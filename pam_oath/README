@@ -23,7 +23,7 @@ window open before making any changes!
 
 ---------
 # head -1 /etc/pam.d/su
-auth requisite pam_oath.so debug usersfile=/etc/users.oath window=20
+auth [user_unknown=ignore success=ok] pam_oath.so debug usersfile=/etc/users.oath window=20
 #
 ---------
 

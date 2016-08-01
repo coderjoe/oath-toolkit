@@ -162,6 +162,23 @@ pam_sm_authenticate (pam_handle_t * pamh,
     }
   DBG (("get user returned: %s", user));
 
+  // quick check to skip unconfigured users before prompting for password
+  {
+    time_t last_otp;
+    otp[0] = '\0';
+    rc = oath_authenticate_usersfile (cfg.usersfile,
+                                      user,
+                                      otp, cfg.window, onlypasswd, &last_otp);
+
+    DBG (("authenticate first pass rc %d (%s: %s) last otp %s", rc,
+          oath_strerror_name (rc) ? oath_strerror_name (rc) : "UNKNOWN",
+          oath_strerror (rc), ctime (&last_otp)));
+    if (rc == OATH_UNKNOWN_USER)
+      {
+        return PAM_USER_UNKNOWN;
+      }
+  }
+
   if (cfg.try_first_pass || cfg.use_first_pass)
     {
       retval = pam_get_item (pamh, PAM_AUTHTOK, (const void **) &password);
