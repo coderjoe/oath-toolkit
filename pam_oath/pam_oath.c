@@ -146,6 +146,8 @@ pam_sm_authenticate (pam_handle_t * pamh,
   char *query_prompt = NULL;
   char *onlypasswd = strdup ("");	/* empty passwords never match */
 
+  cfg.alwaysok = false; /* make sure this gets a safe default */
+
   if (!onlypasswd)
     {
       retval = PAM_BUF_ERR;
