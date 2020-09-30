@@ -124,6 +124,43 @@ verbose_totp (oath_totp_flags flags, time_t t0, time_t time_step_size,
 #define generate_otp_p(n) ((n) == 1)
 #define validate_otp_p(n) ((n) == 2)
 
+const char*
+maybe_read_input(const struct gengetopt_args_info *args_info, int i)
+{
+  if (i >= args_info->inputs_num)
+    return NULL;
+  const char *given = args_info->inputs[i];
+  if (!args_info->args_from_files_given)
+    return given;
+
+  static FILE *f;
+  static const char *last_file;
+
+  if (!strcmp(given,"-")) {
+    f = stdin;
+  } else if (last_file != NULL && !strcmp(given, last_file)) {
+  } else {
+    if (f)
+      fclose(f);
+    f = fopen(given, "r");
+    if (!f)
+      error (EXIT_FAILURE, errno, "open file for KEY/OTP");
+    last_file = given;
+  }
+
+  char buf[4096];
+  if (!fgets(buf, sizeof(buf), f))
+    error (EXIT_FAILURE, ferror(f) ? errno : 0, "read file for KEY/OTP");
+  size_t l = strlen(buf);
+  if (l > 0 && buf[--l] == '\n')
+    buf[l] = 0;
+
+  const char *r = strdup(buf);
+  if (!r)
+    error (EXIT_FAILURE, errno, "strdup");
+  return r;
+}
+
 #define EXIT_OTP_INVALID 2
 
 int
@@ -177,10 +214,14 @@ main (int argc, char *argv[])
     error (EXIT_FAILURE, 0, "liboath initialization failed: %s",
 	   oath_strerror (rc));
 
+  const char *inputs[2];
+  inputs[0] = maybe_read_input(&args_info, 0);
+  inputs[1] = maybe_read_input(&args_info, 1);
+
   if (args_info.base32_flag)
     {
-      rc = oath_base32_decode (args_info.inputs[0],
-			       strlen (args_info.inputs[0]),
+      rc = oath_base32_decode (inputs[0],
+			       strlen (inputs[0]),
 			       &secret, &secretlen);
       if (rc != OATH_OK)
 	error (EXIT_FAILURE, 0, "base32 decoding failed: %s",
@@ -188,12 +229,12 @@ main (int argc, char *argv[])
     }
   else
     {
-      secretlen = 1 + strlen (args_info.inputs[0]) / 2;
+      secretlen = 1 + strlen (inputs[0]) / 2;
       secret = malloc (secretlen);
       if (!secret)
 	error (EXIT_FAILURE, errno, "malloc");
 
-      rc = oath_hex2bin (args_info.inputs[0], secret, &secretlen);
+      rc = oath_hex2bin (inputs[0], secret, &secretlen);
       if (rc != OATH_OK)
 	error (EXIT_FAILURE, 0, "hex decoding of secret key failed");
     }
@@ -217,12 +258,12 @@ main (int argc, char *argv[])
     error (EXIT_FAILURE, 0, "only digits 6, 7 and 8 are supported");
 
   if (validate_otp_p (args_info.inputs_num) && !args_info.digits_orig)
-    digits = strlen (args_info.inputs[1]);
+    digits = strlen (inputs[1]);
   else if (validate_otp_p (args_info.inputs_num) && args_info.digits_orig &&
-	   args_info.digits_arg != strlen (args_info.inputs[1]))
+	   args_info.digits_arg != strlen (inputs[1]))
     error (EXIT_FAILURE, 0,
 	   "given one-time password has bad length %d != %ld",
-	   args_info.digits_arg, strlen (args_info.inputs[1]));
+	   args_info.digits_arg, strlen (inputs[1]));
 
   if (args_info.inputs_num > 2)
     error (EXIT_FAILURE, 0, "too many parameters");
@@ -249,7 +290,7 @@ main (int argc, char *argv[])
       free (tmp);
 
       if (args_info.inputs_num == 2)
-	printf ("OTP: %s\n", args_info.inputs[1]);
+	printf ("OTP: %s\n", inputs[1]);
       printf ("Digits: %d\n", digits);
       printf ("Window size: %ld\n", window);
     }
@@ -332,11 +373,11 @@ main (int argc, char *argv[])
     {
       rc = oath_hotp_validate (secret,
 			       secretlen,
-			       moving_factor, window, args_info.inputs[1]);
+			       moving_factor, window, inputs[1]);
       if (rc == OATH_INVALID_OTP)
 	error (EXIT_OTP_INVALID, 0,
 	       "password \"%s\" not found in range %ld .. %ld",
-	       args_info.inputs[1],
+	       inputs[1],
 	       (long) moving_factor, (long) moving_factor + window);
       else if (rc < 0)
 	error (EXIT_FAILURE, 0,
@@ -351,11 +392,11 @@ main (int argc, char *argv[])
 				time_step_size,
 				t0,
 				window,
-				NULL, NULL, totpflags, args_info.inputs[1]);
+				NULL, NULL, totpflags, inputs[1]);
       if (rc == OATH_INVALID_OTP)
 	error (EXIT_OTP_INVALID, 0,
 	       "password \"%s\" not found in range %ld .. %ld",
-	       args_info.inputs[1],
+	       inputs[1],
 	       (long) ((when - t0) / time_step_size - window / 2),
 	       (long) ((when - t0) / time_step_size + window / 2));
       else if (rc < 0)
