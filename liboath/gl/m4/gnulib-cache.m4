@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2020 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this file.  If not, see <http://www.gnu.org/licenses/>.
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
 #
 # As a special exception to the GNU General Public License,
 # this file may be distributed as part of a program that
@@ -27,7 +27,38 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --local-dir=gl/override --lib=libgnu --source-base=gl --m4-base=gl/m4 --doc-base=doc --tests-base=gl/tests --aux-dir=build-aux --with-tests --lgpl=2 --no-conditional-dependencies --libtool --macro-prefix=gl base32 c-ctype crypto/gc-hmac-sha1 crypto/gc-hmac-sha256 crypto/gc-hmac-sha512 fclose fopen fseeko getline lib-symbol-versions lib-symbol-visibility manywarnings rename snprintf strdup-posix strtok_r strverscmp sys_stat unlink valgrind-tests
+# gnulib-tool --import --local-dir=gl/override \
+#  --lib=libgnu \
+#  --source-base=gl \
+#  --m4-base=gl/m4 \
+#  --doc-base=doc \
+#  --tests-base=gl/tests \
+#  --aux-dir=build-aux \
+#  --with-tests \
+#  --lgpl=2 \
+#  --no-conditional-dependencies \
+#  --libtool \
+#  --macro-prefix=gl \
+#  base32 \
+#  c-ctype \
+#  crypto/gc-hmac-sha1 \
+#  crypto/gc-hmac-sha256 \
+#  crypto/gc-hmac-sha512 \
+#  fclose \
+#  fopen \
+#  fseeko \
+#  getline \
+#  lib-symbol-versions \
+#  lib-symbol-visibility \
+#  manywarnings \
+#  rename \
+#  snprintf \
+#  strdup-posix \
+#  strtok_r \
+#  strverscmp \
+#  sys_stat \
+#  unlink \
+#  valgrind-tests
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([gl/override])

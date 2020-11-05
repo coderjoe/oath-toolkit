@@ -1,5 +1,5 @@
 /* Test of <stdint.h> substitute.
-   Copyright (C) 2006-2016 Free Software Foundation, Inc.
+   Copyright (C) 2006-2020 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Written by Bruno Haible <bruno@clisp.org>, 2006.  */
 
@@ -26,7 +26,7 @@
 #include "verify.h"
 #include "intprops.h"
 
-#if __GNUC__ >= 2 && DO_PEDANTIC
+#if ((__GNUC__ >= 2) || (__clang_major__ >= 4)) && DO_PEDANTIC
 # define verify_same_types(expr1,expr2)  \
     extern void _verify_func(__LINE__) (__typeof__ (expr1) *); \
     extern void _verify_func(__LINE__) (__typeof__ (expr2) *);
@@ -217,12 +217,14 @@ err or;
 /* 7.18.2.4. Limits of integer types capable of holding object pointers */
 
 intptr_t g[3] = { 17, INTPTR_MIN, INTPTR_MAX };
+verify (sizeof (void *) <= sizeof (intptr_t));
 verify (TYPE_MINIMUM (intptr_t) == INTPTR_MIN);
 verify (TYPE_MAXIMUM (intptr_t) == INTPTR_MAX);
 verify_same_types (INTPTR_MIN, (intptr_t) 0 + 0);
 verify_same_types (INTPTR_MAX, (intptr_t) 0 + 0);
 
 uintptr_t h[2] = { 17, UINTPTR_MAX };
+verify (sizeof (void *) <= sizeof (uintptr_t));
 verify (TYPE_MAXIMUM (uintptr_t) == UINTPTR_MAX);
 verify_same_types (UINTPTR_MAX, (uintptr_t) 0 + 0);
 
@@ -351,10 +353,19 @@ verify_same_types (INTMAX_C (17), (intmax_t)0 + 0);
 verify (UINTMAX_C (17) == 17);
 verify_same_types (UINTMAX_C (17), (uintmax_t)0 + 0);
 
-/* Macros specified by ISO/IEC TS 18661-1:2014.  */
+/* Use _GL_VERIFY (with a fixed-length diagnostic string) rather than verify,
+   because the latter would require forming each stringified expression, and
+   many of these would be so long as to trigger a warning/error like this:
 
+   test-stdint.c:407:1: error: string length '6980' is greater than the \
+     length '4095' ISO C99 compilers are required to support \
+     [-Werror=overlength-strings]
+  */
 #define verify_width(width, min, max) \
-  verify ((max) >> ((width) - 1 - ((min) < 0)) == 1)
+  _GL_VERIFY ((max) >> ((width) - 1 - ((min) < 0)) == 1, \
+              "verify_width check", -)
+
+/* Macros specified by ISO/IEC TS 18661-1:2014.  */
 
 #ifdef INT8_MAX
 verify_width (INT8_WIDTH, INT8_MIN, INT8_MAX);

@@ -50,8 +50,6 @@ liboath/configure
 liboath/gl/.deps/
 liboath/gl/.libs/
 liboath/gl/alloca.h
-liboath/gl/arg-nonnull.h
-liboath/gl/c++defs.h
 liboath/gl/libgnu.la
 liboath/gl/stdalign.h
 liboath/gl/stddef.h
@@ -60,8 +58,6 @@ liboath/gl/stdlib.h
 liboath/gl/string.h
 liboath/gl/sys/
 liboath/gl/tests/.deps/
-liboath/gl/tests/arg-nonnull.h
-liboath/gl/tests/c++defs.h
 liboath/gl/tests/ctype.h
 liboath/gl/tests/dirent.h
 liboath/gl/tests/fcntl.h
@@ -148,12 +144,8 @@ liboath/gl/tests/test-unsetenv
 liboath/gl/tests/test-vasnprintf
 liboath/gl/tests/test-verify
 liboath/gl/tests/test-wchar
-liboath/gl/tests/unused-parameter.h
-liboath/gl/tests/warn-on-use.h
 liboath/gl/time.h
 liboath/gl/unistd.h
-liboath/gl/unused-parameter.h
-liboath/gl/warn-on-use.h
 liboath/gl/wchar.h
 liboath/gtk-doc/Makefile
 liboath/gtk-doc/Makefile.in

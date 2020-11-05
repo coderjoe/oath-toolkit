@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2016 Free Software Foundation, Inc.
+# Copyright (C) 2002-2020 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this file.  If not, see <http://www.gnu.org/licenses/>.
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
 #
 # As a special exception to the GNU General Public License,
 # this file may be distributed as part of a program that
@@ -45,8 +45,10 @@ AC_DEFUN([gl_EARLY],
   # Code from module absolute-header:
   # Code from module alloca-opt:
   # Code from module alloca-opt-tests:
+  # Code from module attribute:
   # Code from module base64:
   # Code from module base64-tests:
+  # Code from module c99:
   # Code from module errno:
   # Code from module errno-tests:
   # Code from module extensions:
@@ -73,6 +75,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module inttypes-tests:
   # Code from module lib-symbol-versions:
   # Code from module lib-symbol-visibility:
+  # Code from module libc-config:
   # Code from module limits-h:
   # Code from module limits-h-tests:
   # Code from module manywarnings:
@@ -88,6 +91,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module snprintf:
   # Code from module snprintf-tests:
   # Code from module ssize_t:
+  # Code from module std-gnu11:
   # Code from module stdalign:
   # Code from module stdalign-tests:
   # Code from module stdbool:
@@ -138,9 +142,10 @@ AC_DEFUN([gl_INIT],
   gl_INTTOSTR
   gl_LD_VERSION_SCRIPT
   gl_VISIBILITY
+  gl___INLINE
   gl_LIMITS_H
   gl_FUNC_MEMCHR
-  if test $HAVE_MEMCHR = 0 || test $REPLACE_MEMCHR = 1; then
+  if test $REPLACE_MEMCHR = 1; then
     AC_LIBOBJ([memchr])
     gl_PREREQ_MEMCHR
   fi
@@ -247,6 +252,7 @@ changequote([, ])dnl
   gl_STDIO_H
   gl_UNISTD_H
   gl_VALGRIND_TESTS
+  AC_REQUIRE([AC_C_RESTRICT])
   gl_FUNC_VASNPRINTF
   gl_WCHAR_H
   gl_XSIZE
@@ -342,16 +348,17 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # This macro records the list of files which have been installed by
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
-  build-aux/snippet/arg-nonnull.h
-  build-aux/snippet/c++defs.h
-  build-aux/snippet/warn-on-use.h
   lib/anytostr.c
+  lib/arg-nonnull.h
   lib/base64.c
   lib/base64.h
+  lib/c++defs.h
+  lib/cdefs.h
   lib/imaxtostr.c
   lib/intprops.h
   lib/inttostr.c
   lib/inttostr.h
+  lib/libc-config.h
   lib/limits.in.h
   lib/memchr.c
   lib/memchr.valgrind
@@ -365,8 +372,9 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/sys_types.in.h
   lib/uinttostr.c
   lib/umaxtostr.c
-  lib/verify.h
+  lib/warn-on-use.h
   m4/00gnulib.m4
+  m4/__inline.m4
   m4/absolute-header.m4
   m4/alloca.m4
   m4/base64.m4
@@ -382,12 +390,11 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/include_next.m4
   m4/intmax_t.m4
   m4/inttostr.m4
-  m4/inttypes-pri.m4
   m4/inttypes.m4
   m4/inttypes_h.m4
   m4/ld-version-script.m4
   m4/limits-h.m4
-  m4/longlong.m4
+  m4/manywarnings-c++.m4
   m4/manywarnings.m4
   m4/math_h.m4
   m4/memchr.m4
@@ -396,11 +403,12 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/msvc-inval.m4
   m4/multiarch.m4
   m4/off_t.m4
-  m4/onceonly.m4
+  m4/pid_t.m4
   m4/printf.m4
   m4/size_max.m4
   m4/snprintf.m4
   m4/ssize_t.m4
+  m4/std-gnu11.m4
   m4/stdalign.m4
   m4/stdbool.m4
   m4/stddef_h.m4
@@ -420,6 +428,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/wchar_t.m4
   m4/wint_t.m4
   m4/xsize.m4
+  m4/zzgnulib.m4
   tests/init.sh
   tests/macros.h
   tests/signature.h
@@ -449,12 +458,16 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-sys_types.c
   tests/test-unistd.c
   tests/test-vasnprintf.c
+  tests/test-verify-try.c
   tests/test-verify.c
   tests/test-verify.sh
   tests/test-wchar.c
   tests/zerosize-ptr.h
   tests=lib/alloca.in.h
+  tests=lib/arg-nonnull.h
   tests=lib/asnprintf.c
+  tests=lib/attribute.h
+  tests=lib/c++defs.h
   tests=lib/errno.in.h
   tests=lib/fdopen.c
   tests=lib/float+.h
@@ -478,6 +491,8 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/unistd.in.h
   tests=lib/vasnprintf.c
   tests=lib/vasnprintf.h
+  tests=lib/verify.h
+  tests=lib/warn-on-use.h
   tests=lib/wchar.in.h
   tests=lib/xsize.c
   tests=lib/xsize.h

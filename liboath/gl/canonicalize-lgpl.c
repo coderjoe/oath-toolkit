@@ -1,5 +1,5 @@
 /* Return the canonical absolute name of a given file.
-   Copyright (C) 1996-2016 Free Software Foundation, Inc.
+   Copyright (C) 1996-2020 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    This program is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@
    GNU Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #ifndef _LIBC
 /* Don't use __attribute__ __nonnull__ in this compilation unit.  Otherwise gcc
@@ -51,16 +51,20 @@
 # define __realpath realpath
 # include "pathmax.h"
 # include "malloca.h"
-# include "dosname.h"
-# if HAVE_GETCWD
+# include "filename.h"
+# if defined _WIN32 && !defined __CYGWIN__
+#  define __getcwd _getcwd
+# elif HAVE_GETCWD
 #  if IN_RELOCWRAPPER
     /* When building the relocatable program wrapper, use the system's getcwd
        function, not the gnulib override, otherwise we would get a link error.
      */
 #   undef getcwd
 #  endif
-#  ifdef VMS
-    /* We want the directory in Unix syntax, not in VMS syntax.  */
+#  if defined VMS && !defined getcwd
+    /* We want the directory in Unix syntax, not in VMS syntax.
+       The gnulib override of 'getcwd' takes 2 arguments; the original VMS
+       'getcwd' takes 3 arguments.  */
 #   define __getcwd(buf, max) getcwd (buf, max, 0)
 #  else
 #   define __getcwd getcwd
@@ -83,14 +87,19 @@
 # define DOUBLE_SLASH_IS_DISTINCT_ROOT 0
 #endif
 
+/* Define this independently so that stdint.h is not a prerequisite.  */
+#ifndef SIZE_MAX
+# define SIZE_MAX ((size_t) -1)
+#endif
+
 #if !FUNC_REALPATH_WORKS || defined _LIBC
 
 static void
 alloc_failed (void)
 {
-#if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
+#if defined _WIN32 && ! defined __CYGWIN__
   /* Avoid errno problem without using the malloc or realloc modules; see:
-     http://lists.gnu.org/archive/html/bug-gnulib/2016-08/msg00025.html  */
+     https://lists.gnu.org/r/bug-gnulib/2016-08/msg00025.html  */
   errno = ENOMEM;
 #endif
 }
@@ -194,7 +203,6 @@ __realpath (const char *name, char *resolved)
 #else
       struct stat st;
 #endif
-      int n;
 
       /* Skip sequence of multiple path-separators.  */
       while (ISSLASH (*start))
@@ -226,7 +234,7 @@ __realpath (const char *name, char *resolved)
           if (!ISSLASH (dest[-1]))
             *dest++ = '/';
 
-          if (dest + (end - start) >= rpath_limit)
+          if (rpath_limit - dest <= end - start)
             {
               ptrdiff_t dest_offset = dest - rpath;
               char *new_rpath;
@@ -264,6 +272,8 @@ __realpath (const char *name, char *resolved)
 #endif
           *dest = '\0';
 
+          /* FIXME: if lstat fails with errno == EOVERFLOW,
+             the entry exists.  */
 #ifdef _LIBC
           if (__lxstat64 (_STAT_VER, rpath, &st) < 0)
 #else
@@ -275,6 +285,7 @@ __realpath (const char *name, char *resolved)
             {
               char *buf;
               size_t len;
+              ssize_t n;
 
               if (++num_links > MAXSYMLINKS)
                 {
@@ -311,7 +322,8 @@ __realpath (const char *name, char *resolved)
                 }
 
               len = strlen (end);
-              if ((long int) (n + len) >= path_max)
+              /* Check that n + len + 1 doesn't overflow and is <= path_max. */
+              if (n >= SIZE_MAX - len || n + len >= path_max)
                 {
                   freea (buf);
                   __set_errno (ENAMETOOLONG);
