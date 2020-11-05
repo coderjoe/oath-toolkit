@@ -1,6 +1,8 @@
 OATH Toolkit NEWS -- History of user-visible changes.           -*- outline -*-
 Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
+* Version 2.6.3 (unreleased)
+
 * Version 2.6.2 (released 2016-08-27)
 
 ** doc: Version controlled source code repository moved to GitLab.
