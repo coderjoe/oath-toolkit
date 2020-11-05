@@ -25,6 +25,8 @@
 
 #include <stdlib.h>
 
+#include "attribute.h" /* FALLTHROUGH */
+
 #include "base32.h"
 #include "c-ctype.h"
 
@@ -226,13 +228,17 @@ oath_base32_decode (const char *in, size_t inlen, char **out, size_t * outlen)
     case 2:
       in_upcase[j++] = '=';
       in_upcase[j++] = '=';
+      FALLTHROUGH;
     case 4:
       in_upcase[j++] = '=';
+      FALLTHROUGH;
     case 5:
       in_upcase[j++] = '=';
       in_upcase[j++] = '=';
+      FALLTHROUGH;
     case 7:
       in_upcase[j++] = '=';
+      FALLTHROUGH;
     default:
     case 0:
       break;
