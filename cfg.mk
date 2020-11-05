@@ -1,4 +1,4 @@
-# Copyright (C) 2009-2016 Simon Josefsson
+# Copyright (C) 2009-2020 Simon Josefsson
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ exclude_file_name_regexp--sc_require_config_h_first = $(exclude_file_name_regexp
 exclude_file_name_regexp--sc_trailing_blank = ^libpskc/examples/pskctool-h.txt
 exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
 
-update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=1
+update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=2
 
 glimport:
 	gnulib-tool --add-import
