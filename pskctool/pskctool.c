@@ -94,9 +94,9 @@ get_container (const struct gengetopt_args_info *args_info)
 	   pskc_strerror (rc));
 
   if (filename)
-    buffer = read_binary_file (filename, &len);
+    buffer = read_file (filename, RF_BINARY | RF_SENSITIVE, &len);
   else
-    buffer = fread_file (stdin, &len);
+    buffer = fread_file (stdin, RF_BINARY | RF_SENSITIVE, &len);
   if (buffer == NULL)
     error (EXIT_FAILURE, errno, "read");
 
