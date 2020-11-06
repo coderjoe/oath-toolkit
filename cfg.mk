@@ -51,6 +51,8 @@ exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
 update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=2
 
 glimport:
+	cd liboath && gtkdocize --copy
+	cd libpskc && gtkdocize --copy
 	gnulib-tool --add-import
 	cd liboath && gnulib-tool --add-import
 	cd oathtool && gnulib-tool --add-import
