@@ -51,7 +51,7 @@ the instructions for installing them differ.  Here are some hints:
 -----
 apt-get install make git autoconf automake libtool bison
 apt-get install libpam0g-dev libxmlsec1-dev libxml2-utils
-apt-get install help2man gtk-doc-tools valgrind gengetopt
+apt-get install help2man gtk-doc-tools dblatex valgrind gengetopt
 -----
 
 If you have hints on how to install the required dependencies on other
