@@ -133,30 +133,22 @@ _oath_hotp_generate2 (const char *secret,
 #endif
   }
 
-  switch (digits)
-    {
-    case 6:
-      S = S % 1000000;
-      break;
-
-    case 7:
-      S = S % 10000000;
-      break;
-
-    case 8:
-      S = S % 100000000;
-      break;
-
-    default:
-      return OATH_INVALID_DIGITS;
-      break;
-    }
+  if (digits < 6 || digits > 8)
+    return OATH_INVALID_DIGITS;
 
   {
-    int len = snprintf (output_otp, digits + 1, "%.*ld", digits, S);
-    output_otp[digits] = '\0';
-    if (len <= 0 || ((unsigned) len) != digits)
-      return OATH_PRINTF_ERROR;
+    char *p = output_otp;
+    if (digits == 8)
+      *p++ = '0' + S % 100000000 / 10000000;
+    if (digits == 8 || digits == 7)
+      *p++ = '0' + S % 10000000 / 1000000;
+    *p++ = '0' + S % 1000000 /  100000;
+    *p++ = '0' + S % 100000 / 10000;
+    *p++ = '0' + S % 10000 / 1000;
+    *p++ = '0' + S % 1000 / 100;
+    *p++ = '0' + S % 100 / 10;
+    *p++ = '0' + S % 10;
+    *p = '\0';
   }
 
   return OATH_OK;
