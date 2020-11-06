@@ -255,14 +255,14 @@ print_keypackage (struct buffer *buf, pskc_key_t * kp)
   if (key_b64secret)
     buffer_addf (buf, "\t\t\tKey Secret (base64): %s\n", key_b64secret);
   if (key_counter_present)
-    buffer_addf (buf, "\t\t\tKey Counter: %" PRId64 "\n", key_counter);
+    buffer_addf (buf, "\t\t\tKey Counter: %" PRIu64 "\n", key_counter);
   if (key_time_present)
-    buffer_addf (buf, "\t\t\tKey Time: %" PRId32 "\n", key_time);
+    buffer_addf (buf, "\t\t\tKey Time: %" PRIu32 "\n", key_time);
   if (key_timeinterval_present)
-    buffer_addf (buf, "\t\t\tKey TimeInterval: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tKey TimeInterval: %" PRIu32 "\n",
 		 key_timeinterval);
   if (key_timedrift_present)
-    buffer_addf (buf, "\t\t\tKey TimeDrift: %" PRId32 "\n", key_timedrift);
+    buffer_addf (buf, "\t\t\tKey TimeDrift: %" PRIu32 "\n", key_timedrift);
   if (key_policy_keyusages_present)
     {
       int i;
@@ -289,10 +289,10 @@ print_keypackage (struct buffer *buf, pskc_key_t * kp)
       buffer_addf (buf, "\t\t\tPolicy ExpiryDate: %s\n", t);
     }
   if (key_policy_pinminlength_present)
-    buffer_addf (buf, "\t\t\tPIN Policy Minimum Length: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tPIN Policy Minimum Length: %" PRIu32 "\n",
 		 key_policy_pinminlength);
   if (key_policy_pinmaxlength_present)
-    buffer_addf (buf, "\t\t\tPIN Policy Maximum Length: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tPIN Policy Maximum Length: %" PRIu32 "\n",
 		 key_policy_pinmaxlength);
   if (key_policy_pinkeyid)
     buffer_addf (buf, "\t\t\tPIN Policy PIN Key Id: %s\n",
@@ -305,7 +305,7 @@ print_keypackage (struct buffer *buf, pskc_key_t * kp)
 		 pskc_pinusagemode2str (key_policy_pinusagemode));
   if (key_policy_pinmaxfailedattempts_present)
     buffer_addf (buf,
-		 "\t\t\tPIN Policy PIN Max Failed Attempts: %" PRId32 "\n",
+		 "\t\t\tPIN Policy PIN Max Failed Attempts: %" PRIu32 "\n",
 		 key_policy_pinmaxfailedattempts);
   if (key_algparm_suite)
     buffer_addf (buf, "\t\t\tAlgorithm Parameters Suite: %s\n",
@@ -314,13 +314,13 @@ print_keypackage (struct buffer *buf, pskc_key_t * kp)
     buffer_addf (buf, "\t\t\tChallenge Format Encoding: %s\n",
 		 pskc_valueformat2str (key_algparm_chall_encoding));
   if (key_algparm_chall_min_present)
-    buffer_addf (buf, "\t\t\tChallenge Format Min: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tChallenge Format Min: %" PRIu32 "\n",
 		 key_algparm_chall_min);
   if (key_algparm_chall_max_present)
-    buffer_addf (buf, "\t\t\tChallenge Format Max: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tChallenge Format Max: %" PRIu32 "\n",
 		 key_algparm_chall_max);
   if (key_algparm_resp_length_present)
-    buffer_addf (buf, "\t\t\tResponse Format Length: %" PRId32 "\n",
+    buffer_addf (buf, "\t\t\tResponse Format Length: %" PRIu32 "\n",
 		 key_algparm_resp_length);
   if (key_algparm_resp_encoding_present)
     buffer_addf (buf, "\t\t\tResponse Format Encoding: %s\n",
