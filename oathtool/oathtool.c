@@ -145,10 +145,10 @@ main (int argc, char *argv[])
       int l = -1;
 
       if (strcmp (oath_check_version (NULL), OATH_VERSION) != 0)
-	l = asprintf (&p, "OATH Toolkit liboath.so %s oath.h %s",
-		      oath_check_version (NULL), OATH_VERSION);
+	l = asprintf (&p, "OATH Toolkit %s/%s",
+		      OATH_VERSION, oath_check_version (NULL));
       else if (strcmp (OATH_VERSION, PACKAGE_VERSION) != 0)
-	l = asprintf (&p, "OATH Toolkit liboath.so/oath.h %s", OATH_VERSION);
+	l = asprintf (&p, "OATH Toolkit %s", OATH_VERSION);
       version_etc (stdout, "oathtool", l == -1 ? "OATH Toolkit" : p,
 		   PACKAGE_VERSION, "Simon Josefsson", (char *) NULL);
       if (l != -1)
