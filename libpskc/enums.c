@@ -60,7 +60,7 @@ pskc_pinusagemode2str (pskc_pinusagemode pinusagemode)
       break;
 
     default:
-      _pskc_debug ("unknown pinusagemode value %d", pinusagemode);
+      _pskc_debug ("unknown pinusagemode value %u", pinusagemode);
       p = "Unknown";
       break;
     }
@@ -106,7 +106,7 @@ pskc_valueformat2str (pskc_valueformat valueformat)
       break;
 
     default:
-      _pskc_debug ("unknown valueformat value %d", valueformat);
+      _pskc_debug ("unknown valueformat value %u", valueformat);
       p = "Unknown";
       break;
     }
@@ -176,7 +176,7 @@ pskc_keyusage2str (pskc_keyusage keyusage)
       break;
 
     default:
-      _pskc_debug ("unknown keyusage value %d", keyusage);
+      _pskc_debug ("unknown keyusage value %u", keyusage);
       p = "Unknown";
       break;
     }
