@@ -87,4 +87,3 @@ Code coverage charts:
 
 Clang code analysis:
   http://www.nongnu.org/oath-toolkit/clang-analyzer/
-

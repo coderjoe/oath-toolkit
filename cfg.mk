@@ -38,7 +38,7 @@ local-checks-to-skip = sc_GPL_version sc_immutable_NEWS	\
 # syntax-check: Re-add when we have translation.
 local-checks-to-skip += sc_unmarked_diagnostics sc_bindtextdomain
 # syntax-check: Revisit these soon.
-local-checks-to-skip += sc_prohibit_atoi_atof
+local-checks-to-skip += sc_prohibit_atoi_atof sc_prohibit_gnu_make_extensions
 # syntax-check: Explicit syntax-check exceptions.
 exclude_file_name_regexp--sc_program_name = ^liboath/tests/|libpskc/examples/|libpskc/tests/|pam_oath/tests/
 exclude_file_name_regexp--sc_texinfo_acronym = ^oathtool/doc/parse-datetime.texi
