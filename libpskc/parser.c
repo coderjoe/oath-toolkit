@@ -148,7 +148,7 @@ parse_intlongstrdatatype (xmlNode * x, const char **var, int *rc)
 }
 
 static char *
-remove_whitespace (const char *str, size_t * outlen)
+remove_whitespace (const char *str, size_t *outlen)
 {
   size_t len = strlen (str);
   char *out = malloc (len + 1);

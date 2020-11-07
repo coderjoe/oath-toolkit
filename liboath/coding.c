@@ -25,7 +25,7 @@
 
 #include <stdlib.h>
 
-#include "attribute.h" /* FALLTHROUGH */
+#include "attribute.h"		/* FALLTHROUGH */
 
 #include "base32.h"
 #include "c-ctype.h"
@@ -101,7 +101,7 @@ hex_decode (char hex)
  *   error code is returned.
  **/
 int
-oath_hex2bin (const char *hexstr, char *binstr, size_t * binlen)
+oath_hex2bin (const char *hexstr, char *binstr, size_t *binlen)
 {
   bool highbits = true;
   size_t save_binlen = *binlen;
@@ -205,7 +205,7 @@ oath_bin2hex (const char *binstr, size_t binlen, char *hexstr)
  * Since: 1.12.0
  **/
 int
-oath_base32_decode (const char *in, size_t inlen, char **out, size_t * outlen)
+oath_base32_decode (const char *in, size_t inlen, char **out, size_t *outlen)
 {
   size_t i, j, tmplen = 0;
   char *in_upcase;
@@ -295,7 +295,7 @@ oath_base32_decode (const char *in, size_t inlen, char **out, size_t * outlen)
  * Since: 1.12.0
  **/
 int
-oath_base32_encode (const char *in, size_t inlen, char **out, size_t * outlen)
+oath_base32_encode (const char *in, size_t inlen, char **out, size_t *outlen)
 {
   char *tmp;
   size_t len = base32_encode_alloc (in, inlen, &tmp);

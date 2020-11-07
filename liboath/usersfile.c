@@ -82,8 +82,8 @@ parse_usersfile (const char *username,
 		 const char *passwd,
 		 time_t * last_otp,
 		 FILE * infh,
-		 char **lineptr, size_t * n, uint64_t * new_moving_factor,
-		 size_t * skipped_users)
+		 char **lineptr, size_t *n, uint64_t * new_moving_factor,
+		 size_t *skipped_users)
 {
   int bad_password = 0;
 
@@ -240,7 +240,7 @@ update_usersfile2 (const char *username,
 		   FILE * infh,
 		   FILE * outfh,
 		   char **lineptr,
-		   size_t * n, char *timestamp, uint64_t new_moving_factor,
+		   size_t *n, char *timestamp, uint64_t new_moving_factor,
 		   size_t skipped_users)
 {
   size_t got_users = 0;
@@ -302,7 +302,7 @@ update_usersfile (const char *usersfile,
 		  const char *otp,
 		  FILE * infh,
 		  char **lineptr,
-		  size_t * n, char *timestamp, uint64_t new_moving_factor,
+		  size_t *n, char *timestamp, uint64_t new_moving_factor,
 		  size_t skipped_users)
 {
   FILE *outfh, *lockfh;

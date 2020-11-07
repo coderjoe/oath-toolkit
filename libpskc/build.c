@@ -483,7 +483,7 @@ build_keycont (pskc_t * container, xmlNodePtr keycont)
  *   allocation errors %PSKC_MALLOC_ERROR is returned.
  **/
 int
-pskc_build_xml (pskc_t * container, char **out, size_t * len)
+pskc_build_xml (pskc_t * container, char **out, size_t *len)
 {
   xmlDocPtr doc = NULL;
   xmlNodePtr keycont = NULL;

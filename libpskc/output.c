@@ -60,7 +60,7 @@ buffer_done (struct buffer *buf)
 }
 #endif
 static void
-buffer_getstr (struct buffer *buf, char **str, size_t * dlen)
+buffer_getstr (struct buffer *buf, char **str, size_t *dlen)
 {
   *str = buf->mem;
   *dlen = buf->dlen;
@@ -111,7 +111,7 @@ buffer_addz (struct buffer *buf, const char *str)
 
 static void
 buffer_addf (struct buffer *buf, const char *fmt, ...)
-__attribute__ ((format (printf, 2, 3)));
+__attribute__((format (printf, 2, 3)));
 
 static void
 buffer_addf (struct buffer *buf, const char *fmt, ...)
@@ -364,7 +364,7 @@ print_keycontainer (pskc_t * data, struct buffer *buf)
  */
 int
 pskc_output (pskc_t * container,
-	     pskc_output_formats_t format, char **out, size_t * len)
+	     pskc_output_formats_t format, char **out, size_t *len)
 {
   if (format == PSKC_OUTPUT_HUMAN_COMPLETE)
     {

@@ -1181,7 +1181,7 @@ pskc_set_key_userid (pskc_key_t * key, const char *keyuserid)
  *   content of length *@len, or NULL if not set.
  */
 const char *
-pskc_get_key_data_secret (pskc_key_t * key, size_t * len)
+pskc_get_key_data_secret (pskc_key_t * key, size_t *len)
 {
   if (len)
     *len = key->key_secret_len;

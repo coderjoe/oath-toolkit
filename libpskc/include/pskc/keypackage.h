@@ -138,7 +138,7 @@ extern PSKCAPI void pskc_set_key_userid (pskc_key_t * key,
 					 const char *keyuserid);
 
 extern PSKCAPI const char *pskc_get_key_data_secret (pskc_key_t * key,
-						     size_t * len);
+						     size_t *len);
 extern PSKCAPI int pskc_set_key_data_secret (pskc_key_t * key,
 					     const char *data, size_t len);
 

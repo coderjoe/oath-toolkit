@@ -53,7 +53,7 @@ extern PSKCAPI int pskc_get_signed_p (pskc_t * container);
 extern PSKCAPI int pskc_validate (pskc_t * container, int *isvalid);
 
 extern PSKCAPI int pskc_build_xml (pskc_t * container, char **out,
-				   size_t * len);
+				   size_t *len);
 
 extern PSKCAPI int pskc_sign_x509 (pskc_t * container,
 				   const char *key_file,
@@ -91,6 +91,6 @@ typedef enum pskc_output_formats
 
 extern PSKCAPI int pskc_output (pskc_t * container,
 				pskc_output_formats_t format,
-				char **out, size_t * len);
+				char **out, size_t *len);
 
 #endif /* PSKC_CONTAINER_H */
