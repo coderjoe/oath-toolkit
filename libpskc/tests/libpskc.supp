@@ -64,6 +64,7 @@
 
 {
    libxmlsec issue?
+   Memcheck:Leak
    fun:malloc
    fun:xmlStrndup__internal_alias
    fun:xmlStrdup__internal_alias
