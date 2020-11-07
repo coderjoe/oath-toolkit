@@ -62,7 +62,9 @@ else
     rc=$?
 fi
 
-diff -u $srcdir/expect.oath $ETCUSRCFG || rc=1
+if test "$rc" != "77"; then
+    diff -u $srcdir/expect.oath $ETCUSRCFG || rc=1
+fi
 
 rm -f $ETCPAMCFG $ETCUSRCFG
 
