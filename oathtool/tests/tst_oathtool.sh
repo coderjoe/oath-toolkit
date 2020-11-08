@@ -40,14 +40,14 @@ dotest()
 	cmp="!="
     fi
 
-    got="`$OATHTOOL $params 2> /dev/null`"
-    err="`$OATHTOOL $params 2>&1 > /dev/null`"
+    got="$($OATHTOOL $params 2> /dev/null)"
+    err="$($OATHTOOL $params 2>&1 > /dev/null)"
 
-    if test "`echo $got`" $cmp "$expect"; then
+    if test "`echo $got`" $cmp "`echo $expect`"; then
 	echo FAIL: oathtool $params
-	echo expected: -$expect-
-	echo got: -$got-
-	echo err: -$err-
+	echo "expected: -$expect-"
+	echo "got:      -$got-"
+	echo "stderr:   -$err-"
 	exit 1
     else
 	echo PASS oathtool $params
@@ -113,5 +113,24 @@ dotest "--totp --now @1111111109 -w 10 $sha1key 14050471" "1"
 dotest "--totp --now @1111111109 -w 5 $sha1key" "081804 050471 266759 306183 466594 754889"
 dotest "--totp=sha256 --now @1111111109 -w 5 $sha256key" "084774 062674 267535 096086 328915 956967"
 dotest "--hotp --counter 1099511627776 00" "363425"
+dotest "--verbose 00" "Hex secret: 00
+Base32 secret: AA======
+Digits: 6
+Window size: 0
+Start counter: 0x0 (0)
+
+328482"
+dotest " --verbose --totp=SHA512 --now @0 00" "Hex secret: 00
+Base32 secret: AA======
+Digits: 6
+Window size: 0
+TOTP mode: SHA512
+Step size (seconds): 30
+Start time: 1970-01-01 00:00:00 UTC (0)
+Current time: 1970-01-01 00:00:00 UTC (0)
+Counter: 0x0 (0)
+
+674061
+"
 
 exit 0
