@@ -6,6 +6,8 @@ Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 ** oathtool: Hash names (e.g., SHA256) for --totp are now upper case.
 Lower/mixed case hash names are supported for compatibility.  Fixes #3.
 
+** Build fixes.
+
 * Version 2.6.3 (released 2020-11-07)
 
 ** pam_oath: Fix self-tests.
