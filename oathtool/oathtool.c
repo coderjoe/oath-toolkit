@@ -26,6 +26,7 @@
 #include <string.h>
 #include <errno.h>
 #include <inttypes.h>
+#include <ctype.h>
 
 /* Gnulib. */
 #include "progname.h"
@@ -255,6 +256,8 @@ main (int argc, char *argv[])
 
   if (args_info.totp_given)
     {
+      char *p;
+
       now = time (NULL);
       when = parse_time (args_info.now_arg, now);
       t0 = parse_time (args_info.start_time_arg, now);
@@ -271,9 +274,11 @@ main (int argc, char *argv[])
 	error (EXIT_FAILURE, 0, "cannot parse time `%s'",
 	       args_info.time_step_size_arg);
 
-      if (strcmp (args_info.totp_arg, "sha256") == 0)
+      for (p = args_info.totp_arg; *p ; p++)
+	*p = toupper (*p);
+      if (strcmp (args_info.totp_arg, "SHA256") == 0)
 	totpflags = OATH_TOTP_HMAC_SHA256;
-      else if (strcmp (args_info.totp_arg, "sha512") == 0)
+      else if (strcmp (args_info.totp_arg, "SHA512") == 0)
 	totpflags = OATH_TOTP_HMAC_SHA512;
 
       if (args_info.verbose_flag)
