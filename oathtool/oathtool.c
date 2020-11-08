@@ -90,16 +90,15 @@ verbose_hotp (uint64_t moving_factor)
 }
 
 static void
-verbose_totp (oath_totp_flags flags, time_t t0, time_t time_step_size, time_t when)
+verbose_totp (oath_totp_flags flags, time_t t0, time_t time_step_size,
+	      time_t when)
 {
   struct tm tmp;
   char outstr[200];
 
-  printf ("TOTP mode: %s\n",
-          flags==OATH_TOTP_HMAC_SHA256?"sha256":
-          flags==OATH_TOTP_HMAC_SHA512?"sha512":
-          flags==0?"sha1":"invalid"
-          );
+  printf ("TOTP mode: %s\n", flags == OATH_TOTP_HMAC_SHA256 ? "SHA256" :
+	  flags == OATH_TOTP_HMAC_SHA512 ? "SHA512" :
+	  flags == 0 ? "SHA1" : "invalid");
 
   if (gmtime_r (&t0, &tmp) == NULL)
     error (EXIT_FAILURE, 0, "gmtime_r");
@@ -278,7 +277,7 @@ main (int argc, char *argv[])
 	totpflags = OATH_TOTP_HMAC_SHA512;
 
       if (args_info.verbose_flag)
-        verbose_totp (totpflags, t0, time_step_size, when);
+	verbose_totp (totpflags, t0, time_step_size, when);
     }
   else
     {
