@@ -160,6 +160,7 @@ you can invoke the tool like this:
    Base32 secret: GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ
    Digits: 8
    Window size: 0
+   TOTP mode: SHA1
    Step size (seconds): 30
    Start time: 1970\-01\-01 00:00:00 UTC (0)
    Time now: 2033\-05\-18 03:33:20 UTC (2000000000)
