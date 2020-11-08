@@ -1,21 +1,23 @@
 To: oath-toolkit-help@nongnu.org
-Subject: OATH Toolkit 2.6.2
+Subject: OATH Toolkit 2.6.3
 <#part sign=pgpmime>
-I'm practicing the release process.  The only change except gnulib fixes
-since the last release is that version controlled source code repository
-moved to GitLab.
+Hi everyone!  It has been four long years without a release.  This
+release contains no real changes but update the build system and will
+serve as a declaration that we are now open for business again.  I plan
+to review merge requests and bug reports now, and encourage you to
+remind me what I have been missing and help me update any merge requests
+so they can be more easily reviewed.
 
 Happy hacking,
 Simon
 
-The OATH Toolkit makes it easy to build one-time password
-authentication systems.  It contains shared libraries, command line
-tools and a PAM module.  Supported technologies include the
-event-based HOTP algorithm (RFC4226) and the time-based TOTP algorithm
-(RFC6238).  OATH stands for Open AuTHentication, which is the
-organization that specify the algorithms.  For managing secret key
-files, the Portable Symmetric Key Container (PSKC) format described in
-RFC6030 is supported.
+The OATH Toolkit makes it easy to build one-time password authentication
+systems.  It contains shared libraries, command line tools and a PAM
+module.  Supported technologies include the event-based HOTP algorithm
+(RFC4226) and the time-based TOTP algorithm (RFC6238).  OATH stands for
+Open AuTHentication, which is the organization that specify the
+algorithms.  For managing secret key files, the Portable Symmetric Key
+Container (PSKC) format described in RFC6030 is supported.
 
 The components included in the package is:
 
@@ -30,51 +32,51 @@ The components included in the package is:
   * pskctool: A command line tool for manipulating PSKC data.
 
 The project's web page is available at:
-  http://www.nongnu.org/oath-toolkit/
+  https://www.nongnu.org/oath-toolkit/
 
 Documentation for the command line tools oathtool and pskctool:
-  http://www.nongnu.org/oath-toolkit/oathtool.1.html
-  http://www.nongnu.org/oath-toolkit/pskctool.1.html
-  http://www.nongnu.org/oath-toolkit/libpskc-api/pskc-tutorial-pskctool.html
+  https://www.nongnu.org/oath-toolkit/oathtool.1.html
+  https://www.nongnu.org/oath-toolkit/pskctool.1.html
+  https://www.nongnu.org/oath-toolkit/libpskc-api/pskc-tutorial-pskctool.html
 
 Manual for PAM module:
-  http://git.savannah.gnu.org/cgit/oath-toolkit.git/tree/pam_oath/README
+  https://www.nongnu.org/oath-toolkit/pam_oath.html
 
-Liboath manual:
-  http://www.nongnu.org/oath-toolkit/liboath-api/liboath-oath.html
+Liboath Manual:
+  https://www.nongnu.org/oath-toolkit/liboath-api/liboath-oath.html
 
-Libpskc Tutorial & Manual
-  http://www.nongnu.org/oath-toolkit/libpskc-api/pskc-tutorial-quickstart.html
-  http://www.nongnu.org/oath-toolkit/libpskc-api/pskc-reference.html
+Libpskc Manual
+  https://www.nongnu.org/oath-toolkit/libpskc-api/pskc-reference.html
 
 If you need help to use the OATH Toolkit, or want to help others, you
 are invited to join our oath-toolkit-help mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
 
 Here are the compressed sources of the entire package:
-  http://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.2.tar.gz (4.1MB)
-  http://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.2.tar.gz.sig (OpenPGP)
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.3.tar.gz
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.3.tar.gz.sig
 
 The software is cryptographically signed by the author using an OpenPGP
 key identified by the following information:
 
-pub   3744R/54265E8C 2014-06-22
-      Key fingerprint = 9AA9 BDB1 1BB1 B99A 2128  5A33 0664 A769 5426 5E8C
-uid                  Simon Josefsson <simon@josefsson.org>
+pub   ed25519 2019-03-20 [SC] [expires: 2021-01-24]
+      B1D2 BD13 75BE CB78 4CF4  F8C4 D73C F638 C53C 06BE
+uid           [ultimate] Simon Josefsson <simon@josefsson.org>
 
 The key is available from:
-  http://josefsson.org/54265e8c.txt
+  https://josefsson.org/key-20190320.txt
 
 I have changed key since older releases, see my transition statement:
-  http://blog.josefsson.org/2014/06/23/openpgp-key-transition-statement/
+  https://blog.josefsson.org/2019/03/21/openpgp-2019-key-transition-statement/
+  https://blog.josefsson.org/2014/06/23/openpgp-key-transition-statement/
 
 Here are the SHA-1 and SHA-224 checksums:
 
-2cb5252edd3a8e07425bc88d1641ca2b3db9ebc8  oath-toolkit-2.6.2.tar.gz
-64660926d5ac02b23a15106e2cbea4654590b208edb626cff7f2cedf  oath-toolkit-2.6.2.tar.gz
+27a75c35834292adc8d925d6c7d024f5f3b9215d  oath-toolkit-2.6.3.tar.gz
+47fa1f8a654b12930d01e292c0e8a0fbc8bb65f82dde7cd9e624730f  oath-toolkit-2.6.3.tar.gz
 
 General information on contributing:
-  http://www.nongnu.org/oath-toolkit/contrib.html
+  https://www.nongnu.org/oath-toolkit/contrib.html
 
 GitLab's page:
   https://gitlab.com/oath-toolkit/oath-toolkit
@@ -83,7 +85,9 @@ Savannah developer's home page:
   https://savannah.nongnu.org/projects/oath-toolkit/
 
 Code coverage charts:
-  http://www.nongnu.org/oath-toolkit/coverage/
+  https://www.nongnu.org/oath-toolkit/coverage/
 
 Clang code analysis:
-  http://www.nongnu.org/oath-toolkit/clang-analyzer/
+  https://www.nongnu.org/oath-toolkit/clang-analyzer/
+
+[[End of PGP Signed Part]]
