@@ -30,11 +30,28 @@ Mingw:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings --host=x86_64-w64-mingw32
+  - make check V=1
 
 CentOS:
   image: centos:latest
   stage: tarball-test
+  before_script:
+  - yum install gcc
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings
+  - make check V=1
+
+Alpine:
+  image: alpine:latest
+  stage: tarball-test
+  before_script:
+  - echo "ipv6" >> /etc/modules
+  - apk update
+  - apk add libxml2-dev
+  script:
+  - tar xfa oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - ./configure --enable-gcc-warnings
+  - make check V=1
