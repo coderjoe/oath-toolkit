@@ -1,13 +1,13 @@
 stages:
- - git-builds
- - tarball-test
+ - build
+ - test
 
 Debian:
   image: debian:latest
-  stage: git-builds
+  stage: build
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make bootstrap
@@ -21,7 +21,7 @@ Debian:
 
 Ubuntu:
   image: ubuntu:devel
-  stage: git-builds
+  stage: build
   before_script:
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools valgrind gengetopt datefudge
@@ -34,10 +34,11 @@ Ubuntu:
 
 Mingw64:
   image: debian:latest
-  stage: tarball-test
+  stage: test
+  needs: [Debian]
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
     - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
@@ -49,10 +50,11 @@ Mingw64:
 
 Mingw32:
   image: debian:latest
-  stage: tarball-test
+  stage: test
+  needs: [Debian]
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make mingw-w64 wine wine32 binfmt-support wine-binfmt
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 binfmt-support wine-binfmt
     - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
@@ -64,7 +66,8 @@ Mingw32:
 
 CentOS:
   image: centos:latest
-  stage: tarball-test
+  stage: test
+  needs: [Debian]
   before_script:
   - yum -y groupinstall "Development Tools"
   - yum -y install libxml2-devel
@@ -76,7 +79,8 @@ CentOS:
 
 Alpine:
   image: alpine:latest
-  stage: tarball-test
+  stage: test
+  needs: [Debian]
   before_script:
   - echo "ipv6" >> /etc/modules
   - apk update
