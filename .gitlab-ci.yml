@@ -1,21 +1,13 @@
 GNU/Linux build:
   before_script:
-    - apt-get update -qq && apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
+    - apt-get update -qq
+    - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
   script:
-  - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc && make V=1 && make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
+  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make dist
   tags:
   - linux
-
-dist-check:
-  before_script:
-  - apt-get update -qq
-  - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt
-  script:
-  - make V=1
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
-  - make distcheck
-  tags:
-  - shared
   artifacts:
     expire_in: 2 weeks
     when: on_failure
