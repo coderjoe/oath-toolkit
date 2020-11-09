@@ -1,6 +1,6 @@
 Manipulate Portable Symmetric Key Container (PSKC) data.
 
-Usage: pskctool [OPTIONS]... [FILE]...
+Usage: pskctool [OPTION]... [FILE]...
 
 This tool allows you to parse, print, validate, sign and verify PSKC data.  The
 input is provided in FILE or on standard input.
