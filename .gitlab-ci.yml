@@ -28,7 +28,7 @@ Mingw:
     - apt-get install -y -qq make mingw-w64
   script:
   - tar xfa oath-toolkit-*.tar.gz
-  - cd `ls oath-toolkit-* | grep -v tar.gz`
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings --host=x86_64-w64-mingw32
 
 CentOS:
@@ -36,5 +36,5 @@ CentOS:
   stage: tarball-test
   script:
   - tar xfa oath-toolkit-*.tar.gz
-  - cd `ls oath-toolkit-* | grep -v tar.gz`
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings
