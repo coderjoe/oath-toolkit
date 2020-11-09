@@ -141,6 +141,9 @@ pskc_sign_x509 (pskc_t * container,
 
   return PSKC_OK;
 #else
+  (void) container;
+  (void) key_file;
+  (void) cert_file;
   return PSKC_XMLSEC_ERROR;
 #endif
 }
@@ -230,6 +233,9 @@ pskc_verify_x509crt (pskc_t * container, const char *cert_file,
 
   return rc;
 #else
+  (void) container;
+  (void) cert_file;
+  (void) valid_signature;
   return PSKC_XMLSEC_ERROR;
 #endif
 }
