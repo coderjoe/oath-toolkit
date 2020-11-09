@@ -45,8 +45,11 @@
 #  crypto/gc-hmac-sha256 \
 #  crypto/gc-hmac-sha512 \
 #  fclose \
+#  fcntl \
+#  flock \
 #  fopen \
 #  fseeko \
+#  fsync \
 #  getline \
 #  lib-symbol-versions \
 #  lib-symbol-visibility \
@@ -54,6 +57,7 @@
 #  rename \
 #  snprintf \
 #  strdup-posix \
+#  strptime \
 #  strtok_r \
 #  strverscmp \
 #  sys_stat \
@@ -69,8 +73,11 @@ gl_MODULES([
   crypto/gc-hmac-sha256
   crypto/gc-hmac-sha512
   fclose
+  fcntl
+  flock
   fopen
   fseeko
+  fsync
   getline
   lib-symbol-versions
   lib-symbol-visibility
@@ -78,6 +85,7 @@ gl_MODULES([
   rename
   snprintf
   strdup-posix
+  strptime
   strtok_r
   strverscmp
   sys_stat

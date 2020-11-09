@@ -129,6 +129,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module filename:
   # Code from module float:
   # Code from module float-tests:
+  # Code from module flock:
+  # Code from module flock-tests:
   # Code from module fopen:
   # Code from module fopen-tests:
   # Code from module fpieee:
@@ -147,6 +149,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module fseeko-tests:
   # Code from module fstat:
   # Code from module fstat-tests:
+  # Code from module fsync:
+  # Code from module fsync-tests:
   # Code from module ftell:
   # Code from module ftell-tests:
   # Code from module ftello:
@@ -290,6 +294,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdio-tests:
   # Code from module stdlib:
   # Code from module stdlib-tests:
+  # Code from module strcase:
   # Code from module strdup-posix:
   # Code from module strerror:
   # Code from module strerror-override:
@@ -298,11 +303,16 @@ AC_DEFUN([gl_EARLY],
   # Code from module strerror_r-posix-tests:
   # Code from module string:
   # Code from module string-tests:
+  # Code from module strings:
+  # Code from module strings-tests:
+  # Code from module strptime:
   # Code from module strtok_r:
   # Code from module strverscmp:
   # Code from module strverscmp-tests:
   # Code from module symlink:
   # Code from module symlink-tests:
+  # Code from module sys_file:
+  # Code from module sys_file-tests:
   # Code from module sys_ioctl:
   # Code from module sys_ioctl-tests:
   # Code from module sys_resource:
@@ -327,6 +337,7 @@ AC_DEFUN([gl_EARLY],
   gl_THREADLIB_EARLY
   # Code from module time:
   # Code from module time-tests:
+  # Code from module time_r:
   # Code from module u64:
   # Code from module u64-tests:
   # Code from module unistd:
@@ -451,6 +462,12 @@ AC_DEFUN([gl_INIT],
   if test $REPLACE_ITOLD = 1; then
     AC_LIBOBJ([itold])
   fi
+  gl_FUNC_FLOCK
+  if test $HAVE_FLOCK = 0; then
+    AC_LIBOBJ([flock])
+    gl_PREREQ_FLOCK
+  fi
+  gl_HEADER_SYS_FILE_MODULE_INDICATOR([flock])
   gl_FUNC_FOPEN
   if test $REPLACE_FOPEN = 1; then
     AC_LIBOBJ([fopen])
@@ -485,6 +502,12 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_FSTAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([fstat])
+  gl_FUNC_FSYNC
+  if test $HAVE_FSYNC = 0; then
+    AC_LIBOBJ([fsync])
+    gl_PREREQ_FSYNC
+  fi
+  gl_UNISTD_MODULE_INDICATOR([fsync])
   gl_FUNC_FTELL
   if test $REPLACE_FTELL = 1; then
     AC_LIBOBJ([ftell])
@@ -603,6 +626,15 @@ AC_DEFUN([gl_INIT],
   gl_STDINT_H
   gl_STDIO_H
   gl_STDLIB_H
+  gl_STRCASE
+  if test $HAVE_STRCASECMP = 0; then
+    AC_LIBOBJ([strcasecmp])
+    gl_PREREQ_STRCASECMP
+  fi
+  if test $HAVE_STRNCASECMP = 0; then
+    AC_LIBOBJ([strncasecmp])
+    gl_PREREQ_STRNCASECMP
+  fi
   gl_FUNC_STRDUP_POSIX
   if test $REPLACE_STRDUP = 1; then
     AC_LIBOBJ([strdup])
@@ -610,6 +642,13 @@ AC_DEFUN([gl_INIT],
   fi
   gl_STRING_MODULE_INDICATOR([strdup])
   gl_HEADER_STRING_H
+  gl_HEADER_STRINGS_H
+  gl_FUNC_STRPTIME
+  if test $HAVE_STRPTIME = 0; then
+    AC_LIBOBJ([strptime])
+    gl_PREREQ_STRPTIME
+  fi
+  gl_TIME_MODULE_INDICATOR([strptime])
   gl_FUNC_STRTOK_R
   if test $HAVE_STRTOK_R = 0 || test $REPLACE_STRTOK_R = 1; then
     AC_LIBOBJ([strtok_r])
@@ -622,15 +661,25 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STRVERSCMP
   fi
   gl_STRING_MODULE_INDICATOR([strverscmp])
+  gl_HEADER_SYS_FILE_H
+  AC_PROG_MKDIR_P
   AC_REQUIRE([gl_HEADER_SYS_SOCKET])
   AC_PROG_MKDIR_P
   gl_HEADER_SYS_STAT_H
+  AC_PROG_MKDIR_P
+  gl_HEADER_SYS_TIME_H
   AC_PROG_MKDIR_P
   gl_SYS_TYPES_H
   AC_PROG_MKDIR_P
   gl_HEADER_SYS_UIO
   AC_PROG_MKDIR_P
   gl_HEADER_TIME_H
+  gl_TIME_R
+  if test $HAVE_LOCALTIME_R = 0 || test $REPLACE_LOCALTIME_R = 1; then
+    AC_LIBOBJ([time_r])
+    gl_PREREQ_TIME_R
+  fi
+  gl_TIME_MODULE_INDICATOR([time_r])
   gl_UNISTD_H
   gl_FUNC_UNLINK
   if test $REPLACE_UNLINK = 1; then
@@ -931,8 +980,6 @@ changequote([, ])dnl
   AC_REQUIRE([gl_HEADER_SYS_SELECT])
   AC_PROG_MKDIR_P
   AC_CHECK_FUNCS_ONCE([shutdown])
-  gl_HEADER_SYS_TIME_H
-  AC_PROG_MKDIR_P
   gl_THREAD
   AC_REQUIRE([gl_THREADLIB])
   gl_UNLINKDIR
@@ -1112,6 +1159,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/float+.h
   lib/float.c
   lib/float.in.h
+  lib/flock.c
   lib/fopen.c
   lib/fpurge.c
   lib/freading.c
@@ -1119,6 +1167,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/fseek.c
   lib/fseeko.c
   lib/fstat.c
+  lib/fsync.c
   lib/ftell.c
   lib/ftello.c
   lib/gc-gnulib.c
@@ -1181,18 +1230,25 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdio-impl.h
   lib/stdio.in.h
   lib/stdlib.in.h
+  lib/strcasecmp.c
   lib/strdup.c
   lib/string.in.h
+  lib/strings.in.h
   lib/stripslash.c
+  lib/strncasecmp.c
+  lib/strptime.c
   lib/strtok_r.c
   lib/strverscmp.c
   lib/sys-limits.h
+  lib/sys_file.in.h
   lib/sys_socket.c
   lib/sys_socket.in.h
   lib/sys_stat.in.h
+  lib/sys_time.in.h
   lib/sys_types.in.h
   lib/sys_uio.in.h
   lib/time.in.h
+  lib/time_r.c
   lib/u64.c
   lib/u64.h
   lib/unistd.c
@@ -1236,6 +1292,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fdopen.m4
   m4/fflush.m4
   m4/float_h.m4
+  m4/flock.m4
   m4/fopen.m4
   m4/fpieee.m4
   m4/fpurge.m4
@@ -1243,6 +1300,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fseek.m4
   m4/fseeko.m4
   m4/fstat.m4
+  m4/fsync.m4
   m4/ftell.m4
   m4/ftello.m4
   m4/ftruncate.m4
@@ -1342,13 +1400,17 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdint_h.m4
   m4/stdio_h.m4
   m4/stdlib_h.m4
+  m4/strcase.m4
   m4/strdup.m4
   m4/strerror.m4
   m4/strerror_r.m4
   m4/string_h.m4
+  m4/strings_h.m4
+  m4/strptime.m4
   m4/strtok_r.m4
   m4/strverscmp.m4
   m4/symlink.m4
+  m4/sys_file_h.m4
   m4/sys_ioctl_h.m4
   m4/sys_resource_h.m4
   m4/sys_select_h.m4
@@ -1360,6 +1422,8 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/thread.m4
   m4/threadlib.m4
   m4/time_h.m4
+  m4/time_r.m4
+  m4/tm_gmtoff.m4
   m4/ungetc.m4
   m4/unistd_h.m4
   m4/unlink.m4
@@ -1417,6 +1481,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-fflush2.sh
   tests/test-fgetc.c
   tests/test-float.c
+  tests/test-flock.c
   tests/test-fopen.c
   tests/test-fopen.h
   tests/test-fpurge.c
@@ -1434,6 +1499,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-fseeko4.c
   tests/test-fseeko4.sh
   tests/test-fstat.c
+  tests/test-fsync.c
   tests/test-ftell.c
   tests/test-ftell.sh
   tests/test-ftell2.sh
@@ -1530,9 +1596,11 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-strerror.c
   tests/test-strerror_r.c
   tests/test-string.c
+  tests/test-strings.c
   tests/test-strverscmp.c
   tests/test-symlink.c
   tests/test-symlink.h
+  tests/test-sys_file.c
   tests/test-sys_ioctl.c
   tests/test-sys_resource.c
   tests/test-sys_select.c
@@ -1625,7 +1693,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/sys_ioctl.in.h
   tests=lib/sys_resource.in.h
   tests=lib/sys_select.in.h
-  tests=lib/sys_time.in.h
   tests=lib/unlinkdir.c
   tests=lib/unlinkdir.h
   tests=lib/unsetenv.c

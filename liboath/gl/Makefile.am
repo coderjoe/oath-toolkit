@@ -40,8 +40,11 @@
 #  crypto/gc-hmac-sha256 \
 #  crypto/gc-hmac-sha512 \
 #  fclose \
+#  fcntl \
+#  flock \
 #  fopen \
 #  fseeko \
+#  fsync \
 #  getline \
 #  lib-symbol-versions \
 #  lib-symbol-visibility \
@@ -49,6 +52,7 @@
 #  rename \
 #  snprintf \
 #  strdup-posix \
+#  strptime \
 #  strtok_r \
 #  strverscmp \
 #  sys_stat \
@@ -429,6 +433,15 @@ EXTRA_libgnu_la_SOURCES += float.c itold.c
 
 ## end   gnulib module float
 
+## begin gnulib module flock
+
+
+EXTRA_DIST += flock.c
+
+EXTRA_libgnu_la_SOURCES += flock.c
+
+## end   gnulib module flock
+
 ## begin gnulib module fopen
 
 
@@ -481,6 +494,15 @@ EXTRA_DIST += fstat.c stat-w32.c stat-w32.h
 EXTRA_libgnu_la_SOURCES += fstat.c stat-w32.c
 
 ## end   gnulib module fstat
+
+## begin gnulib module fsync
+
+
+EXTRA_DIST += fsync.c
+
+EXTRA_libgnu_la_SOURCES += fsync.c
+
+## end   gnulib module fsync
 
 ## begin gnulib module ftell
 
@@ -1221,6 +1243,15 @@ EXTRA_DIST += stdlib.in.h
 
 ## end   gnulib module stdlib
 
+## begin gnulib module strcase
+
+
+EXTRA_DIST += strcasecmp.c strncasecmp.c
+
+EXTRA_libgnu_la_SOURCES += strcasecmp.c strncasecmp.c
+
+## end   gnulib module strcase
+
 ## begin gnulib module strdup-posix
 
 
@@ -1338,6 +1369,46 @@ EXTRA_DIST += string.in.h
 
 ## end   gnulib module string
 
+## begin gnulib module strings
+
+BUILT_SOURCES += strings.h
+
+# We need the following in order to create <strings.h> when the system
+# doesn't have one that works with the given compiler.
+strings.h: strings.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H) $(ARG_NONNULL_H)
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's|@''HAVE_STRINGS_H''@|$(HAVE_STRINGS_H)|g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_STRINGS_H''@|$(NEXT_STRINGS_H)|g' \
+	      -e 's/@''GNULIB_FFS''@/$(GNULIB_FFS)/g' \
+	      -e 's|@''HAVE_FFS''@|$(HAVE_FFS)|g' \
+	      -e 's|@''HAVE_STRCASECMP''@|$(HAVE_STRCASECMP)|g' \
+	      -e 's|@''HAVE_DECL_STRNCASECMP''@|$(HAVE_DECL_STRNCASECMP)|g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/strings.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += strings.h strings.h-t
+
+EXTRA_DIST += strings.in.h
+
+## end   gnulib module strings
+
+## begin gnulib module strptime
+
+
+EXTRA_DIST += strptime.c
+
+EXTRA_libgnu_la_SOURCES += strptime.c
+
+## end   gnulib module strptime
+
 ## begin gnulib module strtok_r
 
 
@@ -1355,6 +1426,35 @@ EXTRA_DIST += strverscmp.c
 EXTRA_libgnu_la_SOURCES += strverscmp.c
 
 ## end   gnulib module strverscmp
+
+## begin gnulib module sys_file
+
+BUILT_SOURCES += sys/file.h
+
+# We need the following in order to create <sys/file.h> when the system
+# has one that is incomplete.
+sys/file.h: sys_file.in.h $(top_builddir)/config.status $(WARN_ON_USE_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's/@''HAVE_SYS_FILE_H''@/$(HAVE_SYS_FILE_H)/g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_FILE_H''@|$(NEXT_SYS_FILE_H)|g' \
+	      -e 's/@''HAVE_FLOCK''@/$(HAVE_FLOCK)/g' \
+	      -e 's/@''GNULIB_FLOCK''@/$(GNULIB_FLOCK)/g' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_file.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += sys/file.h sys/file.h-t
+MOSTLYCLEANDIRS += sys
+
+EXTRA_DIST += sys_file.in.h
+
+## end   gnulib module sys_file
 
 ## begin gnulib module sys_socket
 
@@ -1475,6 +1575,40 @@ EXTRA_DIST += sys_stat.in.h
 
 ## end   gnulib module sys_stat
 
+## begin gnulib module sys_time
+
+BUILT_SOURCES += sys/time.h
+
+# We need the following in order to create <sys/time.h> when the system
+# doesn't have one that works with the given compiler.
+sys/time.h: sys_time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
+	$(AM_V_at)$(MKDIR_P) sys
+	$(AM_V_GEN)rm -f $@-t $@ && \
+	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+	      -e 's/@''HAVE_SYS_TIME_H''@/$(HAVE_SYS_TIME_H)/g' \
+	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
+	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
+	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
+	      -e 's|@''NEXT_SYS_TIME_H''@|$(NEXT_SYS_TIME_H)|g' \
+	      -e 's/@''GNULIB_GETTIMEOFDAY''@/$(GNULIB_GETTIMEOFDAY)/g' \
+	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
+	      -e 's/@''HAVE_GETTIMEOFDAY''@/$(HAVE_GETTIMEOFDAY)/g' \
+	      -e 's/@''HAVE_STRUCT_TIMEVAL''@/$(HAVE_STRUCT_TIMEVAL)/g' \
+	      -e 's/@''REPLACE_GETTIMEOFDAY''@/$(REPLACE_GETTIMEOFDAY)/g' \
+	      -e 's/@''REPLACE_STRUCT_TIMEVAL''@/$(REPLACE_STRUCT_TIMEVAL)/g' \
+	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
+	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
+	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
+	      < $(srcdir)/sys_time.in.h; \
+	} > $@-t && \
+	mv $@-t $@
+MOSTLYCLEANFILES += sys/time.h sys/time.h-t
+
+EXTRA_DIST += sys_time.in.h
+
+## end   gnulib module sys_time
+
 ## begin gnulib module sys_types
 
 BUILT_SOURCES += sys/types.h
@@ -1580,6 +1714,15 @@ MOSTLYCLEANFILES += time.h time.h-t
 EXTRA_DIST += time.in.h
 
 ## end   gnulib module time
+
+## begin gnulib module time_r
+
+
+EXTRA_DIST += time_r.c
+
+EXTRA_libgnu_la_SOURCES += time_r.c
+
+## end   gnulib module time_r
 
 ## begin gnulib module u64
 

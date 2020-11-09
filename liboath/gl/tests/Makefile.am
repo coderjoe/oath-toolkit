@@ -549,6 +549,14 @@ EXTRA_DIST += test-float.c macros.h
 
 ## end   gnulib module float-tests
 
+## begin gnulib module flock-tests
+
+TESTS += test-flock
+check_PROGRAMS += test-flock
+EXTRA_DIST += test-flock.c signature.h macros.h
+
+## end   gnulib module flock-tests
+
 ## begin gnulib module fopen-tests
 
 TESTS += test-fopen
@@ -622,6 +630,14 @@ check_PROGRAMS += test-fstat
 EXTRA_DIST += test-fstat.c signature.h macros.h
 
 ## end   gnulib module fstat-tests
+
+## begin gnulib module fsync-tests
+
+TESTS += test-fsync
+check_PROGRAMS += test-fsync
+EXTRA_DIST += test-fsync.c signature.h macros.h
+
+## end   gnulib module fsync-tests
 
 ## begin gnulib module ftell-tests
 
@@ -1712,6 +1728,14 @@ EXTRA_DIST += test-string.c
 
 ## end   gnulib module string-tests
 
+## begin gnulib module strings-tests
+
+TESTS += test-strings
+check_PROGRAMS += test-strings
+EXTRA_DIST += test-strings.c
+
+## end   gnulib module strings-tests
+
 ## begin gnulib module strverscmp-tests
 
 TESTS += test-strverscmp
@@ -1736,6 +1760,14 @@ check_PROGRAMS += test-symlink
 EXTRA_DIST += test-symlink.h test-symlink.c signature.h macros.h
 
 ## end   gnulib module symlink-tests
+
+## begin gnulib module sys_file-tests
+
+TESTS += test-sys_file
+check_PROGRAMS += test-sys_file
+EXTRA_DIST += test-sys_file.c
+
+## end   gnulib module sys_file-tests
 
 ## begin gnulib module sys_ioctl
 
@@ -1873,40 +1905,6 @@ check_PROGRAMS += test-sys_stat
 EXTRA_DIST += test-sys_stat.c
 
 ## end   gnulib module sys_stat-tests
-
-## begin gnulib module sys_time
-
-BUILT_SOURCES += sys/time.h
-
-# We need the following in order to create <sys/time.h> when the system
-# doesn't have one that works with the given compiler.
-sys/time.h: sys_time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) $(WARN_ON_USE_H)
-	$(AM_V_at)$(MKDIR_P) sys
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
-	      -e 's/@''HAVE_SYS_TIME_H''@/$(HAVE_SYS_TIME_H)/g' \
-	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
-	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
-	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
-	      -e 's|@''NEXT_SYS_TIME_H''@|$(NEXT_SYS_TIME_H)|g' \
-	      -e 's/@''GNULIB_GETTIMEOFDAY''@/$(GNULIB_GETTIMEOFDAY)/g' \
-	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
-	      -e 's/@''HAVE_GETTIMEOFDAY''@/$(HAVE_GETTIMEOFDAY)/g' \
-	      -e 's/@''HAVE_STRUCT_TIMEVAL''@/$(HAVE_STRUCT_TIMEVAL)/g' \
-	      -e 's/@''REPLACE_GETTIMEOFDAY''@/$(REPLACE_GETTIMEOFDAY)/g' \
-	      -e 's/@''REPLACE_STRUCT_TIMEVAL''@/$(REPLACE_STRUCT_TIMEVAL)/g' \
-	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
-	      -e '/definition of _GL_ARG_NONNULL/r $(ARG_NONNULL_H)' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/sys_time.in.h; \
-	} > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += sys/time.h sys/time.h-t
-
-EXTRA_DIST += sys_time.in.h
-
-## end   gnulib module sys_time
 
 ## begin gnulib module sys_time-tests
 
