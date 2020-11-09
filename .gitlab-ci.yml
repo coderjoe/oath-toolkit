@@ -10,7 +10,7 @@ Debian:
     - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
-  - make V=1
+  - make bootstrap
   - make check V=1 || (cat */tests/test-suite.log; exit 1)
   - make dist
   - sha224sum oath-toolkit-*.tar.gz
@@ -27,7 +27,8 @@ Ubuntu:
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools valgrind gengetopt datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
-  - make V=1
+  - make autoreconf
+  - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests
   - make check V=1 || (cat */tests/test-suite.log; exit 1)
   - make syntax-check
 

@@ -22,13 +22,14 @@ endif
 
 INDENT_SOURCES = `find . -name '*.[ch]' | grep -v -e /gl/ -e build-aux`
 
-bootstrap:
+autoreconf:
 	printf "gdoc_MANS =\ngdoc_TEXINFOS =\n" > liboath/man/Makefile.gdoc
 	printf "gdoc_MANS =\ngdoc_TEXINFOS =\n" > libpskc/man/Makefile.gdoc
 	touch ChangeLog
 	test -f configure || autoreconf --force --install
+
+bootstrap: autoreconf
 	test -f Makefile || ./configure $(CFGFLAGS)
-	make
 
 # syntax-check
 VC_LIST_ALWAYS_EXCLUDE_REGEX = ^GNUmakefile|maint.mk|build-aux/|gl/|m4/libxml2.m4|oathtool/doc/parse-datetime.texi|(liboath|libpskc)/man/gdoc|liboath/gtk-doc.make|libpskc/gtk-doc.make|libpskc/schemas/|(oathtool|liboath)/(build-aux|gl)/.*$$
