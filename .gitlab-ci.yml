@@ -79,10 +79,9 @@ CentOS:
   - yum -y groupinstall "Development Tools"
   - yum -y install libxml2-devel
   script:
-  - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --enable-gcc-warnings || (cat config.log; exit 1)
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 Alpine:
