@@ -1,10 +1,10 @@
 stages:
- - dist
+ - git-builds
  - tarball-test
 
 Debian:
   image: debian:latest
-  stage: dist
+  stage: git-builds
   before_script:
     - apt-get update -qq
     - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
@@ -14,8 +14,6 @@ Debian:
   - make check V=1 || (cat */tests/test-suite.log; exit 1)
   - make dist
   - sha224sum oath-toolkit-*.tar.gz
-  tags:
-  - linux
   artifacts:
     expire_in: 2 weeks
     paths:
@@ -23,22 +21,15 @@ Debian:
 
 Ubuntu:
   image: ubuntu:latest
-  stage: dist
+  stage: git-builds
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
+    - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make V=1
   - make check V=1 || (cat */tests/test-suite.log; exit 1)
-  - make dist
-  - sha224sum oath-toolkit-*.tar.gz
-  tags:
-  - linux
-  artifacts:
-    expire_in: 2 weeks
-    paths:
-      - oath-toolkit-*.tar.gz
+  - make syntax-check
 
 Mingw:
   image: debian:latest
@@ -58,7 +49,7 @@ CentOS:
   image: centos:latest
   stage: tarball-test
   before_script:
-  - yum -y install gcc
+  - yum -y install make gcc libxml2-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
