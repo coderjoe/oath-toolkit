@@ -6,6 +6,7 @@ Debian:
   image: debian:latest
   stage: dist
   before_script:
+    - apt-get update -qq
     - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
@@ -23,6 +24,7 @@ Mingw:
   image: debian:latest
   stage: tarball-test
   before_script:
+    - apt-get update -qq
     - apt-get install -y -qq make mingw-w64
   script:
   - tar xfa oath-toolkit-*.tar.gz
