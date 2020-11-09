@@ -45,8 +45,14 @@ AC_PROG_LIBTOOL
 gl_INIT
 GTK_DOC_CHECK(1.1)
 
+AC_ARG_WITH(xmlsec-crypto-engine,
+  AC_HELP_STRING([--with-xmlsec-crypto-engine=ENGINE],
+                 [Use specified non-dynamic xmlsec crypto engine]),
+  [xmlsecengine="-${withval}"])
+AC_MSG_NOTICE([xmlsec crypto engine: $xmlsecengine])
+
 AM_PATH_XML2([], [], [AC_MSG_ERROR(["cannot find libxml2"])])
-PKG_CHECK_MODULES(XMLSEC, xmlsec1, [xmlsec=yes], [xmlsec=no])
+PKG_CHECK_MODULES(XMLSEC, xmlsec1$xmlsecengine, [xmlsec=yes], [xmlsec=no])
 AC_PATH_PROG(XMLCATALOG, xmlcatalog)
 if test -z "$ac_cv_path_XMLCATALOG"; then
   xmlsec=no
@@ -133,5 +139,9 @@ AC_OUTPUT
 
 AC_MSG_NOTICE([summary of build options:
 
-  XMLSEC enabled:       $xmlsec
+  Libxml2 LIBS:         $XML_LIBS
+  Libxml2 CPPFLAGS:     $XML_CPPFLAGS
+  XMLSEC enabled:       $xmlsec crypto engine: $xmlsecengine
+            LIBS:       $XMLSEC_LIBS
+	  CFLAGS:       $XMLSEC_CFLAGS
 ])

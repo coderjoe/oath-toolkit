@@ -3,6 +3,11 @@ Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.4 (unreleased)
 
+** libpskc: New --with-xmlsec-crypto-engine to hard-code crypto engine.
+Use it like --with-xmlsec-crypto-engine=gnutls or
+--with-xmlsec-crypto-engine=openssl if the default dynamic loading
+fails because of runtime linker search path issues.  Fixes #16.
+
 ** oathtool: Hash names (e.g., SHA256) for --totp are now upper case.
 Lower/mixed case hash names are supported for compatibility.  Fixes #3.
 
