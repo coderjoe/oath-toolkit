@@ -47,7 +47,9 @@ Mingw64:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --host=x86_64-w64-mingw32
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make V=1
+  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
+  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
 Mingw32:
   image: debian:latest
@@ -65,7 +67,9 @@ Mingw32:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --host=i686-w64-mingw32
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make V=1
+  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
+  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
 CentOS:
   image: centos:latest
