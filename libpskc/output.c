@@ -46,19 +46,11 @@ buffer_init (struct buffer *buf)
 {
   buf->memlen = CHUNK;
   buf->mem = malloc (buf->memlen);
-  buf->mem[0] = '\0';
+  if (buf->mem)
+    buf->mem[0] = '\0';
   buf->dlen = 0;
 }
 
-#if 0
-static void
-buffer_done (struct buffer *buf)
-{
-  if (buf)
-    free (buf->mem);
-  buffer_init (buf);
-}
-#endif
 static void
 buffer_getstr (struct buffer *buf, char **str, size_t *dlen)
 {
