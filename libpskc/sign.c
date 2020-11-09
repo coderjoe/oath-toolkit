@@ -25,11 +25,13 @@
 
 #define INTERNAL_NEED_PSKC_STRUCT
 #include "internal.h"
+#ifdef USE_XMLSEC
 #include <xmlsec/xmlsec.h>
 #include <xmlsec/crypto.h>
 #include <xmlsec/xmltree.h>
 #include <xmlsec/xmldsig.h>
 #include <xmlsec/templates.h>
+#endif
 
 /**
  * pskc_sign_x509:
@@ -45,6 +47,7 @@ int
 pskc_sign_x509 (pskc_t * container,
 		const char *key_file, const char *cert_file)
 {
+#ifdef USE_XMLSEC
   xmlNodePtr signNode;
   xmlNodePtr keyInfoNode = NULL;
   xmlNodePtr refNode = NULL;
@@ -137,8 +140,12 @@ pskc_sign_x509 (pskc_t * container,
     }
 
   return PSKC_OK;
+#else
+  return PSKC_XMLSEC_ERROR;
+#endif
 }
 
+#ifdef USE_XMLSEC
 static int
 verify (pskc_t * container, xmlSecKeysMngrPtr mngr,
 	xmlSecDSigCtxPtr dsigCtx, const char *cert_file, int *valid_signature)
@@ -180,6 +187,7 @@ verify (pskc_t * container, xmlSecKeysMngrPtr mngr,
 
   return PSKC_OK;
 }
+#endif
 
 /**
  * pskc_verify_x509crt:
@@ -195,6 +203,7 @@ int
 pskc_verify_x509crt (pskc_t * container, const char *cert_file,
 		     int *valid_signature)
 {
+#ifdef USE_XMLSEC
   xmlSecKeysMngrPtr mngr = NULL;
   xmlSecDSigCtxPtr dsigCtx = NULL;
   int rc;
@@ -220,4 +229,7 @@ pskc_verify_x509crt (pskc_t * container, const char *cert_file,
   xmlSecKeysMngrDestroy (mngr);
 
   return rc;
+#else
+  return PSKC_XMLSEC_ERROR;
+#endif
 }

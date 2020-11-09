@@ -27,8 +27,10 @@
 #include <string.h>		/* strverscmp */
 #include <libxml/parser.h>	/* xmlInitParser */
 #include <libxml/catalog.h>	/* xmlLoadCatalog */
+#ifdef USE_XMLSEC
 #include <xmlsec/xmlsec.h>
 #include <xmlsec/crypto.h>
+#endif
 
 int _pskc_init = 0;
 
