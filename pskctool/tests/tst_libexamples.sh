@@ -21,7 +21,13 @@ set -e
 srcdir=${srcdir:-.}
 PSKCTOOL=../pskctool
 
-$PSKCTOOL -h | sed '1,2d;s/ \+$//' > foo
+if $PSKCTOOL -h | head -1 | grep -q ^pskctool; then
+    # gengetopt < 2.23
+    $PSKCTOOL -h | sed '1,2d;s/ \+$//' > foo
+else
+    # gengetopt >= 2.23
+    $PSKCTOOL -h | sed 's/ \+$//' > foo
+fi
 if ! diff -ur $srcdir/../../libpskc/examples/pskctool-h.txt foo; then
     cp foo $srcdir/../../libpskc/examples/pskctool-h.txt
     echo "FAIL: pskctool --help output change, commit updated file."
