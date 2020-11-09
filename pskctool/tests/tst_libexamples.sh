@@ -23,7 +23,8 @@ PSKCTOOL=../pskctool
 
 if $PSKCTOOL -h | head -1 | grep -q ^pskctool; then
     # gengetopt < 2.23
-    $PSKCTOOL -h | sed '1,2d;s/ \+$//;s/OPTIONS/OPTION/' > foo
+    ($PSKCTOOL -h | grep ^Usage: | sed 's/ \+$//;s/OPTIONS/OPTION/';
+     $PSKCTOOL -h | sed '1,2d;4,5d;s/ \+$//;') > foo
 else
     # gengetopt >= 2.23
     $PSKCTOOL -h | sed 's/ \+$//' > foo
