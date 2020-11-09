@@ -11,7 +11,7 @@ Debian:
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make bootstrap
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make dist
   - sha224sum oath-toolkit-*.tar.gz
   artifacts:
@@ -20,7 +20,7 @@ Debian:
       - oath-toolkit-*.tar.gz
 
 Ubuntu:
-  image: ubuntu:latest
+  image: ubuntu:devel
   stage: git-builds
   before_script:
     - apt-get update -qq
@@ -29,7 +29,7 @@ Ubuntu:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make autoreconf
   - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests || (cat config.log; exit 1)
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make syntax-check
 
 Mingw64:
@@ -37,7 +37,8 @@ Mingw64:
   stage: tarball-test
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make mingw-w64 wine binfmt-support wine-binfmt
+    - apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
+    - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
   script:
@@ -51,14 +52,15 @@ Mingw32:
   stage: tarball-test
   before_script:
     - apt-get update -qq
-    - apt-get install -y -qq make mingw-w64 wine binfmt-support wine-binfmt
+    - apt-get install -y -qq make mingw-w64 wine wine32 binfmt-support wine-binfmt
+    - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --host=i686-w64-mingw32
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 CentOS:
   image: centos:latest
@@ -70,7 +72,7 @@ CentOS:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings || (cat config.log; exit 1)
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 Alpine:
   image: alpine:latest
@@ -78,9 +80,9 @@ Alpine:
   before_script:
   - echo "ipv6" >> /etc/modules
   - apk update
-  - apk add build-base libxml2-dev
+  - apk add build-base libxml2-dev datefudge
   script:
   - tar xfz oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --enable-gcc-warnings || (cat config.log; exit 1)
-  - make check V=1 || (cat */tests/test-suite.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
