@@ -6,7 +6,6 @@ Debian:
   image: debian:latest
   stage: git-builds
   before_script:
-    - lsb_release --all
     - apt-get update -qq
     - apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools dblatex valgrind gengetopt libxml2-dbg datefudge
   script:
@@ -24,7 +23,6 @@ Ubuntu:
   image: ubuntu:latest
   stage: git-builds
   before_script:
-    - lsb_release --all
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make git autoconf automake libtool bison libpam0g-dev libxmlsec1-dev libxml2-utils help2man gtk-doc-tools valgrind gengetopt datefudge
   script:
@@ -51,7 +49,6 @@ CentOS:
   image: centos:latest
   stage: tarball-test
   before_script:
-  - lsb_release --all
   - yum -y install make gcc libxml2-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
