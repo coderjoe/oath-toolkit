@@ -549,14 +549,6 @@ EXTRA_DIST += test-float.c macros.h
 
 ## end   gnulib module float-tests
 
-## begin gnulib module flock-tests
-
-TESTS += test-flock
-check_PROGRAMS += test-flock
-EXTRA_DIST += test-flock.c signature.h macros.h
-
-## end   gnulib module flock-tests
-
 ## begin gnulib module fopen-tests
 
 TESTS += test-fopen
@@ -1760,14 +1752,6 @@ check_PROGRAMS += test-symlink
 EXTRA_DIST += test-symlink.h test-symlink.c signature.h macros.h
 
 ## end   gnulib module symlink-tests
-
-## begin gnulib module sys_file-tests
-
-TESTS += test-sys_file
-check_PROGRAMS += test-sys_file
-EXTRA_DIST += test-sys_file.c
-
-## end   gnulib module sys_file-tests
 
 ## begin gnulib module sys_ioctl
 

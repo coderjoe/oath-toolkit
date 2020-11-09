@@ -45,8 +45,6 @@
 #  crypto/gc-hmac-sha256 \
 #  crypto/gc-hmac-sha512 \
 #  fclose \
-#  fcntl \
-#  flock \
 #  fopen \
 #  fseeko \
 #  fsync \
@@ -73,8 +71,6 @@ gl_MODULES([
   crypto/gc-hmac-sha256
   crypto/gc-hmac-sha512
   fclose
-  fcntl
-  flock
   fopen
   fseeko
   fsync

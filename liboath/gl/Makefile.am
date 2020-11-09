@@ -40,8 +40,6 @@
 #  crypto/gc-hmac-sha256 \
 #  crypto/gc-hmac-sha512 \
 #  fclose \
-#  fcntl \
-#  flock \
 #  fopen \
 #  fseeko \
 #  fsync \
@@ -432,15 +430,6 @@ EXTRA_DIST += float.c float.in.h itold.c
 EXTRA_libgnu_la_SOURCES += float.c itold.c
 
 ## end   gnulib module float
-
-## begin gnulib module flock
-
-
-EXTRA_DIST += flock.c
-
-EXTRA_libgnu_la_SOURCES += flock.c
-
-## end   gnulib module flock
 
 ## begin gnulib module fopen
 
@@ -1426,35 +1415,6 @@ EXTRA_DIST += strverscmp.c
 EXTRA_libgnu_la_SOURCES += strverscmp.c
 
 ## end   gnulib module strverscmp
-
-## begin gnulib module sys_file
-
-BUILT_SOURCES += sys/file.h
-
-# We need the following in order to create <sys/file.h> when the system
-# has one that is incomplete.
-sys/file.h: sys_file.in.h $(top_builddir)/config.status $(WARN_ON_USE_H)
-	$(AM_V_at)$(MKDIR_P) sys
-	$(AM_V_GEN)rm -f $@-t $@ && \
-	{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-	  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
-	      -e 's/@''HAVE_SYS_FILE_H''@/$(HAVE_SYS_FILE_H)/g' \
-	      -e 's|@''INCLUDE_NEXT''@|$(INCLUDE_NEXT)|g' \
-	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
-	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
-	      -e 's|@''NEXT_SYS_FILE_H''@|$(NEXT_SYS_FILE_H)|g' \
-	      -e 's/@''HAVE_FLOCK''@/$(HAVE_FLOCK)/g' \
-	      -e 's/@''GNULIB_FLOCK''@/$(GNULIB_FLOCK)/g' \
-	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
-	      < $(srcdir)/sys_file.in.h; \
-	} > $@-t && \
-	mv $@-t $@
-MOSTLYCLEANFILES += sys/file.h sys/file.h-t
-MOSTLYCLEANDIRS += sys
-
-EXTRA_DIST += sys_file.in.h
-
-## end   gnulib module sys_file
 
 ## begin gnulib module sys_socket
 

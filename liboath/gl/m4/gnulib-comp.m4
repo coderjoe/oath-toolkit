@@ -129,8 +129,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module filename:
   # Code from module float:
   # Code from module float-tests:
-  # Code from module flock:
-  # Code from module flock-tests:
   # Code from module fopen:
   # Code from module fopen-tests:
   # Code from module fpieee:
@@ -311,8 +309,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module strverscmp-tests:
   # Code from module symlink:
   # Code from module symlink-tests:
-  # Code from module sys_file:
-  # Code from module sys_file-tests:
   # Code from module sys_ioctl:
   # Code from module sys_ioctl-tests:
   # Code from module sys_resource:
@@ -462,12 +458,6 @@ AC_DEFUN([gl_INIT],
   if test $REPLACE_ITOLD = 1; then
     AC_LIBOBJ([itold])
   fi
-  gl_FUNC_FLOCK
-  if test $HAVE_FLOCK = 0; then
-    AC_LIBOBJ([flock])
-    gl_PREREQ_FLOCK
-  fi
-  gl_HEADER_SYS_FILE_MODULE_INDICATOR([flock])
   gl_FUNC_FOPEN
   if test $REPLACE_FOPEN = 1; then
     AC_LIBOBJ([fopen])
@@ -661,8 +651,6 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_STRVERSCMP
   fi
   gl_STRING_MODULE_INDICATOR([strverscmp])
-  gl_HEADER_SYS_FILE_H
-  AC_PROG_MKDIR_P
   AC_REQUIRE([gl_HEADER_SYS_SOCKET])
   AC_PROG_MKDIR_P
   gl_HEADER_SYS_STAT_H
@@ -1159,7 +1147,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/float+.h
   lib/float.c
   lib/float.in.h
-  lib/flock.c
   lib/fopen.c
   lib/fpurge.c
   lib/freading.c
@@ -1240,7 +1227,6 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/strtok_r.c
   lib/strverscmp.c
   lib/sys-limits.h
-  lib/sys_file.in.h
   lib/sys_socket.c
   lib/sys_socket.in.h
   lib/sys_stat.in.h
@@ -1292,7 +1278,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fdopen.m4
   m4/fflush.m4
   m4/float_h.m4
-  m4/flock.m4
   m4/fopen.m4
   m4/fpieee.m4
   m4/fpurge.m4
@@ -1410,7 +1395,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/strtok_r.m4
   m4/strverscmp.m4
   m4/symlink.m4
-  m4/sys_file_h.m4
   m4/sys_ioctl_h.m4
   m4/sys_resource_h.m4
   m4/sys_select_h.m4
@@ -1481,7 +1465,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-fflush2.sh
   tests/test-fgetc.c
   tests/test-float.c
-  tests/test-flock.c
   tests/test-fopen.c
   tests/test-fopen.h
   tests/test-fpurge.c
@@ -1600,7 +1583,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-strverscmp.c
   tests/test-symlink.c
   tests/test-symlink.h
-  tests/test-sys_file.c
   tests/test-sys_ioctl.c
   tests/test-sys_resource.c
   tests/test-sys_select.c
