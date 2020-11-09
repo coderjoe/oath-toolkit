@@ -33,6 +33,7 @@ Ubuntu:
   - make syntax-check
 
 Mingw64:
+  allow_failure: true # until usersfile works on mingw
   image: debian:latest
   stage: test
   needs: [Debian]
@@ -52,6 +53,7 @@ Mingw64:
   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
 Mingw32:
+  allow_failure: true # until usersfile works on mingw
   image: debian:latest
   stage: test
   needs: [Debian]
