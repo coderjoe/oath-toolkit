@@ -39,6 +39,7 @@ Mingw64:
   before_script:
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
+    - update-binfmts --enable wine
     - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
@@ -53,8 +54,10 @@ Mingw32:
   stage: test
   needs: [Debian]
   before_script:
+    - dpkg --add-architecture i386
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 binfmt-support wine-binfmt
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 libwine libwine:i386 binfmt-support wine-binfmt
+    - update-binfmts --enable wine
     - update-binfmts --display
     - mount
     - find /proc/sys/fs/binfmt_misc
@@ -70,7 +73,7 @@ CentOS:
   needs: [Debian]
   before_script:
   - yum -y groupinstall "Development Tools"
-  - yum -y install libxml2-devel
+  - yum -y install libxml2-devel datefudge
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
