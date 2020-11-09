@@ -16,7 +16,7 @@
 AC_INIT([oath-toolkit],
   m4_esyscmd([build-aux/oath-toolkit-version .tarball-version]),
   [oath-toolkit-help@nongnu.org],,
-  [http://www.nongnu.org/oath-toolkit/])
+  [https://www.nongnu.org/oath-toolkit/])
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])

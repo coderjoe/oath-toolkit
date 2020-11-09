@@ -18,7 +18,7 @@
 AC_INIT([libpskc],
   m4_esyscmd([../build-aux/oath-toolkit-version ../.tarball-version]),
   [oath-toolkit-help@nongnu.org],,
-  [http://www.nongnu.org/oath-toolkit/])
+  [https://www.nongnu.org/oath-toolkit/])
 
 VERSION_NUMBER=`"$srcdir"/../build-aux/oath-toolkit-version ../.tarball-version vn`
 AC_SUBST(VERSION_NUMBER)

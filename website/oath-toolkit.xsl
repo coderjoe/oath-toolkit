@@ -37,7 +37,7 @@
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="https://gitlab.com/oath-toolkit/oath-toolkit/tree/master">Git Repository</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="https://gitlab.com/oath-toolkit/oath-toolkit/issues">Bug&#160;tracker</a></div>
 	<div style="text-align:center;padding-top: 1em;">
-	  <a class="FlattrButton" style="display:none;" href="http://www.nongnu.org/oath-toolkit/"></a>
+	  <a class="FlattrButton" style="display:none;" href="https://www.nongnu.org/oath-toolkit/"></a>
 	  <noscript><div><a href="http://flattr.com/thing/130057/OATH-Toolkit">
 	  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border:0" /></a></div></noscript>
 	</div>

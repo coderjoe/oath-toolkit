@@ -22,7 +22,7 @@ includedir=@includedir@/pskc
 
 Name: Libpskc
 Description: Library for Portable Symmetric Key Container
-URL: http://www.nongnu.org/oath-toolkit/
+URL: https://www.nongnu.org/oath-toolkit/
 Version: @VERSION@
 Libs: -L${libdir} -lpskc
 Cflags: -I${includedir}
