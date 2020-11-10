@@ -48,7 +48,7 @@ Fedora:
   image: fedora:latest
   stage: build
   before_script:
-  - yum -y install make clang diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge
+  - yum -y install make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make autoreconf
