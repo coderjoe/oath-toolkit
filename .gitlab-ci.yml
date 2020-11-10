@@ -1,6 +1,7 @@
 stages:
  - build
  - test
+ - deploy
 
 Debian:
   image: debian:latest
