@@ -48,11 +48,10 @@ Fedora:
   image: fedora:latest
   stage: build
   before_script:
-  - yum -y install make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge
+  - yum -y install make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel
   script:
-  - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make autoreconf
-  - scan-build ./configure --disable-pskc || (cat config.log; exit 1)
+  - scan-build ./configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
   - scan-build -o clang-analyzer make V=1
   artifacts:
     when: on_success
@@ -63,10 +62,11 @@ Fedora:
 
 pages:
   stage: deploy
-  needs: [Ubuntu]
+  needs: ["Ubuntu", "Fedora"]
   script:
     - mkdir public
     - mv coverage/ public/
+    - mv clang-analyzer/* public/clang-analyzer
   artifacts:
     paths:
     - public
