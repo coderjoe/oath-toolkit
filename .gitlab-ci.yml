@@ -44,6 +44,23 @@ Ubuntu:
   only:
     - master
 
+Fedora:
+  image: fedora:latest
+  stage: build
+  before_script:
+  - yum -y install make clang diffutils file autoconf automake libtool bison help2man gtk-doc-tools gengetopt datefudge
+  script:
+  - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
+  - make autoreconf
+  - scan-build ./configure || (cat config.log; exit 1)
+  - scan-build -o clang-analyzer make V=1
+  artifacts:
+    when: on_success
+    paths:
+      - clang-analyzer
+  only:
+    - master
+
 pages:
   stage: deploy
   needs: [Ubuntu]
