@@ -79,7 +79,7 @@ Ubuntu xmlsec:
   needs: [Debian]
   before_script:
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libxmlsec1-dev libxml2-utils datefudge
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc libxmlsec1-dev libxml2-utils datefudge
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -105,7 +105,7 @@ CentOS xmlsec:
   before_script:
   - yum -y groupinstall "Development Tools"
   - yum search xmlsec
-  - yum update
+  - yum -y update
   - yum search xmlsec
   - yum -y install libxml2-devel xmlsec1-openssl
   script:
