@@ -73,11 +73,12 @@ Mingw32:
   - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
-Ubuntu stable xmlsec:
+Ubuntu xmlsec:
   image: ubuntu:latest
   stage: test
   needs: [Debian]
   before_script:
+    - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libxmlsec1-dev libxml2-utils datefudge
   script:
   - tar xfa oath-toolkit-*.tar.gz
@@ -103,7 +104,10 @@ CentOS xmlsec:
   needs: [Debian]
   before_script:
   - yum -y groupinstall "Development Tools"
-  - yum -y install libxml2-devel libxmlsec1-devel
+  - yum search xmlsec
+  - yum update
+  - yum search xmlsec
+  - yum -y install libxml2-devel xmlsec1-openssl
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
