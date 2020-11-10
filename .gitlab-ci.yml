@@ -35,7 +35,7 @@ Ubuntu:
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - mkdir coverage
   - lcov --directory . --output-file coverage/oath-toolkit.info --capture
-  - lcov --remove coverage/oath-toolkit.info '/usr/include/*' 'liboath/gl/*' 'liboath/tests/*' 'libpskc/gl/*' 'libpskc/tests/*' 'oathtool/gl/*' 'pam_oath/tests/*' 'pskctool/gl/*' -o coverage/oath-toolkit_filtered.info
+  - lcov --remove coverage/oath-toolkit.info '/usr/include/*' '*/liboath/gl/*' '*/liboath/tests/*' '*/libpskc/gl/*' '*/libpskc/tests/*' '*/oathtool/gl/*' '*/pam_oath/tests/*' '*/pskctool/gl/*' -o coverage/oath-toolkit_filtered.info
   - genhtml --output-directory coverage coverage/oath-toolkit_filtered.info --highlight --frames --legend --title "OATH Toolkit"
   artifacts:
     when: on_success
@@ -56,47 +56,6 @@ pages:
     expire_in: 30 days
   only:
   - master
-
-Mingw64:
-  allow_failure: true # until usersfile works on mingw
-  image: debian:latest
-  stage: test
-  needs: [Debian]
-  before_script:
-    - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
-    - update-binfmts --enable wine
-    - update-binfmts --display
-    - mount
-    - find /proc/sys/fs/binfmt_misc
-  script:
-  - tar xfa oath-toolkit-*.tar.gz
-  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --host=x86_64-w64-mingw32
-  - make V=1
-  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
-  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
-
-Mingw32:
-  allow_failure: true # until usersfile works on mingw
-  image: debian:latest
-  stage: test
-  needs: [Debian]
-  before_script:
-    - dpkg --add-architecture i386
-    - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 libwine libwine:i386 binfmt-support wine-binfmt
-    - update-binfmts --enable wine
-    - update-binfmts --display
-    - mount
-    - find /proc/sys/fs/binfmt_misc
-  script:
-  - tar xfa oath-toolkit-*.tar.gz
-  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --host=i686-w64-mingw32
-  - make V=1
-  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
-  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
 Ubuntu xmlsec:
   image: ubuntu:latest
@@ -151,3 +110,42 @@ Alpine:
   - ./configure --disable-pskc --enable-gcc-warnings || (cat config.log; exit 1)
   - sed -i -e 's,  /\* Outlandishly-long.*,#if 0,;s,  return 0;,#endif\nreturn 0;,' ./oathtool/gl/tests/test-parse-datetime.c
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+
+# Mingw64:
+#   image: debian:latest
+#   stage: test
+#   needs: [Debian]
+#   before_script:
+#     - apt-get update -qq
+#     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
+#     - update-binfmts --enable wine
+#     - update-binfmts --display
+#     - mount
+#     - find /proc/sys/fs/binfmt_misc
+#   script:
+#   - tar xfa oath-toolkit-*.tar.gz
+#   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+#   - ./configure --host=x86_64-w64-mingw32
+#   - make V=1
+#   - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
+#   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
+
+# Mingw32:
+#   image: debian:latest
+#   stage: test
+#   needs: [Debian]
+#   before_script:
+#     - dpkg --add-architecture i386
+#     - apt-get update -qq
+#     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 libwine libwine:i386 binfmt-support wine-binfmt
+#     - update-binfmts --enable wine
+#     - update-binfmts --display
+#     - mount
+#     - find /proc/sys/fs/binfmt_misc
+#   script:
+#   - tar xfa oath-toolkit-*.tar.gz
+#   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+#   - ./configure --host=i686-w64-mingw32
+#   - make V=1
+#   - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
+#   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
