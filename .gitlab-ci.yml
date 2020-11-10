@@ -31,16 +31,12 @@ Ubuntu:
   - make autoreconf
   - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests CFLAGS="-g --coverage" || (cat config.log; exit 1)
   - make syntax-check
-  - make V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - lcov --directory . --zerocounters
-  - make -C liboath/tests check
-  - make -C oathtool/tests check
-  - make -C libpskc/tests check
-  - make -C pskctool/tests check
-  - make -C pam_oath/tests check
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - mkdir coverage
   - lcov --directory . --output-file coverage/oath-toolkit.info --capture
-  - genhtml --output-directory coverage coverage/oath-toolkit.info --highlight --frames --legend --title "OATH Toolkit"
+  - lcov --remove coverage/oath-toolkit.info '/usr/include/*' 'liboath/gl/*' 'liboath/tests/*' 'libpskc/gl/*' 'libpskc/tests/*' 'oathtool/gl/*' 'pam_oath/tests/*' 'pskctool/gl/*' -o coverage/oath-toolkit_filtered.info
+  - genhtml --output-directory coverage coverage/oath-toolkit_filtered.info --highlight --frames --legend --title "OATH Toolkit"
   artifacts:
     when: on_success
     paths:
@@ -52,8 +48,8 @@ pages:
   stage: deploy
   needs: [Ubuntu]
   script:
-    - mv coverage public/
-    - echo 'Hello World' > public/index.html
+    - mkdir public
+    - mv coverage/ public/
   artifacts:
     paths:
     - public
@@ -134,7 +130,7 @@ CentOS xmlsec:
   before_script:
   - yum -y install make gcc diffutils file
   - yum -y install libxml2-devel libtool-ltdl-devel
-  - dnf -y --enablerepo=PowerTools install xmlsec1-devel
+  - dnf -y --enablerepo=PowerTools install xmlsec1-openssl-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
