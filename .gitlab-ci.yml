@@ -48,7 +48,7 @@ Fedora:
   image: fedora:latest
   stage: build
   before_script:
-  - yum -y install make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel
+  - yum -y install git make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel
   script:
   - make autoreconf
   - scan-build ./configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
