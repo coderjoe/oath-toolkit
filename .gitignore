@@ -25,7 +25,6 @@ build-aux/test-driver
 config.log
 config.status
 configure
-doc/coverage/
 gl/.deps/
 gl/libgnu.a
 liboath/.deps/

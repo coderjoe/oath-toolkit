@@ -19,13 +19,13 @@ project:
 
 * Bug tracker: https://gitlab.com/oath-toolkit/oath-toolkit/issues
 
+* Old bug tracker: https://savannah.nongnu.org/support/?group=oath-toolkit
+
 * Code browser: https://gitlab.com/oath-toolkit/oath-toolkit/tree/master
 
-* Code coverage report: https://www.nongnu.org/oath-toolkit/coverage/
+* Code coverage report: https://oath-toolkit.gitlab.io/oath-toolkit/coverage/
 
-* Clang code analysis: https://www.nongnu.org/oath-toolkit/clang-analyzer/
-
-* Old bug tracker: https://savannah.nongnu.org/support/?group=oath-toolkit
+* Clang code analysis: https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/
 
 Several tools are required to build the software, including:
 

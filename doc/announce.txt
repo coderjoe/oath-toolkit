@@ -78,16 +78,14 @@ Here are the SHA-1 and SHA-224 checksums:
 General information on contributing:
   https://www.nongnu.org/oath-toolkit/contrib.html
 
-GitLab's page:
+OATH Toolkit GitLab project page:
   https://gitlab.com/oath-toolkit/oath-toolkit
 
-Savannah developer's home page:
+OATH Toolkit Savannah project page:
   https://savannah.nongnu.org/projects/oath-toolkit/
 
 Code coverage charts:
-  https://www.nongnu.org/oath-toolkit/coverage/
+  https://oath-toolkit.gitlab.io/oath-toolkit/coverage/
 
 Clang code analysis:
-  https://www.nongnu.org/oath-toolkit/clang-analyzer/
-
-[[End of PGP Signed Part]]
+  https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/

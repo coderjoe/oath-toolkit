@@ -71,35 +71,6 @@ review-diff:
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
 htmldir = ../www-$(PACKAGE)
 
-coverage-my:
-	$(MAKE) coverage WERROR_CFLAGS= VALGRIND=
-
-coverage-copy:
-	rm -fv `find $(htmldir)/coverage -type f`
-	mkdir -p $(htmldir)/coverage/
-	cp -rv $(COVERAGE_OUT)/* $(htmldir)/coverage/
-
-coverage-upload:
-	cd $(htmldir) && \
-	git add --all coverage && \
-	git commit -m "Auto-update code-coverage." coverage
-
-clang:
-	make clean
-	scan-build ./configure
-	rm -rf scan.tmp
-	scan-build -o scan.tmp make
-
-clang-copy:
-	rm -fv `find $(htmldir)/clang-analyzer -type f`
-	mkdir -p $(htmldir)/clang-analyzer/
-	cp -rv scan.tmp/*/* $(htmldir)/clang-analyzer/
-
-clang-upload:
-	cd $(htmldir) && \
-		git add --all clang-analyzer && \
-		git commit -m "Auto-update clang-analyzer." clang-analyzer
-
 ChangeLog:
 	git2cl > ChangeLog
 	cat .clcopying >> ChangeLog
@@ -159,9 +130,9 @@ website-upload:
 		git commit -m "Auto-update." \
 		git push
 
-release-check: syntax-check tarball man-copy gtkdoc-copy coverage-my coverage-copy clang clang-copy website website-copy
+release-check: syntax-check tarball man-copy gtkdoc-copy website website-copy
 
-release-upload-www: man-upload gtkdoc-upload coverage-upload clang-upload website-upload
+release-upload-www: man-upload gtkdoc-upload website-upload
 
 release-upload-ftp:
 	gpg -b $(distdir).tar.gz
