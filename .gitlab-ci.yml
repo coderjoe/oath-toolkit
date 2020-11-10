@@ -85,6 +85,19 @@ CentOS:
   - ./configure --disable-pskc --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
+CentOS xmlsec:
+  image: centos:latest
+  stage: test
+  needs: [Debian]
+  before_script:
+  - yum -y groupinstall "Development Tools"
+  - yum -y install libxml2-devel xmlsec1-devel
+  script:
+  - tar xfa oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+
 Alpine:
   image: alpine:latest
   stage: test
