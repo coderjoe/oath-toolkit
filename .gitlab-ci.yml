@@ -33,6 +33,7 @@ Ubuntu:
   - make syntax-check
   - lcov --directory . --zerocounters
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - mkdir coverage
   - lcov --directory . --output-file coverage/oath-toolkit.info --capture
   - genhtml --output-directory coverage coverage/oath-toolkit.info --highlight --frames --legend --title "OATH Toolkit"
   artifacts:
@@ -113,7 +114,7 @@ CentOS:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y groupinstall "Development Tools"
+  - yum -y install make gcc
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -126,7 +127,7 @@ CentOS xmlsec:
   needs: [Debian]
   before_script:
   - yum -y groupinstall "Development Tools"
-  - dnf --enablerepo=PowerTools install xmlsec1-devel
+  - dnf -y --enablerepo=PowerTools install xmlsec1-devel
   - yum -y install libxml2-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
