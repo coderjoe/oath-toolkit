@@ -73,6 +73,18 @@ Mingw32:
   - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
+Ubuntu stable xmlsec:
+  image: ubuntu:latest
+  stage: test
+  needs: [Debian]
+  before_script:
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libxmlsec1-dev libxml2-utils datefudge
+  script:
+  - tar xfa oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+
 CentOS:
   image: centos:latest
   stage: test
@@ -91,7 +103,7 @@ CentOS xmlsec:
   needs: [Debian]
   before_script:
   - yum -y groupinstall "Development Tools"
-  - yum -y install libxml2-devel xmlsec1-devel
+  - yum -y install libxml2-devel libxmlsec1-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
