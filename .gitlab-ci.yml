@@ -48,6 +48,7 @@ pages:
   needs: [Ubuntu]
   script:
     - mv coverage/ public/
+    - echo 'Hello World' > public/index.html
   artifacts:
     paths:
     - public
@@ -102,7 +103,7 @@ Ubuntu xmlsec:
   needs: [Debian]
   before_script:
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc libxmlsec1-dev libxml2-utils datefudge
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libxmlsec1-dev libxml2-utils datefudge
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -114,7 +115,7 @@ CentOS:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y install make gcc
+  - yum -y install make gcc diffutils
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -128,7 +129,7 @@ CentOS xmlsec:
   before_script:
   - yum -y groupinstall "Development Tools"
   - dnf -y --enablerepo=PowerTools install xmlsec1-devel
-  - yum -y install libxml2-devel
+  - yum -y install libxml2-devel libtool-ltdl-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
