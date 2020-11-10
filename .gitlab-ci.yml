@@ -31,8 +31,13 @@ Ubuntu:
   - make autoreconf
   - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests CFLAGS="-g --coverage" || (cat config.log; exit 1)
   - make syntax-check
+  - make V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - lcov --directory . --zerocounters
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make -C liboath/tests check
+  - make -C oathtool/tests check
+  - make -C libpskc/tests check
+  - make -C pskctool/tests check
+  - make -C pam_oath/tests check
   - mkdir coverage
   - lcov --directory . --output-file coverage/oath-toolkit.info --capture
   - genhtml --output-directory coverage coverage/oath-toolkit.info --highlight --frames --legend --title "OATH Toolkit"
@@ -47,7 +52,7 @@ pages:
   stage: deploy
   needs: [Ubuntu]
   script:
-    - mv coverage/ public/
+    - mv coverage public/
     - echo 'Hello World' > public/index.html
   artifacts:
     paths:
@@ -115,7 +120,7 @@ CentOS:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y install make gcc diffutils
+  - yum -y install make gcc diffutils file
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -127,13 +132,13 @@ CentOS xmlsec:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y groupinstall "Development Tools"
-  - dnf -y --enablerepo=PowerTools install xmlsec1-devel
+  - yum -y install make gcc diffutils file
   - yum -y install libxml2-devel libtool-ltdl-devel
+  - dnf -y --enablerepo=PowerTools install xmlsec1-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 Alpine:
