@@ -135,7 +135,7 @@ ArchLinux:
   stage: test
   needs: [Debian]
   before_script:
-  - pacman -Syu gcc
+  - pacman -S --no-confirm gcc
   script:
   - tar xfz oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
