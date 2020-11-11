@@ -51,7 +51,17 @@ main (void)
       return 1;
     }
 
-  /* Test initialization. */
+  if (!oath_check_version ("0"))
+    {
+      printf ("oath_check_version (0) didn't fail?!\n");
+      return 1;
+    }
+
+  if (OATH_VERSION_NUMBER < 0x02060300 || OATH_VERSION_NUMBER >= 0x03000000)
+    {
+      printf ("OATH_VERSION_NUMBER out of range?!\n");
+      return 1;
+    }
 
   rc = oath_init ();
   if (rc != OATH_OK)
