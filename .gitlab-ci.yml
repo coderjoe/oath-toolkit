@@ -20,7 +20,7 @@ Debian:
     paths:
       - oath-toolkit-*.tar.gz
 
-Ubuntu:
+Ubuntu-syntaxcheck-coverage:
   image: ubuntu:devel
   stage: build
   before_script:
@@ -44,14 +44,16 @@ Ubuntu:
   only:
     - master
 
-Fedora:
+Fedora-clanganalyzer-builddir:
   image: fedora:latest
   stage: build
   before_script:
   - yum -y install git make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel
   script:
   - make autoreconf
-  - scan-build ./configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
+  - mkdir b
+  - cd b
+  - scan-build ../configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
   - scan-build -o clang-analyzer make V=1
   artifacts:
     when: on_success
@@ -74,7 +76,7 @@ pages:
   only:
   - master
 
-Ubuntu xmlsec:
+Ubuntu-xmlsec:
   image: ubuntu:latest
   stage: test
   needs: [Debian]
@@ -99,7 +101,7 @@ CentOS:
   - ./configure --disable-pskc --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
-CentOS xmlsec:
+CentOS-xmlsec:
   image: centos:latest
   stage: test
   needs: [Debian]
@@ -129,7 +131,7 @@ Alpine:
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 ArchLinux:
-  image: arch:latest
+  image: archlinux:latest
   stage: test
   needs: [Debian]
   before_script:
