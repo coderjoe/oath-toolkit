@@ -128,6 +128,20 @@ Alpine:
   - sed -i -e 's,  /\* Outlandishly-long.*,#if 0,;s,  return 0;,#endif\nreturn 0;,' ./oathtool/gl/tests/test-parse-datetime.c
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
+ArchLinux:
+  image: arch:latest
+  stage: test
+  needs: [Debian]
+  before_script:
+  - pacman -S gcc
+  script:
+  - tar xfz oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - mkdir b
+  - cd b
+  - ../configure --disable-pskc --enable-gcc-warnings || (cat config.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+
 # Mingw64:
 #   image: debian:latest
 #   stage: test
