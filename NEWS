@@ -12,6 +12,7 @@ fails because of runtime linker search path issues.  Fixes #16.
 Lower/mixed case hash names are supported for compatibility.  Fixes #3.
 
 ** pam_oath: Fail gracefully for missing users.
+Fixes <https://savannah.nongnu.org/support/index.php?109111>.
 This allows you to incrementally add support for OATH authentication
 instead of forcing it on all users.  See updated pam_oath/README on
 the '[user_unknown=ignore success=ok]' parameter that can now be
