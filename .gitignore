@@ -59,6 +59,7 @@ liboath/gl/stddef.h
 liboath/gl/stdio.h
 liboath/gl/stdlib.h
 liboath/gl/string.h
+liboath/gl/strings.h
 liboath/gl/sys/
 liboath/gl/tests/.deps/
 liboath/gl/tests/arpa/
