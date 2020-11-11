@@ -64,7 +64,7 @@ Fedora-clanganalyzer-builddir:
 
 pages:
   stage: deploy
-  needs: ["Ubuntu", "Fedora"]
+  needs: ["Ubuntu-syntaxcheck-coverage", "Fedora-clanganalyzer-builddir"]
   script:
     - mkdir public
     - mv coverage/ public/
