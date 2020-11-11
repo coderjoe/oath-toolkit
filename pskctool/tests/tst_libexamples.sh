@@ -32,16 +32,13 @@ fi
 if ! diff -ur $srcdir/../../libpskc/examples/pskctool-h.txt foo; then
     set -x
     $PSKCTOOL -h
-    cat $srcdir/../../libpskc/examples/pskctool-h.txt
     cat foo
-    cp foo $srcdir/../../libpskc/examples/pskctool-h.txt
     echo "FAIL: pskctool --help output change, commit updated file."
     exit 1
 fi
 
 $PSKCTOOL -i $srcdir/../../libpskc/examples/pskc-hotp.xml > foo
 if ! diff -ur $srcdir/../../libpskc/examples/pskc-hotp-human.txt foo; then
-    cp foo $srcdir/../../libpskc/examples/pskc-hotp-human.txt
     echo "FAIL: pskctool --info output change, commit updated file."
     exit 1
 fi
@@ -50,14 +47,12 @@ $PSKCTOOL --sign --sign-key $srcdir/pskc-ee-key.pem \
     --sign-crt $srcdir/pskc-ee-crt.pem \
     $srcdir/../../libpskc/examples/pskc-hotp.xml > foo
 if ! diff -ur $srcdir/../../libpskc/examples/pskc-hotp-signed.xml foo; then
-    cp foo $srcdir/../../libpskc/examples/pskc-hotp-signed.xml
     echo "FAIL: pskctool --sign output change, commit updated file."
     exit 1
 fi
 
 $PSKCTOOL --info --debug --quiet $srcdir/pskc-figure6.xml > foo 2>&1
 if ! diff -ur $srcdir/../../libpskc/examples/pskc-figure6-debug.txt foo; then
-    cp foo $srcdir/../../libpskc/examples/pskc-figure6-debug.txt
     echo "FAIL: pskctool --info output change, commit updated file."
     exit 1
 fi
