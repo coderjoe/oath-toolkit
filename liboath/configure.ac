@@ -20,7 +20,7 @@ AC_INIT([liboath],
   [oath-toolkit-help@nongnu.org],,
   [https://www.nongnu.org/oath-toolkit/])
 
-VERSION_NUMBER=`"$srcdir"/../build-aux/oath-toolkit-version ../.tarball-version vn`
+VERSION_NUMBER=`"$srcdir"/../build-aux/oath-toolkit-version "$srcdir"/../.tarball-version vn`
 AC_SUBST(VERSION_NUMBER)
 
 # Library code modified:                              REVISION++
