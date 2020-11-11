@@ -551,6 +551,7 @@ libpskc/tests/.deps/
 libpskc/tests/tst_accessors
 libpskc/tests/tst_basic
 libpskc/tests/tst_errors
+libpskc/tests/tst_invalidread
 libpskc/tests/tst_setters
 libpskc/tests/tst_validate
 oath-toolkit-*.tar.gz
