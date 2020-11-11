@@ -127,7 +127,7 @@ website-upload:
 		git add --all *.html *.css && \
 		git add --all liboath-api && \
 		git add --all libpskc-api && \
-		git commit -m "Auto-update." \
+		git commit -m "Auto-update." && \
 		git push
 
 release-check: syntax-check tarball man-copy gtkdoc-copy website website-copy
