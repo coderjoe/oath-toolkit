@@ -34,8 +34,6 @@
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="libpskc-api/pskc-reference.html">Libpskc&#160;API</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="pam_oath.html">pam_oath</a></div>
 	<div>&#187;<a href="contrib.html">Contribute</a></div>
-	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="https://gitlab.com/oath-toolkit/oath-toolkit/tree/master">Git Repository</a></div>
-	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="https://gitlab.com/oath-toolkit/oath-toolkit/issues">Bug&#160;tracker</a></div>
 	<div style="text-align:center;padding-top: 1em;">
 	  <a class="FlattrButton" style="display:none;" href="https://www.nongnu.org/oath-toolkit/"></a>
 	  <noscript><div><a href="http://flattr.com/thing/130057/OATH-Toolkit">
