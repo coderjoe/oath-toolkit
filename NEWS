@@ -11,6 +11,13 @@ fails because of runtime linker search path issues.  Fixes #16.
 ** oathtool: Hash names (e.g., SHA256) for --totp are now upper case.
 Lower/mixed case hash names are supported for compatibility.  Fixes #3.
 
+** pam_oath: Fail gracefully for missing users.
+This allows you to incrementally add support for OATH authentication
+instead of forcing it on all users.  See updated pam_oath/README on
+the '[user_unknown=ignore success=ok]' parameter that can now be
+supplied to PAM configuration.  Patch by Antoine Beaupré
+<anarcat@debian.org>.
+
 ** Build fixes.
 
 * Version 2.6.3 (released 2020-11-07)
