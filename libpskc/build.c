@@ -510,7 +510,7 @@ pskc_build_xml (pskc_t * container, char **out, size_t *len)
 
   xmlDocSetRootElement (doc, keycont);
 
-  if (container->xmldoc)
+  if (container->xmldoc && container->xmldoc != container->original_xmldoc)
     xmlFreeDoc (container->xmldoc);
   container->xmldoc = doc;
   doc = NULL;

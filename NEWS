@@ -18,6 +18,10 @@ the '[user_unknown=ignore success=ok]' parameter that can now be
 supplied to PAM configuration.  Patch by Antoine Beaupré
 <anarcat@debian.org>.
 
+** Fix libpskc memory corruption bug.
+Fixes <https://savannah.nongnu.org/support/?108736>.  Thanks to David
+Woodhouse and Jaroslav Škarvada for report, self check and patch.
+
 ** Build fixes.
 
 * Version 2.6.3 (released 2020-11-07)

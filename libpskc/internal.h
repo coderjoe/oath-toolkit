@@ -103,7 +103,7 @@ struct pskc_key
 struct pskc
 {
   /* raw XML */
-  xmlDocPtr xmldoc;
+  xmlDocPtr xmldoc, original_xmldoc;
   /* Is there a Signature element in xmldoc? */
   int signed_p;
 

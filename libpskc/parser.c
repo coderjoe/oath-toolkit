@@ -677,6 +677,8 @@ pskc_done (pskc_t * container)
     return;
 
   xmlFreeDoc (container->xmldoc);
+  if (container->original_xmldoc != container->xmldoc)
+	  xmlFreeDoc (container->original_xmldoc);
 
   for (i = 0; i < container->nkeypackages; i++)
     {
@@ -717,7 +719,7 @@ pskc_parse_from_memory (pskc_t * container, size_t len, const char *buffer)
   if (xmldoc == NULL)
     return PSKC_XML_ERROR;
 
-  container->xmldoc = xmldoc;
+  container->original_xmldoc = container->xmldoc = xmldoc;
 
   root = xmlDocGetRootElement (xmldoc);
   parse_keycontainer (container, root, &rc);
