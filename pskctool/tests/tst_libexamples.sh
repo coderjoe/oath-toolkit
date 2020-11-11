@@ -30,6 +30,10 @@ else
     $PSKCTOOL -h | sed 's/ \+$//' > foo
 fi
 if ! diff -ur $srcdir/../../libpskc/examples/pskctool-h.txt foo; then
+    set -x
+    $PSKCTOOL -h
+    cat $srcdir/../../libpskc/examples/pskctool-h.txt
+    cat foo
     cp foo $srcdir/../../libpskc/examples/pskctool-h.txt
     echo "FAIL: pskctool --help output change, commit updated file."
     exit 1
