@@ -636,6 +636,10 @@ sub output_man {
 	print ".SH \"" . uc($section) . "\"\n";
 	$sec = $args{'sections'}{$section};
 	$sec =~ s/-/\\-/g;
+# Escape single quotes "'" on line beginning by zero width space "\&",
+# otherwise the single quotes are misinterpreted as beginning of macros
+# http://savannah.nongnu.org/support/?108312
+	$sec =~ s/\n\'/\n\\&\'/g;
 	output_highlight($sec);
     }
 
