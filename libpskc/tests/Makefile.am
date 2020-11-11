@@ -27,7 +27,8 @@ ctests = \
 	tst_errors \
 	tst_accessors \
 	tst_setters \
-	tst_validate
+	tst_validate \
+	tst_invalidread
 
 check_PROGRAMS = $(ctests)
 
