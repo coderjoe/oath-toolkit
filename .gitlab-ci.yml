@@ -108,11 +108,11 @@ CentOS-xmlsec:
   before_script:
   - yum -y install make gcc diffutils file
   - yum -y install libxml2-devel libtool-ltdl-devel
-  - dnf -y --enablerepo=PowerTools install xmlsec1-gnutls xmlsec1-gnutls-devel
+  - dnf -y --enablerepo=PowerTools install xmlsec1-nss xmlsec1-nss-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --enable-gcc-warnings --disable-valgrind-tests --with-xmlsec-crypto-engine=gnutls || (cat config.log; exit 1)
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests --with-xmlsec-crypto-engine=nss || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 Alpine:
