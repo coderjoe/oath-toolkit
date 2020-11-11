@@ -13,7 +13,7 @@ Debian:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make bootstrap
   - make syntax-check
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
   - make dist
   - sha224sum oath-toolkit-*.tar.gz
   artifacts:
@@ -135,7 +135,7 @@ ArchLinux:
   stage: test
   needs: [Debian]
   before_script:
-  - pacman -S --no-confirm gcc
+  - pacman -S --noconfirm gcc
   script:
   - tar xfz oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
