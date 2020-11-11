@@ -1,12 +1,38 @@
 To: oath-toolkit-help@nongnu.org
-Subject: OATH Toolkit 2.6.3
+Subject: OATH Toolkit 2.6.4
 <#part sign=pgpmime>
-Hi everyone!  It has been four long years without a release.  This
-release contains no real changes but update the build system and will
-serve as a declaration that we are now open for business again.  I plan
-to review merge requests and bug reports now, and encourage you to
-remind me what I have been missing and help me update any merge requests
-so they can be more easily reviewed.
+Hi!  This release contains a bunch of smaller fixes.
+
+** libpskc: New --with-xmlsec-crypto-engine to hard-code crypto engine.
+Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/16>.
+Use it like --with-xmlsec-crypto-engine=gnutls or
+--with-xmlsec-crypto-engine=openssl if the default dynamic loading
+fails because of runtime linker search path issues.
+
+** oathtool --totp --verbose now prints TOTP hash mode.
+Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/4>.
+
+** oathtool: Hash names (e.g., SHA256) for --totp are now upper case.
+Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/3>.
+Lower/mixed case hash names are supported for compatibility.
+
+** pam_oath: Fail gracefully for missing users.
+Fixes <https://savannah.nongnu.org/support/index.php?109111>.
+This allows you to incrementally add support for OATH authentication
+instead of forcing it on all users.  See updated pam_oath/README on
+the '[user_unknown=ignore success=ok]' parameter that can now be
+supplied to PAM configuration.  Patch by Antoine Beaupré
+<anarcat@debian.org>.
+
+** Fix libpskc memory corruption bug.
+Fixes <https://savannah.nongnu.org/support/?108736>.  Thanks to David
+Woodhouse and Jaroslav Škarvada for report, self check and patch.
+
+** Fix man pages.
+Fixes <https://savannah.nongnu.org/support/?108312>.  Thanks to
+Jaroslav Škarvada for the patch.
+
+** Build fixes.
 
 Happy hacking,
 Simon
@@ -53,8 +79,8 @@ are invited to join our oath-toolkit-help mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
 
 Here are the compressed sources of the entire package:
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.3.tar.gz
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.3.tar.gz.sig
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.4.tar.gz
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.4.tar.gz.sig
 
 The software is cryptographically signed by the author using an OpenPGP
 key identified by the following information:
@@ -72,8 +98,8 @@ I have changed key since older releases, see my transition statement:
 
 Here are the SHA-1 and SHA-224 checksums:
 
-27a75c35834292adc8d925d6c7d024f5f3b9215d  oath-toolkit-2.6.3.tar.gz
-47fa1f8a654b12930d01e292c0e8a0fbc8bb65f82dde7cd9e624730f  oath-toolkit-2.6.3.tar.gz
+bb3784c8e32cd3be2b2b95d1ed53607fbbe23200  oath-toolkit-2.6.4.tar.gz
+316f359eb8616b23a48593f281d5b1d88874d307dd513b61c7eceda1  oath-toolkit-2.6.4.tar.gz
 
 General information on contributing:
   https://www.nongnu.org/oath-toolkit/contrib.html
