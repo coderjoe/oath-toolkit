@@ -18,7 +18,7 @@ purpose "Manipulate Portable Symmetric Key Container (PSKC) data."
 description "This tool allows you to parse, print, validate, sign and verify PSKC data.  The input is provided in FILE or on standard input."
 
 option "strict" - "Fail hard on PSKC parse error" flag off
-option "debug" d "Show debug mesages on stderr" flag off
+option "debug" d "Show debug messages on stderr" flag off
 option "quiet" q "Quiet operation" flag off
 option "verbose" v "Produce more output" flag off
 
