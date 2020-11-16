@@ -439,8 +439,7 @@ pam_sm_authenticate (pam_handle_t * pamh,
 
 done:
   oath_done ();
-  if(usersfile)
-    free(usersfile);
+  free (usersfile);
   free (query_prompt);
   free (onlypasswd);
   if (cfg.alwaysok && retval != PAM_SUCCESS)
