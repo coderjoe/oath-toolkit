@@ -60,11 +60,11 @@ version (void)
   int l = -1;
 
   if (strcmp (pskc_check_version (NULL), PSKC_VERSION) != 0)
-    l = asprintf (&p, "PSKC Toolkit libpskc.so %s pskc.h %s",
+    l = asprintf (&p, "OATH Toolkit %s/%s",
 		  pskc_check_version (NULL), PSKC_VERSION);
   else if (strcmp (PSKC_VERSION, PACKAGE_VERSION) != 0)
-    l = asprintf (&p, "PSKC Toolkit %s", pskc_check_version (NULL));
-  version_etc (stdout, "pskctool", l == -1 ? "PSKC Toolkit" : p,
+    l = asprintf (&p, "OATH Toolkit %s", PSKC_VERSION);
+  version_etc (stdout, "pskctool", l == -1 ? "OATH Toolkit" : p,
 	       PACKAGE_VERSION, "Simon Josefsson", (char *) NULL);
   if (l != -1)
     free (p);
