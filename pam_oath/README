@@ -215,7 +215,11 @@ List of all parameters
                     user will be denied access.
 
   "usersfile": Specify filename where credentials are stored, for
-               example "/etc/users.oath".
+               example "/etc/users.oath". The placeholder values
+               "${USER}" and "${HOME}" may be used to specify the
+               filename on a per-user basis. The values "${USER}" and
+               "${HOME}" expand to the user's username and home
+               directory, respectively.
 
   "digits": Specify number of digits in the one-time password,
             required when using passwords in usersfile.  Supported

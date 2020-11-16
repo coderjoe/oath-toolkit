@@ -298,6 +298,7 @@ update_usersfile2 (const char *username,
 
 static int
 update_usersfile (const char *usersfile,
+		  uid_t usersfile_uid,
 		  const char *username,
 		  const char *otp,
 		  FILE * infh,
@@ -393,6 +394,10 @@ update_usersfile (const char *usersfile,
   if (fclose (outfh) != 0)
     rc = OATH_FILE_CLOSE_ERROR;
 
+  /* Change ownership of the new usersfile file */
+  if(rc == OATH_OK && chown(newfilename, usersfile_uid, -1) != 0)
+    rc = OATH_FILE_CHOWN_ERROR;
+
   /* On success, overwrite the usersfile with the new copy. */
   if (rc == OATH_OK && rename (newfilename, usersfile) != 0)
     rc = OATH_FILE_RENAME_ERROR;
@@ -416,6 +421,7 @@ update_usersfile (const char *usersfile,
 /**
  * oath_authenticate_usersfile:
  * @usersfile: string with user credential filename, in UsersFile format
+ * @usersfile_uid: UID to use for updated user credential file ownership
  * @username: string with name of user
  * @otp: string with one-time password to authenticate
  * @window: how many past/future OTPs to search
@@ -441,6 +447,7 @@ update_usersfile (const char *usersfile,
  **/
 int
 oath_authenticate_usersfile (const char *usersfile,
+			     uid_t usersfile_uid,
 			     const char *username,
 			     const char *otp,
 			     size_t window,
@@ -481,7 +488,7 @@ oath_authenticate_usersfile (const char *usersfile,
 
       old_umask = umask (~(S_IRUSR | S_IWUSR));
 
-      rc = update_usersfile (usersfile, username, otp, infh,
+      rc = update_usersfile (usersfile, usersfile_uid, username, otp, infh,
 			     &line, &n, timestamp, new_moving_factor,
 			     skipped_users);
 

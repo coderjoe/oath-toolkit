@@ -21,11 +21,14 @@
 #include <config.h>
 
 #include "oath.h"
+#include "gl/pathmax.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <pwd.h>
+#include <unistd.h>
 
 /* Libtool defines PIC for shared objects */
 #ifndef PIC
@@ -40,6 +43,9 @@
 
 #ifdef HAVE_SECURITY_PAM_APPL_H
 #include <security/pam_appl.h>
+#endif
+#ifdef HAVE_SECURITY_PAM_MODUTIL_H
+#include <security/pam_modutil.h>
 #endif
 #ifdef HAVE_SECURITY_PAM_MODULES_H
 #include <security/pam_modules.h>
@@ -129,6 +135,66 @@ parse_cfg (int flags, int argc, const char **argv, struct cfg *cfg)
     }
 }
 
+static int
+parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *user, char *usersfile,
+		    size_t max_len, uid_t *usersfile_uid)
+{
+
+  const char *const str_end = cfg->usersfile + strlen(cfg->usersfile);
+  const char *str = cfg->usersfile;
+  size_t end = 0;
+
+  do {
+    const char *copy_str = NULL;
+    size_t copy_len = 0;
+
+    if( strncmp(str, "${USER}", 7) == 0 )
+      {
+	copy_str = user;
+	copy_len = strlen(copy_str);
+	*usersfile_uid = pw->pw_uid;
+	str += 7;
+      }
+    else if( strncmp(str, "${HOME}", 7) == 0 )
+      {
+	copy_str = pw->pw_dir;
+	copy_len = strlen(copy_str);
+	*usersfile_uid = pw->pw_uid;
+	str += 7;
+      }
+    else
+      {
+	const char *search_str = str;
+	if( search_str[0] == '$' )
+	  {
+	    ++search_str;
+	  }
+	const char *spec = strchr(search_str, '$');
+	if(!spec)
+	  {
+	    spec = str_end;
+	  }
+	copy_str = str;
+	copy_len = spec - str;
+	str = spec;
+      }
+
+    if( max_len - end < copy_len + 1 )
+      {
+	return OATH_TOO_SMALL_BUFFER;
+      }
+    if(copy_len > 0)
+      {
+	memcpy(usersfile + end, copy_str, copy_len);
+      }
+    end += copy_len;
+    usersfile[end] = '\0';
+
+  } while(str[0]);
+
+  return OATH_OK;
+}
+
 PAM_EXTERN int
 pam_sm_authenticate (pam_handle_t * pamh,
 		     int flags, int argc, const char **argv)
@@ -145,6 +211,8 @@ pam_sm_authenticate (pam_handle_t * pamh,
   struct cfg cfg;
   char *query_prompt = NULL;
   char *onlypasswd = strdup ("");	/* empty passwords never match */
+  char usersfile[PATH_MAX];
+  uid_t usersfile_uid = 0;
 
   /* this has to be first in this function to avoid that cfg contain
      uninitialized variables. */
@@ -164,13 +232,34 @@ pam_sm_authenticate (pam_handle_t * pamh,
     }
   DBG (("get user returned: %s", user));
 
+  {
+    struct passwd *pw = pam_modutil_getpwnam(pamh, user);
+    if(!pw)
+      {
+	retval=PAM_USER_UNKNOWN;
+	goto done;
+      }
+
+    usersfile_uid = getuid();
+    usersfile[0]='\0';
+
+    rc = parse_usersfile_str(&cfg, pw, user, usersfile, sizeof(usersfile), &usersfile_uid);
+    if( rc == OATH_TOO_SMALL_BUFFER )
+      {
+	retval = PAM_BUF_ERR;
+	goto done;
+      }
+  }
+  DBG (("usersfile is %s", usersfile));
+
   // quick check to skip unconfigured users before prompting for password
   {
     time_t last_otp;
     otp[0] = '\0';
-    rc = oath_authenticate_usersfile (cfg.usersfile,
-				      user,
-				      otp, cfg.window, onlypasswd, &last_otp);
+    rc = oath_authenticate_usersfile (usersfile,
+				      usersfile_uid,
+                                      user,
+                                      otp, cfg.window, onlypasswd, &last_otp);
 
     DBG (("authenticate first pass rc %d (%s: %s) last otp %s", rc,
 	  oath_strerror_name (rc) ? oath_strerror_name (rc) : "UNKNOWN",
@@ -324,7 +413,8 @@ pam_sm_authenticate (pam_handle_t * pamh,
   {
     time_t last_otp;
 
-    rc = oath_authenticate_usersfile (cfg.usersfile,
+    rc = oath_authenticate_usersfile (usersfile,
+				      usersfile_uid,
 				      user,
 				      otp, cfg.window, onlypasswd, &last_otp);
     DBG (("authenticate rc %d (%s: %s) last otp %s", rc,
