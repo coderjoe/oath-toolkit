@@ -211,7 +211,7 @@ pam_sm_authenticate (pam_handle_t * pamh,
   struct cfg cfg;
   char *query_prompt = NULL;
   char *onlypasswd = strdup ("");	/* empty passwords never match */
-  char usersfile[PATH_MAX];
+  char *usersfile = NULL;
   uid_t usersfile_uid = 0;
 
   /* this has to be first in this function to avoid that cfg contain
@@ -241,9 +241,15 @@ pam_sm_authenticate (pam_handle_t * pamh,
       }
 
     usersfile_uid = getuid();
-    usersfile[0]='\0';
+    usersfile = malloc(PATH_MAX);
+    if(!usersfile)
+      {
+	retval = PAM_BUF_ERR;
+	goto done;
+      }
+    usersfile[0] = '\0';
 
-    rc = parse_usersfile_str(&cfg, pw, user, usersfile, sizeof(usersfile), &usersfile_uid);
+    rc = parse_usersfile_str(&cfg, pw, user, usersfile, PATH_MAX, &usersfile_uid);
     if( rc == OATH_TOO_SMALL_BUFFER )
       {
 	retval = PAM_BUF_ERR;
@@ -433,6 +439,8 @@ pam_sm_authenticate (pam_handle_t * pamh,
 
 done:
   oath_done ();
+  if(usersfile)
+    free(usersfile);
   free (query_prompt);
   free (onlypasswd);
   if (cfg.alwaysok && retval != PAM_SUCCESS)
