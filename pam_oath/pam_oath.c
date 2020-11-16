@@ -146,15 +146,15 @@ pam_sm_authenticate (pam_handle_t * pamh,
   char *query_prompt = NULL;
   char *onlypasswd = strdup ("");	/* empty passwords never match */
 
-  cfg.alwaysok = false;		/* make sure this gets a safe default */
+  /* this has to be first in this function to avoid that cfg contain
+     uninitialized variables. */
+  parse_cfg (flags, argc, argv, &cfg);
 
   if (!onlypasswd)
     {
       retval = PAM_BUF_ERR;
       goto done;
     }
-
-  parse_cfg (flags, argc, argv, &cfg);
 
   retval = pam_get_user (pamh, &user, NULL);
   if (retval != PAM_SUCCESS)
