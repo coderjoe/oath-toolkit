@@ -48,7 +48,7 @@ Fedora-clanganalyzer:
   image: fedora:latest
   stage: build
   before_script:
-  - yum -y install git make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel
+  - yum -y install git make clang clang-analyzer diffutils file autoconf automake libtool bison libxml2-devel help2man gtk-doc gengetopt datefudge libxml2-devel libtool-ltdl-devel xmlsec1-openssl-devel pam-devel
   script:
   - make autoreconf
   - scan-build ./configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
@@ -80,7 +80,7 @@ Ubuntu-xmlsec:
   needs: [Debian]
   before_script:
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libxmlsec1-dev libxml2-utils datefudge
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libpam0g-dev libxmlsec1-dev libxml2-utils datefudge
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -94,7 +94,7 @@ CentOS:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y install make gcc diffutils file
+  - yum -y install make gcc diffutils file pam-devel
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
@@ -106,7 +106,7 @@ CentOS-xmlsec:
   stage: test
   needs: [Debian]
   before_script:
-  - yum -y install make gcc diffutils file
+  - yum -y install make gcc diffutils file pam-devel
   - yum -y install libxml2-devel libtool-ltdl-devel
   - dnf -y --enablerepo=PowerTools install xmlsec1-openssl-devel
   script:
