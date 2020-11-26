@@ -3,6 +3,9 @@ Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.5 (unreleased)
 
+** pam_oath: Fix unlikely logic fail on out of memory conditions.
+Patch from Matthias Gerstner.
+
 ** Doc fixes.
 
 * Version 2.6.4 (released 2020-11-11)
