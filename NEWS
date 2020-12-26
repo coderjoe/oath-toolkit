@@ -3,6 +3,12 @@ Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.5 (unreleased)
 
+** oathtool: Support for reading KEY and OTP from standard input or filename.
+KEY and OTP may now be given as '-' to mean stdin, or @FILE to read
+from a particular file.  This is recommended on multi-user systems,
+since secrets as command line parameters leak.  Based on a patch from
+Ian Jackson <ijackson@chiark.greenend.org.uk>.  Fixes #6.
+
 ** pam_oath: Fix unlikely logic fail on out of memory conditions.
 Patch from Matthias Gerstner.
 
