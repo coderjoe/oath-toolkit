@@ -127,13 +127,14 @@ verbose_totp (oath_totp_flags flags, time_t t0, time_t time_step_size,
 /* Return newly allocated string with args_info->inputs[i] or, if that
    string starts with '-' or '@', a line read from stdin (-) or file
    (@...). */
-const char*
-maybe_read_input(const struct gengetopt_args_info *args_info, int i)
+const char *
+maybe_read_input (const struct gengetopt_args_info *args_info, int i)
 {
   const char *given;
   static FILE *f;
   static const char *last_file;
-  char *lineptr = NULL; size_t n = 0;
+  char *lineptr = NULL;
+  size_t n = 0;
   ssize_t l;
 
   if (i >= args_info->inputs_num)
@@ -144,12 +145,12 @@ maybe_read_input(const struct gengetopt_args_info *args_info, int i)
   if (*given != '-' && *given != '@')
     return strdup (given);
 
-  if (!strcmp(given,"-"))
+  if (!strcmp (given, "-"))
     f = stdin;
   else if (last_file == NULL || strcmp (given, last_file) != 0)
     {
       if (f)
-	fclose(f);
+	fclose (f);
       f = fopen (given + 1, "r");
       if (!f)
 	error (EXIT_FAILURE, errno, "open file for KEY/OTP");
@@ -219,14 +220,13 @@ main (int argc, char *argv[])
     error (EXIT_FAILURE, 0, "liboath initialization failed: %s",
 	   oath_strerror (rc));
 
-  inputs[0] = maybe_read_input(&args_info, 0);
-  inputs[1] = maybe_read_input(&args_info, 1);
+  inputs[0] = maybe_read_input (&args_info, 0);
+  inputs[1] = maybe_read_input (&args_info, 1);
 
   if (args_info.base32_flag)
     {
       rc = oath_base32_decode (inputs[0],
-			       strlen (inputs[0]),
-			       &secret, &secretlen);
+			       strlen (inputs[0]), &secret, &secretlen);
       if (rc != OATH_OK)
 	error (EXIT_FAILURE, 0, "base32 decoding failed: %s",
 	       oath_strerror (rc));
@@ -319,7 +319,7 @@ main (int argc, char *argv[])
 	error (EXIT_FAILURE, 0, "cannot parse time `%s'",
 	       args_info.time_step_size_arg);
 
-      for (p = args_info.totp_arg; *p ; p++)
+      for (p = args_info.totp_arg; *p; p++)
 	*p = toupper (*p);
       if (strcmp (args_info.totp_arg, "SHA256") == 0)
 	totpflags = OATH_TOTP_HMAC_SHA256;
@@ -376,8 +376,7 @@ main (int argc, char *argv[])
   else if (validate_otp_p (args_info.inputs_num) && !args_info.totp_given)
     {
       rc = oath_hotp_validate (secret,
-			       secretlen,
-			       moving_factor, window, inputs[1]);
+			       secretlen, moving_factor, window, inputs[1]);
       if (rc == OATH_INVALID_OTP)
 	error (EXIT_OTP_INVALID, 0,
 	       "password \"%s\" not found in range %ld .. %ld",
@@ -394,9 +393,7 @@ main (int argc, char *argv[])
 				secretlen,
 				when,
 				time_step_size,
-				t0,
-				window,
-				NULL, NULL, totpflags, inputs[1]);
+				t0, window, NULL, NULL, totpflags, inputs[1]);
       if (rc == OATH_INVALID_OTP)
 	error (EXIT_OTP_INVALID, 0,
 	       "password \"%s\" not found in range %ld .. %ld",

@@ -678,7 +678,7 @@ pskc_done (pskc_t * container)
 
   xmlFreeDoc (container->xmldoc);
   if (container->original_xmldoc != container->xmldoc)
-	  xmlFreeDoc (container->original_xmldoc);
+    xmlFreeDoc (container->original_xmldoc);
 
   for (i = 0; i < container->nkeypackages; i++)
     {
