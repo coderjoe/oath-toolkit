@@ -124,41 +124,45 @@ verbose_totp (oath_totp_flags flags, time_t t0, time_t time_step_size,
 #define generate_otp_p(n) ((n) == 1)
 #define validate_otp_p(n) ((n) == 2)
 
+/* Return newly allocated string with args_info->inputs[i] or, if that
+   string starts with '-' or '@', a line read from stdin (-) or file
+   (@...). */
 const char*
 maybe_read_input(const struct gengetopt_args_info *args_info, int i)
 {
-  if (i >= args_info->inputs_num)
-    return NULL;
-  const char *given = args_info->inputs[i];
-  if (!args_info->args_from_files_given)
-    return given;
-
+  const char *given;
   static FILE *f;
   static const char *last_file;
+  char *lineptr = NULL; size_t n = 0;
+  ssize_t l;
 
-  if (!strcmp(given,"-")) {
+  if (i >= args_info->inputs_num)
+    return NULL;
+
+  given = args_info->inputs[i];
+
+  if (*given != '-' && *given != '@')
+    return strdup (given);
+
+  if (!strcmp(given,"-"))
     f = stdin;
-  } else if (last_file != NULL && !strcmp(given, last_file)) {
-  } else {
-    if (f)
-      fclose(f);
-    f = fopen(given, "r");
-    if (!f)
-      error (EXIT_FAILURE, errno, "open file for KEY/OTP");
-    last_file = given;
-  }
+  else if (last_file == NULL || strcmp (given, last_file) != 0)
+    {
+      if (f)
+	fclose(f);
+      f = fopen (given + 1, "r");
+      if (!f)
+	error (EXIT_FAILURE, errno, "open file for KEY/OTP");
+      last_file = given;
+    }
 
-  char buf[4096];
-  if (!fgets(buf, sizeof(buf), f))
-    error (EXIT_FAILURE, ferror(f) ? errno : 0, "read file for KEY/OTP");
-  size_t l = strlen(buf);
-  if (l > 0 && buf[--l] == '\n')
-    buf[l] = 0;
+  l = getline (&lineptr, &n, f);
+  if (l < 0)
+    error (EXIT_FAILURE, errno, "read file for KEY/OTP");
+  if (l > 0 && lineptr[--l] == '\n')
+    lineptr[l] = '\0';
 
-  const char *r = strdup(buf);
-  if (!r)
-    error (EXIT_FAILURE, errno, "strdup");
-  return r;
+  return lineptr;
 }
 
 #define EXIT_OTP_INVALID 2
@@ -176,6 +180,7 @@ main (int argc, char *argv[])
   char otp[10];
   time_t now, when, t0, time_step_size;
   int totpflags = 0;
+  const char *inputs[2];
 
   set_program_name (argv[0]);
 
@@ -214,7 +219,6 @@ main (int argc, char *argv[])
     error (EXIT_FAILURE, 0, "liboath initialization failed: %s",
 	   oath_strerror (rc));
 
-  const char *inputs[2];
   inputs[0] = maybe_read_input(&args_info, 0);
   inputs[1] = maybe_read_input(&args_info, 1);
 
