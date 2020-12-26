@@ -5,7 +5,7 @@ oathtool \- OATH one-time password tool
 [EXAMPLES]
 To generate the first event-based (HOTP) one-time password for an all-zero key:
 
-   $ oathtool 00
+   $ echo 00 | oathtool -
    328482
    $
 
