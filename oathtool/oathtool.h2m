@@ -1,8 +1,27 @@
 Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
 [NAME]
-oathtool \- OATH one-time password tool
+oathtool \- Open AuTHentication (OATH) one-time password tool
 [EXAMPLES]
+To generate a time\-based (TOTP) one-time password from a key
+protected by GnuPG:
+
+  $ gpg \-\-decrypt \-\-quiet ~/.my-totp-secret.asc | oathtool \-\-totp \-
+
+How to create the encrypted file is outside of scope of this manual,
+see gpg(1), however the following two commands may help you to encrypt
+the secret symmetrically (using a password) or asymmetrically (if you
+have created a private key), respectively.  You will need to provide
+the secret from the terminal after invoking the commands.
+
+  $ gpg \-\-symmetric > ~/.my-totp-secret.asc
+  $ gpg \-\-encrypt \-\-default-recipient-self > ~/.my-totp-secret.asc
+
+For easier reading, the rest of this man page provides the KEY and OTP
+on the command line.  Keep in mind that this usage is not recommended
+since on most multi-user systems, command-line parameters of running
+processes can be seen by other users.
+
 To generate the first event-based (HOTP) one-time password for an all-zero key:
 
    $ echo 00 | oathtool \-
