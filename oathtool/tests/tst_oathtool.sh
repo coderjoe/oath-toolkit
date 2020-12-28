@@ -40,8 +40,8 @@ dotest()
 	cmp="!="
     fi
 
-    got="$($OATHTOOL $params 2> /dev/null)"
-    err="$($OATHTOOL $params 2>&1 > /dev/null)"
+    got="$(printf "$STDIN" | $OATHTOOL $params 2> /dev/null)"
+    err="$(printf "$STDIN" | $OATHTOOL $params 2>&1 > /dev/null)"
 
     if test "`echo $got`" $cmp "`echo $expect`"; then
 	echo FAIL: oathtool $params
@@ -50,7 +50,11 @@ dotest()
 	echo "stderr:   -$err-"
 	exit 1
     else
-	echo PASS oathtool $params
+	if test -z "$STDIN"; then
+	    echo PASS oathtool $params
+	else
+	    echo PASS oathtool $params STDIN=$(echo $STDIN)
+	fi
     fi
 }
 
@@ -58,6 +62,7 @@ sha1key=3132333435363738393031323334353637383930
 sha256key=3132333435363738393031323334353637383930313233343536373839303132
 sha512key=31323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334
 
+STDIN=""
 dotest "--version" "fail" fail
 dotest "" "fail" fail
 dotest "-h" "fail" fail
@@ -164,5 +169,27 @@ Counter: 0x0 (0)
 
 674061
 "
+
+STDIN="gr6d5br725s6vnckv4vlhlaore" dotest "--base32 -" "993210"
+STDIN="gr6d5br725s6vnckv4vlhlaore\n993210\n" dotest "--base32 - -" "0"
+
+tmpfile=`mktemp`
+if ! test -f "$tmpfile"; then
+    tmpfile=tmp
+fi
+tmpfile2=`mktemp`
+if ! test -f "$tmpfile2"; then
+    tmpfile2=tmp2
+fi
+
+trap 'echo rm -f "$tmpfile" "$tmpfile2"' EXIT QUIT
+
+echo gr6d5br725s6vnckv4vlhlaore > "$tmpfile"
+dotest "--base32 @$tmpfile" "993210"
+STDIN=993210 dotest "--base32 @$tmpfile -" "0"
+echo 993210 > "$tmpfile2"
+dotest "--base32 @$tmpfile @$tmpfile2" "0"
+echo 993210 >> "$tmpfile"
+dotest "--base32 @$tmpfile @$tmpfile" "0"
 
 exit 0
