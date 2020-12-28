@@ -120,6 +120,38 @@ Window size: 0
 Start counter: 0x0 (0)
 
 328482"
+dotest "--verbose 00 328482" "Hex secret: 00
+Base32 secret: AA======
+OTP: 328482
+Digits: 6
+Window size: 0
+Start counter: 0x0 (0)
+
+0"
+dotest " --verbose --totp --now @0 00" "Hex secret: 00
+Base32 secret: AA======
+Digits: 6
+Window size: 0
+TOTP mode: SHA1
+Step size (seconds): 30
+Start time: 1970-01-01 00:00:00 UTC (0)
+Current time: 1970-01-01 00:00:00 UTC (0)
+Counter: 0x0 (0)
+
+328482
+"
+dotest " --verbose --totp=SHA256 --now @0 42" "Hex secret: 42
+Base32 secret: II======
+Digits: 6
+Window size: 0
+TOTP mode: SHA256
+Step size (seconds): 30
+Start time: 1970-01-01 00:00:00 UTC (0)
+Current time: 1970-01-01 00:00:00 UTC (0)
+Counter: 0x0 (0)
+
+654791
+"
 dotest " --verbose --totp=SHA512 --now @0 00" "Hex secret: 00
 Base32 secret: AA======
 Digits: 6
