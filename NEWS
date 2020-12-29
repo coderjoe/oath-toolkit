@@ -1,7 +1,7 @@
 OATH Toolkit NEWS -- History of user-visible changes.           -*- outline -*-
 Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
-* Version 2.6.5 (unreleased)
+* Version 2.6.5 (released 2020-12-29)
 
 ** oathtool: Support for reading KEY and OTP from standard input or filename.
 KEY and OTP may now be given as '-' to mean stdin, or @FILE to read
