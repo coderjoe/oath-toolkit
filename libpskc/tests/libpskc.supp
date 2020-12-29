@@ -81,5 +81,27 @@
    fun:xmlSchemaParse
    fun:pskc_validate
    fun:main
+}
 
+{
+   libxmlsec issue?
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:xmlStrndup__internal_alias
+   fun:xmlStrdup__internal_alias
+   fun:xmlStrdup
+   fun:xmlSchemaCollapseString__internal_alias.part.12
+   fun:xmlSchemaCollapseString__internal_alias
+   fun:xmlSchemaValAtomicType.constprop.16
+   fun:xmlSchemaValPredefTypeNode
+   fun:xmlSchemaPValAttrNodeValue
+   fun:xmlSchemaPValAttrNode.constprop.108
+   fun:xmlSchemaPValAttr
+   fun:xmlSchemaParseImport
+   fun:xmlSchemaParseSchemaTopLevel
+   fun:xmlSchemaParseNewDocWithContext
+   fun:xmlSchemaParse
+   fun:pskc_validate
+   fun:main
 }
