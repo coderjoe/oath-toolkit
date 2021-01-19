@@ -9,16 +9,6 @@
     <link rel="stylesheet" href="asciidoc.css" type="text/css" />
     <link rel="stylesheet" href="layout.css" type="text/css" />
     <xsl:copy-of select="//head/*" />
-    <script type="text/javascript">
-      /* <![CDATA[ */
-      (function() {
-      var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-      t.parentNode.insertBefore(s, t);
-      })();
-      /* ]]> */</script>
   </head>
   <body>
     <div id="layout-menu-box">
@@ -34,11 +24,6 @@
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="libpskc-api/pskc-reference.html">Libpskc&#160;API</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="pam_oath.html">pam_oath</a></div>
 	<div>&#187;<a href="contrib.html">Contribute</a></div>
-	<div style="text-align:center;padding-top: 1em;">
-	  <a class="FlattrButton" style="display:none;" href="https://www.nongnu.org/oath-toolkit/"></a>
-	  <noscript><div><a href="http://flattr.com/thing/130057/OATH-Toolkit">
-	  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" style="border:0" /></a></div></noscript>
-	</div>
       </div>
     </div>
     <div id="layout-content-box">
