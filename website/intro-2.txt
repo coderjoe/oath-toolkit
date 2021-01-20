@@ -42,6 +42,7 @@ Related applications:
 - The https://developers.yubico.com/yubioath-desktop/[Yubico
   Authenticator Desktop] is a free client-side implementation storing
   secrets on external hardware.
+- https://arthurdejong.org/python-pskc/[Python PSKC library]
 
 Please let me know if any of these links need updating.
 
