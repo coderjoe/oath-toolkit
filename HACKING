@@ -19,7 +19,7 @@ project:
 - Code browser: https://gitlab.com/oath-toolkit/oath-toolkit/tree/master
 - Code coverage report: https://oath-toolkit.gitlab.io/oath-toolkit/coverage/
 - Clang code analysis: https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/
-- Latest web pages: https://oath-toolkit.gitlab.io/oath-toolkit/
+- Pre-release version of website: https://oath-toolkit.gitlab.io/oath-toolkit/
 
 We rely on several tools to build the software, including:
 
