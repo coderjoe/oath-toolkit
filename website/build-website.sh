@@ -44,12 +44,14 @@ for txt in index.txt NEWS.txt download.txt docs.txt pam_oath.txt contrib.txt; do
     xsltproc --html --output html/$html oath-toolkit.xsl tmp2
 done
 
+mkdir html/man
 for man in ../oathtool/oathtool.1 ../pskctool/pskctool.1; do
     html=`basename $man`.html
     groff -man -T html $man \
 	| grep -v -e '<meta http-equiv' -e 'text-align: center' \
 	| sed 's/ align="center"//' > tmp
     xsltproc --html --output html/$html oath-toolkit.xsl tmp
+    groff -man -T html $man > html/man/$html
 done
 
 for lib in oath pskc; do

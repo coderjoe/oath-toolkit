@@ -21,10 +21,11 @@
       <para>
 	The Portable Symmetric Key Container (PSKC) format is used to
 	transport and provision symmetric keys to cryptographic
-	devices or software.  The PSKC Library allows you to parse,
-	validate and generate PSKC data.  This manual documents the
-	interfaces of PSKC library and contains a tutorial to get you
-	started working with the library.
+	devices or software.  The PSKC Library (libpskc) allows you to
+	parse, validate and generate PSKC data.  This manual documents
+	the interfaces of PSKC library and contains a tutorial to get
+	you started working with the library and the command-line tool
+	(pskctool).
       </para>
     </abstract>
 
@@ -38,9 +39,9 @@
   </bookinfo>
 
   <part id="pskc-tutorial">
-    <title>Tutorial</title>
+    <title>PSKC Tutorial</title>
     <chapter id="pskc-tutorial-quickstart">
-      <title>Quickstart</title>
+      <title>PSKC Introduction</title>
       <para>
 	The Portable Symmetric Key Container (PSKC) format is used to
 	transport and provision symmetric keys to cryptographic
@@ -70,6 +71,10 @@
       </para>
 
       <xi:include href="xml/pskc-hotp.xml"/>
+    </chapter>
+
+    <chapter id="pskc-tutorial-library">
+      <title>Library libpskc</title>
 
       <para>
 	To illustrate how the library works, let's give an example on
