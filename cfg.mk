@@ -96,9 +96,9 @@ website-upload:
 		git commit -m "Auto-update." && \
 		git push
 
-release-check: syntax-check tarball man-copy gtkdoc-copy website website-copy
+release-check: syntax-check tarball website website-copy
 
-release-upload-www: man-upload gtkdoc-upload website-upload
+release-upload-www: website-upload
 
 release-upload-ftp:
 	gpg -b $(distdir).tar.gz
