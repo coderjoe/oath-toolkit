@@ -133,7 +133,7 @@ Window size: 0
 Start counter: 0x0 (0)
 
 0"
-dotest " --verbose --totp --now @0 00" "Hex secret: 00
+dotest "--verbose --totp --now @0 00" "Hex secret: 00
 Base32 secret: AA======
 Digits: 6
 Window size: 0
@@ -145,7 +145,7 @@ Counter: 0x0 (0)
 
 328482
 "
-dotest " --verbose --totp=SHA256 --now @0 42" "Hex secret: 42
+dotest "--verbose --totp=SHA256 --now @0 42" "Hex secret: 42
 Base32 secret: II======
 Digits: 6
 Window size: 0
@@ -157,7 +157,7 @@ Counter: 0x0 (0)
 
 654791
 "
-dotest " --verbose --totp=SHA512 --now @0 00" "Hex secret: 00
+dotest "--verbose --totp=SHA512 --now @0 00" "Hex secret: 00
 Base32 secret: AA======
 Digits: 6
 Window size: 0
@@ -169,6 +169,23 @@ Counter: 0x0 (0)
 
 674061
 "
+
+dotest "-v --hotp -c 9223372036854775808 DEADBEEF" "Hex secret: deadbeef
+Base32 secret: 32W353Y=
+Digits: 6
+Window size: 0
+Start counter: 0x8000000000000000 (9223372036854775808)
+
+657352
+"
+
+dotest "-v --hotp -c 18446744073709551615 DEADBEEF" "Hex secret: deadbeef
+Base32 secret: 32W353Y=
+Digits: 6
+Window size: 0
+Start counter: 0xFFFFFFFFFFFFFFFF (18446744073709551615)
+
+044040"
 
 STDIN="gr6d5br725s6vnckv4vlhlaore" dotest "--base32 -" "993210"
 STDIN="gr6d5br725s6vnckv4vlhlaore\n993210\n" dotest "--base32 - -" "0"

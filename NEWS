@@ -3,6 +3,9 @@ Copyright (C) 2009-2020 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.6 (unreleased)
 
+** oathtool: Handle HOTP --counter values larger than 0x7FFFFFFFFFFFFFFF.
+Thanks to Jason Lai <jason99.lai@gmail.com> for report.
+
 * Version 2.6.5 (released 2020-12-29)
 
 ** oathtool: Support for reading KEY and OTP from standard input or filename.
