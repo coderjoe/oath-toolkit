@@ -1,11 +1,11 @@
 Documentation
 =============
 
-The components for the OATH Toolkit are documented separately.
+Standalone documentation for OATH Toolkit:
 
-* The oathtool command line tool: link:oathtool.1.html[oathtool man page].
+* The oathtool command line tool: link:man-oathtool.html[oathtool man page].
 
-* The pskctool command line tool: link:libpskc-api/pskc-tutorial-pskctool.html[pskctool man page].
+* The pskctool command line tool: link:man-pskctool.html[pskctool man page].
 
 * The liboath library: link:liboath/[OATH Library (liboath) Manual].
 
