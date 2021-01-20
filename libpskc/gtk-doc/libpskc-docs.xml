@@ -193,7 +193,7 @@ jas@latte:~$</programlisting></informalexample></para>
 
 	<para>
 	  To verify XML digital signatures in PSKC data, you may use
-	  the <link linkend="pskc_verify_x509crt">pskc_verify_x509crt</link>
+	  the <link linkend="pskc-verify-x509crt">pskc_verify_x509crt</link>
 	  function.
 	</para>
 
@@ -222,18 +222,18 @@ jas@latte:~$</programlisting></informalexample></para>
 
 	<para>
 	  To create PSKC data you should first get a handle to a
-	  container using <link linkend="pskc_init">pskc_init</link>.
+	  container using <link linkend="pskc-init">pskc_init</link>.
 	  Add one or more keypackages to the container
-	  using <link linkend="pskc_add_keypackage">
+	  using <link linkend="pskc-add-keypackage">
 	  pskc_add_keypackage</link>.  For each keypackage, set the
 	  relevant values you want using the "pskc_set_*" functions,
-	  for example <link linkend="pskc_set_device_serialno">
+	  for example <link linkend="pskc-set-device-serialno">
 	  pskc_set_device_serialno</link>.
 	</para>
 
 	<para>
 	  The XML output is created as usual
-	  with <link linkend="pskc_build_xml">pskc_build_xml</link>.
+	  with <link linkend="pskc-build-xml">pskc_build_xml</link>.
 	</para>
 
 	<para>
