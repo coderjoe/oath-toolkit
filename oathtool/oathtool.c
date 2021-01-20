@@ -1,6 +1,6 @@
 /*
  * oathtool.c - command line tool for OATH one-time passwords
- * Copyright (C) 2009-2020 Simon Josefsson
+ * Copyright (C) 2009-2021 Simon Josefsson
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -41,7 +41,7 @@ const char version_etc_copyright[] =
   /* Do *not* mark this string for translation.  %s is a copyright
      symbol suitable for this locale, and %d is the copyright
      year.  */
-  "Copyright %s %d Simon Josefsson.";
+  "Copyright %s 2009-%d Simon Josefsson.";
 
 /* This feature is available in gcc versions 2.5 and later.  */
 #if __GNUC__ < 2 || (__GNUC__ == 2 && __GNUC_MINOR__ < 5)
