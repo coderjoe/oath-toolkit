@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2020 Simon Josefsson
+# Copyright (C) 2012-2021 Simon Josefsson
 
 # This library is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -43,7 +43,9 @@ gl_EARLY
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 AC_PROG_LIBTOOL
 gl_INIT
-GTK_DOC_CHECK(1.1)
+
+# https://developer.gnome.org/gtk-doc-manual/stable/settingup_autoconf.html.en
+GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
 
 AC_ARG_WITH(xmlsec-crypto-engine,
   AC_HELP_STRING([--with-xmlsec-crypto-engine=ENGINE],

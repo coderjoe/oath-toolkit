@@ -1,6 +1,6 @@
 /*
  * global.c - Implementation of PSKC library global functions.
- * Copyright (C) 2012-2020 Simon Josefsson
+ * Copyright (C) 2012-2021 Simon Josefsson
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -171,13 +171,13 @@ pskc_log_func _pskc_log_func;
  * @log_func: new global #pskc_log_func log function to use.
  *
  * Enable global debug logging function.  The function will be invoked
- * to print various debugging information.
+ * by the library when it wishes to print various debug information.
  *
  * @pskc_log_func is of the form,
  * void (*pskc_log_func) (const char *msg);
  *
- * The container and keypackage variables may be NULL if they are not
- * relevant for the debug information printed.
+ * The application may use this to provide a debug mode with trace
+ * information for the user.
  **/
 void
 pskc_global_log (pskc_log_func log_func)

@@ -1,6 +1,6 @@
 /*
  * pskc/global.h - PSKC header file with library global function prototypes.
- * Copyright (C) 2012-2020 Simon Josefsson
+ * Copyright (C) 2012-2021 Simon Josefsson
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -43,6 +43,13 @@
 extern PSKCAPI int pskc_global_init (void);
 extern PSKCAPI void pskc_global_done (void);
 
+/**
+ * pskc_log_func:
+ * @msg: message to be logged.
+ *
+ * Function prototype for the application to be able to log PSKC
+ * messages, see pskc_global_log().
+ */
 typedef void (*pskc_log_func) (const char *msg);
 extern PSKCAPI void pskc_global_log (pskc_log_func log_func);
 

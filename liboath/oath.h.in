@@ -1,6 +1,6 @@
 /*
  * oath.h - header file for liboath
- * Copyright (C) 2009-2020 Simon Josefsson
+ * Copyright (C) 2009-2021 Simon Josefsson
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -19,9 +19,28 @@
  *
  */
 
+
+/**
+ * SECTION:oath
+ * @title: oath.h
+ * @short_description: liboath declarations
+ *
+ * The oath.h file contains declarations for the liboath library.
+ */
+
 #ifndef OATH_H
 #define OATH_H
 
+/**
+ * OATHAPI:
+ *
+ * Symbol holding shared library API visibility decorator.
+ *
+ * This is used internally by the library header file and should never
+ * be used or modified by the application.
+ *
+ * https://www.gnu.org/software/gnulib/manual/html_node/Exported-Symbols-of-Shared-Libraries.html
+ */
 #ifndef OATHAPI
 # if defined LIBOATH_BUILDING && defined HAVE_VISIBILITY && HAVE_VISIBILITY
 #  define OATHAPI __attribute__((__visibility__("default")))
@@ -160,8 +179,23 @@ extern OATHAPI int oath_base32_encode (const char *in, size_t inlen,
 
 /* HOTP */
 
+/**
+ * OATH_HOTP_LENGTH:
+ * @digits: number of requested digits in the OTP, excluding checksum
+ * @checksum: whether to add a checksum digit or not
+ *
+ * Pre-processor macro to get length of a OTP string.
+ *
+ * Returns: Length of generated one-time password.
+ **/
 #define OATH_HOTP_LENGTH(digits, checksum) (digits + (checksum ? 1 : 0))
 
+/**
+ * OATH_HOTP_DYNAMIC_TRUNCATION:
+ *
+ * Pre-processor symbol to indicate that no HOTP truncation should
+ * occur, see oath_hotp_generate().
+ */
 #define OATH_HOTP_DYNAMIC_TRUNCATION SIZE_MAX
 
 extern OATHAPI int
@@ -209,7 +243,14 @@ oath_hotp_validate (const char *secret,
 typedef int (*oath_validate_strcmp_function) (void *handle,
 					      const char *test_otp);
 
-/* For backwards compatibility with 1.4.x. */
+/**
+ * oath_hotp_validate_strcmp_function:
+ *
+ * Pre-processor compatibility definition for
+ * oath_validate_strcmp_function().
+ *
+ * Since: 1.4.0
+ */
 #define oath_hotp_validate_strcmp_function oath_validate_strcmp_function
 
 extern OATHAPI int
@@ -223,7 +264,20 @@ oath_hotp_validate_callback (const char *secret,
 
 /* TOTP */
 
+/**
+ * OATH_TOTP_DEFAULT_TIME_STEP_SIZE:
+ *
+ * Pre-processor symbol to provide a default value for the TOTP
+ * time-step value, see oath_totp_generate().
+ */
 #define OATH_TOTP_DEFAULT_TIME_STEP_SIZE	30
+
+/**
+ * OATH_TOTP_DEFAULT_START_TIME:
+ *
+ * Pre-processor symbol to indicate that you want to use the Unix
+ * epoch as a starting pointer for TOTP, see oath_totp_generate().
+ */
 #define OATH_TOTP_DEFAULT_START_TIME		((time_t) 0)
 
 /**

@@ -1,24 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-          "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
-	  [
-	  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
-	  <!ENTITY version SYSTEM "version.xml">
-	  <!ENTITY pskc-example-serialno SYSTEM "serialno.sgml">
-	  <!ENTITY pskc-example-mini SYSTEM "pskc-mini.sgml">
-	  <!ENTITY pskc-example-hotp SYSTEM "pskc-hotp.sgml">
-	  <!ENTITY pskc-example-hotp-signed SYSTEM "pskc-hotp-signed.sgml">
-	  <!ENTITY pskc-example-hotp-human SYSTEM "pskc-hotp-human.sgml">
-	  <!ENTITY pskc-example-figure6-debug SYSTEM "pskc-figure6-debug.sgml">
-	  <!ENTITY pskc-example-pskc2csv SYSTEM "pskc2csv.sgml">
-	  <!ENTITY pskc-example-pskcsign SYSTEM "pskcsign.sgml">
-	  <!ENTITY pskc-example-pskcverify SYSTEM "pskcverify.sgml">
-	  <!ENTITY pskc-example-pskccreate SYSTEM "pskccreate.sgml">
-	  <!ENTITY pskc-example-pskctool-h SYSTEM "pskctool-h.sgml">
-	  ]>
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY % gtkdocentities SYSTEM "xml/gtkdocentities.ent">
+  %gtkdocentities;
+]>
 <book id="index">
   <bookinfo>
-    <title>PSKC Library Manual</title>
+    <title>PSKC Library (libpskc) Manual</title>
     <authorgroup>
       <author>
         <firstname>Simon</firstname>
@@ -26,17 +16,6 @@
 	<email>simon@josefsson.org</email>
       </author>
     </authorgroup>
-    <copyright>
-      <year>2012</year>
-      <holder>Simon Josefsson</holder>
-    </copyright>
-    <legalnotice>
-      <para>
-	Copying and distribution of this file, with or without modification,
-	are permitted in any medium without royalty provided the copyright
-	notice and this notice are preserved.
-      </para>
-    </legalnotice>
 
     <abstract>
       <para>
@@ -48,9 +27,10 @@
 	started working with the library.
       </para>
     </abstract>
+
     <releaseinfo>
-      Version &version;.  The latest version of this documentation can
-      be found on-line at
+      Version &package_string;.
+      The latest version of this documentation can be found on-line at
       <ulink role="online-location"
 	     url="https://www.nongnu.org/oath-toolkit/libpskc/">
 	https://www.nongnu.org/oath-toolkit/libpskc/</ulink>.
@@ -76,7 +56,7 @@
 	possible valid PSKC content.
       </para>
 
-      &pskc-example-mini;
+      <xi:include href="xml/pskc-mini.xml"/>
 
       <para>
 	Of course, since the intent with PSKC is to transport
@@ -89,7 +69,7 @@
 	"MTIzNA==".
       </para>
 
-      &pskc-example-hotp;
+      <xi:include href="xml/pskc-hotp.xml"/>
 
       <para>
 	To illustrate how the library works, let's give an example on
@@ -98,7 +78,7 @@
 	performs minimal error checking.
       </para>
 
-	&pskc-example-serialno;
+      <xi:include href="xml/serialno.xml"/>
 
       <para>
 	Compiling and linking code with the PSKC Library requires that
@@ -146,7 +126,7 @@ jas@latte:~$</programlisting></informalexample></para>
 	  codes and releases resources.
 	</para>
 
-	&pskc-example-pskc2csv;
+	<xi:include href="xml/pskc2csv.xml"/>
 
 	<para>
 	  Below we'll illustrate how to build the tool and run it on
@@ -188,7 +168,7 @@ jas@latte:~$</programlisting></informalexample></para>
 	  digitally sign it and then print the signed XML to stdout.
 	</para>
 
-	&pskc-example-pskcsign;
+	<xi:include href="xml/pskcsign.xml"/>
 
 	<para>
 	  You would compile and use the example like this.
@@ -217,7 +197,7 @@ jas@latte:~$</programlisting></informalexample></para>
 	  function.
 	</para>
 
-	&pskc-example-pskcverify;
+	<xi:include href="xml/pskcverify.xml"/>
 
 	<para>
 	  You would compile and use the example like this.
@@ -261,7 +241,7 @@ jas@latte:~$</programlisting></informalexample></para>
 	  could be used to personalize an imaginary HOTP token.
 	</para>
 
-	&pskc-example-pskccreate;
+	<xi:include href="xml/pskccreate.xml"/>
 
 	<para>
 	  You would compile and use the example like this.
@@ -297,7 +277,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 	the parameters it accepts.
       </para>
 
-      &pskc-example-pskctool-h;
+      <xi:include href="xml/pskctool-h.xml"/>
 
       <para>
 	As you can see, the pskctool have a few different modes: info,
@@ -319,7 +299,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 	  "pskc.xml".
 	</para>
 
-	&pskc-example-hotp;
+	<xi:include href="xml/pskc-hotp.xml"/>
 
 	<para>
 	  Running the tool with the --info parameter, i.e., "pskctool
@@ -327,7 +307,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 	  the PSKC data.
 	</para>
 
-	&pskc-example-hotp-human;
+	<xi:include href="xml/pskc-hotp-human.xml"/>
 
 	<para>
 	  If the --verbose (-v) parameter is given, the tool will also
@@ -352,7 +332,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 	  output on stderr.
 	</para>
 
-	&pskc-example-figure6-debug;
+	<xi:include href="xml/pskc-figure6-debug.xml"/>
 
 	<para>
 	  Even when noticing a problem, the tool continue with the
@@ -601,7 +581,7 @@ jas@latte:~$
 	  data, stored in a file "pskc-hotp.xml".
 	</para>
 
-	&pskc-example-hotp;
+	<xi:include href="xml/pskc-hotp.xml"/>
 
 	<para>
 	  The --sign mode flag requires the --sign-key and --sign-crt
@@ -622,7 +602,7 @@ $
 	  invalidate signature).
 	</para>
 
-	&pskc-example-hotp-signed;
+	<xi:include href="xml/pskc-hotp-signed.xml"/>
 
       </section>
 
@@ -659,10 +639,11 @@ jas@latte:~$
 
     </chapter>
   </part>
-
+  
   <part id="pskc-reference">
     <title>API Reference</title>
 
+    
     <para>This part contains the complete API reference for the PSKC
     Library.  There is a separate section for each include file, which
     contains related functions grouped together, but applications
@@ -677,11 +658,16 @@ jas@latte:~$
     <xi:include href="xml/keypackage.xml"/>
 
     <index id="api-index-full">
-      <title>Index of all symbols</title>
+      <title>API Index</title>
+      <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
     </index>
-    <index role="2.2.0" id="api-index-2-2-0">
-      <title>Index of new symbols in 2.2.0</title>
+    <index id="api-index-2-2-0" role="2.2.0">
+      <title>Index of new API in 2.2.0</title>
+      <xi:include href="xml/api-index-2.2.0.xml"><xi:fallback /></xi:include>
+    </index>
+    <index id="deprecated-api-index" role="deprecated">
+      <title>Index of deprecated API</title>
+      <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
     </index>
   </part>
-
 </book>
