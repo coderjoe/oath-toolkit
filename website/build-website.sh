@@ -33,6 +33,8 @@
 
 mkdir html
 
+cp *.css html/
+
 for txt in index.txt NEWS.txt download.txt docs.txt pam_oath.txt contrib.txt; do
     html=`echo $txt | sed 's/\.txt$/.html/'`
     asciidoc --backend=xhtml11 --conf-file=config.cfg -a index-only -o tmp $txt
