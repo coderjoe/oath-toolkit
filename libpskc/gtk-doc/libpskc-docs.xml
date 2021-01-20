@@ -290,7 +290,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 	next few sections.
       </para>
 
-      <section>
+      <section id="pskc-tutorial-pskctool-parse">
 	<title>Parse and print summary of PSKC data</title>
 
 	<para>
@@ -350,7 +350,7 @@ jas@latte:~$ </programlisting></informalexample></para>
 
       </section>
 
-      <section>
+      <section id="pskc-tutorial-pskctool-validate">
 	<title>Validate PSKC against XML Schema</title>
 
 	<para>
@@ -381,7 +381,7 @@ $
 	</para>
       </section>
 
-      <section>
+      <section id="pskc-tutorial-pskctool-sign">
 	<title>Digitally sign PSKC data</title>
 
 	<para>
@@ -611,7 +611,7 @@ $
 
       </section>
 
-      <section>
+      <section id="pskc-tutorial-pskctool-verify">
 	<title>Verify digitally signed PSKC data</title>
 
 	<para>
