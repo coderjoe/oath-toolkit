@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2020 Free Software Foundation, Inc.
+# Copyright (C) 2002-2021 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -80,12 +80,12 @@ EXTRA_DIST += test-accept.c signature.h macros.h
 ## begin gnulib module alloca
 
 
+libtests_a_LIBADD += @ALLOCA@
+libtests_a_DEPENDENCIES += @ALLOCA@
 EXTRA_DIST += alloca.c
 
 EXTRA_libtests_a_SOURCES += alloca.c
 
-libtests_a_LIBADD += @ALLOCA@
-libtests_a_DEPENDENCIES += @ALLOCA@
 ## end   gnulib module alloca
 
 ## begin gnulib module alloca-opt-tests
@@ -204,6 +204,7 @@ EXTRA_DIST += test-c-ctype.c macros.h
 
 TESTS += test-canonicalize-lgpl
 check_PROGRAMS += test-canonicalize-lgpl
+test_canonicalize_lgpl_LDADD = $(LDADD) $(LIBINTL)
 EXTRA_DIST += test-canonicalize-lgpl.c signature.h null-ptr.h macros.h
 
 ## end   gnulib module canonicalize-lgpl-tests
@@ -290,7 +291,7 @@ EXTRA_DIST += test-gc-hmac-sha512.c
 
 TESTS += test-gc
 check_PROGRAMS += test-gc
-test_gc_LDADD = $(LDADD) @LIB_CRYPTO@ $(LIB_GC_RANDOM)
+test_gc_LDADD = $(LDADD) @LIB_CRYPTO@
 EXTRA_DIST += test-gc.c
 
 ## end   gnulib module crypto/gc-tests
@@ -598,6 +599,14 @@ MOSTLYCLEANFILES += t-freading.tmp
 EXTRA_DIST += test-freading.c macros.h
 
 ## end   gnulib module freading-tests
+
+## begin gnulib module free-posix-tests
+
+TESTS += test-free
+check_PROGRAMS += test-free
+EXTRA_DIST += test-free.c macros.h
+
+## end   gnulib module free-posix-tests
 
 ## begin gnulib module fseek-tests
 
@@ -1288,6 +1297,14 @@ EXTRA_DIST += test-raise.c signature.h macros.h
 
 ## end   gnulib module raise-tests
 
+## begin gnulib module rawmemchr-tests
+
+TESTS += test-rawmemchr
+check_PROGRAMS += test-rawmemchr
+EXTRA_DIST += test-rawmemchr.c zerosize-ptr.h signature.h macros.h
+
+## end   gnulib module rawmemchr-tests
+
 ## begin gnulib module readdir
 
 
@@ -1366,6 +1383,24 @@ check_PROGRAMS += test-sched
 EXTRA_DIST += test-sched.c
 
 ## end   gnulib module sched-tests
+
+## begin gnulib module sched_yield
+
+
+EXTRA_DIST += sched_yield.c
+
+EXTRA_libtests_a_SOURCES += sched_yield.c
+
+## end   gnulib module sched_yield
+
+## begin gnulib module scratch_buffer-tests
+
+TESTS += test-scratch-buffer
+check_PROGRAMS += test-scratch-buffer
+test_scratch_buffer_SOURCES = test-scratch-buffer.c
+EXTRA_DIST += test-scratch-buffer.c macros.h
+
+## end   gnulib module scratch_buffer-tests
 
 ## begin gnulib module select
 

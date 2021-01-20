@@ -1,5 +1,5 @@
 /* Test of fcntl(2).
-   Copyright (C) 2009-2020 Free Software Foundation, Inc.
+   Copyright (C) 2009-2021 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -212,8 +212,12 @@ check_flags (void)
 }
 
 int
-main (void)
+main (int argc, char *argv[])
 {
+  if (argc > 1)
+    /* child process */
+    return (is_open (10) ? 42 : 0);
+
   const char *file = "test-fcntl.tmp";
   int fd;
   int bad_fd = getdtablesize ();
@@ -411,5 +415,11 @@ main (void)
   ASSERT (close (fd) == 0);
   ASSERT (unlink (file) == 0);
 
-  return 0;
+  /* Test whether F_DUPFD_CLOEXEC is effective.  */
+  ASSERT (fcntl (1, F_DUPFD_CLOEXEC, 10) >= 0);
+#if defined _WIN32 && !defined __CYGWIN__
+  return _execl ("./test-fcntl", "./test-fcntl", "child", NULL);
+#else
+  return execl ("./test-fcntl", "./test-fcntl", "child", NULL);
+#endif
 }

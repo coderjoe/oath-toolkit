@@ -1,6 +1,6 @@
 ## DO NOT EDIT! GENERATED AUTOMATICALLY!
 ## Process this file with automake to produce Makefile.in.
-# Copyright (C) 2002-2020 Free Software Foundation, Inc.
+# Copyright (C) 2002-2021 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -80,12 +80,12 @@ EXTRA_DIST += test-accept.c signature.h macros.h
 ## begin gnulib module alloca
 
 
+libtests_a_LIBADD += @ALLOCA@
+libtests_a_DEPENDENCIES += @ALLOCA@
 EXTRA_DIST += alloca.c
 
 EXTRA_libtests_a_SOURCES += alloca.c
 
-libtests_a_LIBADD += @ALLOCA@
-libtests_a_DEPENDENCIES += @ALLOCA@
 ## end   gnulib module alloca
 
 ## begin gnulib module alloca-opt-tests
@@ -1018,6 +1018,15 @@ check_PROGRAMS += test-sched
 EXTRA_DIST += test-sched.c
 
 ## end   gnulib module sched-tests
+
+## begin gnulib module sched_yield
+
+
+EXTRA_DIST += sched_yield.c
+
+EXTRA_libtests_a_SOURCES += sched_yield.c
+
+## end   gnulib module sched_yield
 
 ## begin gnulib module select
 

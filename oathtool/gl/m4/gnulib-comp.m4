@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2020 Free Software Foundation, Inc.
+# Copyright (C) 2002-2021 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -114,6 +114,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module gettime:
   # Code from module gettimeofday:
   # Code from module gettimeofday-tests:
+  # Code from module idx:
   # Code from module ignore-value:
   # Code from module ignore-value-tests:
   # Code from module include_next:
@@ -181,6 +182,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module same-inode:
   # Code from module sched:
   # Code from module sched-tests:
+  # Code from module sched_yield:
   # Code from module select:
   # Code from module select-tests:
   # Code from module setenv:
@@ -689,6 +691,11 @@ changequote([, ])dnl
   fi
   gl_SIGNAL_MODULE_INDICATOR([raise])
   gl_SCHED_H
+  gl_FUNC_SCHED_YIELD
+  if test $HAVE_SCHED_YIELD = 0 || test $REPLACE_SCHED_YIELD = 1; then
+    AC_LIBOBJ([sched_yield])
+  fi
+  gl_SCHED_MODULE_INDICATOR([sched_yield])
   gl_FUNC_SELECT
   if test $REPLACE_SELECT = 1; then
     AC_LIBOBJ([select])
@@ -939,6 +946,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/gettext.h
   lib/gettime.c
   lib/gettimeofday.c
+  lib/idx.h
   lib/intprops.h
   lib/inttypes.in.h
   lib/itold.c
@@ -1086,6 +1094,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/putenv.m4
   m4/raise.m4
   m4/sched_h.m4
+  m4/sched_yield.m4
   m4/select.m4
   m4/semaphore.m4
   m4/setenv.m4
@@ -1306,6 +1315,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/raise.c
   tests=lib/same-inode.h
   tests=lib/sched.in.h
+  tests=lib/sched_yield.c
   tests=lib/select.c
   tests=lib/setsockopt.c
   tests=lib/sig-handler.c

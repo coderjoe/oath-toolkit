@@ -1,5 +1,5 @@
 # DO NOT EDIT! GENERATED AUTOMATICALLY!
-# Copyright (C) 2002-2020 Free Software Foundation, Inc.
+# Copyright (C) 2002-2021 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -42,6 +42,7 @@ AC_DEFUN([gl_EARLY],
   AC_REQUIRE([gl_USE_SYSTEM_EXTENSIONS])
   AC_REQUIRE([gl_PROG_AR_RANLIB])
 
+  AC_REQUIRE([AM_PROG_CC_C_O])
   # Code from module absolute-header:
   # Code from module accept:
   # Code from module accept-tests:
@@ -107,6 +108,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module double-slash-root:
   # Code from module dup2:
   # Code from module dup2-tests:
+  # Code from module eloop-threshold:
   # Code from module environ:
   # Code from module environ-tests:
   # Code from module errno:
@@ -140,6 +142,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module fread-tests:
   # Code from module freading:
   # Code from module freading-tests:
+  # Code from module free-posix:
+  # Code from module free-posix-tests:
   # Code from module fseek:
   # Code from module fseek-tests:
   # Code from module fseeko:
@@ -171,6 +175,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module gettimeofday:
   # Code from module gettimeofday-tests:
   # Code from module havelib:
+  # Code from module idx:
   # Code from module ignore-value:
   # Code from module ignore-value-tests:
   # Code from module include_next:
@@ -208,7 +213,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module manywarnings:
   # Code from module memchr:
   # Code from module memchr-tests:
+  # Code from module mempcpy:
   # Code from module memxor:
+  # Code from module minmax:
   # Code from module msvc-inval:
   # Code from module msvc-nothrow:
   # Code from module multiarch:
@@ -238,6 +245,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module putenv:
   # Code from module raise:
   # Code from module raise-tests:
+  # Code from module rawmemchr:
+  # Code from module rawmemchr-tests:
   # Code from module readdir:
   # Code from module readlink:
   # Code from module readlink-tests:
@@ -249,6 +258,9 @@ AC_DEFUN([gl_EARLY],
   # Code from module same-inode:
   # Code from module sched:
   # Code from module sched-tests:
+  # Code from module sched_yield:
+  # Code from module scratch_buffer:
+  # Code from module scratch_buffer-tests:
   # Code from module select:
   # Code from module select-tests:
   # Code from module setsockopt:
@@ -470,6 +482,12 @@ AC_DEFUN([gl_INIT],
   fi
   gl_STDIO_MODULE_INDICATOR([fpurge])
   gl_FUNC_FREADING
+  gl_FUNC_FREE
+  if test $REPLACE_FREE = 1; then
+    AC_LIBOBJ([free])
+    gl_PREREQ_FREE
+  fi
+  gl_STDLIB_MODULE_INDICATOR([free-posix])
   gl_FUNC_FSEEK
   if test $REPLACE_FSEEK = 1; then
     AC_LIBOBJ([fseek])
@@ -557,7 +575,14 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_MEMCHR
   fi
   gl_STRING_MODULE_INDICATOR([memchr])
+  gl_FUNC_MEMPCPY
+  if test $HAVE_MEMPCPY = 0; then
+    AC_LIBOBJ([mempcpy])
+    gl_PREREQ_MEMPCPY
+  fi
+  gl_STRING_MODULE_INDICATOR([mempcpy])
   gl_MEMXOR
+  gl_MINMAX
   AC_REQUIRE([gl_MSVC_INVAL])
   if test $HAVE_MSVC_INVALID_PARAMETER_HANDLER = 1; then
     AC_LIBOBJ([msvc-inval])
@@ -575,6 +600,12 @@ AC_DEFUN([gl_INIT],
   fi
   gl_FCNTL_MODULE_INDICATOR([open])
   gl_PATHMAX
+  gl_FUNC_RAWMEMCHR
+  if test $HAVE_RAWMEMCHR = 0; then
+    AC_LIBOBJ([rawmemchr])
+    gl_PREREQ_RAWMEMCHR
+  fi
+  gl_STRING_MODULE_INDICATOR([rawmemchr])
   gl_FUNC_READLINK
   if test $HAVE_READLINK = 0 || test $REPLACE_READLINK = 1; then
     AC_LIBOBJ([readlink])
@@ -882,12 +913,21 @@ changequote([, ])dnl
     gl_PREREQ_RAISE
   fi
   gl_SIGNAL_MODULE_INDICATOR([raise])
+  dnl Check for prerequisites for memory fence checks.
+  gl_FUNC_MMAP_ANON
+  AC_CHECK_HEADERS_ONCE([sys/mman.h])
+  AC_CHECK_FUNCS_ONCE([mprotect])
   gl_FUNC_READDIR
   if test $HAVE_READDIR = 0; then
     AC_LIBOBJ([readdir])
   fi
   gl_DIRENT_MODULE_INDICATOR([readdir])
   gl_SCHED_H
+  gl_FUNC_SCHED_YIELD
+  if test $HAVE_SCHED_YIELD = 0 || test $REPLACE_SCHED_YIELD = 1; then
+    AC_LIBOBJ([sched_yield])
+  fi
+  gl_SCHED_MODULE_INDICATOR([sched_yield])
   gl_FUNC_SELECT
   if test $REPLACE_SELECT = 1; then
     AC_LIBOBJ([select])
@@ -1136,6 +1176,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/dirname-lgpl.c
   lib/dirname.h
   lib/dup2.c
+  lib/eloop-threshold.h
   lib/errno.in.h
   lib/fclose.c
   lib/fcntl.c
@@ -1151,6 +1192,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/fpurge.c
   lib/freading.c
   lib/freading.h
+  lib/free.c
   lib/fseek.c
   lib/fseeko.c
   lib/fstat.c
@@ -1169,6 +1211,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/hmac-sha512.c
   lib/hmac.c
   lib/hmac.h
+  lib/idx.h
   lib/intprops.h
   lib/inttypes.in.h
   lib/itold.c
@@ -1177,12 +1220,19 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/lseek.c
   lib/lstat.c
   lib/malloc.c
+  lib/malloc/scratch_buffer.h
+  lib/malloc/scratch_buffer_dupfree.c
+  lib/malloc/scratch_buffer_grow.c
+  lib/malloc/scratch_buffer_grow_preserve.c
+  lib/malloc/scratch_buffer_set_array_size.c
   lib/malloca.c
   lib/malloca.h
   lib/memchr.c
   lib/memchr.valgrind
+  lib/mempcpy.c
   lib/memxor.c
   lib/memxor.h
+  lib/minmax.h
   lib/msvc-inval.c
   lib/msvc-inval.h
   lib/msvc-nothrow.c
@@ -1193,10 +1243,13 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/printf-args.h
   lib/printf-parse.c
   lib/printf-parse.h
+  lib/rawmemchr.c
+  lib/rawmemchr.valgrind
   lib/readlink.c
   lib/rename.c
   lib/rmdir.c
   lib/same-inode.h
+  lib/scratch_buffer.h
   lib/sha1.c
   lib/sha1.h
   lib/sha256.c
@@ -1282,6 +1335,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fpieee.m4
   m4/fpurge.m4
   m4/freading.m4
+  m4/free.m4
   m4/fseek.m4
   m4/fseeko.m4
   m4/fstat.m4
@@ -1327,7 +1381,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/manywarnings.m4
   m4/math_h.m4
   m4/memchr.m4
+  m4/mempcpy.m4
   m4/memxor.m4
+  m4/minmax.m4
   m4/mmap-anon.m4
   m4/mode_t.m4
   m4/msvc-inval.m4
@@ -1353,11 +1409,13 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/pthread_sigmask.m4
   m4/putenv.m4
   m4/raise.m4
+  m4/rawmemchr.m4
   m4/readdir.m4
   m4/readlink.m4
   m4/rename.m4
   m4/rmdir.m4
   m4/sched_h.m4
+  m4/sched_yield.m4
   m4/select.m4
   m4/semaphore.m4
   m4/setenv.m4
@@ -1471,6 +1529,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-fputc.c
   tests/test-fread.c
   tests/test-freading.c
+  tests/test-free.c
   tests/test-fseek.c
   tests/test-fseek.sh
   tests/test-fseek2.sh
@@ -1543,6 +1602,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-pthread_sigmask1.c
   tests/test-pthread_sigmask2.c
   tests/test-raise.c
+  tests/test-rawmemchr.c
   tests/test-readlink.c
   tests/test-readlink.h
   tests/test-rename.c
@@ -1551,6 +1611,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-rmdir.h
   tests/test-rwlock1.c
   tests/test-sched.c
+  tests/test-scratch-buffer.c
   tests/test-select-fd.c
   tests/test-select-in.sh
   tests/test-select-out.sh
@@ -1656,6 +1717,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/readdir.c
   tests=lib/root-uid.h
   tests=lib/sched.in.h
+  tests=lib/sched_yield.c
   tests=lib/select.c
   tests=lib/setsockopt.c
   tests=lib/sig-handler.c
