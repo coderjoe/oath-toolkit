@@ -50,21 +50,30 @@ and I'll add them to the list.
   the HOTP/TOTP/PSKC technology.
 - The https://openauthentication.org/specifications-technical-resources/[OATH
   Specifications] page for list of published documents.
-- http://code.google.com/p/google-authenticator/[Google Authenticator]
-  is/was a free implementation for several mobile platforms.
-- The https://developers.yubico.com/yubioath-desktop/[Yubico
-  Authenticator Desktop] is a free client-side implementation storing
-  secrets on external hardware.
-- Daniel Pocock maintains http://www.dynalogin.org/[Dynalogin] which
-  is an Open Source two factor authentication suite.
 - https://tools.ietf.org/html/rfc4226[RFC 4226 on HOTP: An HMAC-Based One-Time
   Password Algorithm].
 - https://tools.ietf.org/html/rfc6238[RFC 6238 on TOTP: Time-Based
   One-Time Password Algorithm].
 - https://tools.ietf.org/html/rfc6030[RFC 6030 on Portable Symmetric
   Key Container (PSKC)].
+
+Projects using OATH Toolkit:
+
 - https://github.com/malept/pyoath-toolkit[Python bindings for OATH
   Toolkit].
+- The https://www.passwordstore.org/[pass] one-time-password extension
+  https://github.com/tadfisher/pass-otp[pass-otp].
+- The Openconnect VPN Server[https://ocserv.gitlab.io/www/] use it for
+  https://ocserv.gitlab.io/www/recipes-ocserv-2fa.html[one-time
+  passwords].
+
+Related applications:
+
+- http://code.google.com/p/google-authenticator/[Google Authenticator]
+  is/was a free implementation for several mobile platforms.
+- The https://developers.yubico.com/yubioath-desktop/[Yubico
+  Authenticator Desktop] is a free client-side implementation storing
+  secrets on external hardware.
 
 Please let me know if any of these links need updating.
 
