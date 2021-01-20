@@ -1,31 +1,27 @@
 To: oath-toolkit-help@nongnu.org
-Subject: OATH Toolkit 2.6.5
-<#part sign=pgpmime>
-Hi!  This release fixes the long-standing issue of suppluing secrets on
-the command line.  Thanks to everyone who worked on discussions and
-patches related to this.
+Subject: OATH Toolkit 2.6.6
+<#secure method=pgpmime mode=sign>
+Hi!  This release contains some minor bug fixes:
 
-** oathtool: Support for reading KEY and OTP from standard input or filename.
-KEY and OTP may now be given as '-' to mean stdin, or @FILE to read
-from a particular file.  This is recommended on multi-user systems,
-since secrets as command line parameters leak.  Based on a patch from
-Ian Jackson <ijackson@chiark.greenend.org.uk>.  Fixes #6.
+** oathtool: Handle HOTP --counter values larger than 0x7FFFFFFFFFFFFFFF.
+Thanks to Jason Lai <jason99.lai@gmail.com> for report.
 
-** pam_oath: Fix unlikely logic fail on out of memory conditions.
-Patch from Matthias Gerstner.
+** doc: GTK-DOC manual improvements.
 
-** Doc fixes.
+** Updated gnulib files.
+Fixes test-parse-datetime self-check.  Fixes
+<https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/20>.
 
 Happy hacking,
 Simon
 
-The OATH Toolkit makes it easy to build one-time password authentication
-systems.  It contains shared libraries, command line tools and a PAM
-module.  Supported technologies include the event-based HOTP algorithm
-(RFC4226) and the time-based TOTP algorithm (RFC6238).  OATH stands for
-Open AuTHentication, which is the organization that specify the
-algorithms.  For managing secret key files, the Portable Symmetric Key
-Container (PSKC) format described in RFC6030 is supported.
+OATH Toolkit provide components to build one-time password
+authentication systems.  It contains shared C libraries, command line
+tools and a PAM module.  Supported technologies include the
+event-based HOTP algorithm (RFC 4226), the time-based TOTP algorithm
+(RFC 6238), and Portable Symmetric Key Container (PSKC, RFC 6030) to
+manage secret key data.  OATH stands for Open AuTHentication, which is
+the organization that specify the algorithms.
 
 The components included in the package is:
 
@@ -45,13 +41,15 @@ The project's web page is available at:
 Documentation for the command line tools oathtool and pskctool:
   https://www.nongnu.org/oath-toolkit/oathtool.1.html
   https://www.nongnu.org/oath-toolkit/pskctool.1.html
-  https://www.nongnu.org/oath-toolkit/libpskc-api/pskc-tutorial-pskctool.html
+
+Tutorial on PSKC:
+  https://www.nongnu.org/oath-toolkit/libpskc-api/pskc-tutorial.html
 
 Manual for PAM module:
   https://www.nongnu.org/oath-toolkit/pam_oath.html
 
 Liboath Manual:
-  https://www.nongnu.org/oath-toolkit/liboath-api/liboath-oath.html
+  https://www.nongnu.org/oath-toolkit/liboath-api/liboath-oath.h.html
 
 Libpskc Manual
   https://www.nongnu.org/oath-toolkit/libpskc-api/pskc-reference.html
@@ -61,8 +59,8 @@ are invited to join our oath-toolkit-help mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
 
 Here are the compressed sources of the entire package:
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.5.tar.gz
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.5.tar.gz.sig
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.6.tar.gz
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.6.tar.gz.sig
 
 The software is cryptographically signed by the author using an OpenPGP
 key identified by the following information:
@@ -74,14 +72,14 @@ uid           [ultimate] Simon Josefsson <simon@josefsson.org>
 The key is available from:
   https://josefsson.org/key-20190320.txt
 
-I have changed key since older releases, see my transition statement:
+I have changed key since older releases, see my transition statements:
   https://blog.josefsson.org/2019/03/21/openpgp-2019-key-transition-statement/
   https://blog.josefsson.org/2014/06/23/openpgp-key-transition-statement/
 
 Here are the SHA-1 and SHA-224 checksums:
 
-31eff0b9bcc4dd5f397b9abc0cf2ccdb99615c9e  oath-toolkit-2.6.5.tar.gz
-5dd716a98749ba22bfe5fa8597f8b6ee7a01dda744ec3ee462ffd3e2  oath-toolkit-2.6.5.tar.gz
+b71dc6e2bf12ba44a9417f04059ea693d32f5693  oath-toolkit-2.6.6.tar.gz
+eb1ce3283a82090d2779f410a717a6fa13dad3e8153717f1791aad06  oath-toolkit-2.6.6.tar.gz
 
 General information on contributing:
   https://www.nongnu.org/oath-toolkit/contrib.html
