@@ -25,8 +25,8 @@ See each sub-directory for more information.
 The file INSTALL contains generic installation and configuration
 instructions, however briefly the typical process is:
 
-$ ./configure
-$ make check install
+  ./configure
+  make check install
 
 If the builtin self-tests fail, you should report it as a bug and not
 install the software.
