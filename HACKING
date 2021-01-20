@@ -2,10 +2,10 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 .Download, build and self-check version controlled sources:
 ----
-$ git clone https://gitlab.com/oath-toolkit/oath-toolkit.git
-$ cd oath-toolkit
-$ make
-$ make check
+git clone https://gitlab.com/oath-toolkit/oath-toolkit.git
+cd oath-toolkit
+make
+make check
 ----
 
 Links to resources that may be useful if you want to get involved the
@@ -27,22 +27,23 @@ project:
 
 * Clang code analysis: https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/
 
-Several tools are required to build the software, including:
+We rely on several tools to build the software, including:
 
-- Make <http://www.gnu.org/software/make/>
-- Automake <http://www.gnu.org/software/automake/>
-- Autoconf <http://www.gnu.org/software/autoconf/>
-- Libtool <http://www.gnu.org/software/libtool/>
-- Bison <http://www.gnu.org/software/bison/>
-- help2man <http://www.gnu.org/software/help2man/>
-- Gengetopt <http://www.gnu.org/software/gengetopt/>
-- Tar <http://www.gnu.org/software/tar/>
-- Gzip <http://www.gnu.org/software/gzip/>
-- GTK-DOC <http://www.gtk.org/gtk-doc/> (for API manual)
-- Git <http://git.or.cz/>
-- Valgrind <http://valgrind.org/> (optional)
+- Make <https://www.gnu.org/software/make/>
+- C compiler <https://www.gnu.org/software/gcc/>
+- Automake <https://www.gnu.org/software/automake/>
+- Autoconf <https://www.gnu.org/software/autoconf/>
+- Libtool <https://www.gnu.org/software/libtool/>
+- Bison <https://www.gnu.org/software/bison/>
+- help2man <https://www.gnu.org/software/help2man/>
+- Gengetopt <https://www.gnu.org/software/gengetopt/>
+- Tar <https://www.gnu.org/software/tar/>
+- Gzip <https://www.gnu.org/software/gzip/>
+- GTK-DOC <https://gitlab.gnome.org/GNOME/gtk-doc> (for API manuals)
+- Git <https://git-scm.com/>
+- Valgrind <https://valgrind.org/> (optional)
 - PAM library/headers (optional, required for PAM module)
-- XMLSec <http://www.aleksey.com/xmlsec/> (optional, for libpskc)
+- XMLSec <https://www.aleksey.com/xmlsec/> (optional, for libpskc)
 
 The software is typically distributed with your operating system, and
 the instructions for installing them differ.  Here are some hints:
@@ -72,12 +73,13 @@ To prepare releases (see rules in cfg.mk) you need some additional
 tools:
 
 - Asciidoc <http://www.methods.co.nz/asciidoc/>
+- XSLT <http://xmlsoft.org/xslt/>
 - Lcov (to produce coverage HTML pages)
 - Clang (to produce clang analysis)
 
 .gNewSense/Debian/Ubuntu dependencies:
 -----
-apt-get install asciidoc lcov clang
+apt-get install asciidoc xsltproc lcov clang
 -----
 
 Happy hacking!
