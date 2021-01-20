@@ -19,7 +19,7 @@
 	<div>&#187;<a href="docs.html">Documentation</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="oathtool.1.html">oathtool(1)</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="libpskc-api/pskc-tutorial-pskctool.html">pskctool(1)</a></div>
-	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="liboath-api/liboath-oath.html">Liboath&#160;API</a></div>
+	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="liboath-api/liboath-oath.h.html">Liboath&#160;API</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="libpskc-api/pskc-tutorial-quickstart.html">Libpskc Quickstart</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="libpskc-api/pskc-reference.html">Libpskc&#160;API</a></div>
 	<div>&#160;&#160;&#160;&#160;&#160;&#187;<a href="pam_oath.html">pam_oath</a></div>
