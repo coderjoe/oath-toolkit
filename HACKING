@@ -11,21 +11,15 @@ make check
 Links to resources that may be useful if you want to get involved the
 project:
 
-* Mailing list: http://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
-
-* Savannah OATH Toolkit Project: https://savannah.nongnu.org/projects/oath-toolkit/
-
-* GitLab OATH Toolkit Project: https://gitlab.com/oath-toolkit/oath-toolkit
-
-* Bug tracker: https://gitlab.com/oath-toolkit/oath-toolkit/issues
-
-* Old bug tracker: https://savannah.nongnu.org/support/?group=oath-toolkit
-
-* Code browser: https://gitlab.com/oath-toolkit/oath-toolkit/tree/master
-
-* Code coverage report: https://oath-toolkit.gitlab.io/oath-toolkit/coverage/
-
-* Clang code analysis: https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/
+- Mailing list: https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
+- Savannah OATH Toolkit Project: https://savannah.nongnu.org/projects/oath-toolkit/
+- GitLab OATH Toolkit Project: https://gitlab.com/oath-toolkit/oath-toolkit
+- GitLab Bug tracker: https://gitlab.com/oath-toolkit/oath-toolkit/issues
+- Savannah bug tracker: https://savannah.nongnu.org/support/?group=oath-toolkit
+- Code browser: https://gitlab.com/oath-toolkit/oath-toolkit/tree/master
+- Code coverage report: https://oath-toolkit.gitlab.io/oath-toolkit/coverage/
+- Clang code analysis: https://oath-toolkit.gitlab.io/oath-toolkit/clang-analyzer/
+- Latest web pages: https://oath-toolkit.gitlab.io/oath-toolkit/
 
 We rely on several tools to build the software, including:
 

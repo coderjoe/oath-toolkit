@@ -7,8 +7,8 @@ The components for the OATH Toolkit are documented separately.
 
 * The pskctool command line tool: link:libpskc-api/pskc-tutorial-pskctool.html[pskctool man page].
 
-* The liboath library: link:liboath-api/[Liboath API Reference Manual].
+* The liboath library: link:liboath/[OATH Library (liboath) Manual].
 
-* The libpskc library: link:libpskc-api/[PSKC Library Manual].
+* The libpskc library: link:libpskc/[PSKC Library (libpskc) Manual].
 
 * The PAM module: link:pam_oath.html[pam_oath README].

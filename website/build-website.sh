@@ -28,7 +28,9 @@
     echo '============'
     echo ''
     echo ".$LAST_DATE: OATH Toolkit $LAST_VERSION Released"
-    cat intro.txt
+    cat intro-1.txt
+    sed -n 2,20p ../README
+    cat intro-2.txt
 ) > index.txt
 
 mkdir html
@@ -51,6 +53,7 @@ for man in ../oathtool/oathtool.1 ../pskctool/pskctool.1; do
 done
 
 for lib in oath pskc; do
+    cp -r ../lib$lib/gtk-doc/html html/lib$lib
     mkdir -p html/lib$lib-api/
     cp ../lib$lib/gtk-doc/lib$lib.pdf ../lib$lib/gtk-doc/html/*.png ../lib$lib/gtk-doc/html/*.devhelp2 html/lib$lib-api/
     for src in `find ../lib$lib/gtk-doc/html/ -name "*.html" -print`; do
