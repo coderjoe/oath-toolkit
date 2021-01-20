@@ -31,7 +31,7 @@ Projects using OATH Toolkit:
   Toolkit].
 - The https://www.passwordstore.org/[pass] one-time-password extension
   https://github.com/tadfisher/pass-otp[pass-otp].
-- The Openconnect VPN Server[https://ocserv.gitlab.io/www/] use it for
+- https://ocserv.gitlab.io/www/[The Openconnect VPN Server] use it for
   https://ocserv.gitlab.io/www/recipes-ocserv-2fa.html[one-time
   passwords].
 
