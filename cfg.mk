@@ -116,15 +116,11 @@ website:
 
 website-copy:
 	mkdir -p $(htmldir)/liboath-api/ $(htmldir)/libpskc-api/
-	cp website/*.html website/*.css $(htmldir)/
-	cp website/liboath-api/*.html website/liboath-api/*.png \
-		$(htmldir)/liboath-api/
-	cp website/libpskc-api/*.html website/libpskc-api/*.png \
-		$(htmldir)/libpskc-api/
+	rsync -av website/html/ $(htmldir)/
 
 website-upload:
 	cd $(htmldir) && \
-		git add --all *.html *.css && \
+		git add --all *.html *.css *.devhelp2 *.pdf && \
 		git add --all liboath-api && \
 		git add --all libpskc-api && \
 		git commit -m "Auto-update." && \

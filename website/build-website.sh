@@ -31,11 +31,13 @@
     cat intro.txt
 ) > index.txt
 
+mkdir html
+
 for txt in index.txt NEWS.txt download.txt docs.txt pam_oath.txt contrib.txt; do
     html=`echo $txt | sed 's/\.txt$/.html/'`
     asciidoc --backend=xhtml11 --conf-file=config.cfg -a index-only -o tmp $txt
     tr -d '\015' < tmp > tmp2
-    xsltproc --html --output $html oath-toolkit.xsl tmp2
+    xsltproc --html --output html/$html oath-toolkit.xsl tmp2
 done
 
 for man in ../oathtool/oathtool.1 ../pskctool/pskctool.1; do
@@ -43,12 +45,12 @@ for man in ../oathtool/oathtool.1 ../pskctool/pskctool.1; do
     groff -man -T html $man \
 	| grep -v -e '<meta http-equiv' -e 'text-align: center' \
 	| sed 's/ align="center"//' > tmp
-    xsltproc --html --output $html oath-toolkit.xsl tmp
+    xsltproc --html --output html/$html oath-toolkit.xsl tmp
 done
 
 for lib in oath pskc; do
-    mkdir -p lib$lib-api/
-    cp ../lib$lib/gtk-doc/html/*.png lib$lib-api/
+    mkdir -p html/lib$lib-api/
+    cp ../lib$lib/gtk-doc/lib$lib.pdf ../lib$lib/gtk-doc/html/*.png ../lib$lib/gtk-doc/html/*.devhelp2 html/lib$lib-api/
     for src in `find ../lib$lib/gtk-doc/html/ -name "*.html" -print`; do
 	dst=`basename $src`
 	xsltproc --html --output tmp oath-toolkit.xsl $src
@@ -56,7 +58,7 @@ for lib in oath pskc; do
 	    -e 's#»<a href="#»<a href="../#g' \
 	    -e 's#"asciidoc.css"#"../asciidoc.css"#' \
 	    -e 's#"style.css"#"../style.css"#' \
-	    -e 's#"layout.css"#"../layout.css"#' < tmp > lib$lib-api/$dst
+	    -e 's#"layout.css"#"../layout.css"#' < tmp > html/lib$lib-api/$dst
     done
 done
 
