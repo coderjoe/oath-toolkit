@@ -80,49 +80,19 @@ tarball:
 	rm -f ChangeLog
 	$(MAKE) ChangeLog distcheck
 
-gtkdoc-copy:
-	mkdir -p $(htmldir)/reference/ $(htmldir)/libpskc/
-	cp -v liboath/gtk-doc/liboath.pdf \
-		liboath/gtk-doc/html/*.html \
-		liboath/gtk-doc/html/*.png \
-		liboath/gtk-doc/html/*.devhelp2 \
-		liboath/gtk-doc/html/*.css \
-		$(htmldir)/reference/
-	cp -v libpskc/gtk-doc/libpskc.pdf \
-		libpskc/gtk-doc/html/*.html \
-		libpskc/gtk-doc/html/*.png \
-		libpskc/gtk-doc/html/*.devhelp2 \
-		libpskc/gtk-doc/html/*.css \
-		$(htmldir)/libpskc/
-
-gtkdoc-upload:
-	cd $(htmldir) && \
-		git add --all reference && \
-		git commit -m "Auto-update GTK-DOC liboath." reference/
-	cd $(htmldir) && \
-		git add --all libpskc && \
-		git commit -m "Auto-update GTK-DOC libpskc." libpskc/
-
-man-copy:
-	groff -man -T html oathtool/oathtool.1  > $(htmldir)/man-oathtool.html
-
-man-upload:
-	cd $(htmldir) && \
-		git commit -m "Auto-update man-oathtool.html." man-oathtool.html
-
 .PHONY: website
 website:
 	cd website && ./build-website.sh
 
 website-copy:
-	mkdir -p $(htmldir)/liboath-api/ $(htmldir)/libpskc-api/
-	rsync -av website/html/ $(htmldir)/
+	rsync -av --exclude .git --exclude coverage --exclude clang-analyzer --delete website/html/ $(htmldir)/
+	ln -s liboath-oath.h.html $(htmldir)/liboath/liboath-oath.html
+	ln -s liboath-oath.h.html $(htmldir)/liboath-api/liboath-oath.html
+	ln -s liboath $(htmldir)/reference
 
 website-upload:
 	cd $(htmldir) && \
-		git add --all *.html *.css *.devhelp2 *.pdf && \
-		git add --all liboath-api && \
-		git add --all libpskc-api && \
+		git add . && \
 		git commit -m "Auto-update." && \
 		git push
 
