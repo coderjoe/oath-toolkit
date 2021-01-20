@@ -639,15 +639,17 @@ jas@latte:~$
 
     </chapter>
   </part>
-  
+
   <part id="pskc-reference">
     <title>API Reference</title>
 
-    
-    <para>This part contains the complete API reference for the PSKC
-    Library.  There is a separate section for each include file, which
-    contains related functions grouped together, but applications
-    should include the top-level &lt;pskc/pskc.h&gt; file.</para>
+    <para>
+      This part contains the complete API reference for the PSKC
+      Library.  There is a separate section for each include file,
+      which contains related functions grouped together, but
+      applications should include the top-level &lt;pskc/pskc.h&gt;
+      file.
+    </para>
 
     <xi:include href="xml/pskc.xml"/>
     <xi:include href="xml/version.xml"/>
