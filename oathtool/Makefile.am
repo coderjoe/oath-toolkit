@@ -34,7 +34,7 @@ oathtool_cmd.h oathtool_cmd.c: oathtool.ggo Makefile.am
 		--no-handle-version --no-handle-help \
 		--input $< --file-name oathtool_cmd && \
 	perl -pi -e 's/HAVE_LONG_LONG/HAVE_UNSIGNED_LONG_LONG/g' oathtool_cmd.h oathtool_cmd.c && \
-	perl -pi -e 's/long long int/unsigned long long int/g' oathtool_cmd.h oathtool_cmd.c && \
+	perl -pi -e 's/  long long int/  unsigned long long int/g' oathtool_cmd.h oathtool_cmd.c && \
 	perl -pi -e 's/int\) strtoll /int\) strtoull /' oathtool_cmd.c
 
 dist_man_MANS = oathtool.1
