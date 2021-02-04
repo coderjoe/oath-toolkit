@@ -48,6 +48,7 @@ exclude_file_name_regexp--sc_require_config_h = ^libpskc/examples/
 exclude_file_name_regexp--sc_require_config_h_first = $(exclude_file_name_regexp--sc_require_config_h)
 exclude_file_name_regexp--sc_trailing_blank = ^libpskc/examples/pskctool-h.txt
 exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
+exclude_file_name_regexp--sc_space_tab = ^m4/pkg.m4$$
 
 update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=2
 
