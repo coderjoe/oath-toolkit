@@ -46,7 +46,7 @@ exclude_file_name_regexp--sc_texinfo_acronym = ^oathtool/doc/parse-datetime.texi
 exclude_file_name_regexp--sc_error_message_uppercase = ^oathtool/oathtool.c|pskctool/pskctool.c
 exclude_file_name_regexp--sc_require_config_h = ^libpskc/examples/
 exclude_file_name_regexp--sc_require_config_h_first = $(exclude_file_name_regexp--sc_require_config_h)
-exclude_file_name_regexp--sc_trailing_blank = ^libpskc/examples/pskctool-h.txt
+exclude_file_name_regexp--sc_trailing_blank = ^m4/pkg.m4|libpskc/examples/pskctool-h.txt$$
 exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
 exclude_file_name_regexp--sc_space_tab = ^m4/pkg.m4$$
 
