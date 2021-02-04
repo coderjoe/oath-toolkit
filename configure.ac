@@ -20,8 +20,7 @@ AC_INIT([oath-toolkit],
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.11 -Wall -Werror])
-AM_SILENT_RULES([yes])
+AM_INIT_AUTOMAKE([1.13 -Wall])
 
 AC_CHECK_HEADERS_ONCE([security/pam_appl.h])
 AC_ARG_ENABLE([pam],

@@ -21,16 +21,14 @@ AC_INIT([pskctool],
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([gl/m4])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-AM_SILENT_RULES([yes])
+AM_INIT_AUTOMAKE([1.13 -Wall foreign])
 
 AM_MISSING_PROG(HELP2MAN, help2man, $missing_dir)
 
-AC_LIBTOOL_WIN32_DLL
 AC_PROG_CC
 gl_EARLY
-m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
-AC_PROG_LIBTOOL
+AM_PROG_AR
+LT_INIT([win32-dll])
 gl_INIT
 
 AC_CONFIG_FILES([
