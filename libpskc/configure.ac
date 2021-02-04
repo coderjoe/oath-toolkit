@@ -51,7 +51,7 @@ AC_ARG_WITH(xmlsec-crypto-engine,
   [xmlsecengine="-${withval}"])
 AC_MSG_NOTICE([xmlsec crypto engine: $xmlsecengine])
 
-AM_PATH_XML2([], [], [AC_MSG_ERROR(["cannot find libxml2"])])
+PKG_CHECK_MODULES(XML2, libxml-2.0,, [AC_MSG_ERROR([Cannot find libxml2])])
 PKG_CHECK_MODULES(XMLSEC, xmlsec1$xmlsecengine, [xmlsec=yes], [xmlsec=no])
 AC_PATH_PROG(XMLCATALOG, xmlcatalog)
 if test -z "$ac_cv_path_XMLCATALOG"; then
