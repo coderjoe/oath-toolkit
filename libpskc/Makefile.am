@@ -24,10 +24,10 @@ ACLOCAL_AMFLAGS = -I m4 -I gl/m4
 AM_CPPFLAGS = -DPSKC_BUILDING
 AM_CPPFLAGS += -I$(srcdir)/gl -I$(builddir)/gl
 AM_CPPFLAGS += -I$(srcdir)/include -I$(builddir)/include
-AM_CPPFLAGS += $(XML_CPPFLAGS) $(XMLSEC_CFLAGS)
 AM_CPPFLAGS += -DPSKC_SCHEMA_CATALOG=\"$(pskcschemadir)/catalog-pskc.xml\"
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS)
+AM_CFLAGS += $(XML2_CFLAGS) $(XMLSEC_CFLAGS)
 AM_CFLAGS += $(CFLAG_VISIBILITY)
 
 lib_LTLIBRARIES = libpskc.la
@@ -36,7 +36,7 @@ libpskc_la_SOURCES = internal.h libpskc.map
 libpskc_la_SOURCES += global.c errors.c enums.c
 libpskc_la_SOURCES += container.c parser.c validate.c build.c sign.c output.c
 libpskc_la_LIBADD = gl/libgnu.la
-libpskc_la_LDFLAGS = $(XML_LIBS) $(XMLSEC_LIBS) \
+libpskc_la_LDFLAGS = $(XML2_LIBS) $(XMLSEC_LIBS) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) -no-undefined
 
 if HAVE_LD_VERSION_SCRIPT

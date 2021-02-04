@@ -139,9 +139,9 @@ AC_OUTPUT
 
 AC_MSG_NOTICE([summary of build options:
 
-  Libxml2 LIBS:         $XML_LIBS
-  Libxml2 CPPFLAGS:     $XML_CPPFLAGS
-  XMLSEC enabled:       $xmlsec crypto engine: $xmlsecengine
-            LIBS:       $XMLSEC_LIBS
-	  CFLAGS:       $XMLSEC_CFLAGS
+  Libxml2   LIBS:  $XML2_LIBS
+  Libxml2 CFLAGS:  $XML2_CFLAGS
+  XMLSEC enabled:  $xmlsec crypto engine: $xmlsecengine
+  Xmlsec    LIBS:  $XMLSEC_LIBS
+  Xmlsec  CFLAGS:  $XMLSEC_CFLAGS
 ])
