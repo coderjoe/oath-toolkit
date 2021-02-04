@@ -36,7 +36,7 @@ AC_CHECK_LIB(pam, pam_get_item)
 
 AC_SUBST(PAMDIR, "\$(exec_prefix)/lib/security")
 AC_ARG_WITH(pam-dir,
-  AC_HELP_STRING([--with-pam-dir=DIR],
+  AS_HELP_STRING([--with-pam-dir=DIR],
                  [Where to install PAM module [[PREFIX/lib/security]]]),
   [case "${withval}" in
      /*) PAMDIR="${withval}";;
@@ -46,7 +46,7 @@ AC_ARG_WITH(pam-dir,
 AC_MSG_NOTICE([PAM installation path $PAMDIR])
 
 AC_ARG_ENABLE(root-tests,
-  AC_HELP_STRING([--enable-root-tests],
+  AS_HELP_STRING([--enable-root-tests],
                  [enable some self-tests that need root permissions]),
   root_tests=yes, root_tests=$enableval)
 AM_CONDITIONAL([ROOT_TESTS], [test x$root_tests = xyes])

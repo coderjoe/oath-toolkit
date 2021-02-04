@@ -46,7 +46,7 @@ gl_INIT
 GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
 
 AC_ARG_WITH(xmlsec-crypto-engine,
-  AC_HELP_STRING([--with-xmlsec-crypto-engine=ENGINE],
+  AS_HELP_STRING([--with-xmlsec-crypto-engine=ENGINE],
                  [Use specified non-dynamic xmlsec crypto engine]),
   [xmlsecengine="-${withval}"])
 AC_MSG_NOTICE([xmlsec crypto engine: $xmlsecengine])
@@ -65,7 +65,7 @@ AC_MSG_RESULT($xmlsec)
 
 AC_SUBST(pskcschemadir, "\$(datarootdir)/xml/pskc")
 AC_ARG_WITH(pskc-schema-dir,
-  AC_HELP_STRING([--with-pskc-schema-dir=DIR],
+  AS_HELP_STRING([--with-pskc-schema-dir=DIR],
     [Put PSKC schemas in DIR [[PREFIX/share/xml/pskc]]]),
   [case "${withval}" in
     /*)        pskcschemadir="${withval}";;
