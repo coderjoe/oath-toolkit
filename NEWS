@@ -3,6 +3,10 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.7 (unreleased)
 
+** build: Drop use of libxml's AM_PATH_XML2 in favor of pkg-config.
+
+** build: Modernize autotools usage.
+
 * Version 2.6.6 (released 2021-01-20)
 
 ** oathtool: Handle HOTP --counter values larger than 0x7FFFFFFFFFFFFFFF.
