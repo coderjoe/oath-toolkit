@@ -40,8 +40,9 @@ Related applications:
 - http://code.google.com/p/google-authenticator/[Google Authenticator]
   is/was a free implementation for several mobile platforms.
 - The https://developers.yubico.com/yubioath-desktop/[Yubico
-  Authenticator Desktop] is a free client-side implementation storing
-  secrets on external hardware.
+  Authenticator Desktop] and
+  https://developers.yubico.com/yubikey-manager/[YubiKey Manager] are
+  free client-side applications that stores secrets on a YubiKey.
 - https://arthurdejong.org/python-pskc/[Python PSKC library]
 
 Please let me know if any of these links need updating.
