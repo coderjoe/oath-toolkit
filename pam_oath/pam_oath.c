@@ -135,20 +135,32 @@ parse_cfg (int flags, int argc, const char **argv, struct cfg *cfg)
 }
 
 static int
-parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *user, char **usersfile)
+parse_usersfile_str(pam_handle_t * pamh, const struct cfg *cfg, const char *user, char **usersfile)
 {
   int retval = PAM_SUCCESS;
-  size_t name_len = strlen(pw->pw_name);
-  size_t home_len = strlen(pw->pw_dir);
+  size_t name_len = 0;
+  size_t home_len = 0;
   size_t len = strlen(cfg->usersfile) + 1;
   char *str = NULL;
   char *u = NULL;
+  struct passwd *pw = NULL;
 
   if(*usersfile) {
     return PAM_BUF_ERR;
   }
 
-  /* Count occurances of the placeholder fields */
+  pw = pam_modutil_getpwnam(pamh, user);
+  if(!pw)
+    {
+      return PAM_USER_UNKNOWN;
+    }
+
+  /*
+    Find occurances of the placeholder fields to determine
+    userfile buffer length
+  */
+  name_len = strlen(pw->pw_name);
+  home_len = strlen(pw->pw_dir);
   str = cfg->usersfile;
   while((str = strstr(str, "${USER}")))
     {
@@ -262,20 +274,12 @@ pam_sm_authenticate (pam_handle_t * pamh,
     }
   DBG (("get user returned: %s", user));
 
-  {
-    struct passwd *pw = pam_modutil_getpwnam(pamh, user);
-    if(!pw)
-      {
-	retval=PAM_USER_UNKNOWN;
-	goto done;
-      }
-
-    retval = parse_usersfile_str(&cfg, pw, user, &usersfile);
-    if(retval != PAM_SUCCESS)
-      {
-	goto done;
-      }
-  }
+  retval = parse_usersfile_str(pamh, &cfg, user, &usersfile);
+  if(retval != PAM_SUCCESS)
+    {
+      DBG (("parse usersfile string returned error: %s", pam_strerror (pamh, retval)));
+      goto done;
+    }
   DBG (("usersfile is %s", usersfile));
 
   // quick check to skip unconfigured users before prompting for password
