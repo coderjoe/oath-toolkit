@@ -25,8 +25,6 @@
 
 #include <stdio.h>
 
-#include <unistd.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 
 #define CREDS "tmp.oath"
@@ -38,7 +36,6 @@ main (void)
   time_t last_otp;
   struct stat ufstat1;
   struct stat ufstat2;
-  const uid_t uid = getuid();
 
   if (!oath_check_version (OATH_VERSION))
     {
@@ -54,7 +51,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile ("no-such-file", uid, "joe", "755224",
+  rc = oath_authenticate_usersfile ("no-such-file", "joe", "755224",
 				    0, "1234", &last_otp);
   if (rc != OATH_NO_SUCH_FILE)
     {
@@ -66,7 +63,7 @@ main (void)
   /* Record the current usersfile inode */
   stat (CREDS, &ufstat1);
 
-  rc = oath_authenticate_usersfile (CREDS, uid, "joe", "755224",
+  rc = oath_authenticate_usersfile (CREDS, "joe", "755224",
 				    0, "1234", &last_otp);
   if (rc != OATH_BAD_PASSWORD)
     {
@@ -84,7 +81,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid, "bob", "755224",
+  rc = oath_authenticate_usersfile (CREDS, "bob", "755224",
 				    0, "1234", &last_otp);
   if (rc != OATH_BAD_PASSWORD)
     {
@@ -93,7 +90,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid, "silver", "670691",
+  rc = oath_authenticate_usersfile (CREDS, "silver", "670691",
 				    0, "4711", &last_otp);
   if (rc != OATH_OK)
     {
@@ -110,7 +107,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid, "silver", "599872",
+  rc = oath_authenticate_usersfile (CREDS, "silver", "599872",
 				    1, "4711", &last_otp);
   if (rc != OATH_OK)
     {
@@ -119,7 +116,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid, "silver", "072768",
+  rc = oath_authenticate_usersfile (CREDS, "silver", "072768",
 				    1, "4711", &last_otp);
   if (rc != OATH_OK)
     {
@@ -129,7 +126,7 @@ main (void)
     }
 
   stat (CREDS, &ufstat1);
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "foo", "755224", 0, "8989", &last_otp);
   if (rc != OATH_REPLAYED_OTP)
     {
@@ -152,7 +149,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "rms", "755224", 0, "4321", &last_otp);
   if (rc != OATH_BAD_PASSWORD)
     {
@@ -161,7 +158,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "rms", "436521", 10, "6767", &last_otp);
   if (rc != OATH_OK)
     {
@@ -187,7 +184,7 @@ main (void)
    */
 
   /* Test completely invalid OTP */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "386397", 0, "4711", &last_otp);
   if (rc != OATH_BAD_PASSWORD)
     {
@@ -197,7 +194,7 @@ main (void)
     }
 
   /* Test the next OTP but search window = 0. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "068866", 0, NULL, &last_otp);
   if (rc != OATH_INVALID_OTP)
     {
@@ -207,7 +204,7 @@ main (void)
     }
 
   /* Test the next OTP with search window = 1. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "068866", 1, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -217,7 +214,7 @@ main (void)
     }
 
   /* Test to replay last OTP. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "068866", 1, NULL, &last_otp);
   if (rc != OATH_REPLAYED_OTP)
     {
@@ -227,7 +224,7 @@ main (void)
     }
 
   /* Test to replay previous OTP. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "963013", 1, NULL, &last_otp);
   if (rc != OATH_REPLAYED_OTP)
     {
@@ -237,7 +234,7 @@ main (void)
     }
 
   /* Try an OTP in the future but outside search window. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "892423", 1, NULL, &last_otp);
   if (rc != OATH_INVALID_OTP)
     {
@@ -247,7 +244,7 @@ main (void)
     }
 
   /* Try OTP in the future with good search window. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "892423", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -257,7 +254,7 @@ main (void)
     }
 
   /* Now try a rather old OTP within search window. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "eve", "630208", 10, NULL, &last_otp);
   if (rc != OATH_REPLAYED_OTP)
     {
@@ -267,7 +264,7 @@ main (void)
     }
 
   /* Try OTP that matches user's second line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "twouser",
+  rc = oath_authenticate_usersfile (CREDS, "twouser",
 				    "874680", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -277,7 +274,7 @@ main (void)
     }
 
   /* Try OTP that matches user's third and final line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "threeuser",
+  rc = oath_authenticate_usersfile (CREDS, "threeuser",
 				    "255509", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -287,7 +284,7 @@ main (void)
     }
 
   /* Try OTP that matches user's third and next-to-last line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fouruser",
+  rc = oath_authenticate_usersfile (CREDS, "fouruser",
 				    "663447", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -297,7 +294,7 @@ main (void)
     }
 
   /* Try incorrect OTP for user with five lines. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "812658", 10, NULL, &last_otp);
   if (rc != OATH_INVALID_OTP)
     {
@@ -307,7 +304,7 @@ main (void)
     }
 
   /* Try OTP that matches user's second line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "123001", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -317,7 +314,7 @@ main (void)
     }
 
   /* Try OTP that matches user's fourth line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "893841", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -327,7 +324,7 @@ main (void)
     }
 
   /* Try another OTP that matches user's second line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "746888", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -337,7 +334,7 @@ main (void)
     }
 
   /* Try another OTP that matches user's fifth line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "730790", 10, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -347,7 +344,7 @@ main (void)
     }
 
   /* Try too old OTP for user's second line. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "fiveuser",
+  rc = oath_authenticate_usersfile (CREDS, "fiveuser",
 				    "692901", 10, NULL, &last_otp);
   if (rc != OATH_INVALID_OTP)
     {
@@ -357,7 +354,7 @@ main (void)
     }
 
   /* Test password field of + */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "plus", "328482", 1, "4711", &last_otp);
   if (rc != OATH_OK)
     {
@@ -366,7 +363,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "plus", "812658", 1, "4712", &last_otp);
   if (rc != OATH_OK)
     {
@@ -376,7 +373,7 @@ main (void)
     }
 
   /* Test different tokens with different passwords for one user */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "898463", 5, NULL, &last_otp);
   if (rc != OATH_OK)
     {
@@ -385,7 +382,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "989803", 5, "test",
 				    &last_otp);
   if (rc != OATH_OK)
@@ -395,7 +392,7 @@ main (void)
       return 1;
     }
 
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "427517", 5, "darn",
 				    &last_otp);
   if (rc != OATH_OK)
@@ -406,7 +403,7 @@ main (void)
     }
 
   /* Valid OTP for first token but incorrect password. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "917625", 5, "nope",
 				    &last_otp);
   if (rc != OATH_BAD_PASSWORD)
@@ -417,7 +414,7 @@ main (void)
     }
 
   /* Valid OTP for second token but incorrect password. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "459145", 5, "nope",
 				    &last_otp);
   if (rc != OATH_BAD_PASSWORD)
@@ -428,7 +425,7 @@ main (void)
     }
 
   /* Valid OTP for first token but with password for second user. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "917625", 5, "test",
 				    &last_otp);
   if (rc != OATH_BAD_PASSWORD)
@@ -439,7 +436,7 @@ main (void)
     }
 
   /* Valid OTP for second token but with password for first user. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "459145", 5, "", &last_otp);
   if (rc != OATH_BAD_PASSWORD)
     {
@@ -449,7 +446,7 @@ main (void)
     }
 
   /* Valid OTP for third token but with password for second user. */
-  rc = oath_authenticate_usersfile (CREDS, uid,
+  rc = oath_authenticate_usersfile (CREDS,
 				    "password", "633070", 9, "test",
 				    &last_otp);
   if (rc != OATH_BAD_PASSWORD)
@@ -460,7 +457,7 @@ main (void)
     }
 
   /* Regression check of the commented-out duplicate user bug. */
-  rc = oath_authenticate_usersfile (CREDS, uid, "nobody", "158134", 5, "",
+  rc = oath_authenticate_usersfile (CREDS, "nobody", "158134", 5, "",
 				    &last_otp);
   if (rc != OATH_OK)
     {
