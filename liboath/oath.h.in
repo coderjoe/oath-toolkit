@@ -112,6 +112,7 @@ extern "C"
  * @OATH_FILE_SYNC_ERROR: System error when syncing file to disk
  * @OATH_FILE_CLOSE_ERROR: System error when closing file
  * @OATH_FILE_CHOWN_ERROR: System error when changing file ownership
+ * @OATH_FILE_STAT_ERROR: System error when getting file status
  * @OATH_LAST_ERROR: Meta-error indicating the last error code, for use
  *   when iterating over all error codes or similar.
  *
@@ -151,9 +152,10 @@ typedef enum
   OATH_FILE_SYNC_ERROR = -24,
   OATH_FILE_CLOSE_ERROR = -25,
   OATH_FILE_CHOWN_ERROR = -26,
+  OATH_FILE_STAT_ERROR = -27,
   /* When adding anything here, update OATH_LAST_ERROR, errors.c
      and tests/tst_errors.c. */
-  OATH_LAST_ERROR = -26
+  OATH_LAST_ERROR = -27
 } oath_rc;
 
 /* Global */
@@ -410,7 +412,6 @@ oath_totp_validate4_callback (const char *secret,
 
 extern OATHAPI int
 oath_authenticate_usersfile (const char *usersfile,
-			     uid_t usersfile_uid,
 			     const char *username,
 			     const char *otp,
 			     size_t window,

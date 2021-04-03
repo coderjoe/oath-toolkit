@@ -298,7 +298,6 @@ update_usersfile2 (const char *username,
 
 static int
 update_usersfile (const char *usersfile,
-		  uid_t usersfile_uid,
 		  const char *username,
 		  const char *otp,
 		  FILE * infh,
@@ -382,6 +381,17 @@ update_usersfile (const char *usersfile,
   rc = update_usersfile2 (username, otp, infh, outfh, lineptr, n,
 			  timestamp, new_moving_factor, skipped_users);
 
+  /* Preserve ownership of the new usersfile file */
+  {
+    struct stat insb;
+
+    if(rc == OATH_OK && fstat(fileno(infh), &insb) == -1)
+      rc = OATH_FILE_STAT_ERROR;
+
+    if(rc == OATH_OK && fchown(fileno(outfh), insb.st_uid, insb.st_gid) != 0)
+      rc = OATH_FILE_CHOWN_ERROR;
+  }
+
   /* On success, flush the buffers. */
   if (rc == OATH_OK && fflush (outfh) != 0)
     rc = OATH_FILE_FLUSH_ERROR;
@@ -393,10 +403,6 @@ update_usersfile (const char *usersfile,
   /* Close the file regardless of success. */
   if (fclose (outfh) != 0)
     rc = OATH_FILE_CLOSE_ERROR;
-
-  /* Change ownership of the new usersfile file */
-  if(rc == OATH_OK && chown(newfilename, usersfile_uid, -1) != 0)
-    rc = OATH_FILE_CHOWN_ERROR;
 
   /* On success, overwrite the usersfile with the new copy. */
   if (rc == OATH_OK && rename (newfilename, usersfile) != 0)
@@ -421,7 +427,6 @@ update_usersfile (const char *usersfile,
 /**
  * oath_authenticate_usersfile:
  * @usersfile: string with user credential filename, in UsersFile format
- * @usersfile_uid: UID to use for updated user credential file ownership
  * @username: string with name of user
  * @otp: string with one-time password to authenticate
  * @window: how many past/future OTPs to search
@@ -447,7 +452,6 @@ update_usersfile (const char *usersfile,
  **/
 int
 oath_authenticate_usersfile (const char *usersfile,
-			     uid_t usersfile_uid,
 			     const char *username,
 			     const char *otp,
 			     size_t window,
@@ -488,7 +492,7 @@ oath_authenticate_usersfile (const char *usersfile,
 
       old_umask = umask (~(S_IRUSR | S_IWUSR));
 
-      rc = update_usersfile (usersfile, usersfile_uid, username, otp, infh,
+      rc = update_usersfile (usersfile, username, otp, infh,
 			     &line, &n, timestamp, new_moving_factor,
 			     skipped_users);
 

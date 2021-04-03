@@ -21,7 +21,6 @@
 #include <config.h>
 
 #include "oath.h"
-#include "gl/pathmax.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -136,63 +135,113 @@ parse_cfg (int flags, int argc, const char **argv, struct cfg *cfg)
 }
 
 static int
-parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *user, char *usersfile,
-		    size_t max_len, uid_t *usersfile_uid)
+parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *user, char **usersfile)
 {
+  int retval = PAM_SUCCESS;
+  size_t name_len = strlen(pw->pw_name);
+  size_t home_len = strlen(pw->pw_dir);
+  size_t len = strlen(cfg->usersfile) + 1;
+  char *str = NULL;
+  char *u = NULL;
 
-  const char *const str_end = cfg->usersfile + strlen(cfg->usersfile);
-  const char *str = cfg->usersfile;
-  size_t end = 0;
+  if(*usersfile) {
+    return PAM_BUF_ERR;
+  }
 
-  do {
-    const char *copy_str = NULL;
-    size_t copy_len = 0;
+  /* Count occurances of the placeholder fields */
+  str = cfg->usersfile;
+  while((str = strstr(str, "${USER}")))
+    {
+      len += name_len;
+      len -= 7;
+      str += 7;
+    }
+  str = cfg->usersfile;
+  while((str = strstr(str, "${HOME}")))
+    {
+      len += home_len;
+      len -= 7;
+      str += 7;
+    }
 
-    if( strncmp(str, "${USER}", 7) == 0 )
-      {
-	copy_str = user;
-	copy_len = strlen(copy_str);
-	*usersfile_uid = pw->pw_uid;
-	str += 7;
-      }
-    else if( strncmp(str, "${HOME}", 7) == 0 )
-      {
-	copy_str = pw->pw_dir;
-	copy_len = strlen(copy_str);
-	*usersfile_uid = pw->pw_uid;
-	str += 7;
-      }
-    else
-      {
-	const char *search_str = str;
-	if( search_str[0] == '$' )
-	  {
-	    ++search_str;
-	  }
-	const char *spec = strchr(search_str, '$');
-	if(!spec)
-	  {
-	    spec = str_end;
-	  }
-	copy_str = str;
-	copy_len = spec - str;
-	str = spec;
-      }
+  *usersfile = malloc(len);
+  if( !(*usersfile) )
+    {
+      return PAM_BUF_ERR;
+    }
+  memset(*usersfile, 0, len);
 
-    if( max_len - end < copy_len + 1 )
-      {
-	return OATH_TOO_SMALL_BUFFER;
-      }
-    if(copy_len > 0)
-      {
-	memcpy(usersfile + end, copy_str, copy_len);
-      }
-    end += copy_len;
-    usersfile[end] = '\0';
+  str = cfg->usersfile;
+  u   = *usersfile;
+  while(*str)
+    {
+      char *c = strchr(str, '$');
+      if(c)
+        {
+	  /* Copy all preceding characters */
+	  const size_t str_len = c - str;
+	  if(len <= str_len)
+	    {
+	      retval = PAM_ABORT;
+	      goto done;
+	    }
+	  memcpy(u, str, str_len);
+	  u   += str_len;
+	  len -= str_len;
+	  str = c;
 
-  } while(str[0]);
+	  const char *rpl_str = NULL;
+	  size_t rpl_len = 0;
 
-  return OATH_OK;
+	  if(strncmp(str, "${USER}", 7) == 0)
+	    {
+	      rpl_str = pw->pw_name;
+	      rpl_len = name_len;
+	      str += 7;
+	    }
+	  else if(strncmp(str, "${HOME}", 7) == 0)
+	    {
+	      rpl_str = pw->pw_dir;
+	      rpl_len = home_len;
+	      str += 7;
+	    }
+	  else
+	    {
+	      rpl_str = "$";
+	      rpl_len = 1;
+	      str += 1;
+	    }
+
+	  if(len <= rpl_len)
+	    {
+	      retval = PAM_ABORT;
+	      goto done;
+	    }
+	  memcpy(u, rpl_str, rpl_len);
+	  u   += rpl_len;
+	  len -= rpl_len;
+	}
+      else
+        {
+	  size_t str_len = strlen(str);
+	  if(len <= str_len)
+	    {
+	      retval = PAM_ABORT;
+	      goto done;
+	    }
+	  memcpy(u, str, str_len);
+	  u   += str_len;
+	  len -= str_len;
+	  str += str_len;
+	}
+    }
+done:
+  if(retval != PAM_SUCCESS)
+    {
+      free(*usersfile);
+      *usersfile = NULL;
+    }
+  return retval;
 }
 
 PAM_EXTERN int
@@ -202,6 +251,7 @@ pam_sm_authenticate (pam_handle_t * pamh,
   int retval, rc;
   const char *user = NULL;
   const char *password = NULL;
+  char *usersfile = NULL;
   char otp[MAX_OTP_LEN + 1];
   int password_len = 0;
   struct pam_conv *conv;
@@ -211,8 +261,6 @@ pam_sm_authenticate (pam_handle_t * pamh,
   struct cfg cfg;
   char *query_prompt = NULL;
   char *onlypasswd = strdup ("");	/* empty passwords never match */
-  char *usersfile = NULL;
-  uid_t usersfile_uid = 0;
 
   /* this has to be first in this function to avoid that cfg contain
      uninitialized variables. */
@@ -240,19 +288,9 @@ pam_sm_authenticate (pam_handle_t * pamh,
 	goto done;
       }
 
-    usersfile_uid = getuid();
-    usersfile = malloc(PATH_MAX);
-    if(!usersfile)
+    retval = parse_usersfile_str(&cfg, pw, user, &usersfile);
+    if(retval != PAM_SUCCESS)
       {
-	retval = PAM_BUF_ERR;
-	goto done;
-      }
-    usersfile[0] = '\0';
-
-    rc = parse_usersfile_str(&cfg, pw, user, usersfile, PATH_MAX, &usersfile_uid);
-    if( rc == OATH_TOO_SMALL_BUFFER )
-      {
-	retval = PAM_BUF_ERR;
 	goto done;
       }
   }
@@ -263,7 +301,6 @@ pam_sm_authenticate (pam_handle_t * pamh,
     time_t last_otp;
     otp[0] = '\0';
     rc = oath_authenticate_usersfile (usersfile,
-				      usersfile_uid,
                                       user,
                                       otp, cfg.window, onlypasswd, &last_otp);
 
@@ -420,7 +457,6 @@ pam_sm_authenticate (pam_handle_t * pamh,
     time_t last_otp;
 
     rc = oath_authenticate_usersfile (usersfile,
-				      usersfile_uid,
 				      user,
 				      otp, cfg.window, onlypasswd, &last_otp);
     DBG (("authenticate rc %d (%s: %s) last otp %s", rc,
