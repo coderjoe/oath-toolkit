@@ -180,15 +180,9 @@ parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *
         {
 	  /* Copy all preceding characters */
 	  const size_t str_len = c - str;
-	  if(len <= str_len)
-	    {
-	      retval = PAM_ABORT;
-	      goto done;
-	    }
 	  memcpy(u, str, str_len);
 	  u   += str_len;
-	  len -= str_len;
-	  str = c;
+	  str += str_len;
 
 	  const char *rpl_str = NULL;
 	  size_t rpl_len = 0;
@@ -212,26 +206,14 @@ parse_usersfile_str(const struct cfg *cfg, const struct passwd *pw, const char *
 	      str += 1;
 	    }
 
-	  if(len <= rpl_len)
-	    {
-	      retval = PAM_ABORT;
-	      goto done;
-	    }
 	  memcpy(u, rpl_str, rpl_len);
 	  u   += rpl_len;
-	  len -= rpl_len;
 	}
       else
         {
 	  size_t str_len = strlen(str);
-	  if(len <= str_len)
-	    {
-	      retval = PAM_ABORT;
-	      goto done;
-	    }
 	  memcpy(u, str, str_len);
 	  u   += str_len;
-	  len -= str_len;
 	  str += str_len;
 	}
     }
