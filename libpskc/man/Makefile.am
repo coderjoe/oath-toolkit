@@ -27,8 +27,9 @@ GDOC_SRC += $(top_srcdir)/container.c $(top_srcdir)/parser.c	\
 	$(top_srcdir)/sign.c $(top_srcdir)/output.c
 
 GDOC_MAN_EXTRA_ARGS = -module $(PACKAGE) -sourceversion $(VERSION) \
-        -bugsto $(PACKAGE_BUGREPORT) -pkg-name "$(PACKAGE_NAME)" \
-        -includefuncprefix \
+        -bugsto $(PACKAGE_BUGREPORT) \
+	-pkg-name "$(PACKAGE_NAME)" -pkg-url "$(PACKAGE_URL)" \
+	-includefuncprefix \
         -copyright "2012-2020 Simon Josefsson" \
         -verbatimcopying
 

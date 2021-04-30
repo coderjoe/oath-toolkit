@@ -26,8 +26,9 @@ GDOC_SRC = $(top_srcdir)/global.c $(top_srcdir)/coding.c	\
 	$(top_srcdir)/totp.c $(top_srcdir)/errors.c
 
 GDOC_MAN_EXTRA_ARGS = -module $(PACKAGE) -sourceversion $(VERSION) \
-        -bugsto $(PACKAGE_BUGREPORT) -pkg-name "$(PACKAGE_NAME)" -pkg-url "$(PACKAGE_URL)" \
-        -includefuncprefix \
+        -bugsto $(PACKAGE_BUGREPORT) \
+	-pkg-name "$(PACKAGE_NAME)" -pkg-url "$(PACKAGE_URL)" \
+	-includefuncprefix \
         -copyright "2009-2020 Simon Josefsson" \
         -verbatimcopying
 
