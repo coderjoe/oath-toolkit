@@ -192,7 +192,7 @@ $blankline_text = "";
 
 
 sub usage {
-    print "Usage: $0 [ -v ] [ -docbook | -html | -text | -man | -tex | -texinfo	 -listfunc ]\n";
+    print "Usage: $0 [ -v ] [ -docbook | -html | -text | -man | -tex | -texinfo | -listfunc ]\n";
     print "	    [ -sourceversion verno ] [ -include file | -includefuncprefix ]\n";
     print "	    [ -bugsto address ] [ -seeinfo infonode ] [ -copyright notice]\n";
     print "	    [ -verbatimcopying ] [ -pkg-name packagename ] [ -pkg-url packageurl ]\n";
