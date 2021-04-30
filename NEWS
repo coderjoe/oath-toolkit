@@ -3,6 +3,10 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.7 (unreleased)
 
+** doc: Fix project URL in man pages.
+Thanks to Jason Graham <jgraham@compukix.net> for the patch.  Fixes
+<https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/19>.
+
 ** build: Drop use of libxml's AM_PATH_XML2 in favor of pkg-config.
 
 ** build: Modernize autotools usage.
