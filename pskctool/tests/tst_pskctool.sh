@@ -19,7 +19,7 @@
 set -e
 
 srcdir=${srcdir:-.}
-PSKCTOOL=../pskctool
+PSKCTOOL=${PSKCTOOL:-../pskctool}
 
 ME_=`expr "./$0" : '.*/\(.*\)$'`
 

@@ -19,7 +19,7 @@
 set -e
 
 srcdir=${srcdir:-.}
-PSKCTOOL=../pskctool
+PSKCTOOL=${PSKCTOOL:-../pskctool}
 
 if $PSKCTOOL -h | head -1 | grep -q ^pskctool; then
     # gengetopt < 2.23

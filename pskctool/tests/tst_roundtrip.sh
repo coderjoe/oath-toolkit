@@ -18,7 +18,7 @@
 
 set -e
 
-PSKCTOOL=../pskctool
+PSKCTOOL=${PSKCTOOL:-../pskctool}
 
 srcdir="${srcdir:-.}"
 pskc_all="$srcdir/pskc-all.xml"
