@@ -1,0 +1,3 @@
+---
+include:
+  - https://gitlab.com/oath-toolkit/cicd/raw/master/oath-toolkit.yml
