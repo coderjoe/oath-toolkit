@@ -98,6 +98,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module fpucw:
   # Code from module fputc-tests:
   # Code from module fread-tests:
+  # Code from module free-posix:
+  # Code from module free-posix-tests:
   # Code from module fstat:
   # Code from module fstat-tests:
   # Code from module ftruncate:
@@ -311,6 +313,8 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([AC_LIBSOURCES], m4_defn([gl_LIBSOURCES]))
   m4_pushdef([gl_LIBSOURCES_LIST], [])
   m4_pushdef([gl_LIBSOURCES_DIR], [])
+  m4_pushdef([GL_MACRO_PREFIX], [gl])
+  m4_pushdef([GL_MODULE_INDICATOR_PREFIX], [GL])
   gl_COMMON
   gl_source_base='gl'
   gl_FUNC_ALLOCA
@@ -347,6 +351,7 @@ AC_DEFUN([gl_INIT],
   fi
   gl_FCNTL_MODULE_INDICATOR([fcntl])
   gl_FCNTL_H
+  gl_FCNTL_H_REQUIRE_DEFAULTS
   AC_C_FLEXIBLE_ARRAY_MEMBER
   gl_FLOAT_H
   if test $REPLACE_FLOAT_LDBL = 1; then
@@ -355,6 +360,12 @@ AC_DEFUN([gl_INIT],
   if test $REPLACE_ITOLD = 1; then
     AC_LIBOBJ([itold])
   fi
+  gl_FUNC_FREE
+  if test $REPLACE_FREE = 1; then
+    AC_LIBOBJ([free])
+    gl_PREREQ_FREE
+  fi
+  gl_STDLIB_MODULE_INDICATOR([free-posix])
   gl_FUNC_FSTAT
   if test $REPLACE_FSTAT = 1; then
     AC_LIBOBJ([fstat])
@@ -384,6 +395,7 @@ AC_DEFUN([gl_INIT],
   gl_SYS_TIME_MODULE_INDICATOR([gettimeofday])
   gl_INTTYPES_H
   gl_INTTYPES_INCOMPLETE
+  gl_INTTYPES_H_REQUIRE_DEFAULTS
   AC_REQUIRE([gl_LARGEFILE])
   gl___INLINE
   gl_LIMITS_H
@@ -449,9 +461,35 @@ AC_DEFUN([gl_INIT],
   gl_STDARG_H
   AM_STDBOOL_H
   gl_STDDEF_H
+  gl_STDDEF_H_REQUIRE_DEFAULTS
   gl_STDINT_H
   gl_STDIO_H
+  gl_STDIO_H_REQUIRE_DEFAULTS
+  dnl No need to create extra modules for these functions. Everyone who uses
+  dnl <stdio.h> likely needs them.
+  gl_STDIO_MODULE_INDICATOR([fscanf])
+  gl_MODULE_INDICATOR([fscanf])
+  gl_STDIO_MODULE_INDICATOR([scanf])
+  gl_MODULE_INDICATOR([scanf])
+  gl_STDIO_MODULE_INDICATOR([fgetc])
+  gl_STDIO_MODULE_INDICATOR([getc])
+  gl_STDIO_MODULE_INDICATOR([getchar])
+  gl_STDIO_MODULE_INDICATOR([fgets])
+  gl_STDIO_MODULE_INDICATOR([fread])
+  dnl No need to create extra modules for these functions. Everyone who uses
+  dnl <stdio.h> likely needs them.
+  gl_STDIO_MODULE_INDICATOR([fprintf])
+  gl_STDIO_MODULE_INDICATOR([printf])
+  gl_STDIO_MODULE_INDICATOR([vfprintf])
+  gl_STDIO_MODULE_INDICATOR([vprintf])
+  gl_STDIO_MODULE_INDICATOR([fputc])
+  gl_STDIO_MODULE_INDICATOR([putc])
+  gl_STDIO_MODULE_INDICATOR([putchar])
+  gl_STDIO_MODULE_INDICATOR([fputs])
+  gl_STDIO_MODULE_INDICATOR([puts])
+  gl_STDIO_MODULE_INDICATOR([fwrite])
   gl_STDLIB_H
+  gl_STDLIB_H_REQUIRE_DEFAULTS
   gl_FUNC_STRERROR
   if test $REPLACE_STRERROR = 1; then
     AC_LIBOBJ([strerror])
@@ -464,14 +502,19 @@ AC_DEFUN([gl_INIT],
     AC_LIBOBJ([strerror-override])
     gl_PREREQ_SYS_H_WINSOCK2
   fi
-  gl_HEADER_STRING_H
-  gl_HEADER_SYS_STAT_H
+  gl_STRING_H
+  gl_STRING_H_REQUIRE_DEFAULTS
+  gl_SYS_STAT_H
+  gl_SYS_STAT_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
-  gl_HEADER_SYS_TIME_H
+  gl_SYS_TIME_H
+  gl_SYS_TIME_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_SYS_TYPES_H
+  gl_SYS_TYPES_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
-  gl_HEADER_TIME_H
+  gl_TIME_H
+  gl_TIME_H_REQUIRE_DEFAULTS
   gl_TIME_R
   if test $HAVE_LOCALTIME_R = 0 || test $REPLACE_LOCALTIME_R = 1; then
     AC_LIBOBJ([time_r])
@@ -496,6 +539,7 @@ AC_DEFUN([gl_INIT],
   fi
   gl_TIME_MODULE_INDICATOR([tzset])
   gl_UNISTD_H
+  gl_UNISTD_H_REQUIRE_DEFAULTS
   gl_FUNC_UNSETENV
   if test $HAVE_UNSETENV = 0 || test $REPLACE_UNSETENV = 1; then
     AC_LIBOBJ([unsetenv])
@@ -511,6 +555,7 @@ AC_DEFUN([gl_INIT],
      AM_][XGETTEXT_OPTION([--flag=vasprintf:2:c-format])])
   gl_VERSION_ETC
   gl_WCHAR_H
+  gl_WCHAR_H_REQUIRE_DEFAULTS
   gl_XSIZE
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
@@ -524,6 +569,8 @@ AC_DEFUN([gl_INIT],
       m4_if(m4_sysval, [0], [],
         [AC_FATAL([expected source file, required through AC_LIBSOURCES, not found])])
   ])
+  m4_popdef([GL_MODULE_INDICATOR_PREFIX])
+  m4_popdef([GL_MACRO_PREFIX])
   m4_popdef([gl_LIBSOURCES_DIR])
   m4_popdef([gl_LIBSOURCES_LIST])
   m4_popdef([AC_LIBSOURCES])
@@ -550,6 +597,8 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([AC_LIBSOURCES], m4_defn([gltests_LIBSOURCES]))
   m4_pushdef([gltests_LIBSOURCES_LIST], [])
   m4_pushdef([gltests_LIBSOURCES_DIR], [])
+  m4_pushdef([GL_MACRO_PREFIX], [gltests])
+  m4_pushdef([GL_MODULE_INDICATOR_PREFIX], [GL])
   gl_COMMON
   gl_source_base='gl/tests'
 changequote(,)dnl
@@ -558,12 +607,13 @@ changequote([, ])dnl
   AC_SUBST([gltests_WITNESS])
   gl_module_indicator_condition=$gltests_WITNESS
   m4_pushdef([gl_MODULE_INDICATOR_CONDITION], [$gl_module_indicator_condition])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([accept])
   fi
   gl_SYS_SOCKET_MODULE_INDICATOR([accept])
-  gl_HEADER_ARPA_INET
+  gl_ARPA_INET_H
+  gl_ARPA_INET_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_FUNC_ATOLL
   if test $HAVE_ATOLL = 0; then
@@ -571,17 +621,18 @@ changequote([, ])dnl
     gl_PREREQ_ATOLL
   fi
   gl_STDLIB_MODULE_INDICATOR([atoll])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([bind])
   fi
   gl_SYS_SOCKET_MODULE_INDICATOR([bind])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([connect])
   fi
   gl_SYS_SOCKET_MODULE_INDICATOR([connect])
   gl_CTYPE_H
+  gl_CTYPE_H_REQUIRE_DEFAULTS
   gl_FUNC_FDOPEN
   if test $REPLACE_FDOPEN = 1; then
     AC_LIBOBJ([fdopen])
@@ -622,7 +673,7 @@ changequote([, ])dnl
   fi
   gl_MODULE_INDICATOR([isblank])
   gl_CTYPE_MODULE_INDICATOR([isblank])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([listen])
   fi
@@ -638,7 +689,7 @@ changequote([, ])dnl
     gl_PREREQ_LSTAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([lstat])
-  gl_FUNC_MALLOC_POSIX
+  AC_REQUIRE([gl_FUNC_MALLOC_POSIX])
   if test $REPLACE_MALLOC = 1; then
     AC_LIBOBJ([malloc])
   fi
@@ -667,6 +718,7 @@ changequote([, ])dnl
   fi
   gl_UNISTD_MODULE_INDICATOR([pipe])
   gl_PTHREAD_H
+  gl_PTHREAD_H_REQUIRE_DEFAULTS
   gl_PTHREAD_THREAD
   if test $HAVE_PTHREAD_CREATE = 0 || test $REPLACE_PTHREAD_CREATE = 1; then
     AC_LIBOBJ([pthread-thread])
@@ -691,6 +743,7 @@ changequote([, ])dnl
   fi
   gl_SIGNAL_MODULE_INDICATOR([raise])
   gl_SCHED_H
+  gl_SCHED_H_REQUIRE_DEFAULTS
   gl_FUNC_SCHED_YIELD
   if test $HAVE_SCHED_YIELD = 0 || test $REPLACE_SCHED_YIELD = 1; then
     AC_LIBOBJ([sched_yield])
@@ -702,7 +755,7 @@ changequote([, ])dnl
   fi
   gl_SYS_SELECT_MODULE_INDICATOR([select])
   AC_CHECK_HEADERS_ONCE([sys/wait.h])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([setsockopt])
   fi
@@ -714,6 +767,7 @@ changequote([, ])dnl
   fi
   gl_SIGNAL_MODULE_INDICATOR([sigaction])
   gl_SIGNAL_H
+  gl_SIGNAL_H_REQUIRE_DEFAULTS
   gl_SIGNALBLOCKING
   if test $HAVE_POSIX_SIGNALBLOCKING = 0; then
     AC_LIBOBJ([sigprocmask])
@@ -726,14 +780,14 @@ changequote([, ])dnl
   fi
   gl_UNISTD_MODULE_INDICATOR([sleep])
   AC_CHECK_DECLS_ONCE([alarm])
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  AC_REQUIRE([gl_SYS_SOCKET_H])
   if test "$ac_cv_header_winsock2_h" = yes; then
     AC_LIBOBJ([socket])
   fi
   # When this module is used, sockets may actually occur as file descriptors,
   # hence it is worth warning if the modules 'close' and 'ioctl' are not used.
-  m4_ifdef([gl_UNISTD_H_DEFAULTS], [AC_REQUIRE([gl_UNISTD_H_DEFAULTS])])
-  m4_ifdef([gl_SYS_IOCTL_H_DEFAULTS], [AC_REQUIRE([gl_SYS_IOCTL_H_DEFAULTS])])
+  m4_ifdef([gl_UNISTD_H_DEFAULTS], [gl_UNISTD_H_REQUIRE_DEFAULTS])
+  m4_ifdef([gl_SYS_IOCTL_H_DEFAULTS], [gl_SYS_IOCTL_H_REQUIRE_DEFAULTS])
   AC_REQUIRE([gl_PREREQ_SYS_H_WINSOCK2])
   if test "$ac_cv_header_winsock2_h" = yes; then
     UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS=1
@@ -755,7 +809,7 @@ changequote([, ])dnl
   dnl For the modules argp, error.
   gl_MODULE_INDICATOR([strerror_r-posix])
   gl_FUNC_STRTOLL
-  if test $HAVE_STRTOLL = 0; then
+  if test $HAVE_STRTOLL = 0 || test $REPLACE_STRTOLL = 1; then
     AC_LIBOBJ([strtoll])
     gl_PREREQ_STRTOLL
   fi
@@ -766,13 +820,17 @@ changequote([, ])dnl
   fi
   gl_UNISTD_MODULE_INDICATOR([symlink])
   gl_SYS_IOCTL_H
+  gl_SYS_IOCTL_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
-  AC_REQUIRE([gl_HEADER_SYS_SELECT])
+  gl_SYS_SELECT_H
+  gl_SYS_SELECT_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
-  AC_REQUIRE([gl_HEADER_SYS_SOCKET])
+  gl_SYS_SOCKET_H
+  gl_SYS_SOCKET_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   AC_CHECK_FUNCS_ONCE([shutdown])
-  gl_HEADER_SYS_UIO
+  gl_SYS_UIO_H
+  gl_SYS_UIO_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_THREAD
   AC_REQUIRE([gl_THREADLIB])
@@ -830,6 +888,8 @@ changequote([, ])dnl
       m4_if(m4_sysval, [0], [],
         [AC_FATAL([expected source file, required through AC_LIBSOURCES, not found])])
   ])
+  m4_popdef([GL_MODULE_INDICATOR_PREFIX])
+  m4_popdef([GL_MACRO_PREFIX])
   m4_popdef([gltests_LIBSOURCES_DIR])
   m4_popdef([gltests_LIBSOURCES_LIST])
   m4_popdef([AC_LIBSOURCES])
@@ -939,6 +999,7 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/float+.h
   lib/float.c
   lib/float.in.h
+  lib/free.c
   lib/fstat.c
   lib/getdtablesize.c
   lib/getprogname.c
@@ -1027,7 +1088,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/bison.m4
   m4/clock_time.m4
   m4/close.m4
-  m4/ctype.m4
+  m4/ctype_h.m4
   m4/double-slash-root.m4
   m4/dup2.m4
   m4/eealloc.m4
@@ -1044,6 +1105,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/flexmember.m4
   m4/float_h.m4
   m4/fpieee.m4
+  m4/free.m4
   m4/fstat.m4
   m4/ftruncate.m4
   m4/getcwd.m4
@@ -1178,6 +1240,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-float.c
   tests/test-fputc.c
   tests/test-fread.c
+  tests/test-free.c
   tests/test-fstat.c
   tests/test-ftruncate.c
   tests/test-ftruncate.sh

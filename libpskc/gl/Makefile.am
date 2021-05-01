@@ -291,7 +291,7 @@ stdint.h: stdint.in.h $(top_builddir)/config.status
 	      -e 's/@''BITSIZEOF_WINT_T''@/$(BITSIZEOF_WINT_T)/g' \
 	      -e 's/@''HAVE_SIGNED_WINT_T''@/$(HAVE_SIGNED_WINT_T)/g' \
 	      -e 's/@''WINT_T_SUFFIX''@/$(WINT_T_SUFFIX)/g' \
-	      -e 's/@''GNULIB_OVERRIDES_WINT_T''@/$(GNULIB_OVERRIDES_WINT_T)/g' \
+	      -e 's/@''GNULIBHEADERS_OVERRIDE_WINT_T''@/$(GNULIBHEADERS_OVERRIDE_WINT_T)/g' \
 	      < $(srcdir)/stdint.in.h; \
 	} > $@-t && \
 	mv $@-t $@
@@ -319,49 +319,49 @@ string.h: string.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_STRING_H''@|$(NEXT_STRING_H)|g' \
-	      -e 's/@''GNULIB_EXPLICIT_BZERO''@/$(GNULIB_EXPLICIT_BZERO)/g' \
-	      -e 's/@''GNULIB_FFSL''@/$(GNULIB_FFSL)/g' \
-	      -e 's/@''GNULIB_FFSLL''@/$(GNULIB_FFSLL)/g' \
-	      -e 's/@''GNULIB_MBSLEN''@/$(GNULIB_MBSLEN)/g' \
-	      -e 's/@''GNULIB_MBSNLEN''@/$(GNULIB_MBSNLEN)/g' \
-	      -e 's/@''GNULIB_MBSCHR''@/$(GNULIB_MBSCHR)/g' \
-	      -e 's/@''GNULIB_MBSRCHR''@/$(GNULIB_MBSRCHR)/g' \
-	      -e 's/@''GNULIB_MBSSTR''@/$(GNULIB_MBSSTR)/g' \
-	      -e 's/@''GNULIB_MBSCASECMP''@/$(GNULIB_MBSCASECMP)/g' \
-	      -e 's/@''GNULIB_MBSNCASECMP''@/$(GNULIB_MBSNCASECMP)/g' \
-	      -e 's/@''GNULIB_MBSPCASECMP''@/$(GNULIB_MBSPCASECMP)/g' \
-	      -e 's/@''GNULIB_MBSCASESTR''@/$(GNULIB_MBSCASESTR)/g' \
-	      -e 's/@''GNULIB_MBSCSPN''@/$(GNULIB_MBSCSPN)/g' \
-	      -e 's/@''GNULIB_MBSPBRK''@/$(GNULIB_MBSPBRK)/g' \
-	      -e 's/@''GNULIB_MBSSPN''@/$(GNULIB_MBSSPN)/g' \
-	      -e 's/@''GNULIB_MBSSEP''@/$(GNULIB_MBSSEP)/g' \
-	      -e 's/@''GNULIB_MBSTOK_R''@/$(GNULIB_MBSTOK_R)/g' \
-	      -e 's/@''GNULIB_MEMCHR''@/$(GNULIB_MEMCHR)/g' \
-	      -e 's/@''GNULIB_MEMMEM''@/$(GNULIB_MEMMEM)/g' \
-	      -e 's/@''GNULIB_MEMPCPY''@/$(GNULIB_MEMPCPY)/g' \
-	      -e 's/@''GNULIB_MEMRCHR''@/$(GNULIB_MEMRCHR)/g' \
-	      -e 's/@''GNULIB_RAWMEMCHR''@/$(GNULIB_RAWMEMCHR)/g' \
-	      -e 's/@''GNULIB_STPCPY''@/$(GNULIB_STPCPY)/g' \
-	      -e 's/@''GNULIB_STPNCPY''@/$(GNULIB_STPNCPY)/g' \
-	      -e 's/@''GNULIB_STRCHRNUL''@/$(GNULIB_STRCHRNUL)/g' \
-	      -e 's/@''GNULIB_STRDUP''@/$(GNULIB_STRDUP)/g' \
-	      -e 's/@''GNULIB_STRNCAT''@/$(GNULIB_STRNCAT)/g' \
-	      -e 's/@''GNULIB_STRNDUP''@/$(GNULIB_STRNDUP)/g' \
-	      -e 's/@''GNULIB_STRNLEN''@/$(GNULIB_STRNLEN)/g' \
-	      -e 's/@''GNULIB_STRPBRK''@/$(GNULIB_STRPBRK)/g' \
-	      -e 's/@''GNULIB_STRSEP''@/$(GNULIB_STRSEP)/g' \
-	      -e 's/@''GNULIB_STRSTR''@/$(GNULIB_STRSTR)/g' \
-	      -e 's/@''GNULIB_STRCASESTR''@/$(GNULIB_STRCASESTR)/g' \
-	      -e 's/@''GNULIB_STRTOK_R''@/$(GNULIB_STRTOK_R)/g' \
-	      -e 's/@''GNULIB_STRERROR''@/$(GNULIB_STRERROR)/g' \
-	      -e 's/@''GNULIB_STRERROR_R''@/$(GNULIB_STRERROR_R)/g' \
-	      -e 's/@''GNULIB_STRERRORNAME_NP''@/$(GNULIB_STRERRORNAME_NP)/g' \
-	      -e 's/@''GNULIB_SIGABBREV_NP''@/$(GNULIB_SIGABBREV_NP)/g' \
-	      -e 's/@''GNULIB_SIGDESCR_NP''@/$(GNULIB_SIGDESCR_NP)/g' \
-	      -e 's/@''GNULIB_STRSIGNAL''@/$(GNULIB_STRSIGNAL)/g' \
-	      -e 's/@''GNULIB_STRVERSCMP''@/$(GNULIB_STRVERSCMP)/g' \
-	      -e 's/@''GNULIB_MDA_MEMCCPY''@/$(GNULIB_MDA_MEMCCPY)/g' \
-	      -e 's/@''GNULIB_MDA_STRDUP''@/$(GNULIB_MDA_STRDUP)/g' \
+	      -e 's/@''GNULIB_EXPLICIT_BZERO''@/$(GL_GNULIB_EXPLICIT_BZERO)/g' \
+	      -e 's/@''GNULIB_FFSL''@/$(GL_GNULIB_FFSL)/g' \
+	      -e 's/@''GNULIB_FFSLL''@/$(GL_GNULIB_FFSLL)/g' \
+	      -e 's/@''GNULIB_MBSLEN''@/$(GL_GNULIB_MBSLEN)/g' \
+	      -e 's/@''GNULIB_MBSNLEN''@/$(GL_GNULIB_MBSNLEN)/g' \
+	      -e 's/@''GNULIB_MBSCHR''@/$(GL_GNULIB_MBSCHR)/g' \
+	      -e 's/@''GNULIB_MBSRCHR''@/$(GL_GNULIB_MBSRCHR)/g' \
+	      -e 's/@''GNULIB_MBSSTR''@/$(GL_GNULIB_MBSSTR)/g' \
+	      -e 's/@''GNULIB_MBSCASECMP''@/$(GL_GNULIB_MBSCASECMP)/g' \
+	      -e 's/@''GNULIB_MBSNCASECMP''@/$(GL_GNULIB_MBSNCASECMP)/g' \
+	      -e 's/@''GNULIB_MBSPCASECMP''@/$(GL_GNULIB_MBSPCASECMP)/g' \
+	      -e 's/@''GNULIB_MBSCASESTR''@/$(GL_GNULIB_MBSCASESTR)/g' \
+	      -e 's/@''GNULIB_MBSCSPN''@/$(GL_GNULIB_MBSCSPN)/g' \
+	      -e 's/@''GNULIB_MBSPBRK''@/$(GL_GNULIB_MBSPBRK)/g' \
+	      -e 's/@''GNULIB_MBSSPN''@/$(GL_GNULIB_MBSSPN)/g' \
+	      -e 's/@''GNULIB_MBSSEP''@/$(GL_GNULIB_MBSSEP)/g' \
+	      -e 's/@''GNULIB_MBSTOK_R''@/$(GL_GNULIB_MBSTOK_R)/g' \
+	      -e 's/@''GNULIB_MEMCHR''@/$(GL_GNULIB_MEMCHR)/g' \
+	      -e 's/@''GNULIB_MEMMEM''@/$(GL_GNULIB_MEMMEM)/g' \
+	      -e 's/@''GNULIB_MEMPCPY''@/$(GL_GNULIB_MEMPCPY)/g' \
+	      -e 's/@''GNULIB_MEMRCHR''@/$(GL_GNULIB_MEMRCHR)/g' \
+	      -e 's/@''GNULIB_RAWMEMCHR''@/$(GL_GNULIB_RAWMEMCHR)/g' \
+	      -e 's/@''GNULIB_STPCPY''@/$(GL_GNULIB_STPCPY)/g' \
+	      -e 's/@''GNULIB_STPNCPY''@/$(GL_GNULIB_STPNCPY)/g' \
+	      -e 's/@''GNULIB_STRCHRNUL''@/$(GL_GNULIB_STRCHRNUL)/g' \
+	      -e 's/@''GNULIB_STRDUP''@/$(GL_GNULIB_STRDUP)/g' \
+	      -e 's/@''GNULIB_STRNCAT''@/$(GL_GNULIB_STRNCAT)/g' \
+	      -e 's/@''GNULIB_STRNDUP''@/$(GL_GNULIB_STRNDUP)/g' \
+	      -e 's/@''GNULIB_STRNLEN''@/$(GL_GNULIB_STRNLEN)/g' \
+	      -e 's/@''GNULIB_STRPBRK''@/$(GL_GNULIB_STRPBRK)/g' \
+	      -e 's/@''GNULIB_STRSEP''@/$(GL_GNULIB_STRSEP)/g' \
+	      -e 's/@''GNULIB_STRSTR''@/$(GL_GNULIB_STRSTR)/g' \
+	      -e 's/@''GNULIB_STRCASESTR''@/$(GL_GNULIB_STRCASESTR)/g' \
+	      -e 's/@''GNULIB_STRTOK_R''@/$(GL_GNULIB_STRTOK_R)/g' \
+	      -e 's/@''GNULIB_STRERROR''@/$(GL_GNULIB_STRERROR)/g' \
+	      -e 's/@''GNULIB_STRERROR_R''@/$(GL_GNULIB_STRERROR_R)/g' \
+	      -e 's/@''GNULIB_STRERRORNAME_NP''@/$(GL_GNULIB_STRERRORNAME_NP)/g' \
+	      -e 's/@''GNULIB_SIGABBREV_NP''@/$(GL_GNULIB_SIGABBREV_NP)/g' \
+	      -e 's/@''GNULIB_SIGDESCR_NP''@/$(GL_GNULIB_SIGDESCR_NP)/g' \
+	      -e 's/@''GNULIB_STRSIGNAL''@/$(GL_GNULIB_STRSIGNAL)/g' \
+	      -e 's/@''GNULIB_STRVERSCMP''@/$(GL_GNULIB_STRVERSCMP)/g' \
+	      -e 's/@''GNULIB_MDA_MEMCCPY''@/$(GL_GNULIB_MDA_MEMCCPY)/g' \
+	      -e 's/@''GNULIB_MDA_STRDUP''@/$(GL_GNULIB_MDA_STRDUP)/g' \
 	      < $(srcdir)/string.in.h | \
 	  sed -e 's|@''HAVE_EXPLICIT_BZERO''@|$(HAVE_EXPLICIT_BZERO)|g' \
 	      -e 's|@''HAVE_FFSL''@|$(HAVE_FFSL)|g' \

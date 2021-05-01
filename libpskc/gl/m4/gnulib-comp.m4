@@ -63,6 +63,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module fpucw:
   # Code from module fputc-tests:
   # Code from module fread-tests:
+  # Code from module free-posix:
+  # Code from module free-posix-tests:
   # Code from module fwrite-tests:
   # Code from module getpagesize:
   # Code from module include_next:
@@ -85,6 +87,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module msvc-inval:
   # Code from module multiarch:
   # Code from module size_max:
+  # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
@@ -102,6 +105,8 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdint-tests:
   # Code from module stdio:
   # Code from module stdio-tests:
+  # Code from module stdlib:
+  # Code from module stdlib-tests:
   # Code from module string:
   # Code from module string-tests:
   # Code from module strverscmp:
@@ -135,6 +140,8 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([AC_LIBSOURCES], m4_defn([gl_LIBSOURCES]))
   m4_pushdef([gl_LIBSOURCES_LIST], [])
   m4_pushdef([gl_LIBSOURCES_DIR], [])
+  m4_pushdef([GL_MACRO_PREFIX], [gl])
+  m4_pushdef([GL_MODULE_INDICATOR_PREFIX], [GL])
   gl_COMMON
   gl_source_base='gl'
   gl_FUNC_BASE64
@@ -155,8 +162,10 @@ AC_DEFUN([gl_INIT],
   gt_TYPE_SSIZE_T
   AM_STDBOOL_H
   gl_STDDEF_H
+  gl_STDDEF_H_REQUIRE_DEFAULTS
   gl_STDINT_H
-  gl_HEADER_STRING_H
+  gl_STRING_H
+  gl_STRING_H_REQUIRE_DEFAULTS
   gl_FUNC_STRVERSCMP
   if test $HAVE_STRVERSCMP = 0; then
     AC_LIBOBJ([strverscmp])
@@ -164,6 +173,7 @@ AC_DEFUN([gl_INIT],
   fi
   gl_STRING_MODULE_INDICATOR([strverscmp])
   gl_SYS_TYPES_H
+  gl_SYS_TYPES_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
   gl_VALGRIND_TESTS
   # End of code from modules
@@ -178,6 +188,8 @@ AC_DEFUN([gl_INIT],
       m4_if(m4_sysval, [0], [],
         [AC_FATAL([expected source file, required through AC_LIBSOURCES, not found])])
   ])
+  m4_popdef([GL_MODULE_INDICATOR_PREFIX])
+  m4_popdef([GL_MACRO_PREFIX])
   m4_popdef([gl_LIBSOURCES_DIR])
   m4_popdef([gl_LIBSOURCES_LIST])
   m4_popdef([AC_LIBSOURCES])
@@ -204,6 +216,8 @@ AC_DEFUN([gl_INIT],
   m4_pushdef([AC_LIBSOURCES], m4_defn([gltests_LIBSOURCES]))
   m4_pushdef([gltests_LIBSOURCES_LIST], [])
   m4_pushdef([gltests_LIBSOURCES_DIR], [])
+  m4_pushdef([GL_MACRO_PREFIX], [gltests])
+  m4_pushdef([GL_MODULE_INDICATOR_PREFIX], [GL])
   gl_COMMON
   gl_source_base='gl/tests'
 changequote(,)dnl
@@ -227,6 +241,12 @@ changequote([, ])dnl
   if test $REPLACE_ITOLD = 1; then
     AC_LIBOBJ([itold])
   fi
+  gl_FUNC_FREE
+  if test $REPLACE_FREE = 1; then
+    AC_LIBOBJ([free])
+    gl_PREREQ_FREE
+  fi
+  gl_STDLIB_MODULE_INDICATOR([free-posix])
   gl_FUNC_GETPAGESIZE
   if test $REPLACE_GETPAGESIZE = 1; then
     AC_LIBOBJ([getpagesize])
@@ -234,6 +254,7 @@ changequote([, ])dnl
   gl_UNISTD_MODULE_INDICATOR([getpagesize])
   gl_INTTYPES_H
   gl_INTTYPES_INCOMPLETE
+  gl_INTTYPES_H_REQUIRE_DEFAULTS
   dnl Check for prerequisites for memory fence checks.
   gl_FUNC_MMAP_ANON
   AC_CHECK_HEADERS_ONCE([sys/mman.h])
@@ -250,11 +271,39 @@ changequote([, ])dnl
   AC_REQUIRE([gt_TYPE_WCHAR_T])
   AC_REQUIRE([gt_TYPE_WINT_T])
   gl_STDIO_H
+  gl_STDIO_H_REQUIRE_DEFAULTS
+  dnl No need to create extra modules for these functions. Everyone who uses
+  dnl <stdio.h> likely needs them.
+  gl_STDIO_MODULE_INDICATOR([fscanf])
+  gl_MODULE_INDICATOR([fscanf])
+  gl_STDIO_MODULE_INDICATOR([scanf])
+  gl_MODULE_INDICATOR([scanf])
+  gl_STDIO_MODULE_INDICATOR([fgetc])
+  gl_STDIO_MODULE_INDICATOR([getc])
+  gl_STDIO_MODULE_INDICATOR([getchar])
+  gl_STDIO_MODULE_INDICATOR([fgets])
+  gl_STDIO_MODULE_INDICATOR([fread])
+  dnl No need to create extra modules for these functions. Everyone who uses
+  dnl <stdio.h> likely needs them.
+  gl_STDIO_MODULE_INDICATOR([fprintf])
+  gl_STDIO_MODULE_INDICATOR([printf])
+  gl_STDIO_MODULE_INDICATOR([vfprintf])
+  gl_STDIO_MODULE_INDICATOR([vprintf])
+  gl_STDIO_MODULE_INDICATOR([fputc])
+  gl_STDIO_MODULE_INDICATOR([putc])
+  gl_STDIO_MODULE_INDICATOR([putchar])
+  gl_STDIO_MODULE_INDICATOR([fputs])
+  gl_STDIO_MODULE_INDICATOR([puts])
+  gl_STDIO_MODULE_INDICATOR([fwrite])
+  gl_STDLIB_H
+  gl_STDLIB_H_REQUIRE_DEFAULTS
   gl_UNISTD_H
+  gl_UNISTD_H_REQUIRE_DEFAULTS
   gl_VALGRIND_TESTS
   AC_REQUIRE([AC_C_RESTRICT])
   gl_FUNC_VASNPRINTF
   gl_WCHAR_H
+  gl_WCHAR_H_REQUIRE_DEFAULTS
   gl_XSIZE
   m4_popdef([gl_MODULE_INDICATOR_CONDITION])
   m4_ifval(gltests_LIBSOURCES_LIST, [
@@ -268,6 +317,8 @@ changequote([, ])dnl
       m4_if(m4_sysval, [0], [],
         [AC_FATAL([expected source file, required through AC_LIBSOURCES, not found])])
   ])
+  m4_popdef([GL_MODULE_INDICATOR_PREFIX])
+  m4_popdef([GL_MACRO_PREFIX])
   m4_popdef([gltests_LIBSOURCES_DIR])
   m4_popdef([gltests_LIBSOURCES_LIST])
   m4_popdef([AC_LIBSOURCES])
@@ -385,6 +436,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fdopen.m4
   m4/float_h.m4
   m4/fpieee.m4
+  m4/free.m4
   m4/getpagesize.m4
   m4/gnulib-common.m4
   m4/include_next.m4
@@ -415,6 +467,7 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdint.m4
   m4/stdint_h.m4
   m4/stdio_h.m4
+  m4/stdlib_h.m4
   m4/string_h.m4
   m4/strverscmp.m4
   m4/sys_types_h.m4
@@ -440,6 +493,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-float.c
   tests/test-fputc.c
   tests/test-fread.c
+  tests/test-free.c
   tests/test-fwrite.c
   tests/test-init.sh
   tests/test-intprops.c
@@ -453,9 +507,11 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-stddef.c
   tests/test-stdint.c
   tests/test-stdio.c
+  tests/test-stdlib.c
   tests/test-string.c
   tests/test-strverscmp.c
   tests/test-sys_types.c
+  tests/test-sys_wait.h
   tests/test-unistd.c
   tests/test-vasnprintf.c
   tests/test-verify-try.c
@@ -463,6 +519,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-verify.sh
   tests/test-wchar.c
   tests/zerosize-ptr.h
+  tests=lib/_Noreturn.h
   tests=lib/alloca.in.h
   tests=lib/arg-nonnull.h
   tests=lib/asnprintf.c
@@ -474,6 +531,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/float.c
   tests=lib/float.in.h
   tests=lib/fpucw.h
+  tests=lib/free.c
   tests=lib/getpagesize.c
   tests=lib/inttypes.in.h
   tests=lib/itold.c
@@ -487,6 +545,7 @@ AC_DEFUN([gl_FILE_LIST], [
   tests=lib/snprintf.c
   tests=lib/stdalign.in.h
   tests=lib/stdio.in.h
+  tests=lib/stdlib.in.h
   tests=lib/unistd.c
   tests=lib/unistd.in.h
   tests=lib/vasnprintf.c

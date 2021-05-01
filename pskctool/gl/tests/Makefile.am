@@ -114,8 +114,8 @@ arpa/inet.h: arpa_inet.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON
 	      -e 's|@''HAVE_FEATURES_H''@|$(HAVE_FEATURES_H)|g' \
 	      -e 's|@''NEXT_ARPA_INET_H''@|$(NEXT_ARPA_INET_H)|g' \
 	      -e 's|@''HAVE_ARPA_INET_H''@|$(HAVE_ARPA_INET_H)|g' \
-	      -e 's/@''GNULIB_INET_NTOP''@/$(GNULIB_INET_NTOP)/g' \
-	      -e 's/@''GNULIB_INET_PTON''@/$(GNULIB_INET_PTON)/g' \
+	      -e 's/@''GNULIB_INET_NTOP''@/$(GL_GNULIB_INET_NTOP)/g' \
+	      -e 's/@''GNULIB_INET_PTON''@/$(GL_GNULIB_INET_PTON)/g' \
 	      -e 's|@''HAVE_WS2TCPIP_H''@|$(HAVE_WS2TCPIP_H)|g' \
 	      -e 's|@''HAVE_DECL_INET_NTOP''@|$(HAVE_DECL_INET_NTOP)|g' \
 	      -e 's|@''HAVE_DECL_INET_PTON''@|$(HAVE_DECL_INET_PTON)|g' \
@@ -245,7 +245,7 @@ ctype.h: ctype.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_CTYPE_H''@|$(NEXT_CTYPE_H)|g' \
-	      -e 's/@''GNULIB_ISBLANK''@/$(GNULIB_ISBLANK)/g' \
+	      -e 's/@''GNULIB_ISBLANK''@/$(GL_GNULIB_ISBLANK)/g' \
 	      -e 's/@''HAVE_ISBLANK''@/$(HAVE_ISBLANK)/g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
 	      -e '/definition of _GL_WARN_ON_USE/r $(WARN_ON_USE_H)' \
@@ -373,6 +373,14 @@ check_PROGRAMS += test-fread
 EXTRA_DIST += test-fread.c signature.h macros.h
 
 ## end   gnulib module fread-tests
+
+## begin gnulib module free-posix-tests
+
+TESTS += test-free
+check_PROGRAMS += test-free
+EXTRA_DIST += test-free.c macros.h
+
+## end   gnulib module free-posix-tests
 
 ## begin gnulib module fstat-tests
 
@@ -545,10 +553,10 @@ inttypes.h: inttypes.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_U
 	      -e 's|@''NEXT_INTTYPES_H''@|$(NEXT_INTTYPES_H)|g' \
 	      -e 's/@''APPLE_UNIVERSAL_BUILD''@/$(APPLE_UNIVERSAL_BUILD)/g' \
 	      -e 's/@''PRIPTR_PREFIX''@/$(PRIPTR_PREFIX)/g' \
-	      -e 's/@''GNULIB_IMAXABS''@/$(GNULIB_IMAXABS)/g' \
-	      -e 's/@''GNULIB_IMAXDIV''@/$(GNULIB_IMAXDIV)/g' \
-	      -e 's/@''GNULIB_STRTOIMAX''@/$(GNULIB_STRTOIMAX)/g' \
-	      -e 's/@''GNULIB_STRTOUMAX''@/$(GNULIB_STRTOUMAX)/g' \
+	      -e 's/@''GNULIB_IMAXABS''@/$(GL_GNULIB_IMAXABS)/g' \
+	      -e 's/@''GNULIB_IMAXDIV''@/$(GL_GNULIB_IMAXDIV)/g' \
+	      -e 's/@''GNULIB_STRTOIMAX''@/$(GL_GNULIB_STRTOIMAX)/g' \
+	      -e 's/@''GNULIB_STRTOUMAX''@/$(GL_GNULIB_STRTOUMAX)/g' \
 	      -e 's/@''HAVE_DECL_IMAXABS''@/$(HAVE_DECL_IMAXABS)/g' \
 	      -e 's/@''HAVE_DECL_IMAXDIV''@/$(HAVE_DECL_IMAXDIV)/g' \
 	      -e 's/@''HAVE_DECL_STRTOIMAX''@/$(HAVE_DECL_STRTOIMAX)/g' \
@@ -816,14 +824,14 @@ pthread.h: pthread.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(_NORETURN_H
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_PTHREAD_H''@|$(NEXT_PTHREAD_H)|g' \
-	      -e 's/@''GNULIB_PTHREAD_THREAD''@/$(GNULIB_PTHREAD_THREAD)/g' \
-	      -e 's/@''GNULIB_PTHREAD_ONCE''@/$(GNULIB_PTHREAD_ONCE)/g' \
-	      -e 's/@''GNULIB_PTHREAD_MUTEX''@/$(GNULIB_PTHREAD_MUTEX)/g' \
-	      -e 's/@''GNULIB_PTHREAD_RWLOCK''@/$(GNULIB_PTHREAD_RWLOCK)/g' \
-	      -e 's/@''GNULIB_PTHREAD_COND''@/$(GNULIB_PTHREAD_COND)/g' \
-	      -e 's/@''GNULIB_PTHREAD_TSS''@/$(GNULIB_PTHREAD_TSS)/g' \
-	      -e 's/@''GNULIB_PTHREAD_SPIN''@/$(GNULIB_PTHREAD_SPIN)/g' \
-	      -e 's/@''GNULIB_PTHREAD_MUTEX_TIMEDLOCK''@/$(GNULIB_PTHREAD_MUTEX_TIMEDLOCK)/g' \
+	      -e 's/@''GNULIB_PTHREAD_THREAD''@/$(GL_GNULIB_PTHREAD_THREAD)/g' \
+	      -e 's/@''GNULIB_PTHREAD_ONCE''@/$(GL_GNULIB_PTHREAD_ONCE)/g' \
+	      -e 's/@''GNULIB_PTHREAD_MUTEX''@/$(GL_GNULIB_PTHREAD_MUTEX)/g' \
+	      -e 's/@''GNULIB_PTHREAD_RWLOCK''@/$(GL_GNULIB_PTHREAD_RWLOCK)/g' \
+	      -e 's/@''GNULIB_PTHREAD_COND''@/$(GL_GNULIB_PTHREAD_COND)/g' \
+	      -e 's/@''GNULIB_PTHREAD_TSS''@/$(GL_GNULIB_PTHREAD_TSS)/g' \
+	      -e 's/@''GNULIB_PTHREAD_SPIN''@/$(GL_GNULIB_PTHREAD_SPIN)/g' \
+	      -e 's/@''GNULIB_PTHREAD_MUTEX_TIMEDLOCK''@/$(GL_GNULIB_PTHREAD_MUTEX_TIMEDLOCK)/g' \
 	      -e 's|@''HAVE_PTHREAD_T''@|$(HAVE_PTHREAD_T)|g' \
 	      -e 's|@''HAVE_PTHREAD_SPINLOCK_T''@|$(HAVE_PTHREAD_SPINLOCK_T)|g' \
 	      -e 's|@''HAVE_PTHREAD_CREATE_DETACHED''@|$(HAVE_PTHREAD_CREATE_DETACHED)|g' \
@@ -1048,7 +1056,7 @@ sched.h: sched.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON_USE_H)
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SCHED_H''@|$(NEXT_SCHED_H)|g' \
 	      -e 's|@''HAVE_STRUCT_SCHED_PARAM''@|$(HAVE_STRUCT_SCHED_PARAM)|g' \
-	      -e 's/@''GNULIB_SCHED_YIELD''@/$(GNULIB_SCHED_YIELD)/g' \
+	      -e 's/@''GNULIB_SCHED_YIELD''@/$(GL_GNULIB_SCHED_YIELD)/g' \
 	      -e 's|@''HAVE_SCHED_YIELD''@|$(HAVE_SCHED_YIELD)|g' \
 	      -e 's|@''REPLACE_SCHED_YIELD''@|$(REPLACE_SCHED_YIELD)|g' \
 	      -e '/definitions of _GL_FUNCDECL_RPL/r $(CXXDEFS_H)' \
@@ -1150,11 +1158,11 @@ signal.h: signal.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SIGNAL_H''@|$(NEXT_SIGNAL_H)|g' \
-	      -e 's/@''GNULIB_PTHREAD_SIGMASK''@/$(GNULIB_PTHREAD_SIGMASK)/g' \
-	      -e 's/@''GNULIB_RAISE''@/$(GNULIB_RAISE)/g' \
-	      -e 's/@''GNULIB_SIGNAL_H_SIGPIPE''@/$(GNULIB_SIGNAL_H_SIGPIPE)/g' \
-	      -e 's/@''GNULIB_SIGPROCMASK''@/$(GNULIB_SIGPROCMASK)/g' \
-	      -e 's/@''GNULIB_SIGACTION''@/$(GNULIB_SIGACTION)/g' \
+	      -e 's/@''GNULIB_PTHREAD_SIGMASK''@/$(GL_GNULIB_PTHREAD_SIGMASK)/g' \
+	      -e 's/@''GNULIB_RAISE''@/$(GL_GNULIB_RAISE)/g' \
+	      -e 's/@''GNULIB_SIGNAL_H_SIGPIPE''@/$(GL_GNULIB_SIGNAL_H_SIGPIPE)/g' \
+	      -e 's/@''GNULIB_SIGPROCMASK''@/$(GL_GNULIB_SIGPROCMASK)/g' \
+	      -e 's/@''GNULIB_SIGACTION''@/$(GL_GNULIB_SIGACTION)/g' \
 	      -e 's|@''HAVE_POSIX_SIGNALBLOCKING''@|$(HAVE_POSIX_SIGNALBLOCKING)|g' \
 	      -e 's|@''HAVE_PTHREAD_SIGMASK''@|$(HAVE_PTHREAD_SIGMASK)|g' \
 	      -e 's|@''HAVE_RAISE''@|$(HAVE_RAISE)|g' \
@@ -1449,7 +1457,7 @@ sys/ioctl.h: sys_ioctl.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_ON
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_IOCTL_H''@|$(NEXT_SYS_IOCTL_H)|g' \
-	      -e 's/@''GNULIB_IOCTL''@/$(GNULIB_IOCTL)/g' \
+	      -e 's/@''GNULIB_IOCTL''@/$(GL_GNULIB_IOCTL)/g' \
 	      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H''@|$(SYS_IOCTL_H_HAVE_WINSOCK2_H)|g' \
 	      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|$(SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS)|g' \
 	      -e 's|@''REPLACE_IOCTL''@|$(REPLACE_IOCTL)|g' \
@@ -1489,8 +1497,8 @@ sys/select.h: sys_select.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_SELECT_H''@|$(NEXT_SYS_SELECT_H)|g' \
 	      -e 's|@''HAVE_SYS_SELECT_H''@|$(HAVE_SYS_SELECT_H)|g' \
-	      -e 's/@''GNULIB_PSELECT''@/$(GNULIB_PSELECT)/g' \
-	      -e 's/@''GNULIB_SELECT''@/$(GNULIB_SELECT)/g' \
+	      -e 's/@''GNULIB_PSELECT''@/$(GL_GNULIB_PSELECT)/g' \
+	      -e 's/@''GNULIB_SELECT''@/$(GL_GNULIB_SELECT)/g' \
 	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
 	      -e 's|@''HAVE_PSELECT''@|$(HAVE_PSELECT)|g' \
 	      -e 's|@''REPLACE_PSELECT''@|$(REPLACE_PSELECT)|g' \
@@ -1532,22 +1540,22 @@ sys/socket.h: sys_socket.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(WARN_
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_SOCKET_H''@|$(NEXT_SYS_SOCKET_H)|g' \
 	      -e 's|@''HAVE_SYS_SOCKET_H''@|$(HAVE_SYS_SOCKET_H)|g' \
-	      -e 's/@''GNULIB_CLOSE''@/$(GNULIB_CLOSE)/g' \
-	      -e 's/@''GNULIB_SOCKET''@/$(GNULIB_SOCKET)/g' \
-	      -e 's/@''GNULIB_CONNECT''@/$(GNULIB_CONNECT)/g' \
-	      -e 's/@''GNULIB_ACCEPT''@/$(GNULIB_ACCEPT)/g' \
-	      -e 's/@''GNULIB_BIND''@/$(GNULIB_BIND)/g' \
-	      -e 's/@''GNULIB_GETPEERNAME''@/$(GNULIB_GETPEERNAME)/g' \
-	      -e 's/@''GNULIB_GETSOCKNAME''@/$(GNULIB_GETSOCKNAME)/g' \
-	      -e 's/@''GNULIB_GETSOCKOPT''@/$(GNULIB_GETSOCKOPT)/g' \
-	      -e 's/@''GNULIB_LISTEN''@/$(GNULIB_LISTEN)/g' \
-	      -e 's/@''GNULIB_RECV''@/$(GNULIB_RECV)/g' \
-	      -e 's/@''GNULIB_SEND''@/$(GNULIB_SEND)/g' \
-	      -e 's/@''GNULIB_RECVFROM''@/$(GNULIB_RECVFROM)/g' \
-	      -e 's/@''GNULIB_SENDTO''@/$(GNULIB_SENDTO)/g' \
-	      -e 's/@''GNULIB_SETSOCKOPT''@/$(GNULIB_SETSOCKOPT)/g' \
-	      -e 's/@''GNULIB_SHUTDOWN''@/$(GNULIB_SHUTDOWN)/g' \
-	      -e 's/@''GNULIB_ACCEPT4''@/$(GNULIB_ACCEPT4)/g' \
+	      -e 's/@''GNULIB_CLOSE''@/$(GL_GNULIB_CLOSE)/g' \
+	      -e 's/@''GNULIB_SOCKET''@/$(GL_GNULIB_SOCKET)/g' \
+	      -e 's/@''GNULIB_CONNECT''@/$(GL_GNULIB_CONNECT)/g' \
+	      -e 's/@''GNULIB_ACCEPT''@/$(GL_GNULIB_ACCEPT)/g' \
+	      -e 's/@''GNULIB_BIND''@/$(GL_GNULIB_BIND)/g' \
+	      -e 's/@''GNULIB_GETPEERNAME''@/$(GL_GNULIB_GETPEERNAME)/g' \
+	      -e 's/@''GNULIB_GETSOCKNAME''@/$(GL_GNULIB_GETSOCKNAME)/g' \
+	      -e 's/@''GNULIB_GETSOCKOPT''@/$(GL_GNULIB_GETSOCKOPT)/g' \
+	      -e 's/@''GNULIB_LISTEN''@/$(GL_GNULIB_LISTEN)/g' \
+	      -e 's/@''GNULIB_RECV''@/$(GL_GNULIB_RECV)/g' \
+	      -e 's/@''GNULIB_SEND''@/$(GL_GNULIB_SEND)/g' \
+	      -e 's/@''GNULIB_RECVFROM''@/$(GL_GNULIB_RECVFROM)/g' \
+	      -e 's/@''GNULIB_SENDTO''@/$(GL_GNULIB_SENDTO)/g' \
+	      -e 's/@''GNULIB_SETSOCKOPT''@/$(GL_GNULIB_SETSOCKOPT)/g' \
+	      -e 's/@''GNULIB_SHUTDOWN''@/$(GL_GNULIB_SHUTDOWN)/g' \
+	      -e 's/@''GNULIB_ACCEPT4''@/$(GL_GNULIB_ACCEPT4)/g' \
 	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
 	      -e 's|@''HAVE_WS2TCPIP_H''@|$(HAVE_WS2TCPIP_H)|g' \
 	      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE''@|$(HAVE_STRUCT_SOCKADDR_STORAGE)|g' \
@@ -1599,7 +1607,7 @@ sys/time.h: sys_time.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNU
 	      -e 's|@''PRAGMA_SYSTEM_HEADER''@|@PRAGMA_SYSTEM_HEADER@|g' \
 	      -e 's|@''PRAGMA_COLUMNS''@|@PRAGMA_COLUMNS@|g' \
 	      -e 's|@''NEXT_SYS_TIME_H''@|$(NEXT_SYS_TIME_H)|g' \
-	      -e 's/@''GNULIB_GETTIMEOFDAY''@/$(GNULIB_GETTIMEOFDAY)/g' \
+	      -e 's/@''GNULIB_GETTIMEOFDAY''@/$(GL_GNULIB_GETTIMEOFDAY)/g' \
 	      -e 's|@''HAVE_WINSOCK2_H''@|$(HAVE_WINSOCK2_H)|g' \
 	      -e 's/@''HAVE_GETTIMEOFDAY''@/$(HAVE_GETTIMEOFDAY)/g' \
 	      -e 's/@''HAVE_STRUCT_TIMEVAL''@/$(HAVE_STRUCT_TIMEVAL)/g' \
@@ -1804,49 +1812,49 @@ wchar.h: wchar.in.h $(top_builddir)/config.status $(CXXDEFS_H) $(ARG_NONNULL_H) 
 	      -e 's|@''NEXT_WCHAR_H''@|$(NEXT_WCHAR_H)|g' \
 	      -e 's|@''HAVE_WCHAR_H''@|$(HAVE_WCHAR_H)|g' \
 	      -e 's/@''HAVE_CRTDEFS_H''@/$(HAVE_CRTDEFS_H)/g' \
-	      -e 's/@''GNULIB_OVERRIDES_WINT_T''@/$(GNULIB_OVERRIDES_WINT_T)/g' \
-	      -e 's/@''GNULIB_BTOWC''@/$(GNULIB_BTOWC)/g' \
-	      -e 's/@''GNULIB_WCTOB''@/$(GNULIB_WCTOB)/g' \
-	      -e 's/@''GNULIB_MBSINIT''@/$(GNULIB_MBSINIT)/g' \
-	      -e 's/@''GNULIB_MBRTOWC''@/$(GNULIB_MBRTOWC)/g' \
-	      -e 's/@''GNULIB_MBRLEN''@/$(GNULIB_MBRLEN)/g' \
-	      -e 's/@''GNULIB_MBSRTOWCS''@/$(GNULIB_MBSRTOWCS)/g' \
-	      -e 's/@''GNULIB_MBSNRTOWCS''@/$(GNULIB_MBSNRTOWCS)/g' \
-	      -e 's/@''GNULIB_WCRTOMB''@/$(GNULIB_WCRTOMB)/g' \
-	      -e 's/@''GNULIB_WCSRTOMBS''@/$(GNULIB_WCSRTOMBS)/g' \
-	      -e 's/@''GNULIB_WCSNRTOMBS''@/$(GNULIB_WCSNRTOMBS)/g' \
-	      -e 's/@''GNULIB_WCWIDTH''@/$(GNULIB_WCWIDTH)/g' \
-	      -e 's/@''GNULIB_WMEMCHR''@/$(GNULIB_WMEMCHR)/g' \
-	      -e 's/@''GNULIB_WMEMCMP''@/$(GNULIB_WMEMCMP)/g' \
-	      -e 's/@''GNULIB_WMEMCPY''@/$(GNULIB_WMEMCPY)/g' \
-	      -e 's/@''GNULIB_WMEMMOVE''@/$(GNULIB_WMEMMOVE)/g' \
-	      -e 's/@''GNULIB_WMEMPCPY''@/$(GNULIB_WMEMPCPY)/g' \
-	      -e 's/@''GNULIB_WMEMSET''@/$(GNULIB_WMEMSET)/g' \
-	      -e 's/@''GNULIB_WCSLEN''@/$(GNULIB_WCSLEN)/g' \
-	      -e 's/@''GNULIB_WCSNLEN''@/$(GNULIB_WCSNLEN)/g' \
-	      -e 's/@''GNULIB_WCSCPY''@/$(GNULIB_WCSCPY)/g' \
-	      -e 's/@''GNULIB_WCPCPY''@/$(GNULIB_WCPCPY)/g' \
-	      -e 's/@''GNULIB_WCSNCPY''@/$(GNULIB_WCSNCPY)/g' \
-	      -e 's/@''GNULIB_WCPNCPY''@/$(GNULIB_WCPNCPY)/g' \
-	      -e 's/@''GNULIB_WCSCAT''@/$(GNULIB_WCSCAT)/g' \
-	      -e 's/@''GNULIB_WCSNCAT''@/$(GNULIB_WCSNCAT)/g' \
-	      -e 's/@''GNULIB_WCSCMP''@/$(GNULIB_WCSCMP)/g' \
-	      -e 's/@''GNULIB_WCSNCMP''@/$(GNULIB_WCSNCMP)/g' \
-	      -e 's/@''GNULIB_WCSCASECMP''@/$(GNULIB_WCSCASECMP)/g' \
-	      -e 's/@''GNULIB_WCSNCASECMP''@/$(GNULIB_WCSNCASECMP)/g' \
-	      -e 's/@''GNULIB_WCSCOLL''@/$(GNULIB_WCSCOLL)/g' \
-	      -e 's/@''GNULIB_WCSXFRM''@/$(GNULIB_WCSXFRM)/g' \
-	      -e 's/@''GNULIB_WCSDUP''@/$(GNULIB_WCSDUP)/g' \
-	      -e 's/@''GNULIB_WCSCHR''@/$(GNULIB_WCSCHR)/g' \
-	      -e 's/@''GNULIB_WCSRCHR''@/$(GNULIB_WCSRCHR)/g' \
-	      -e 's/@''GNULIB_WCSCSPN''@/$(GNULIB_WCSCSPN)/g' \
-	      -e 's/@''GNULIB_WCSSPN''@/$(GNULIB_WCSSPN)/g' \
-	      -e 's/@''GNULIB_WCSPBRK''@/$(GNULIB_WCSPBRK)/g' \
-	      -e 's/@''GNULIB_WCSSTR''@/$(GNULIB_WCSSTR)/g' \
-	      -e 's/@''GNULIB_WCSTOK''@/$(GNULIB_WCSTOK)/g' \
-	      -e 's/@''GNULIB_WCSWIDTH''@/$(GNULIB_WCSWIDTH)/g' \
-	      -e 's/@''GNULIB_WCSFTIME''@/$(GNULIB_WCSFTIME)/g' \
-	      -e 's/@''GNULIB_MDA_WCSDUP''@/$(GNULIB_MDA_WCSDUP)/g' \
+	      -e 's/@''GNULIBHEADERS_OVERRIDE_WINT_T''@/$(GNULIBHEADERS_OVERRIDE_WINT_T)/g' \
+	      -e 's/@''GNULIB_BTOWC''@/$(GL_GNULIB_BTOWC)/g' \
+	      -e 's/@''GNULIB_WCTOB''@/$(GL_GNULIB_WCTOB)/g' \
+	      -e 's/@''GNULIB_MBSINIT''@/$(GL_GNULIB_MBSINIT)/g' \
+	      -e 's/@''GNULIB_MBRTOWC''@/$(GL_GNULIB_MBRTOWC)/g' \
+	      -e 's/@''GNULIB_MBRLEN''@/$(GL_GNULIB_MBRLEN)/g' \
+	      -e 's/@''GNULIB_MBSRTOWCS''@/$(GL_GNULIB_MBSRTOWCS)/g' \
+	      -e 's/@''GNULIB_MBSNRTOWCS''@/$(GL_GNULIB_MBSNRTOWCS)/g' \
+	      -e 's/@''GNULIB_WCRTOMB''@/$(GL_GNULIB_WCRTOMB)/g' \
+	      -e 's/@''GNULIB_WCSRTOMBS''@/$(GL_GNULIB_WCSRTOMBS)/g' \
+	      -e 's/@''GNULIB_WCSNRTOMBS''@/$(GL_GNULIB_WCSNRTOMBS)/g' \
+	      -e 's/@''GNULIB_WCWIDTH''@/$(GL_GNULIB_WCWIDTH)/g' \
+	      -e 's/@''GNULIB_WMEMCHR''@/$(GL_GNULIB_WMEMCHR)/g' \
+	      -e 's/@''GNULIB_WMEMCMP''@/$(GL_GNULIB_WMEMCMP)/g' \
+	      -e 's/@''GNULIB_WMEMCPY''@/$(GL_GNULIB_WMEMCPY)/g' \
+	      -e 's/@''GNULIB_WMEMMOVE''@/$(GL_GNULIB_WMEMMOVE)/g' \
+	      -e 's/@''GNULIB_WMEMPCPY''@/$(GL_GNULIB_WMEMPCPY)/g' \
+	      -e 's/@''GNULIB_WMEMSET''@/$(GL_GNULIB_WMEMSET)/g' \
+	      -e 's/@''GNULIB_WCSLEN''@/$(GL_GNULIB_WCSLEN)/g' \
+	      -e 's/@''GNULIB_WCSNLEN''@/$(GL_GNULIB_WCSNLEN)/g' \
+	      -e 's/@''GNULIB_WCSCPY''@/$(GL_GNULIB_WCSCPY)/g' \
+	      -e 's/@''GNULIB_WCPCPY''@/$(GL_GNULIB_WCPCPY)/g' \
+	      -e 's/@''GNULIB_WCSNCPY''@/$(GL_GNULIB_WCSNCPY)/g' \
+	      -e 's/@''GNULIB_WCPNCPY''@/$(GL_GNULIB_WCPNCPY)/g' \
+	      -e 's/@''GNULIB_WCSCAT''@/$(GL_GNULIB_WCSCAT)/g' \
+	      -e 's/@''GNULIB_WCSNCAT''@/$(GL_GNULIB_WCSNCAT)/g' \
+	      -e 's/@''GNULIB_WCSCMP''@/$(GL_GNULIB_WCSCMP)/g' \
+	      -e 's/@''GNULIB_WCSNCMP''@/$(GL_GNULIB_WCSNCMP)/g' \
+	      -e 's/@''GNULIB_WCSCASECMP''@/$(GL_GNULIB_WCSCASECMP)/g' \
+	      -e 's/@''GNULIB_WCSNCASECMP''@/$(GL_GNULIB_WCSNCASECMP)/g' \
+	      -e 's/@''GNULIB_WCSCOLL''@/$(GL_GNULIB_WCSCOLL)/g' \
+	      -e 's/@''GNULIB_WCSXFRM''@/$(GL_GNULIB_WCSXFRM)/g' \
+	      -e 's/@''GNULIB_WCSDUP''@/$(GL_GNULIB_WCSDUP)/g' \
+	      -e 's/@''GNULIB_WCSCHR''@/$(GL_GNULIB_WCSCHR)/g' \
+	      -e 's/@''GNULIB_WCSRCHR''@/$(GL_GNULIB_WCSRCHR)/g' \
+	      -e 's/@''GNULIB_WCSCSPN''@/$(GL_GNULIB_WCSCSPN)/g' \
+	      -e 's/@''GNULIB_WCSSPN''@/$(GL_GNULIB_WCSSPN)/g' \
+	      -e 's/@''GNULIB_WCSPBRK''@/$(GL_GNULIB_WCSPBRK)/g' \
+	      -e 's/@''GNULIB_WCSSTR''@/$(GL_GNULIB_WCSSTR)/g' \
+	      -e 's/@''GNULIB_WCSTOK''@/$(GL_GNULIB_WCSTOK)/g' \
+	      -e 's/@''GNULIB_WCSWIDTH''@/$(GL_GNULIB_WCSWIDTH)/g' \
+	      -e 's/@''GNULIB_WCSFTIME''@/$(GL_GNULIB_WCSFTIME)/g' \
+	      -e 's/@''GNULIB_MDA_WCSDUP''@/$(GL_GNULIB_MDA_WCSDUP)/g' \
 	      < $(srcdir)/wchar.in.h | \
 	  sed -e 's|@''HAVE_WINT_T''@|$(HAVE_WINT_T)|g' \
 	      -e 's|@''HAVE_BTOWC''@|$(HAVE_BTOWC)|g' \
