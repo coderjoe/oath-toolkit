@@ -1,6 +1,8 @@
 OATH Toolkit NEWS -- History of user-visible changes.           -*- outline -*-
 Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
+* Version 2.6.8 (unreleased)
+
 * Version 2.6.7 (released 2020-05-01)
 
 ** pam_oath: Support variables in usersfile string parameter.
