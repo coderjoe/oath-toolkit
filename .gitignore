@@ -365,6 +365,7 @@
 /libpskc/gl/tests/inttypes.h
 /libpskc/gl/tests/libtests.a
 /libpskc/gl/tests/stdio.h
+/libpskc/gl/tests/stdlib.h
 /libpskc/gl/tests/sys/
 /libpskc/gl/tests/test-alloca-opt
 /libpskc/gl/tests/test-base64
@@ -374,6 +375,7 @@
 /libpskc/gl/tests/test-float
 /libpskc/gl/tests/test-fputc
 /libpskc/gl/tests/test-fread
+/libpskc/gl/tests/test-free
 /libpskc/gl/tests/test-fwrite
 /libpskc/gl/tests/test-intprops
 /libpskc/gl/tests/test-inttostr
@@ -386,6 +388,7 @@
 /libpskc/gl/tests/test-stddef
 /libpskc/gl/tests/test-stdint
 /libpskc/gl/tests/test-stdio
+/libpskc/gl/tests/test-stdlib
 /libpskc/gl/tests/test-string
 /libpskc/gl/tests/test-strverscmp
 /libpskc/gl/tests/test-sys_types
@@ -643,6 +646,7 @@
 /oathtool/gl/tests/test-float
 /oathtool/gl/tests/test-fputc
 /oathtool/gl/tests/test-fread
+/oathtool/gl/tests/test-free
 /oathtool/gl/tests/test-fstat
 /oathtool/gl/tests/test-ftruncate
 /oathtool/gl/tests/test-fwrite
@@ -856,6 +860,7 @@
 /pskctool/gl/tests/test-fopen-gnu
 /pskctool/gl/tests/test-fputc
 /pskctool/gl/tests/test-fread
+/pskctool/gl/tests/test-free
 /pskctool/gl/tests/test-fstat
 /pskctool/gl/tests/test-ftell
 /pskctool/gl/tests/test-ftell3
