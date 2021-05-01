@@ -3,6 +3,22 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.7 (unreleased)
 
+** pam_oath: Support variables in usersfile string parameter.
+These changes introduce the ${USER} and ${HOME} placeholder values for
+the usersfile string in the pam_oath configuration file. The
+placeholder values allow the user credentials file to be stored in a
+file path that is relative to the user, and mimics similar behavior
+found in google-authenticator-libpam.
+
+The motivation for these changes is to allow for non-privileged
+processes to use pam_oath (e.g., for 2FA with
+xscreensaver). Non-privileged and non-suid programs are unable to use
+pam_oath. These changes are a proposed alternative to a suid helper
+binary as well.
+
+Thanks to Jason Graham <jgraham@compukix.net> for the patch.  See
+<https://gitlab.com/oath-toolkit/oath-toolkit/-/merge_requests/12>.
+
 ** doc: Fix project URL in man pages.
 Thanks to Jason Graham <jgraham@compukix.net> for the patch.  Fixes
 <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/19>.
