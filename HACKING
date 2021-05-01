@@ -44,9 +44,9 @@ the instructions for installing them differ.  Here are some hints:
 
 .Debian/Ubuntu dependencies:
 -----
-apt-get install make git autoconf automake libtool bison
+apt-get install make git autoconf automake libtool bison gengetopt valgrind
 apt-get install libpam0g-dev libxmlsec1-dev libxml2-utils
-apt-get install help2man gtk-doc-tools dblatex valgrind gengetopt
+apt-get install help2man gtk-doc-tools libglib2.0-dev dblatex
 -----
 
 If you have hints on how to install the required dependencies on other
@@ -70,10 +70,11 @@ To prepare a release you need some additional tools:
 - XSLT <http://xmlsoft.org/xslt/>
 - Lcov (to produce coverage HTML pages)
 - Clang (to produce clang analysis)
+- rsync <https://rsync.samba.org/>
 
 .Debian/Ubuntu dependencies:
 -----
-apt-get install asciidoc xsltproc lcov clang
+apt-get install groff asciidoc xsltproc lcov clang rsync
 -----
 
 The release rules are implemented in cfg.mk, and to make new official
