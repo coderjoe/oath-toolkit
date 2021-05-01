@@ -1,16 +1,38 @@
 To: oath-toolkit-help@nongnu.org
-Subject: OATH Toolkit 2.6.6
+Subject: OATH Toolkit 2.6.7
 <#secure method=pgpmime mode=sign>
-Hi!  This release contains some minor bug fixes:
+Hi!  This is a minor release introducing the pam_oath usersfile strings,
+thanks to Jason for contributing this.  Please test that I didn't break
+the functionality for the release, alas the PAM module does not have a
+good self-test coverage.  See below NEWS entries:
 
-** oathtool: Handle HOTP --counter values larger than 0x7FFFFFFFFFFFFFFF.
-Thanks to Jason Lai <jason99.lai@gmail.com> for report.
+** pam_oath: Support variables in usersfile string parameter.
+These changes introduce the ${USER} and ${HOME} placeholder values for
+the usersfile string in the pam_oath configuration file. The
+placeholder values allow the user credentials file to be stored in a
+file path that is relative to the user, and mimics similar behavior
+found in google-authenticator-libpam.
 
-** doc: GTK-DOC manual improvements.
+The motivation for these changes is to allow for non-privileged
+processes to use pam_oath (e.g., for 2FA with
+xscreensaver). Non-privileged and non-suid programs are unable to use
+pam_oath. These changes are a proposed alternative to a suid helper
+binary as well.
+
+Thanks to Jason Graham <jgraham@compukix.net> for the patch.  See
+<https://gitlab.com/oath-toolkit/oath-toolkit/-/merge_requests/12>.
+
+** doc: Fix project URL in man pages.
+Thanks to Jason Graham <jgraham@compukix.net> for the patch.  Fixes
+<https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/19>.
+
+** build: Drop use of libxml's AM_PATH_XML2 in favor of pkg-config.
+
+** build: Modernize autotools usage.
+Most importantly, no longer use -Werror with AM_INIT_AUTOMAKE to make
+rebuilding from source more safe with future automake versions.
 
 ** Updated gnulib files.
-Fixes test-parse-datetime self-check.  Fixes
-<https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/20>.
 
 Happy hacking,
 Simon
@@ -59,8 +81,8 @@ are invited to join our oath-toolkit-help mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
 
 Here are the compressed sources of the entire package:
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.6.tar.gz
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.6.tar.gz.sig
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.7.tar.gz
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.7.tar.gz.sig
 
 The software is cryptographically signed by the author using an OpenPGP
 key identified by the following information:
@@ -78,8 +100,8 @@ I have changed key since older releases, see my transition statements:
 
 Here are the SHA-1 and SHA-224 checksums:
 
-b71dc6e2bf12ba44a9417f04059ea693d32f5693  oath-toolkit-2.6.6.tar.gz
-eb1ce3283a82090d2779f410a717a6fa13dad3e8153717f1791aad06  oath-toolkit-2.6.6.tar.gz
+43daea1daab55ff3d5282fdcaec5f23764ff8fb4  oath-toolkit-2.6.7.tar.gz
+5d828599959a198aa6e4bd716af59d6f74ea56bc89c9947f6323fa8c  oath-toolkit-2.6.7.tar.gz
 
 General information on contributing:
   https://www.nongnu.org/oath-toolkit/contrib.html
