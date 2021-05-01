@@ -10,6 +10,10 @@ Thanks to Jason Graham <jgraham@compukix.net> for the patch.  Fixes
 ** build: Drop use of libxml's AM_PATH_XML2 in favor of pkg-config.
 
 ** build: Modernize autotools usage.
+Most importantly, no longer use -Werror with AM_INIT_AUTOMAKE to make
+rebuilding from source more safe with future automake versions.
+
+** Updated gnulib files.
 
 * Version 2.6.6 (released 2021-01-20)
 
