@@ -109,6 +109,8 @@ release-upload-ftp:
 	scp $(distdir).tar.gz $(distdir).tar.gz.sig jas@dl.sv.nongnu.org:/releases/oath-toolkit/
 	git push
 	git push --tags
+	sha1sum $(distdir).tar.gz
+	sha224sum $(distdir).tar.gz
 
 tag: # Use "make tag VERSION=1.2.3"
 	git tag -s -m $(VERSION) $(tag)
