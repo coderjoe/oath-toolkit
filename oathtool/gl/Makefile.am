@@ -34,6 +34,7 @@
 #  --libtool \
 #  --macro-prefix=gl \
 #  error \
+#  getline \
 #  inttypes \
 #  parse-datetime \
 #  parse-duration \
@@ -320,6 +321,15 @@ EXTRA_libgnu_la_SOURCES += fstat.c stat-w32.c
 
 ## end   gnulib module fstat
 
+## begin gnulib module getdelim
+
+
+EXTRA_DIST += getdelim.c
+
+EXTRA_libgnu_la_SOURCES += getdelim.c
+
+## end   gnulib module getdelim
+
 ## begin gnulib module getdtablesize
 
 
@@ -328,6 +338,15 @@ EXTRA_DIST += getdtablesize.c
 EXTRA_libgnu_la_SOURCES += getdtablesize.c
 
 ## end   gnulib module getdtablesize
+
+## begin gnulib module getline
+
+
+EXTRA_DIST += getline.c
+
+EXTRA_libgnu_la_SOURCES += getline.c
+
+## end   gnulib module getline
 
 ## begin gnulib module getprogname
 

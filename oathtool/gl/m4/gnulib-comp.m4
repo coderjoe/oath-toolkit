@@ -107,8 +107,12 @@ AC_DEFUN([gl_EARLY],
   # Code from module fwrite-tests:
   # Code from module getcwd-lgpl:
   # Code from module getcwd-lgpl-tests:
+  # Code from module getdelim:
+  # Code from module getdelim-tests:
   # Code from module getdtablesize:
   # Code from module getdtablesize-tests:
+  # Code from module getline:
+  # Code from module getline-tests:
   # Code from module getpagesize:
   # Code from module getprogname:
   # Code from module getprogname-tests:
@@ -377,12 +381,24 @@ AC_DEFUN([gl_INIT],
     gl_PREREQ_FSTAT
   fi
   gl_SYS_STAT_MODULE_INDICATOR([fstat])
+  gl_FUNC_GETDELIM
+  if test $HAVE_GETDELIM = 0 || test $REPLACE_GETDELIM = 1; then
+    AC_LIBOBJ([getdelim])
+    gl_PREREQ_GETDELIM
+  fi
+  gl_STDIO_MODULE_INDICATOR([getdelim])
   gl_FUNC_GETDTABLESIZE
   if test $HAVE_GETDTABLESIZE = 0 || test $REPLACE_GETDTABLESIZE = 1; then
     AC_LIBOBJ([getdtablesize])
     gl_PREREQ_GETDTABLESIZE
   fi
   gl_UNISTD_MODULE_INDICATOR([getdtablesize])
+  gl_FUNC_GETLINE
+  if test $REPLACE_GETLINE = 1; then
+    AC_LIBOBJ([getline])
+    gl_PREREQ_GETLINE
+  fi
+  gl_STDIO_MODULE_INDICATOR([getline])
   gl_FUNC_GETPROGNAME
   AC_SUBST([LIBINTL])
   AC_SUBST([LTLIBINTL])
@@ -1001,7 +1017,9 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/float.in.h
   lib/free.c
   lib/fstat.c
+  lib/getdelim.c
   lib/getdtablesize.c
+  lib/getline.c
   lib/getprogname.c
   lib/getprogname.h
   lib/gettext.h
@@ -1109,7 +1127,9 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fstat.m4
   m4/ftruncate.m4
   m4/getcwd.m4
+  m4/getdelim.m4
   m4/getdtablesize.m4
+  m4/getline.m4
   m4/getpagesize.m4
   m4/getprogname.m4
   m4/gettime.m4
@@ -1246,7 +1266,9 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-ftruncate.sh
   tests/test-fwrite.c
   tests/test-getcwd-lgpl.c
+  tests/test-getdelim.c
   tests/test-getdtablesize.c
+  tests/test-getline.c
   tests/test-getprogname.c
   tests/test-gettimeofday.c
   tests/test-ignore-value.c

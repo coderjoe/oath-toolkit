@@ -39,6 +39,7 @@
 #  --libtool \
 #  --macro-prefix=gl \
 #  error \
+#  getline \
 #  inttypes \
 #  parse-datetime \
 #  parse-duration \
@@ -50,6 +51,7 @@
 gl_LOCAL_DIR([])
 gl_MODULES([
   error
+  getline
   inttypes
   parse-datetime
   parse-duration
