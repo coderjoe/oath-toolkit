@@ -41,7 +41,7 @@ dist_man_MANS = oathtool.1
 MAINTAINERCLEANFILES = $(dist_man_MANS)
 EXTRA_DIST = oathtool.h2m
 
-oathtool.1: $(srcdir)/oathtool.c $(srcdir)/oathtool.ggo $(srcdir)/oathtool.h2m $(srcdir)/configure.ac
+oathtool.1: $(srcdir)/oathtool.c $(srcdir)/oathtool.ggo $(srcdir)/oathtool.h2m $(srcdir)/configure.ac $(top_builddir)/oathtool$(EXEEXT)
 	$(AM_V_GEN)$(HELP2MAN) \
 		--include $(srcdir)/oathtool.h2m \
 		--no-info \
