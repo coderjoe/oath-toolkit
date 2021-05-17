@@ -31,6 +31,8 @@
 #include <errno.h>		/* For errno. */
 #include <sys/stat.h>		/* For S_IRUSR, S_IWUSR. */
 
+#ifndef _WIN32
+
 static int
 parse_type (const char *str, unsigned *digits, unsigned *totpstepsize)
 {
@@ -504,3 +506,18 @@ oath_authenticate_usersfile (const char *usersfile,
 
   return rc;
 }
+
+#else /* _WIN32 */
+
+int
+oath_authenticate_usersfile (const char *usersfile,
+			     const char *username,
+			     const char *otp,
+			     size_t window,
+			     const char *passwd, time_t * last_otp)
+{
+	/* The main reason we don't support this on Windows yet is file
+	 * locking. So return that as the error. */
+	return OATH_FILE_LOCK_ERROR;
+}
+#endif
