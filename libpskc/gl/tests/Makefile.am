@@ -792,6 +792,14 @@ EXTRA_DIST += test-string.c
 
 ## end   gnulib module string-tests
 
+## begin gnulib module strings-tests
+
+TESTS += test-strings
+check_PROGRAMS += test-strings
+EXTRA_DIST += test-strings.c
+
+## end   gnulib module strings-tests
+
 ## begin gnulib module strverscmp-tests
 
 TESTS += test-strverscmp
@@ -799,6 +807,14 @@ check_PROGRAMS += test-strverscmp
 EXTRA_DIST += test-strverscmp.c signature.h macros.h
 
 ## end   gnulib module strverscmp-tests
+
+## begin gnulib module sys_time-tests
+
+TESTS += test-sys_time
+check_PROGRAMS += test-sys_time
+EXTRA_DIST += test-sys_time.c
+
+## end   gnulib module sys_time-tests
 
 ## begin gnulib module sys_types-tests
 
@@ -815,6 +831,14 @@ EXTRA_DIST += init.sh
 EXTRA_DIST += test-init.sh
 
 ## end   gnulib module test-framework-sh-tests
+
+## begin gnulib module time-tests
+
+TESTS += test-time
+check_PROGRAMS += test-time
+EXTRA_DIST += test-time.c
+
+## end   gnulib module time-tests
 
 ## begin gnulib module unistd
 

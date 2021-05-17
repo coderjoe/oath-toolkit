@@ -107,14 +107,23 @@ AC_DEFUN([gl_EARLY],
   # Code from module stdio-tests:
   # Code from module stdlib:
   # Code from module stdlib-tests:
+  # Code from module strcase:
   # Code from module string:
   # Code from module string-tests:
+  # Code from module strings:
+  # Code from module strings-tests:
+  # Code from module strptime:
   # Code from module strverscmp:
   # Code from module strverscmp-tests:
+  # Code from module sys_time:
+  # Code from module sys_time-tests:
   # Code from module sys_types:
   # Code from module sys_types-tests:
   # Code from module test-framework-sh:
   # Code from module test-framework-sh-tests:
+  # Code from module time:
+  # Code from module time-tests:
+  # Code from module time_r:
   # Code from module unistd:
   # Code from module unistd-tests:
   # Code from module valgrind-tests:
@@ -164,17 +173,45 @@ AC_DEFUN([gl_INIT],
   gl_STDDEF_H
   gl_STDDEF_H_REQUIRE_DEFAULTS
   gl_STDINT_H
+  gl_STRCASE
+  if test $HAVE_STRCASECMP = 0; then
+    AC_LIBOBJ([strcasecmp])
+    gl_PREREQ_STRCASECMP
+  fi
+  if test $HAVE_STRNCASECMP = 0; then
+    AC_LIBOBJ([strncasecmp])
+    gl_PREREQ_STRNCASECMP
+  fi
   gl_STRING_H
   gl_STRING_H_REQUIRE_DEFAULTS
+  gl_STRINGS_H
+  gl_STRINGS_H_REQUIRE_DEFAULTS
+  gl_FUNC_STRPTIME
+  if test $HAVE_STRPTIME = 0; then
+    AC_LIBOBJ([strptime])
+    gl_PREREQ_STRPTIME
+  fi
+  gl_TIME_MODULE_INDICATOR([strptime])
   gl_FUNC_STRVERSCMP
   if test $HAVE_STRVERSCMP = 0; then
     AC_LIBOBJ([strverscmp])
     gl_PREREQ_STRVERSCMP
   fi
   gl_STRING_MODULE_INDICATOR([strverscmp])
+  gl_SYS_TIME_H
+  gl_SYS_TIME_H_REQUIRE_DEFAULTS
+  AC_PROG_MKDIR_P
   gl_SYS_TYPES_H
   gl_SYS_TYPES_H_REQUIRE_DEFAULTS
   AC_PROG_MKDIR_P
+  gl_TIME_H
+  gl_TIME_H_REQUIRE_DEFAULTS
+  gl_TIME_R
+  if test $HAVE_LOCALTIME_R = 0 || test $REPLACE_LOCALTIME_R = 1; then
+    AC_LIBOBJ([time_r])
+    gl_PREREQ_TIME_R
+  fi
+  gl_TIME_MODULE_INDICATOR([time_r])
   gl_VALGRIND_TESTS
   # End of code from modules
   m4_ifval(gl_LIBSOURCES_LIST, [
@@ -418,9 +455,16 @@ AC_DEFUN([gl_FILE_LIST], [
   lib/stdbool.in.h
   lib/stddef.in.h
   lib/stdint.in.h
+  lib/strcasecmp.c
   lib/string.in.h
+  lib/strings.in.h
+  lib/strncasecmp.c
+  lib/strptime.c
   lib/strverscmp.c
+  lib/sys_time.in.h
   lib/sys_types.in.h
+  lib/time.in.h
+  lib/time_r.c
   lib/uinttostr.c
   lib/umaxtostr.c
   lib/warn-on-use.h
@@ -468,9 +512,17 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdint_h.m4
   m4/stdio_h.m4
   m4/stdlib_h.m4
+  m4/strcase.m4
   m4/string_h.m4
+  m4/strings_h.m4
+  m4/strptime.m4
   m4/strverscmp.m4
+  m4/sys_socket_h.m4
+  m4/sys_time_h.m4
   m4/sys_types_h.m4
+  m4/time_h.m4
+  m4/time_r.m4
+  m4/tm_gmtoff.m4
   m4/unistd_h.m4
   m4/valgrind-tests.m4
   m4/vasnprintf.m4
@@ -509,9 +561,12 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-stdio.c
   tests/test-stdlib.c
   tests/test-string.c
+  tests/test-strings.c
   tests/test-strverscmp.c
+  tests/test-sys_time.c
   tests/test-sys_types.c
   tests/test-sys_wait.h
+  tests/test-time.c
   tests/test-unistd.c
   tests/test-vasnprintf.c
   tests/test-verify-try.c

@@ -45,6 +45,7 @@
 #  lib-symbol-visibility \
 #  manywarnings \
 #  minmax \
+#  strptime \
 #  strverscmp \
 #  valgrind-tests
 
@@ -57,6 +58,7 @@ gl_MODULES([
   lib-symbol-visibility
   manywarnings
   minmax
+  strptime
   strverscmp
   valgrind-tests
 ])
