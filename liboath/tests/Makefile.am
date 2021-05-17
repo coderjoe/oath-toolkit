@@ -34,7 +34,11 @@ ctests = \
 check_PROGRAMS = $(ctests) tst_usersfile
 dist_check_SCRIPTS = tst_usersfile.sh
 
-TESTS = $(ctests) $(dist_check_SCRIPTS)
+TESTS = $(ctests)
+
+if TEST_USERSFILE
+TESTS += $(dist_check_SCRIPTS)
+endif
 
 TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT)
 
