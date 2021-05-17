@@ -15,3 +15,6 @@
 
 TESTS = tst_oathtool.sh tst_hyphen.sh
 dist_check_SCRIPTS = tst_oathtool.sh tst_hyphen.sh
+
+TESTS_ENVIRONMENT = \
+	OATHTOOL=../oathtool$(EXEEXT)
