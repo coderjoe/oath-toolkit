@@ -39,7 +39,8 @@ dist_man_MANS = pskctool.1
 MAINTAINERCLEANFILES = $(dist_man_MANS)
 EXTRA_DIST = pskctool.h2m
 
-pskctool.1: $(srcdir)/pskctool.c $(srcdir)/pskctool.ggo $(srcdir)/pskctool.h2m $(srcdir)/configure.ac $(top_builddir)/pskctool$(EXEEXT)
+pskctool.1: $(srcdir)/pskctool.c $(srcdir)/pskctool.ggo $(srcdir)/pskctool.h2m $(srcdir)/configure.ac
+	$(MAKE) $(builddir)/pskctool$(EXEEXT)
 	$(AM_V_GEN)$(HELP2MAN) \
 		--include $(srcdir)/pskctool.h2m \
 		--no-info \
