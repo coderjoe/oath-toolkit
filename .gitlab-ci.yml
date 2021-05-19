@@ -159,8 +159,7 @@ Mingw64:
   needs: [Debian]
   before_script:
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
-    - update-binfmts --enable wine
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine win32 wine64 binfmt-support wine-binfmt
     - update-binfmts --display
   script:
   - tar xfa oath-toolkit-*.tar.gz
@@ -179,7 +178,6 @@ Mingw32:
     - dpkg --add-architecture i386
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 wine64 libwine libwine:i386 binfmt-support wine-binfmt
-    - update-binfmts --enable wine
     - update-binfmts --display
   script:
   - tar xfa oath-toolkit-*.tar.gz
