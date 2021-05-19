@@ -178,13 +178,13 @@ Mingw32:
   before_script:
     - dpkg --add-architecture i386
     - apt-get update -qq
-    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 libwine libwine:i386 binfmt-support wine-binfmt
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine32 wine64 libwine libwine:i386 binfmt-support wine-binfmt
     - update-binfmts --enable wine
     - update-binfmts --display
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --host=i686-w64-mingw32
+  - ./configure --host=i686-w64-mingw32 CC='i686-w64-mingw32-gcc -static-libgcc'
   - make V=1
   - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
