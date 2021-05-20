@@ -40,8 +40,8 @@ dotest()
 	cmp="!="
     fi
 
-    got="$(printf "$STDIN" | $OATHTOOL $params 2> /dev/null)"
-    err="$(printf "$STDIN" | $OATHTOOL $params 2>&1 > /dev/null)"
+    got="$(printf "$STDIN" | $OATHTOOL $params 2> /dev/null | sed 's/\r//')"
+    err="$(printf "$STDIN" | $OATHTOOL $params 2>&1 > /dev/null | sed 's/\r//')"
 
     if test "`echo $got`" $cmp "`echo $expect`"; then
 	echo FAIL: oathtool $params
