@@ -129,7 +129,7 @@ main (int argc, char **argv)
       rc = pam_authenticate (pamh, 0);
       if (rc == PAM_MODULE_UNKNOWN)
 	{
-	  fprintf (stderr, "pam_oath.so not found in /lib/*/security/.\n");
+	  fprintf (stderr, "pam_oath.so not found.\n");
 	  return 77;
 	}
       if (rc != tv[loop].expectrc)
