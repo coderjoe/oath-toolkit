@@ -37,19 +37,19 @@ static size_t loop;
   887919
   320986
 
-  Run 'oathtool --totp --now=2006-12-07 00 -w10' to generate:
+  Run 'oathtool --totp --now="2006-12-07 UTC" 00 -w10' to generate:
 
-  140852
-  299833
-  044488
-  584072
-  000706
-  512368
-  094088
-  755942
-  936706
-  369736
-  787399
+  963013
+  068866
+  734019
+  038980
+  630208
+  533058
+  042289
+  046988
+  047407
+  892423
+  619507
 */
 
 /* *INDENT-OFF* */
@@ -70,12 +70,12 @@ static const struct {
   { "user2", "bad887919", PAM_AUTH_ERR },
   { "user2", "pw887919", PAM_SUCCESS },
   { "user3", "bad", PAM_AUTH_ERR },
-  { "user3", "299833", PAM_SUCCESS },
-  { "user3", "299833", PAM_AUTH_ERR },
-  { "user3", "140852", PAM_AUTH_ERR },
-  { "user3", "936706", PAM_SUCCESS },
-  { "user3", "512368", PAM_AUTH_ERR },
-  { "user3", "787399", PAM_SUCCESS },
+  { "user3", "068866", PAM_SUCCESS },
+  { "user3", "068866", PAM_AUTH_ERR },
+  { "user3", "963013", PAM_AUTH_ERR },
+  { "user3", "047407", PAM_SUCCESS },
+  { "user3", "533058", PAM_AUTH_ERR },
+  { "user3", "619507", PAM_SUCCESS },
 };
 /* *INDENT-ON* */
 
