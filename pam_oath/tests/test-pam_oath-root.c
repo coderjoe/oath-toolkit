@@ -83,6 +83,7 @@ static const struct {
   { "user3", "047407", PAM_SUCCESS },
   { "user3", "533058", PAM_AUTH_ERR },
   { "user3", "619507", PAM_SUCCESS },
+  { "user4", NULL, PAM_USER_UNKNOWN },  // unconfigured user
 };
 /* *INDENT-ON* */
 
@@ -92,19 +93,31 @@ oath_conv (int num_msg, const struct pam_message **msg,
 {
   struct pam_response *out;
 
+  printf ("Got prompt (type %d): %s\n", msg[0]->msg_style, msg[0]->msg);
+
   if (num_msg != 1)
     {
       printf ("num_msg != 1?!\n");
-      exit (EXIT_FAILURE);
+      return PAM_CONV_ERR;
     }
+
+  // If user is unknown, module should not prompt for password
+  if (tv[loop].passwd == NULL) {
+    printf ("prompt not expected for unknown user (%s)\n", tv[loop].user);
+    return PAM_CONV_ERR;
+  }
 
   out = malloc (sizeof (*out));
   if (out == NULL)
     return PAM_BUF_ERR;
 
-  printf ("Got prompt (type %d): %s\n", msg[0]->msg_style, msg[0]->msg);
   out[0].resp_retcode = 0;
   out[0].resp = strdup (tv[loop].passwd);
+
+  if (out[0].resp == NULL) {
+    free (out);
+    return PAM_BUF_ERR;
+  }
 
   *resp = out;
 
