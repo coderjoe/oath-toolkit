@@ -3,6 +3,9 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.8 (unreleased)
 
+** pam_oath: Self-test improvements.
+Patch from Nick Gaya <nicholasgaya+github@gmail.com>.
+
 ** liboath: Builds on Windows.
 The oath_authenticate_usersfile function is just a stub that returns
 an error.  This allows for use of the rest of the library on Windows.
