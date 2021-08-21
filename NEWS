@@ -3,6 +3,11 @@ Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.8 (unreleased)
 
+** pam_oath: Don't fail authentication when pam_modutil_getpwnam doesn't
+** know the user when usersfile don't include ${USER} or ${HOME}. Closes: #27.
+Regression introduced in previous release.  Reported by Nick Gaya
+<nicholasgaya+github@gmail.com>.
+
 ** pam_oath: Self-test improvements.
 Patch from Nick Gaya <nicholasgaya+github@gmail.com>.
 

@@ -149,6 +149,15 @@ parse_usersfile_str(pam_handle_t * pamh, const struct cfg *cfg, const char *user
     return PAM_BUF_ERR;
   }
 
+  if (strstr (cfg->usersfile, "${USER}") == NULL
+      && strstr (cfg->usersfile, "${HOME}") == NULL)
+    {
+      *usersfile = strdup (cfg->usersfile);
+      if (!*usersfile)
+	return PAM_BUF_ERR;
+      return PAM_SUCCESS;
+    }
+
   pw = pam_modutil_getpwnam(pamh, user);
   if(!pw)
     {
