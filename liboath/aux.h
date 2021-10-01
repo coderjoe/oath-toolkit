@@ -1,5 +1,5 @@
 /*
- * aux.h - auxilliary helper functions for other parts of liboath
+ * aux.h - auxiliary helper functions for other parts of liboath
  * Copyright (C) 2011-2021 Simon Josefsson
  *
  * This library is free software; you can redistribute it and/or

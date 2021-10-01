@@ -144,7 +144,7 @@ Suggested by Jaroslav Škarvada.
 
 ** liboath: Fix usersfile bug that caused it to update the wrong line.
 When an usersfile contain multiple lines for the same user but with an
-unparseable token type (e.g., HOTP vs TOTP), the code would update the
+unparsable token type (e.g., HOTP vs TOTP), the code would update the
 wrong line of the file.  Since the then updated line could be a
 commented out line, this can lead to the same OTP being accepted
 multiple times which is a security vulnerability.  Reported by Bas van

@@ -165,7 +165,7 @@ parse_usersfile_str(pam_handle_t * pamh, const struct cfg *cfg, const char *user
     }
 
   /*
-    Find occurances of the placeholder fields to determine
+    Find occurrences of the placeholder fields to determine
     userfile buffer length
   */
   name_len = strlen(pw->pw_name);
