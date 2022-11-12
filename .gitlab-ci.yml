@@ -71,7 +71,7 @@ pages:
 
 Ubuntu-xmlsec:
   image: ubuntu:20.04
-  Stage: test
+  stage: test
   needs: [Debian]
   before_script:
     - apt-get update -qq
