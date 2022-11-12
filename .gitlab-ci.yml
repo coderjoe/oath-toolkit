@@ -70,8 +70,8 @@ pages:
   - master
 
 Ubuntu-xmlsec:
-  image: ubuntu:latest
-  stage: test
+  image: ubuntu:20.04
+  Stage: test
   needs: [Debian]
   before_script:
     - apt-get update -qq
