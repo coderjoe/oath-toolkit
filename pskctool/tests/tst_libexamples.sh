@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # tst_libexamples.sh - keep pskctool output in GTK-DOC manual up to date
-# Copyright (C) 2012-2021 Simon Josefsson
+# Copyright (C) 2012-2022 Simon Josefsson
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,7 +45,8 @@ fi
 
 $PSKCTOOL --sign --sign-key $srcdir/pskc-ee-key.pem \
     --sign-crt $srcdir/pskc-ee-crt.pem \
-    $srcdir/../../libpskc/examples/pskc-hotp.xml > foo
+    $srcdir/../../libpskc/examples/pskc-hotp.xml \
+    | sed 's,4</X509Cert,4\n</X509Cert,' > foo
 if ! diff -ur $srcdir/../../libpskc/examples/pskc-hotp-signed.xml foo; then
     echo "FAIL: pskctool --sign output change, commit updated file."
     exit 1
