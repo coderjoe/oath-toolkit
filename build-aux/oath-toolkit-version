@@ -19,9 +19,9 @@ if test "x$2" = "xvn"; then
     VERSION=`$0 $1`
     MAJOR=`echo $VERSION | sed 's/^\([^.]*\)\..*/\1/g'`
     MINOR=`echo $VERSION | sed 's/^[^.]*\.\([^.]*\)\..*/\1/g'`
-    PATCH=`echo $VERSION | sed 's/^[^.]*\.[^.]*\.\([0-9]\+\).*/\1/g'`
+    PATCH=`echo $VERSION | sed 's/^[^.]*\.[^.]*\.\([0-9]*\).*/\1/g'`
     printf "0x%02x%02x%02x00" $MAJOR $MINOR $PATCH
 else
     `dirname $0`/git-version-gen --prefix oath-toolkit- $1 \
-		's/\([a-z-]*-\)\([0-9]*\)-\([0-9]*\)-\([0-9]*\)\(-\([0-9]*\)\)\?.*/\1\2.\3.\4.\6/;s/\.$//'
+		's/\([a-z-]*-\)\([0-9]*\)-\([0-9]*\)-\([0-9]*\)-\([0-9]*\)-.*/\1\2.\3.\4.\5/'
 fi
