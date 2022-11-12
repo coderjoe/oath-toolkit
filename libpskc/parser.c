@@ -47,8 +47,10 @@ parse_deviceinfo (xmlNode * x, struct pskc_key *kp, int *rc)
       if (strcmp ("Manufacturer", name) == 0)
 	{
 	  kp->device_manufacturer = content;
-	  if (strncmp ("oath.", content, 5) != 0
-	      && strncmp ("iana.", content, 5) != 0)
+	  if (content == NULL)
+	    _pskc_debug ("non-compliant NULL Manufacturer value");
+	  else if (strncmp ("oath.", content, 5) != 0
+		   && strncmp ("iana.", content, 5) != 0)
 	    _pskc_debug ("non-compliant Manufacturer value: %s", content);
 	}
       else if (strcmp ("SerialNo", name) == 0)
