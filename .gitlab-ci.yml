@@ -84,8 +84,8 @@ Ubuntu-xmlsec:
   - ../configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
-CentOS:
-  image: centos:latest
+AlmaLinux8:
+  image: almalinux:8
   stage: test
   needs: [Debian]
   before_script:
@@ -96,8 +96,8 @@ CentOS:
   - ./configure --disable-pskc --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
-CentOS-xmlsec:
-  image: centos:latest
+AlmaLinux8-xmlsec:
+  image: almalinux:8
   stage: test
   needs: [Debian]
   before_script:
