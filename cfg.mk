@@ -1,4 +1,4 @@
-# Copyright (C) 2009-2021 Simon Josefsson
+# Copyright (C) 2009-2022 Simon Josefsson
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -51,6 +51,7 @@ exclude_file_name_regexp--sc_require_config_h_first = $(exclude_file_name_regexp
 exclude_file_name_regexp--sc_trailing_blank = ^m4/pkg.m4|libpskc/examples/pskctool-h.txt$$
 exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
 exclude_file_name_regexp--sc_space_tab = ^m4/pkg.m4$$
+exclude_file_name_regexp--sc_avoid_if_before_free = ^pam_oath/pam_modutil.c$$
 
 update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=2
 
