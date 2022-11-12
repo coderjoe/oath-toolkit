@@ -154,7 +154,7 @@ ArchLinux-xmlsec:
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
 Mingw32:
-  image: debian:latest
+  image: debian:11-slim
   stage: test
   needs: [Debian]
   before_script:
@@ -171,7 +171,7 @@ Mingw32:
   - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
 
 Mingw64:
-  image: debian:latest
+  image: debian:11-slim
   stage: test
   needs: [Debian]
   before_script:
