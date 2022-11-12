@@ -48,6 +48,7 @@
 /liboath/gl/.deps/
 /liboath/gl/.libs/
 /liboath/gl/alloca.h
+/liboath/gl/byteswap.h
 /liboath/gl/fcntl.h
 /liboath/gl/inttypes.h
 /liboath/gl/libgnu.la
@@ -56,6 +57,7 @@
 /liboath/gl/malloc/.dirstamp
 /liboath/gl/stdalign.h
 /liboath/gl/stddef.h
+/liboath/gl/stdint.h
 /liboath/gl/stdio.h
 /liboath/gl/stdlib.h
 /liboath/gl/string.h
@@ -306,6 +308,7 @@
 /liboath/oath.h
 /liboath/stamp-h1
 /liboath/tests/.deps/
+/liboath/tests/.libs/
 /liboath/tests/Makefile
 /liboath/tests/Makefile.in
 /liboath/tests/test-suite.html
@@ -344,6 +347,7 @@
 /libpskc/config.status
 /libpskc/configure
 /libpskc/examples/.deps/
+/libpskc/examples/.libs/
 /libpskc/examples/pskc2csv
 /libpskc/examples/pskccreate
 /libpskc/examples/pskcsign
@@ -356,7 +360,9 @@
 /libpskc/gl/libgnu.la
 /libpskc/gl/limits.h
 /libpskc/gl/stddef.h
+/libpskc/gl/stdint.h
 /libpskc/gl/string.h
+/libpskc/gl/strings.h
 /libpskc/gl/sys/
 /libpskc/gl/tests/.deps/
 /libpskc/gl/tests/alloca.h
@@ -399,6 +405,7 @@
 /libpskc/gl/tests/unistd.h
 /libpskc/gl/tests/warn-on-use.h
 /libpskc/gl/tests/wchar.h
+/libpskc/gl/time.h
 /libpskc/gl/warn-on-use.h
 /libpskc/gtk-doc/gtkdoc-check.test
 /libpskc/gtk-doc/html-build.stamp
@@ -609,6 +616,7 @@
 /oathtool/gl/parse-datetime-gen.h
 /oathtool/gl/parse-datetime.c
 /oathtool/gl/stddef.h
+/oathtool/gl/stdint.h
 /oathtool/gl/stdio.h
 /oathtool/gl/stdlib.h
 /oathtool/gl/string.h
@@ -820,6 +828,7 @@
 /pskctool/gl/m4/ltversion.m4
 /pskctool/gl/m4/lt~obsolete.m4
 /pskctool/gl/stddef.h
+/pskctool/gl/stdint.h
 /pskctool/gl/stdio.h
 /pskctool/gl/stdlib.h
 /pskctool/gl/string.h
