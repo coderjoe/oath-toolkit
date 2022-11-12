@@ -1,7 +1,13 @@
 OATH Toolkit NEWS -- History of user-visible changes.           -*- outline -*-
-Copyright (C) 2009-2021 Simon Josefsson.  Licensed under the GPLv3+.
+Copyright (C) 2009-2022 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.8 (unreleased)
+
+** libpskc: Self-test fixes to work with recent libxmlsec.
+
+** pam_oath: Provide fallback pam_modutil_getpwnam implementation.
+Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/26> on
+Mac OS.  Patch from Nick Gaya <nicholasgaya+github@gmail.com>.
 
 ** pam_oath: Don't fail authentication when pam_modutil_getpwnam doesn't
 ** know the user when usersfile don't include ${USER} or ${HOME}. Closes: #27.
@@ -16,6 +22,9 @@ The oath_authenticate_usersfile function is just a stub that returns
 an error.  This allows for use of the rest of the library on Windows.
 Thanks to David Woodhouse, see
 <https://gitlab.com/oath-toolkit/oath-toolkit/-/merge_requests/15>.
+
+** Codespell typo fixes.
+Patch by Dimitri Papadopoulos.
 
 * Version 2.6.7 (released 2021-05-01)
 
