@@ -396,8 +396,11 @@
 /libpskc/gl/tests/test-stdio
 /libpskc/gl/tests/test-stdlib
 /libpskc/gl/tests/test-string
+/libpskc/gl/tests/test-strings
 /libpskc/gl/tests/test-strverscmp
+/libpskc/gl/tests/test-sys_time
 /libpskc/gl/tests/test-sys_types
+/libpskc/gl/tests/test-time
 /libpskc/gl/tests/test-unistd
 /libpskc/gl/tests/test-vasnprintf
 /libpskc/gl/tests/test-verify
@@ -571,6 +574,7 @@
 /libpskc/schemas/catalog-pskc.xml
 /libpskc/stamp-h1
 /libpskc/tests/.deps/
+/libpskc/tests/.libs/
 /libpskc/tests/tst_accessors
 /libpskc/tests/tst_basic
 /libpskc/tests/tst_errors
@@ -659,7 +663,9 @@
 /oathtool/gl/tests/test-ftruncate
 /oathtool/gl/tests/test-fwrite
 /oathtool/gl/tests/test-getcwd-lgpl
+/oathtool/gl/tests/test-getdelim
 /oathtool/gl/tests/test-getdtablesize
+/oathtool/gl/tests/test-getline
 /oathtool/gl/tests/test-getprogname
 /oathtool/gl/tests/test-gettimeofday
 /oathtool/gl/tests/test-ignore-value
