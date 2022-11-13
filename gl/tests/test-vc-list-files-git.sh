@@ -1,6 +1,6 @@
 #!/bin/sh
 # Unit tests for vc-list-files
-# Copyright (C) 2008-2021 Free Software Foundation, Inc.
+# Copyright (C) 2008-2022 Free Software Foundation, Inc.
 # This file is part of the GNUlib Library.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,7 @@
 
 tmpdir=vc-git-$$
 GIT_DIR= GIT_WORK_TREE=; unset GIT_DIR GIT_WORK_TREE
+export GIT_CONFIG_GLOBAL=/dev/null
 
 fail=1
 mkdir $tmpdir && cd $tmpdir &&
