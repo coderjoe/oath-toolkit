@@ -1,6 +1,6 @@
 /*
  * test-pam_oath.c - self-tests for PAM module for OATH one-time passwords
- * Copyright (C) 2009-2021 Simon Josefsson
+ * Copyright (C) 2009-2022 Simon Josefsson
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -26,6 +26,9 @@
 /* pam_sm_authenticate */
 #define PAM_SM_AUTH
 #include <security/pam_modules.h>
+
+/* pam_strerror */
+#include <security/pam_appl.h>
 
 int
 main (int argc, char **argv)
