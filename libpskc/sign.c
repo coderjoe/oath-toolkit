@@ -108,9 +108,15 @@ pskc_sign_x509 (pskc_t * container,
     }
 
   /* load private key, assuming that there is not password */
+#ifdef xmlSecCryptoAppKeyLoadEx
+  dsigCtx->signKey = xmlSecCryptoAppKeyLoadEx (key_file, xmlSecKeyDataTypePrivate,
+					       xmlSecKeyDataFormatPem,
+					       NULL, NULL, NULL);
+#else
   dsigCtx->signKey = xmlSecCryptoAppKeyLoad (key_file,
 					     xmlSecKeyDataFormatPem,
 					     NULL, NULL, NULL);
+#endif
   if (dsigCtx->signKey == NULL)
     {
       _pskc_debug ("xmlSecCryptoAppKeyLoad failed");
