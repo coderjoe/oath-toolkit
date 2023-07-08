@@ -44,6 +44,7 @@ AC_DEFUN([gl_EARLY],
   # Code from module autobuild:
   AB_INIT
   # Code from module git-version-gen:
+  # Code from module gitlog-to-changelog:
   # Code from module gnumakefile:
   # Code from module maintainer-makefile:
   # Code from module test-framework-sh:
@@ -238,6 +239,7 @@ AC_DEFUN([gltests_LIBSOURCES], [
 # gnulib-tool and may be removed by future gnulib-tool invocations.
 AC_DEFUN([gl_FILE_LIST], [
   build-aux/git-version-gen
+  build-aux/gitlog-to-changelog
   build-aux/update-copyright
   build-aux/useless-if-before-free
   build-aux/vc-list-files

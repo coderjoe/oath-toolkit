@@ -36,6 +36,7 @@
 #  --no-vc-files \
 #  autobuild \
 #  git-version-gen \
+#  gitlog-to-changelog \
 #  maintainer-makefile \
 #  update-copyright
 
@@ -73,6 +74,13 @@ EXTRA_libgnu_a_SOURCES =
 EXTRA_DIST += $(top_srcdir)/build-aux/git-version-gen
 
 ## end   gnulib module git-version-gen
+
+## begin gnulib module gitlog-to-changelog
+
+
+EXTRA_DIST += $(top_srcdir)/build-aux/gitlog-to-changelog
+
+## end   gnulib module gitlog-to-changelog
 
 ## begin gnulib module gnumakefile
 

@@ -41,6 +41,7 @@
 #  --no-vc-files \
 #  autobuild \
 #  git-version-gen \
+#  gitlog-to-changelog \
 #  maintainer-makefile \
 #  update-copyright
 
@@ -49,6 +50,7 @@ gl_LOCAL_DIR([])
 gl_MODULES([
   autobuild
   git-version-gen
+  gitlog-to-changelog
   maintainer-makefile
   update-copyright
 ])
