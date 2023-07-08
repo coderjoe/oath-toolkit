@@ -22,6 +22,17 @@ fi
 
 srcdir=${srcdir:-.}
 
+FAKETIME=datefudge
+TSTAMP=`$FAKETIME "2006-09-23" date -u +%s`
+if test "$TSTAMP" != "1158969600"; then
+    FAKETIME=faketime
+    TSTAMP=`$FAKETIME "2006-09-23" date -u +%s`
+    if test "$TSTAMP" != "1158969600"; then
+	echo "Faketime or datefudge missing ($TSTAMP)" >&2
+	exit 77
+    fi
+fi
+
 ETCPAMCFG=/etc/pam.d/pam_oath1
 ETCUSRCFG=/etc/tst-pam_oath.users
 
@@ -63,15 +74,8 @@ if ! test -f $ETCUSRCFG; then
     exit 77
 fi
 
-TSTAMP=`TZ=UTC datefudge "2006-09-23" date -u +%s`
-if test "$TSTAMP" != "1158969600"; then
-    echo "Cannot fake timestamp, install datefudge to check better. ($TSTAMP)"
-    ./test-pam_oath-root user3
-    rc=$?
-else
-    TZ=UTC datefudge "2006-12-07" ./test-pam_oath-root user3
-    rc=$?
-fi
+TZ=UTC $FAKETIME "2006-12-07" ./test-pam_oath-root user3
+rc=$?
 
 if test "$rc" != "77"; then
     diff -u "$srcdir/expect.oath" $ETCUSRCFG || rc=1
