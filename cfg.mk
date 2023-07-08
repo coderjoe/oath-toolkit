@@ -67,7 +67,7 @@ glimport:
 review-diff:
 	git diff `git describe --abbrev=0`.. \
 	| grep -v -e ^index -e '^diff --git' \
-	| filterdiff -p 1 -x 'build-aux/*' -x '*/build-aux/*' -x 'gl/*' -x '*/gl/*' -x 'gltests/*' -x '*/gltests/*' -x 'maint.mk' -x '.gitignore' -x '.x-sc*' -x 'ChangeLog' -x 'GNUmakefile' -x '.clcopying' \
+	| filterdiff -p 1 -x 'build-aux/*' -x '*/build-aux/*' -x 'gl/*' -x '*/gl/*' -x 'gltests/*' -x '*/gltests/*' -x 'maint.mk' -x '.gitignore' -x '.x-sc*' -x 'ChangeLog' -x 'GNUmakefile' \
 	| less
 
 # Release
@@ -75,14 +75,9 @@ review-diff:
 tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
 htmldir = ../www-$(PACKAGE)
 
-ChangeLog:
-	git2cl > ChangeLog
-	cat .clcopying >> ChangeLog
-
 tarball:
 	test `git describe` = `git tag -l $(tag)`
-	rm -f ChangeLog
-	$(MAKE) ChangeLog distcheck
+	$(MAKE) distcheck
 
 .PHONY: website
 website:
