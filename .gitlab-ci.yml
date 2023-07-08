@@ -3,8 +3,8 @@ stages:
  - test
  - deploy
 
-Debian:
-  image: registry.gitlab.com/oath-toolkit/build-images:Debian
+Trisquel11:
+  image: registry.gitlab.com/oath-toolkit/build-images:Trisquel11
   stage: build
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
@@ -20,8 +20,8 @@ Debian:
       - oath-toolkit-*.tar.gz
       - website/html
 
-Ubuntu-coverage:
-  image: registry.gitlab.com/oath-toolkit/build-images:Ubuntu-coverage
+Debian12-coverage:
+  image: registry.gitlab.com/oath-toolkit/build-images:Debian12-coverage
   stage: build
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
@@ -40,8 +40,8 @@ Ubuntu-coverage:
   only:
     - master
 
-Fedora-clanganalyzer:
-  image: registry.gitlab.com/oath-toolkit/build-images:Fedora-clanganalyzer
+Fedora38-clanganalyzer:
+  image: registry.gitlab.com/oath-toolkit/build-images:Fedora38-clanganalyzer
   stage: build
   script:
   - make autoreconf
@@ -56,7 +56,7 @@ Fedora-clanganalyzer:
 
 pages:
   stage: deploy
-  needs: ["Debian", "Ubuntu-coverage", "Fedora-clanganalyzer"]
+  needs: ["Trisquel11", "Debian12-coverage", "Fedora38-clanganalyzer"]
   script:
     - mkdir public
     - mv coverage/ public/
@@ -69,10 +69,25 @@ pages:
   only:
   - master
 
+Debian12:
+  image: debian:12-slim
+  stage: test
+  needs: [Trisquel11]
+  before_script:
+    - apt-get update -qq
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libpam0g-dev libxmlsec1-dev libxml2-utils datefudge
+  script:
+  - tar xfa oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - mkdir b
+  - cd b
+  - ../configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
+  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+
 Ubuntu-xmlsec:
   image: ubuntu:20.04
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libpam0g-dev libxmlsec1-dev libxml2-utils datefudge
@@ -87,7 +102,7 @@ Ubuntu-xmlsec:
 AlmaLinux8:
   image: almalinux:8
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
   - yum -y install make gcc diffutils file pam-devel
   script:
@@ -99,7 +114,7 @@ AlmaLinux8:
 AlmaLinux8-xmlsec:
   image: almalinux:8
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
   - yum -y install make gcc diffutils file pam-devel
   - yum -y install libxml2-devel libtool-ltdl-devel
@@ -114,7 +129,7 @@ AlmaLinux8-xmlsec:
 Alpine:
   image: alpine:latest
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
   - apk update
   - apk add build-base datefudge
@@ -128,7 +143,7 @@ Alpine:
 ArchLinux:
   image: archlinux:latest
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
   - pacman -Suy --noconfirm make gcc diffutils file
   script:
@@ -142,7 +157,7 @@ ArchLinux:
 ArchLinux-xmlsec:
   image: archlinux:latest
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
   - pacman -Suy --noconfirm make gcc diffutils file xmlsec pkg-config
   script:
@@ -156,7 +171,7 @@ ArchLinux-xmlsec:
 Mingw32:
   image: debian:11-slim
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
     - dpkg --add-architecture i386
     - apt-get update -qq
@@ -173,7 +188,7 @@ Mingw32:
 Mingw64:
   image: debian:11-slim
   stage: test
-  needs: [Debian]
+  needs: [Trisquel11]
   before_script:
     - apt-get update -qq
     - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make mingw-w64 wine wine64 binfmt-support wine-binfmt
