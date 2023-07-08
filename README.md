@@ -8,7 +8,7 @@ event-based HOTP algorithm (RFC 4226), the time-based TOTP algorithm
 manage secret key data.  OATH stands for Open AuTHentication, which is
 the organization that specify the algorithms.
 
-See each sub-directory for more information:
+The following components are included:
 
  * `liboath`: A shared and static C library for OATH handling.
  * `oathtool`: A command line tool for generating and validating OTPs.
@@ -55,11 +55,9 @@ If any of the self-tests fail, please report it as a bug.
 # Contact
 
 For e-mail discussions related the OATH Toolkit, please send e-mail to
-oath-toolkit-help@nongnu.org after subscribing to the mailing list
-through the following web page, where you can also find an archive of
-earlier posts.
-
-  https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
+oath-toolkit-help@nongnu.org after subscribing to the [mailing
+list](https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help),
+where you can find an archive of earlier posts.
 
 # Contributing
 
