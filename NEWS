@@ -3,7 +3,7 @@ Copyright (C) 2009-2023 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.8 (unreleased)
 
-** libpskc: Self-test fixes to work with recent libxmlsec.
+** libpskc: Fixes for recent libxmlsec releases.
 
 ** pam_oath: Provide fallback pam_modutil_getpwnam implementation.
 Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/26> on
@@ -22,6 +22,12 @@ The oath_authenticate_usersfile function is just a stub that returns
 an error.  This allows for use of the rest of the library on Windows.
 Thanks to David Woodhouse, see
 <https://gitlab.com/oath-toolkit/oath-toolkit/-/merge_requests/15>.
+
+** Disable PAM self-tests on Mac.  Fix --enable-root-tests logic.
+
+** Don't ship gtk-doc PDF's in tarball.
+
+** Use gitlog-to-changelog instead of git2cl.
 
 ** Codespell typo fixes.
 Patch by Dimitri Papadopoulos.
