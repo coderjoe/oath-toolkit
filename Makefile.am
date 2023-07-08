@@ -1,4 +1,4 @@
-# Copyright (C) 2009-2021 Simon Josefsson
+# Copyright (C) 2009-2023 Simon Josefsson
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ ACLOCAL_AMFLAGS = -I m4 -I gl/m4
 
 EXTRA_DIST = GNUmakefile .clcopying cfg.mk maint.mk
 EXTRA_DIST += build-aux/oath-toolkit-version m4/dummy.m4
-EXTRA_DIST += HACKING
+EXTRA_DIST += CONTRIBUTING.md
 
 # Website
 EXTRA_DIST += website/asciidoc.css website/build-website.sh		\
