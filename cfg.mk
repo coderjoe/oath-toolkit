@@ -72,7 +72,7 @@ review-diff:
 
 # Release
 
-tag = $(PACKAGE)-`echo $(VERSION) | sed 's/\./-/g'`
+tag = $(PACKAGE)-$(VERSION)
 htmldir = ../www-$(PACKAGE)
 
 tarball:
