@@ -49,8 +49,17 @@ AC_MSG_NOTICE([PAM installation path $PAMDIR])
 AC_ARG_ENABLE(root-tests,
   AS_HELP_STRING([--enable-root-tests],
                  [enable some self-tests that need root permissions]),
-  root_tests=yes, root_tests=$enableval)
+  root_tests=$enableval, root_tests=no)
 AM_CONDITIONAL([ROOT_TESTS], [test x$root_tests = xyes])
+
+AC_ARG_ENABLE(pam-tests,
+  AS_HELP_STRING([--disable-pam-tests],
+                 [disable PAM self-tests that requires linking a module]),
+  linkable_modules=$enableval,
+  [case "$host_os" in
+     darwin*) linkable_modules=no;;
+   esac])
+AM_CONDITIONAL([TEST_PAM], [test "x$linkable_modules" != "xno"])
 
 AC_CONFIG_FILES([
   Makefile
