@@ -239,6 +239,7 @@
 /liboath/gtk-doc/liboath-undeclared.txt
 /liboath/gtk-doc/liboath-undocumented.txt
 /liboath/gtk-doc/liboath-unused.txt
+/liboath/gtk-doc/liboath.actions
 /liboath/gtk-doc/liboath.args
 /liboath/gtk-doc/liboath.hierarchy
 /liboath/gtk-doc/liboath.interfaces
@@ -248,6 +249,7 @@
 /liboath/gtk-doc/liboath.types
 /liboath/gtk-doc/pdf-build.stamp
 /liboath/gtk-doc/pdf.stamp
+/liboath/gtk-doc/profile.txt
 /liboath/gtk-doc/scan-build.stamp
 /liboath/gtk-doc/setup-build.stamp
 /liboath/gtk-doc/sgml-build.stamp
@@ -423,6 +425,7 @@
 /libpskc/gtk-doc/libpskc-undeclared.txt
 /libpskc/gtk-doc/libpskc-undocumented.txt
 /libpskc/gtk-doc/libpskc-unused.txt
+/libpskc/gtk-doc/libpskc.actions
 /libpskc/gtk-doc/libpskc.args
 /libpskc/gtk-doc/libpskc.hierarchy
 /libpskc/gtk-doc/libpskc.interfaces
