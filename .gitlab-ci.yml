@@ -1,3 +1,17 @@
+default:
+  interruptible: true
+  artifacts:
+    expire_in: 2 weeks
+    when: always
+    paths:
+    - "*.tar.gz"
+    - ./*.log
+    - ./config.h
+    - ./**/*.log
+    - website/html
+    - coverage
+    - clang-analyzer
+
 stages:
  - build
  - test
@@ -10,15 +24,10 @@ Trisquel11:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make bootstrap
   - make syntax-check
-  - make V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make V=1
   - make dist
   - sha224sum oath-toolkit-*.tar.gz
   - cd website && ./build-website.sh
-  artifacts:
-    expire_in: 2 weeks
-    paths:
-      - oath-toolkit-*.tar.gz
-      - website/html
 
 Debian12-coverage:
   image: registry.gitlab.com/oath-toolkit/build-images:Debian12-coverage
@@ -26,48 +35,23 @@ Debian12-coverage:
   script:
   - echo "--suppressions=$(pwd)/libpskc/tests/libpskc.supp" >> ~/.valgrindrc
   - make autoreconf
-  - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests CFLAGS="-g --coverage" || (cat config.log; exit 1)
+  - ./configure --enable-gcc-warnings --enable-root-tests --enable-valgrind-tests CFLAGS="-g --coverage"
   - lcov --directory . --zerocounters
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make check V=1 VERBOSE=t
+  - grep '^PASS tst_usersfile.sh' liboath/tests/tst_usersfile.log
+  - grep '^PASS run-root-tests.sh' pam_oath/tests/run-root-tests.sh.log
   - mkdir coverage
   - lcov --directory . --output-file coverage/oath-toolkit.info --capture
   - lcov --remove coverage/oath-toolkit.info '/usr/include/*' '*/liboath/gl/*' '*/liboath/tests/*' '*/libpskc/gl/*' '*/libpskc/tests/*' '*/oathtool/gl/*' '*/pam_oath/tests/*' '*/pskctool/gl/*' -o coverage/oath-toolkit_filtered.info
   - genhtml --output-directory coverage coverage/oath-toolkit_filtered.info --highlight --frames --legend --title "OATH Toolkit"
-  artifacts:
-    when: on_success
-    paths:
-      - coverage
-  only:
-    - master
 
 Fedora38-clanganalyzer:
   image: registry.gitlab.com/oath-toolkit/build-images:Fedora38-clanganalyzer
   stage: build
   script:
   - make autoreconf
-  - scan-build ./configure --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
+  - scan-build ./configure --with-xmlsec-crypto-engine=openssl
   - scan-build -o clang-analyzer make V=1
-  artifacts:
-    when: on_success
-    paths:
-      - clang-analyzer
-  only:
-    - master
-
-pages:
-  stage: deploy
-  needs: ["Trisquel11", "Debian12-coverage", "Fedora38-clanganalyzer"]
-  script:
-    - mkdir public
-    - mv coverage/ public/
-    - mv clang-analyzer/* public/clang-analyzer
-    - mv website/html/* public/
-  artifacts:
-    paths:
-    - public
-    expire_in: 30 days
-  only:
-  - master
 
 Debian12:
   image: debian:12-slim
@@ -84,6 +68,21 @@ Debian12:
   - ../configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
   - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
 
+Debian12:
+  image: debian:12-slim
+  stage: test
+  needs: [Trisquel11]
+  before_script:
+    - apt-get update -qq
+    - env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq make gcc pkg-config libpam0g-dev libxmlsec1-dev libxml2-utils datefudge
+  script:
+  - tar xfa oath-toolkit-*.tar.gz
+  - cd `ls -d oath-toolkit-* | grep -v tar.gz`
+  - mkdir b
+  - cd b
+  - ../configure --enable-gcc-warnings --disable-valgrind-tests
+  - make check V=1 VERBOSE=t
+
 Ubuntu-xmlsec:
   image: ubuntu:20.04
   stage: test
@@ -96,8 +95,8 @@ Ubuntu-xmlsec:
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - mkdir b
   - cd b
-  - ../configure --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - ../configure --enable-gcc-warnings --disable-valgrind-tests
+  - make check V=1 VERBOSE=t
 
 AlmaLinux8:
   image: almalinux:8
@@ -108,8 +107,8 @@ AlmaLinux8:
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --disable-pskc --enable-gcc-warnings --disable-valgrind-tests || (cat config.log; exit 1)
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - ./configure --disable-pskc --enable-gcc-warnings --disable-valgrind-tests
+  - make check V=1 VERBOSE=t
 
 AlmaLinux8-xmlsec:
   image: almalinux:8
@@ -123,8 +122,8 @@ AlmaLinux8-xmlsec:
   script:
   - tar xfa oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --enable-gcc-warnings --disable-valgrind-tests --with-xmlsec-crypto-engine=openssl || (cat config.log; exit 1)
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - ./configure --enable-gcc-warnings --disable-valgrind-tests --with-xmlsec-crypto-engine=openssl
+  - make check V=1 VERBOSE=t
 
 Alpine:
   image: alpine:latest
@@ -136,9 +135,9 @@ Alpine:
   script:
   - tar xfz oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
-  - ./configure --disable-pskc --enable-gcc-warnings || (cat config.log; exit 1)
+  - ./configure --disable-pskc --enable-gcc-warnings
   - sed -i -e 's,  /\* Outlandishly-long.*,#if 0,;s,  return 0;,#endif\nreturn 0;,' ./oathtool/gl/tests/test-parse-datetime.c
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - make check V=1 VERBOSE=t
 
 ArchLinux:
   image: archlinux:latest
@@ -151,8 +150,8 @@ ArchLinux:
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - mkdir b
   - cd b
-  - ../configure --disable-pskc --enable-gcc-warnings || (cat config.log; exit 1)
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - ../configure --disable-pskc --enable-gcc-warnings
+  - make check V=1 VERBOSE=t
 
 ArchLinux-xmlsec:
   image: archlinux:latest
@@ -165,8 +164,8 @@ ArchLinux-xmlsec:
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - mkdir b
   - cd b
-  - ../configure --enable-gcc-warnings || (cat config.log; exit 1)
-  - make check V=1 || (find . -name test-suite.log -exec cat {} +; exit 1)
+  - ../configure --enable-gcc-warnings
+  - make check V=1 VERBOSE=t
 
 Mingw32:
   image: debian:11-slim
@@ -182,8 +181,8 @@ Mingw32:
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --host=i686-w64-mingw32 CC='i686-w64-mingw32-gcc -static-libgcc'
   - make V=1
-  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
-  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
+  - make -C liboath/tests check VERBOSE=t
+  - make -C oathtool/tests check VERBOSE=t
 
 Mingw64:
   image: debian:11-slim
@@ -198,5 +197,28 @@ Mingw64:
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --host=x86_64-w64-mingw32
   - make V=1
-  - make -C liboath/tests check || (cat liboath/tests/test-suite.log +; exit 1)
-  - make -C oathtool/tests check || (cat oathtool/tests/test-suite.log +; exit 1)
+  - make -C liboath/tests check VERBOSE=t
+  - make -C oathtool/tests check VERBOSE=T
+
+.pages:
+  stage: deploy
+  needs: ["Trisquel11", "Debian12-coverage", "Fedora38-clanganalyzer"]
+  script:
+    - mkdir public
+    - mv coverage/ public/
+    - mv clang-analyzer/* public/clang-analyzer
+    - mv website/html/* public/
+  artifacts:
+    paths:
+    - public
+    expire_in: 30 days
+
+pages:
+  extends: .pages
+  only:
+    - master
+
+pages-test:
+  extends: .pages
+  except:
+    - master
