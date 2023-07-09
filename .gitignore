@@ -397,8 +397,11 @@
 /libpskc/gl/tests/stdio.h
 /libpskc/gl/tests/stdlib.h
 /libpskc/gl/tests/sys/
+/libpskc/gl/tests/test-alignasof
 /libpskc/gl/tests/test-alloca-opt
+/libpskc/gl/tests/test-assert
 /libpskc/gl/tests/test-base64
+/libpskc/gl/tests/test-calloc-gnu
 /libpskc/gl/tests/test-errno
 /libpskc/gl/tests/test-fdopen
 /libpskc/gl/tests/test-fgetc
@@ -411,10 +414,14 @@
 /libpskc/gl/tests/test-inttostr
 /libpskc/gl/tests/test-inttypes
 /libpskc/gl/tests/test-limits-h
+/libpskc/gl/tests/test-malloc-gnu
 /libpskc/gl/tests/test-memchr
+/libpskc/gl/tests/test-realloc-gnu
+/libpskc/gl/tests/test-reallocarray
 /libpskc/gl/tests/test-snprintf
 /libpskc/gl/tests/test-stdalign
 /libpskc/gl/tests/test-stdbool
+/libpskc/gl/tests/test-stdckdint
 /libpskc/gl/tests/test-stddef
 /libpskc/gl/tests/test-stdint
 /libpskc/gl/tests/test-stdio
@@ -425,6 +432,7 @@
 /libpskc/gl/tests/test-sys_time
 /libpskc/gl/tests/test-sys_types
 /libpskc/gl/tests/test-time
+/libpskc/gl/tests/test-time-h
 /libpskc/gl/tests/test-unistd
 /libpskc/gl/tests/test-vasnprintf
 /libpskc/gl/tests/test-verify
@@ -895,8 +903,10 @@
 /pskctool/gl/tests/signal.h
 /pskctool/gl/tests/sys/
 /pskctool/gl/tests/test-accept
+/pskctool/gl/tests/test-alignasof
 /pskctool/gl/tests/test-alloca-opt
 /pskctool/gl/tests/test-arpa_inet
+/pskctool/gl/tests/test-assert
 /pskctool/gl/tests/test-binary-io
 /pskctool/gl/tests/test-bind
 /pskctool/gl/tests/test-c-ctype
@@ -907,6 +917,7 @@
 /pskctool/gl/tests/test-dup2
 /pskctool/gl/tests/test-environ
 /pskctool/gl/tests/test-errno
+/pskctool/gl/tests/test-error
 /pskctool/gl/tests/test-explicit_bzero
 /pskctool/gl/tests/test-fcntl
 /pskctool/gl/tests/test-fcntl-h
@@ -935,12 +946,14 @@
 /pskctool/gl/tests/test-inttypes
 /pskctool/gl/tests/test-ioctl
 /pskctool/gl/tests/test-isblank
+/pskctool/gl/tests/test-largefile
 /pskctool/gl/tests/test-limits-h
 /pskctool/gl/tests/test-listen
 /pskctool/gl/tests/test-lock
 /pskctool/gl/tests/test-lseek
 /pskctool/gl/tests/test-lstat
 /pskctool/gl/tests/test-malloca
+/pskctool/gl/tests/test-memset_explicit
 /pskctool/gl/tests/test-nanosleep
 /pskctool/gl/tests/test-netinet_in
 /pskctool/gl/tests/test-once1
@@ -950,6 +963,7 @@
 /pskctool/gl/tests/test-perror
 /pskctool/gl/tests/test-perror2
 /pskctool/gl/tests/test-pipe
+/pskctool/gl/tests/test-pselect
 /pskctool/gl/tests/test-pthread
 /pskctool/gl/tests/test-pthread-thread
 /pskctool/gl/tests/test-pthread_sigmask1
@@ -971,6 +985,7 @@
 /pskctool/gl/tests/test-stat-time
 /pskctool/gl/tests/test-stdalign
 /pskctool/gl/tests/test-stdbool
+/pskctool/gl/tests/test-stdckdint
 /pskctool/gl/tests/test-stddef
 /pskctool/gl/tests/test-stdint
 /pskctool/gl/tests/test-stdio
@@ -989,6 +1004,7 @@
 /pskctool/gl/tests/test-thread_create
 /pskctool/gl/tests/test-thread_self
 /pskctool/gl/tests/test-time
+/pskctool/gl/tests/test-time-h
 /pskctool/gl/tests/test-unistd
 /pskctool/gl/tests/test-unsetenv
 /pskctool/gl/tests/test-usleep
