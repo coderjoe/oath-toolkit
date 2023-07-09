@@ -20,7 +20,7 @@ ifeq ($(.DEFAULT_GOAL),abort-due-to-no-makefile)
 .DEFAULT_GOAL := bootstrap
 endif
 
-INDENT_SOURCES = `find . -name '*.[ch]' | grep -v -e /gl/ -e build-aux`
+INDENT_SOURCES = `find . -name '*.[ch]' | grep -v -e /gl/ -e build-aux -e /config.h -e _cmd.`
 
 autoreconf:
 	printf "gdoc_MANS =\ngdoc_TEXINFOS =\n" > liboath/man/Makefile.gdoc
