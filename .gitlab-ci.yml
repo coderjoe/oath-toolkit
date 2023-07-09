@@ -136,7 +136,6 @@ Alpine:
   - tar xfz oath-toolkit-*.tar.gz
   - cd `ls -d oath-toolkit-* | grep -v tar.gz`
   - ./configure --disable-pskc --enable-gcc-warnings
-  - sed -i -e 's,  /\* Outlandishly-long.*,#if 0,;s,  return 0;,#endif\nreturn 0;,' ./oathtool/gl/tests/test-parse-datetime.c
   - make check V=1 VERBOSE=t
 
 ArchLinux:
