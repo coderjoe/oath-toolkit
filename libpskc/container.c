@@ -1273,7 +1273,7 @@ pskc_set_key_data_b64secret (pskc_key_t * key, const char *b64secret)
 {
   size_t l = strlen (b64secret);
   char *out, *b64copy;
-  size_t outlen;
+  idx_t outlen;
   bool ok;
 
   b64copy = malloc (l + 1);
