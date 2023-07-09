@@ -1,5 +1,5 @@
 To: oath-toolkit-help@nongnu.org
-Subject: OATH Toolkit 2.6.8
+Subject: OATH Toolkit 2.6.9
 <#secure method=pgpmime mode=sign>
 OATH Toolkit provide components to build one-time password
 authentication systems.  It contains shared C libraries, command line
@@ -56,19 +56,19 @@ are invited to join our oath-toolkit-help mailing list, see:
   https://lists.nongnu.org/mailman/listinfo/oath-toolkit-help
 
 Here are the compressed sources and a GPG detached signature:
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.8.tar.gz
-  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.8.tar.gz.sig
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.9.tar.gz
+  https://download.savannah.nongnu.org/releases/oath-toolkit/oath-toolkit-2.6.9.tar.gz.sig
 
 Here are the SHA1 and SHA224 checksums:
 
-139e535dfb51016d37a3afebfcd9d00d14c47ed4  oath-toolkit-2.6.8.tar.gz
-d2788564f388b04a5e60fcf737b158470f723bca73011af51d238c1e  oath-toolkit-2.6.8.tar.gz
+f2c6d1d7c152aec9ec13e5d4dcc9fb1669c8014c  oath-toolkit-2.6.9.tar.gz
+3397c028d64273537e0e372d18c4bb65a6e6f850266b1bb52067f347  oath-toolkit-2.6.9.tar.gz
 
 Use a .sig file to verify that the corresponding file (without the
 .sig suffix) is intact.  First, be sure to download both the .sig file
 and the corresponding tarball.  Then, run a command like this:
 
-  gpg --verify oath-toolkit-2.6.8.tar.gz.sig
+  gpg --verify oath-toolkit-2.6.9.tar.gz.sig
 
 The signature should match the fingerprint of the following key:
 
@@ -88,36 +88,11 @@ or refresh it, and then rerun the 'gpg --verify' command.
 
 NEWS
 
-* Version 2.6.8 (released 2023-07-09)
+* Version 2.6.9 (released 2023-07-09)
 
-** libpskc: Fixes for recent libxmlsec releases.
+** Improve compatibility with recent libxmlsec.
 
-** pam_oath: Provide fallback pam_modutil_getpwnam implementation.
-Fixes <https://gitlab.com/oath-toolkit/oath-toolkit/-/issues/26> on
-Mac OS.  Patch from Nick Gaya <nicholasgaya+github@gmail.com>.
-
-** pam_oath: Don't fail authentication when pam_modutil_getpwnam doesn't
-** know the user when usersfile don't include ${USER} or ${HOME}. Closes: #27.
-Regression introduced in previous release.  Reported by Nick Gaya
-<nicholasgaya+github@gmail.com>.
-
-** pam_oath: Self-test improvements.
-Patch from Nick Gaya <nicholasgaya+github@gmail.com>.
-
-** liboath: Builds on Windows.
-The oath_authenticate_usersfile function is just a stub that returns
-an error.  This allows for use of the rest of the library on Windows.
-Thanks to David Woodhouse, see
-<https://gitlab.com/oath-toolkit/oath-toolkit/-/merge_requests/15>.
-
-** Disable PAM self-tests on Mac.  Fix --enable-root-tests logic.
-
-** Don't ship gtk-doc PDF's in tarball.
-
-** Use gitlog-to-changelog instead of git2cl.
-
-** Codespell typo fixes.
-Patch by Dimitri Papadopoulos.
+** Update gnulib files, dropping gnulib self-tests.
 
 Happy hacking,
 Simon
