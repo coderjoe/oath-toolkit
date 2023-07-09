@@ -66,7 +66,6 @@ gl_M4_BASE([gl/m4])
 gl_PO_BASE([])
 gl_DOC_BASE([doc])
 gl_TESTS_BASE([gl/tests])
-gl_WITH_TESTS
 gl_LIB([libgnu])
 gl_MAKEFILE_NAME([])
 gl_LIBTOOL
