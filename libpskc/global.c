@@ -74,7 +74,7 @@ pskc_global_init (void)
     }
 
 #if !defined XMLSEC_NO_CRYPTO_DYNAMIC_LOADING && defined XMLSEC_CRYPTO_DYNAMIC_LOADING
-  if (xmlSecCryptoDLLoadLibrary (BAD_CAST XMLSEC_CRYPTO) < 0)
+  if (xmlSecCryptoDLLoadLibrary (xmlSecGetDefaultCrypto()) < 0)
     {
       _pskc_debug ("xmlSecCryptoDLLoadLibrary failed");
       return PSKC_XMLSEC_ERROR;
