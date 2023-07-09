@@ -23,10 +23,10 @@ fi
 srcdir=${srcdir:-.}
 
 FAKETIME=datefudge
-TSTAMP=`$FAKETIME "2006-09-23" date -u +%s`
+TSTAMP=`TZ=UTC $FAKETIME "2006-09-23" date -u +%s`
 if test "$TSTAMP" != "1158969600"; then
     FAKETIME=faketime
-    TSTAMP=`$FAKETIME "2006-09-23" date -u +%s`
+    TSTAMP=`TZ=UTC $FAKETIME "2006-09-23" date -u +%s`
     if test "$TSTAMP" != "1158969600"; then
 	echo "Faketime or datefudge missing ($TSTAMP)" >&2
 	exit 77
