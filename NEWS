@@ -3,6 +3,8 @@ Copyright (C) 2009-2023 Simon Josefsson.  Licensed under the GPLv3+.
 
 * Version 2.6.9 (unreleased)
 
+** Improve compatibility with recent libxmlsec.
+
 ** Update gnulib files.
 
 * Version 2.6.8 (released 2023-07-09)
