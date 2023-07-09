@@ -59,7 +59,7 @@ gl_MODULES([
   vasprintf
   version-etc
 ])
-gl_AVOID([])
+gl_AVOID([strtoll-tests])
 gl_SOURCE_BASE([gl])
 gl_M4_BASE([gl/m4])
 gl_PO_BASE([])
