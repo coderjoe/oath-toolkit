@@ -444,7 +444,7 @@ pam_sm_authenticate (pam_handle_t * pamh,
       password = NULL;
     }
 
-  DBG (("OTP: %s", otp ? otp : "(null)"));
+  DBG (("OTP: %s", otp));
 
   {
     time_t last_otp;
