@@ -55,9 +55,10 @@ operating systems, please let us know.
 When building from version controlled sources, some developer specific
 flags are automatically enabled.  For example, the self-checks are run
 under valgrind if available.  For various reasons, you may run into
-valgrind false positives that will cause self-checks to fail.  We ship
-a Valgrind suppression file to address common issues.  You can use it
-by putting the following in your ~/.valgrindrc:
+valgrind false positives that will cause self-checks to fail.  First
+be sure to install debug symbols for system libraries.  We ship a
+Valgrind suppression file to address common issues.  You can use it by
+putting the following in your ~/.valgrindrc:
 
 ----
 --suppressions=/path/to/oath-toolkit/libpskc/tests/libpskc.supp
