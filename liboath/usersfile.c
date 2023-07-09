@@ -75,7 +75,7 @@ parse_type (const char *str, unsigned *digits, unsigned *totpstepsize)
 }
 
 static const char *whitespace = " \t\r\n";
-#define TIME_FORMAT_STRING "%Y-%m-%dT%H:%M:%SL"
+# define TIME_FORMAT_STRING "%Y-%m-%dT%H:%M:%SL"
 
 static int
 parse_usersfile (const char *username,
@@ -387,10 +387,11 @@ update_usersfile (const char *usersfile,
   {
     struct stat insb;
 
-    if(rc == OATH_OK && fstat(fileno(infh), &insb) == -1)
+    if (rc == OATH_OK && fstat (fileno (infh), &insb) == -1)
       rc = OATH_FILE_STAT_ERROR;
 
-    if(rc == OATH_OK && fchown(fileno(outfh), insb.st_uid, insb.st_gid) != 0)
+    if (rc == OATH_OK
+	&& fchown (fileno (outfh), insb.st_uid, insb.st_gid) != 0)
       rc = OATH_FILE_CHOWN_ERROR;
   }
 
@@ -516,8 +517,8 @@ oath_authenticate_usersfile (const char *usersfile,
 			     size_t window,
 			     const char *passwd, time_t * last_otp)
 {
-	/* The main reason we don't support this on Windows yet is file
-	 * locking. So return that as the error. */
-	return OATH_FILE_LOCK_ERROR;
+  /* The main reason we don't support this on Windows yet is file
+   * locking. So return that as the error. */
+  return OATH_FILE_LOCK_ERROR;
 }
 #endif

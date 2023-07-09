@@ -20,7 +20,7 @@
  */
 
 #ifndef HOTP_H
-#define HOTP_H
+# define HOTP_H
 
 extern int
 _oath_hotp_generate2 (const char *secret,

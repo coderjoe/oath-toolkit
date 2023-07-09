@@ -102,10 +102,11 @@ oath_conv (int num_msg, const struct pam_message **msg,
     }
 
   // If user is unknown, module should not prompt for password
-  if (tv[loop].passwd == NULL) {
-    printf ("prompt not expected for unknown user (%s)\n", tv[loop].user);
-    return PAM_CONV_ERR;
-  }
+  if (tv[loop].passwd == NULL)
+    {
+      printf ("prompt not expected for unknown user (%s)\n", tv[loop].user);
+      return PAM_CONV_ERR;
+    }
 
   out = malloc (sizeof (*out));
   if (out == NULL)
@@ -114,10 +115,11 @@ oath_conv (int num_msg, const struct pam_message **msg,
   out[0].resp_retcode = 0;
   out[0].resp = strdup (tv[loop].passwd);
 
-  if (out[0].resp == NULL) {
-    free (out);
-    return PAM_BUF_ERR;
-  }
+  if (out[0].resp == NULL)
+    {
+      free (out);
+      return PAM_BUF_ERR;
+    }
 
   *resp = out;
 

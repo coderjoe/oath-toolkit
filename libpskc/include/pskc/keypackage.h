@@ -20,7 +20,7 @@
  */
 
 #ifndef PSKC_KEYPACKAGE_H
-#define PSKC_KEYPACKAGE_H
+# define PSKC_KEYPACKAGE_H
 
 /**
  * SECTION:keypackage

@@ -20,7 +20,7 @@
  */
 
 #ifndef PSKC_ENUMS_H
-#define PSKC_ENUMS_H
+# define PSKC_ENUMS_H
 
 /**
  * SECTION:enums

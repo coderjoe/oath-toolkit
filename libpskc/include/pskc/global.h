@@ -20,7 +20,7 @@
  */
 
 #ifndef PSKC_GLOBAL_H
-#define PSKC_GLOBAL_H
+# define PSKC_GLOBAL_H
 
 /**
  * SECTION:global

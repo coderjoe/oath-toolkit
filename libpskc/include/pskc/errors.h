@@ -20,7 +20,7 @@
  */
 
 #ifndef PSKC_ERRORS_H
-#define PSKC_ERRORS_H
+# define PSKC_ERRORS_H
 
 /**
  * SECTION:errors

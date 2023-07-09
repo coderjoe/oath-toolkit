@@ -201,8 +201,7 @@ parse_data (xmlNode * x, struct pskc_key *kp, int *rc)
 		{
 		  idx_t tmplen;
 		  ok = base64_decode_alloc (kp->key_b64secret, l,
-					    &kp->key_secret,
-					    &tmplen);
+					    &kp->key_secret, &tmplen);
 		  if (kp->key_secret_len)
 		    kp->key_secret_len = tmplen;
 		  if (!ok)

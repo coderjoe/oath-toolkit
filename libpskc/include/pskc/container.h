@@ -20,7 +20,7 @@
  */
 
 #ifndef PSKC_CONTAINER_H
-#define PSKC_CONTAINER_H
+# define PSKC_CONTAINER_H
 
 /**
  * SECTION:container

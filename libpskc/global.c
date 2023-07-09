@@ -28,8 +28,8 @@
 #include <libxml/parser.h>	/* xmlInitParser */
 #include <libxml/catalog.h>	/* xmlLoadCatalog */
 #ifdef USE_XMLSEC
-#include <xmlsec/xmlsec.h>
-#include <xmlsec/crypto.h>
+# include <xmlsec/xmlsec.h>
+# include <xmlsec/crypto.h>
 #endif
 
 int _pskc_init = 0;
@@ -73,13 +73,13 @@ pskc_global_init (void)
       return PSKC_XMLSEC_ERROR;
     }
 
-#if !defined XMLSEC_NO_CRYPTO_DYNAMIC_LOADING && defined XMLSEC_CRYPTO_DYNAMIC_LOADING
-  if (xmlSecCryptoDLLoadLibrary (xmlSecGetDefaultCrypto()) < 0)
+# if !defined XMLSEC_NO_CRYPTO_DYNAMIC_LOADING && defined XMLSEC_CRYPTO_DYNAMIC_LOADING
+  if (xmlSecCryptoDLLoadLibrary (xmlSecGetDefaultCrypto ()) < 0)
     {
       _pskc_debug ("xmlSecCryptoDLLoadLibrary failed");
       return PSKC_XMLSEC_ERROR;
     }
-#endif
+# endif
 
   if (xmlSecCryptoAppInit (NULL) < 0)
     {
