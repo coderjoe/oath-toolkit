@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 SUBDIRS = gl liboath oathtool
 

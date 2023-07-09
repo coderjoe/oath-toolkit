@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301 USA
 
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 SUBDIRS = gl schemas include . examples tests gtk-doc man
 

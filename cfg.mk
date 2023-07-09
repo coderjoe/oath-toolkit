@@ -52,6 +52,8 @@ exclude_file_name_regexp--sc_trailing_blank = ^m4/pkg.m4|libpskc/examples/pskcto
 exclude_file_name_regexp--sc_two_space_separator_in_usage = ^pskctool/tests/
 exclude_file_name_regexp--sc_space_tab = ^m4/pkg.m4$$
 exclude_file_name_regexp--sc_avoid_if_before_free = ^pam_oath/pam_modutil.c$$
+exclude_file_name_regexp--sc_readme_link_copying = ^libpskc/README|pam_oath/README$$
+exclude_file_name_regexp--sc_readme_link_install = $(exclude_file_name_regexp--sc_readme_link_copying)
 
 update-copyright-env = UPDATE_COPYRIGHT_HOLDER="Simon Josefsson" UPDATE_COPYRIGHT_USE_INTERVALS=2
 

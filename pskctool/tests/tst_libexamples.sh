@@ -21,7 +21,7 @@ set -e
 srcdir=${srcdir:-.}
 PSKCTOOL=${PSKCTOOL:-../pskctool}
 
-if $PSKCTOOL -h | head -1 | grep -q ^pskctool; then
+if $PSKCTOOL -h | head -1 | grep ^pskctool >/dev/null; then
     # gengetopt < 2.23
     ($PSKCTOOL -h | grep ^Usage: | sed 's/ \+$//;s/OPTIONS/OPTION/';
      $PSKCTOOL -h | sed '1,2d;4,5d;s/ \+$//;') > foo
