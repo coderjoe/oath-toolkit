@@ -34,7 +34,6 @@
 #  --doc-base=doc \
 #  --tests-base=gl/tests \
 #  --aux-dir=build-aux \
-#  --with-tests \
 #  --no-conditional-dependencies \
 #  --libtool \
 #  --macro-prefix=gl \

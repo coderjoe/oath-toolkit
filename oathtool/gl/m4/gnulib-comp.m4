@@ -43,284 +43,111 @@ AC_DEFUN([gl_EARLY],
   AC_REQUIRE([gl_PROG_AR_RANLIB])
 
   # Code from module absolute-header:
-  # Code from module accept:
-  # Code from module accept-tests:
-  # Code from module alignasof:
-  # Code from module alignasof-tests:
-  # Code from module alloca:
   # Code from module alloca-opt:
-  # Code from module alloca-opt-tests:
-  # Code from module arpa_inet:
-  # Code from module arpa_inet-tests:
   # Code from module assert-h:
-  # Code from module assert-h-tests:
-  # Code from module atoll:
   # Code from module attribute:
   # Code from module basename-lgpl:
-  # Code from module binary-io:
-  # Code from module binary-io-tests:
-  # Code from module bind:
-  # Code from module bind-tests:
   # Code from module bison:
   # Code from module c-ctype:
-  # Code from module c-ctype-tests:
   # Code from module c99:
   # Code from module clock-time:
   # Code from module cloexec:
-  # Code from module cloexec-tests:
   # Code from module close:
-  # Code from module close-tests:
-  # Code from module connect:
-  # Code from module connect-tests:
-  # Code from module ctype:
-  # Code from module ctype-tests:
   # Code from module double-slash-root:
-  # Code from module dtotimespec:
   # Code from module dup2:
-  # Code from module dup2-tests:
   # Code from module environ:
-  # Code from module environ-tests:
   # Code from module errno:
-  # Code from module errno-tests:
   # Code from module error:
   # Code from module error-h:
-  # Code from module error-tests:
   # Code from module extensions:
   # Code from module extern-inline:
   # Code from module fcntl:
   # Code from module fcntl-h:
-  # Code from module fcntl-h-tests:
-  # Code from module fcntl-tests:
   # Code from module fd-hook:
-  # Code from module fdopen:
-  # Code from module fdopen-tests:
-  # Code from module fgetc-tests:
   # Code from module filename:
   # Code from module flexmember:
   # Code from module float:
-  # Code from module float-tests:
-  # Code from module fpieee:
-  AC_REQUIRE([gl_FP_IEEE])
-  # Code from module fpucw:
-  # Code from module fputc-tests:
-  # Code from module fread-tests:
   # Code from module free-posix:
-  # Code from module free-posix-tests:
   # Code from module fstat:
-  # Code from module fstat-tests:
-  # Code from module ftruncate:
-  # Code from module ftruncate-tests:
-  # Code from module fwrite-tests:
   # Code from module gen-header:
-  # Code from module getcwd-lgpl:
-  # Code from module getcwd-lgpl-tests:
   # Code from module getdelim:
-  # Code from module getdelim-tests:
   # Code from module getdtablesize:
-  # Code from module getdtablesize-tests:
   # Code from module getline:
-  # Code from module getline-tests:
-  # Code from module getpagesize:
   # Code from module getprogname:
-  # Code from module getprogname-tests:
   # Code from module gettext-h:
   # Code from module gettime:
   # Code from module gettimeofday:
-  # Code from module gettimeofday-tests:
   # Code from module idx:
-  # Code from module ignore-value:
-  # Code from module ignore-value-tests:
   # Code from module include_next:
-  # Code from module inet_pton:
-  # Code from module inet_pton-tests:
   # Code from module intprops:
-  # Code from module intprops-tests:
   # Code from module inttypes:
   # Code from module inttypes-incomplete:
-  # Code from module inttypes-tests:
-  # Code from module ioctl:
-  # Code from module ioctl-tests:
-  # Code from module isblank:
-  # Code from module isblank-tests:
   # Code from module largefile:
   AC_REQUIRE([AC_SYS_LARGEFILE])
-  # Code from module largefile-tests:
   # Code from module libc-config:
   # Code from module limits-h:
-  # Code from module limits-h-tests:
-  # Code from module listen:
-  # Code from module listen-tests:
-  # Code from module lock:
-  # Code from module lock-tests:
-  # Code from module lstat:
-  # Code from module lstat-tests:
-  # Code from module malloc-posix:
   # Code from module malloca:
-  # Code from module malloca-tests:
   # Code from module memchr:
-  # Code from module memchr-tests:
   # Code from module mktime:
   # Code from module mktime-internal:
   # Code from module msvc-inval:
   # Code from module msvc-nothrow:
   # Code from module multiarch:
-  # Code from module nanosleep:
-  # Code from module nanosleep-tests:
-  # Code from module netinet_in:
-  # Code from module netinet_in-tests:
   # Code from module nstrftime:
-  # Code from module nstrftime-tests:
   # Code from module open:
-  # Code from module open-tests:
   # Code from module parse-datetime:
-  # Code from module parse-datetime-tests:
   # Code from module parse-duration:
-  # Code from module parse-duration-tests:
   # Code from module pathmax:
-  # Code from module pathmax-tests:
-  # Code from module perror:
-  # Code from module perror-tests:
-  # Code from module pipe-posix:
-  # Code from module pipe-posix-tests:
   # Code from module progname:
-  # Code from module pselect:
-  # Code from module pselect-tests:
-  # Code from module pthread-h:
-  gl_ANYTHREADLIB_EARLY
-  # Code from module pthread-h-tests:
-  # Code from module pthread-thread:
-  # Code from module pthread-thread-tests:
-  # Code from module pthread_sigmask:
-  # Code from module pthread_sigmask-tests:
-  # Code from module putenv:
-  # Code from module raise:
-  # Code from module raise-tests:
-  # Code from module same-inode:
-  # Code from module sched:
-  # Code from module sched-tests:
-  # Code from module sched_yield:
-  # Code from module select:
-  # Code from module select-tests:
   # Code from module setenv:
-  # Code from module setenv-tests:
-  # Code from module setsockopt:
-  # Code from module setsockopt-tests:
-  # Code from module signal-h:
-  # Code from module signal-h-tests:
-  # Code from module sigprocmask:
-  # Code from module sigprocmask-tests:
   # Code from module size_max:
-  # Code from module sleep:
-  # Code from module sleep-tests:
   # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
-  # Code from module socket:
-  # Code from module socketlib:
-  # Code from module sockets:
-  # Code from module sockets-tests:
-  # Code from module socklen:
   # Code from module ssize_t:
   # Code from module stat:
-  # Code from module stat-tests:
   # Code from module stat-time:
-  # Code from module stat-time-tests:
   # Code from module std-gnu11:
   # Code from module stdarg:
   dnl Some compilers (e.g., AIX 5.3 cc) need to be in c99 mode
   dnl for the builtin va_copy to work.  gl_PROG_CC_C99 arranges for this.
   gl_PROG_CC_C99
-  # Code from module stdarg-tests:
   # Code from module stdbool:
-  # Code from module stdbool-tests:
   # Code from module stdckdint:
-  # Code from module stdckdint-tests:
   # Code from module stddef:
-  # Code from module stddef-tests:
   # Code from module stdint:
-  # Code from module stdint-tests:
   # Code from module stdio:
   gl_STDIO_H_EARLY
-  # Code from module stdio-tests:
   # Code from module stdlib:
-  # Code from module stdlib-tests:
   # Code from module strerror:
   # Code from module strerror-override:
-  # Code from module strerror-tests:
-  # Code from module strerror_r-posix:
-  # Code from module strerror_r-posix-tests:
   # Code from module string:
-  # Code from module string-tests:
-  # Code from module strtoll:
-  # Code from module symlink:
-  # Code from module symlink-tests:
-  # Code from module sys_ioctl:
-  # Code from module sys_ioctl-tests:
-  # Code from module sys_select:
-  # Code from module sys_select-tests:
-  # Code from module sys_socket:
-  # Code from module sys_socket-tests:
   # Code from module sys_stat:
-  # Code from module sys_stat-tests:
   # Code from module sys_time:
-  # Code from module sys_time-tests:
   # Code from module sys_types:
-  # Code from module sys_types-tests:
-  # Code from module sys_uio:
-  # Code from module sys_uio-tests:
-  # Code from module test-framework-sh:
-  # Code from module test-framework-sh-tests:
-  # Code from module thread:
-  # Code from module thread-tests:
-  # Code from module threadlib:
-  gl_THREADLIB_EARLY
-  # Code from module time:
   # Code from module time-h:
-  # Code from module time-h-tests:
-  # Code from module time-tests:
   # Code from module time_r:
   # Code from module time_rz:
   # Code from module timegm:
   # Code from module timespec:
-  # Code from module timespec-add:
-  # Code from module timespec-sub:
-  # Code from module timespec-tests:
   # Code from module tzset:
   # Code from module unistd:
-  # Code from module unistd-tests:
   # Code from module unsetenv:
-  # Code from module unsetenv-tests:
-  # Code from module usleep:
-  # Code from module usleep-tests:
   # Code from module vararrays:
   # Code from module vasnprintf:
-  # Code from module vasnprintf-tests:
   # Code from module vasprintf:
-  # Code from module vasprintf-tests:
   # Code from module verify:
-  # Code from module verify-tests:
   # Code from module version-etc:
-  # Code from module version-etc-fsf:
-  # Code from module version-etc-tests:
   # Code from module wchar:
-  # Code from module wchar-tests:
-  # Code from module windows-mutex:
-  # Code from module windows-once:
-  # Code from module windows-recmutex:
-  # Code from module windows-rwlock:
-  # Code from module windows-thread:
-  # Code from module windows-tls:
   # Code from module xalloc-oversized:
   # Code from module xsize:
-  # Code from module yield:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
 # "Check for header files, types and library functions".
 AC_DEFUN([gl_INIT],
 [
-  AC_CONFIG_LIBOBJ_DIR([gl/tests])
   AM_CONDITIONAL([GL_COND_LIBTOOL], [true])
   gl_cond_libtool=true
   gl_m4_base='gl/m4'
@@ -679,8 +506,6 @@ changequote([, ])dnl
   m4_pushdef([GL_MACRO_PREFIX], [gltests])
   m4_pushdef([GL_MODULE_INDICATOR_PREFIX], [GL])
   gl_COMMON
-  AC_REQUIRE([gl_CC_ALLOW_WARNINGS])
-  AC_REQUIRE([gl_CXX_ALLOW_WARNINGS])
   gl_source_base='gl/tests'
   gl_source_base_prefix=
 changequote(,)dnl
@@ -689,242 +514,6 @@ changequote([, ])dnl
   AC_SUBST([gltests_WITNESS])
   gl_module_indicator_condition=$gltests_WITNESS
   m4_pushdef([gl_MODULE_INDICATOR_CONDITION], [$gl_module_indicator_condition])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_ACCEPT], [test "$ac_cv_header_winsock2_h" = yes])
-  gl_SYS_SOCKET_MODULE_INDICATOR([accept])
-  gl_ALIGNASOF
-  gl_ARPA_INET_H
-  gl_ARPA_INET_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_FUNC_ATOLL
-  gl_CONDITIONAL([GL_COND_OBJ_ATOLL], [test $HAVE_ATOLL = 0])
-  AM_COND_IF([GL_COND_OBJ_ATOLL], [
-    gl_PREREQ_ATOLL
-  ])
-  gl_STDLIB_MODULE_INDICATOR([atoll])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_BIND], [test "$ac_cv_header_winsock2_h" = yes])
-  gl_SYS_SOCKET_MODULE_INDICATOR([bind])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_CONNECT], [test "$ac_cv_header_winsock2_h" = yes])
-  gl_SYS_SOCKET_MODULE_INDICATOR([connect])
-  gl_CTYPE_H
-  gl_CTYPE_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_FUNC_FDOPEN
-  gl_CONDITIONAL([GL_COND_OBJ_FDOPEN], [test $REPLACE_FDOPEN = 1])
-  AM_COND_IF([GL_COND_OBJ_FDOPEN], [
-    gl_PREREQ_FDOPEN
-  ])
-  gl_STDIO_MODULE_INDICATOR([fdopen])
-  gl_FUNC_FTRUNCATE
-  gl_CONDITIONAL([GL_COND_OBJ_FTRUNCATE],
-                 [test $HAVE_FTRUNCATE = 0 || test $REPLACE_FTRUNCATE = 1])
-  AM_COND_IF([GL_COND_OBJ_FTRUNCATE], [
-    gl_PREREQ_FTRUNCATE
-  ])
-  gl_UNISTD_MODULE_INDICATOR([ftruncate])
-  gl_FUNC_GETCWD_LGPL
-  gl_CONDITIONAL([GL_COND_OBJ_GETCWD_LGPL], [test $REPLACE_GETCWD = 1])
-  gl_UNISTD_MODULE_INDICATOR([getcwd])
-  gl_FUNC_GETPAGESIZE
-  gl_CONDITIONAL([GL_COND_OBJ_GETPAGESIZE], [test $REPLACE_GETPAGESIZE = 1])
-  gl_UNISTD_MODULE_INDICATOR([getpagesize])
-  gl_FUNC_INET_PTON
-  gl_CONDITIONAL([GL_COND_OBJ_INET_PTON],
-                 [test $HAVE_INET_PTON = 0 || test $REPLACE_INET_PTON = 1])
-  AM_COND_IF([GL_COND_OBJ_INET_PTON], [
-    gl_PREREQ_INET_PTON
-  ])
-  gl_ARPA_INET_MODULE_INDICATOR([inet_pton])
-  AC_C_BIGENDIAN
-  gl_FUNC_IOCTL
-  gl_CONDITIONAL([GL_COND_OBJ_IOCTL],
-                 [test $HAVE_IOCTL = 0 || test $REPLACE_IOCTL = 1])
-  gl_SYS_IOCTL_MODULE_INDICATOR([ioctl])
-  gl_FUNC_ISBLANK
-  gl_CONDITIONAL([GL_COND_OBJ_ISBLANK], [test $HAVE_ISBLANK = 0])
-  gl_MODULE_INDICATOR([isblank])
-  gl_CTYPE_MODULE_INDICATOR([isblank])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_LISTEN], [test "$ac_cv_header_winsock2_h" = yes])
-  gl_SYS_SOCKET_MODULE_INDICATOR([listen])
-  gl_LOCK
-  gl_MODULE_INDICATOR([lock])
-  AC_CHECK_HEADERS_ONCE([semaphore.h])
-  AC_CHECK_DECLS_ONCE([alarm])
-  AC_REQUIRE([gl_SEMAPHORE])
-  gl_FUNC_LSTAT
-  gl_CONDITIONAL([GL_COND_OBJ_LSTAT], [test $REPLACE_LSTAT = 1])
-  AM_COND_IF([GL_COND_OBJ_LSTAT], [
-    gl_PREREQ_LSTAT
-  ])
-  gl_SYS_STAT_MODULE_INDICATOR([lstat])
-  AC_REQUIRE([gl_FUNC_MALLOC_POSIX])
-  if test $REPLACE_MALLOC_FOR_MALLOC_POSIX = 1; then
-    AC_LIBOBJ([malloc])
-  fi
-  gl_STDLIB_MODULE_INDICATOR([malloc-posix])
-  dnl Check for prerequisites for memory fence checks.
-  gl_FUNC_MMAP_ANON
-  AC_CHECK_HEADERS_ONCE([sys/mman.h])
-  AC_CHECK_FUNCS_ONCE([mprotect])
-  gl_FUNC_NANOSLEEP
-  gl_CONDITIONAL([GL_COND_OBJ_NANOSLEEP],
-                 [test $HAVE_NANOSLEEP = 0 || test $REPLACE_NANOSLEEP = 1])
-  gl_TIME_MODULE_INDICATOR([nanosleep])
-  AC_CHECK_DECLS_ONCE([alarm])
-  gl_HEADER_NETINET_IN
-  gl_CONDITIONAL_HEADER([netinet/in.h])
-  AC_PROG_MKDIR_P
-  gl_FUNC_PERROR
-  gl_CONDITIONAL([GL_COND_OBJ_PERROR], [test $REPLACE_PERROR = 1])
-  gl_STRING_MODULE_INDICATOR([perror])
-  gl_FUNC_PIPE
-  gl_CONDITIONAL([GL_COND_OBJ_PIPE], [test $HAVE_PIPE = 0])
-  gl_UNISTD_MODULE_INDICATOR([pipe])
-  gl_FUNC_PSELECT
-  gl_CONDITIONAL([GL_COND_OBJ_PSELECT],
-                 [test $HAVE_PSELECT = 0 || test $REPLACE_PSELECT = 1])
-  gl_SYS_SELECT_MODULE_INDICATOR([pselect])
-  AC_CHECK_HEADERS_ONCE([sys/wait.h])
-  gl_PTHREAD_H
-  gl_PTHREAD_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_PTHREAD_THREAD
-  gl_CONDITIONAL([GL_COND_OBJ_PTHREAD_THREAD],
-                 [test $HAVE_PTHREAD_CREATE = 0 || test $REPLACE_PTHREAD_CREATE = 1])
-  gl_PTHREAD_MODULE_INDICATOR([pthread-thread])
-  gl_FUNC_PTHREAD_SIGMASK
-  gl_CONDITIONAL([GL_COND_OBJ_PTHREAD_SIGMASK],
-                 [test $HAVE_PTHREAD_SIGMASK = 0 || test $REPLACE_PTHREAD_SIGMASK = 1])
-  AM_COND_IF([GL_COND_OBJ_PTHREAD_SIGMASK], [
-    gl_PREREQ_PTHREAD_SIGMASK
-  ])
-  gl_SIGNAL_MODULE_INDICATOR([pthread_sigmask])
-  gl_FUNC_PUTENV
-  gl_CONDITIONAL([GL_COND_OBJ_PUTENV], [test $REPLACE_PUTENV = 1])
-  AM_COND_IF([GL_COND_OBJ_PUTENV], [
-    gl_PREREQ_PUTENV
-  ])
-  gl_STDLIB_MODULE_INDICATOR([putenv])
-  gl_FUNC_RAISE
-  gl_CONDITIONAL([GL_COND_OBJ_RAISE],
-                 [test $HAVE_RAISE = 0 || test $REPLACE_RAISE = 1])
-  AM_COND_IF([GL_COND_OBJ_RAISE], [
-    gl_PREREQ_RAISE
-  ])
-  gl_SIGNAL_MODULE_INDICATOR([raise])
-  gl_SCHED_H
-  gl_SCHED_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_FUNC_SCHED_YIELD
-  gl_CONDITIONAL([GL_COND_OBJ_SCHED_YIELD],
-                 [test $HAVE_SCHED_YIELD = 0 || test $REPLACE_SCHED_YIELD = 1])
-  gl_SCHED_MODULE_INDICATOR([sched_yield])
-  gl_FUNC_SELECT
-  gl_CONDITIONAL([GL_COND_OBJ_SELECT], [test $REPLACE_SELECT = 1])
-  gl_SYS_SELECT_MODULE_INDICATOR([select])
-  AC_CHECK_HEADERS_ONCE([sys/wait.h])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_SETSOCKOPT],
-                 [test "$ac_cv_header_winsock2_h" = yes])
-  gl_SYS_SOCKET_MODULE_INDICATOR([setsockopt])
-  gl_SIGNAL_H
-  gl_SIGNAL_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_SIGNALBLOCKING
-  gl_CONDITIONAL([GL_COND_OBJ_SIGPROCMASK], [test $HAVE_POSIX_SIGNALBLOCKING = 0])
-  AM_COND_IF([GL_COND_OBJ_SIGPROCMASK], [
-    gl_PREREQ_SIGPROCMASK
-  ])
-  gl_SIGNAL_MODULE_INDICATOR([sigprocmask])
-  gl_FUNC_SLEEP
-  gl_CONDITIONAL([GL_COND_OBJ_SLEEP],
-                 [test $HAVE_SLEEP = 0 || test $REPLACE_SLEEP = 1])
-  gl_UNISTD_MODULE_INDICATOR([sleep])
-  AC_CHECK_DECLS_ONCE([alarm])
-  AC_REQUIRE([gl_SYS_SOCKET_H])
-  gl_CONDITIONAL([GL_COND_OBJ_SOCKET], [test "$ac_cv_header_winsock2_h" = yes])
-  # When this module is used, sockets may actually occur as file descriptors,
-  # hence it is worth warning if the modules 'close' and 'ioctl' are not used.
-  m4_ifdef([gl_UNISTD_H_DEFAULTS], [gl_UNISTD_H_REQUIRE_DEFAULTS])
-  m4_ifdef([gl_SYS_IOCTL_H_DEFAULTS], [gl_SYS_IOCTL_H_REQUIRE_DEFAULTS])
-  AC_REQUIRE([gl_PREREQ_SYS_H_WINSOCK2])
-  if test "$ac_cv_header_winsock2_h" = yes; then
-    UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS=1
-    SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS=1
-  fi
-  gl_SYS_SOCKET_MODULE_INDICATOR([socket])
-  AC_REQUIRE([gl_SOCKETLIB])
-  AC_REQUIRE([gl_SOCKETS])
-  gl_TYPE_SOCKLEN_T
-  AC_REQUIRE([gt_TYPE_WCHAR_T])
-  AC_REQUIRE([gt_TYPE_WINT_T])
-  gl_DOUBLE_EXPONENT_LOCATION
-  gl_FUNC_STRERROR_R
-  AS_IF([test $HAVE_DECL_STRERROR_R = 0 || test $REPLACE_STRERROR_R = 1], [
-    AC_LIBOBJ([strerror_r])
-    gl_PREREQ_STRERROR_R
-  ])
-  gl_STRING_MODULE_INDICATOR([strerror_r])
-  dnl For the modules argp, error.
-  gl_MODULE_INDICATOR([strerror_r-posix])
-  gl_FUNC_STRTOLL
-  gl_CONDITIONAL([GL_COND_OBJ_STRTOLL],
-                 [test $HAVE_STRTOLL = 0 || test $REPLACE_STRTOLL = 1])
-  AM_COND_IF([GL_COND_OBJ_STRTOLL], [
-    gl_PREREQ_STRTOLL
-  ])
-  gl_STDLIB_MODULE_INDICATOR([strtoll])
-  gl_FUNC_SYMLINK
-  gl_CONDITIONAL([GL_COND_OBJ_SYMLINK],
-                 [test $HAVE_SYMLINK = 0 || test $REPLACE_SYMLINK = 1])
-  gl_UNISTD_MODULE_INDICATOR([symlink])
-  gl_SYS_IOCTL_H
-  gl_SYS_IOCTL_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_SYS_SELECT_H
-  gl_SYS_SELECT_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_SYS_SOCKET_H
-  gl_SYS_SOCKET_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  AC_CHECK_FUNCS_ONCE([shutdown])
-  gl_SYS_UIO_H
-  gl_SYS_UIO_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_THREAD
-  AC_REQUIRE([gl_THREADLIB])
-  gl_FUNC_TIME
-  gl_CONDITIONAL([GL_COND_OBJ_TIME], [test $REPLACE_TIME = 1])
-  AM_COND_IF([GL_COND_OBJ_TIME], [
-    gl_PREREQ_TIME
-  ])
-  gl_TIME_MODULE_INDICATOR([time])
-  gl_FUNC_USLEEP
-  gl_CONDITIONAL([GL_COND_OBJ_USLEEP],
-                 [test $HAVE_USLEEP = 0 || test $REPLACE_USLEEP = 1])
-  gl_UNISTD_MODULE_INDICATOR([usleep])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_MUTEX],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_ONCE],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_RECMUTEX],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_RWLOCK],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_THREAD],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([AC_CANONICAL_HOST])
-  gl_CONDITIONAL([GL_COND_OBJ_WINDOWS_TLS],
-                 [case "$host_os" in mingw*) true;; *) false;; esac])
-  AC_REQUIRE([gl_YIELD])
   m4_popdef([gl_MODULE_INDICATOR_CONDITION])
   m4_ifval(gltests_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gltests_LIBSOURCES_DIR])[ ||
@@ -971,8 +560,6 @@ changequote([, ])dnl
     AC_SUBST([gltests_LIBOBJDEPS], [$gltests_libobjdeps])
   ])
   AC_REQUIRE([gl_CC_GNULIB_WARNINGS])
-  LIBTESTS_LIBDEPS="$gltests_libdeps"
-  AC_SUBST([LIBTESTS_LIBDEPS])
 ])
 
 # Like AC_LIBOBJ, except that the module name goes
@@ -1151,15 +738,12 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/__inline.m4
   m4/absolute-header.m4
   m4/alloca.m4
-  m4/arpa_inet_h.m4
   m4/assert_h.m4
-  m4/atoll.m4
   m4/bison.m4
   m4/c-bool.m4
   m4/clock_time.m4
   m4/close.m4
   m4/codeset.m4
-  m4/ctype_h.m4
   m4/double-slash-root.m4
   m4/dup2.m4
   m4/eealloc.m4
@@ -1173,35 +757,24 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/fcntl-o.m4
   m4/fcntl.m4
   m4/fcntl_h.m4
-  m4/fdopen.m4
   m4/flexmember.m4
   m4/float_h.m4
-  m4/fpieee.m4
   m4/free.m4
   m4/fstat.m4
-  m4/ftruncate.m4
-  m4/getcwd.m4
   m4/getdelim.m4
   m4/getdtablesize.m4
   m4/getline.m4
-  m4/getpagesize.m4
   m4/getprogname.m4
   m4/gettime.m4
   m4/gettimeofday.m4
   m4/gnulib-common.m4
   m4/include_next.m4
-  m4/inet_pton.m4
   m4/intmax_t.m4
   m4/inttypes.m4
   m4/inttypes_h.m4
-  m4/ioctl.m4
-  m4/isblank.m4
   m4/largefile.m4
   m4/limits-h.m4
   m4/locale-fr.m4
-  m4/lock.m4
-  m4/lstat.m4
-  m4/malloc.m4
   m4/malloca.m4
   m4/math_h.m4
   m4/memchr.m4
@@ -1212,8 +785,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/msvc-nothrow.m4
   m4/multiarch.m4
   m4/musl.m4
-  m4/nanosleep.m4
-  m4/netinet_in_h.m4
   m4/nstrftime.m4
   m4/off_t.m4
   m4/open-cloexec.m4
@@ -1221,35 +792,14 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/open.m4
   m4/parse-datetime.m4
   m4/pathmax.m4
-  m4/perror.m4
   m4/pid_t.m4
-  m4/pipe.m4
   m4/printf.m4
-  m4/pselect.m4
-  m4/pthread-thread.m4
-  m4/pthread_h.m4
-  m4/pthread_rwlock_rdlock.m4
-  m4/pthread_sigmask.m4
-  m4/putenv.m4
-  m4/raise.m4
-  m4/sched_h.m4
-  m4/sched_yield.m4
-  m4/select.m4
-  m4/semaphore.m4
   m4/setenv.m4
-  m4/signal_h.m4
-  m4/signalblocking.m4
   m4/size_max.m4
-  m4/sleep.m4
-  m4/socketlib.m4
-  m4/sockets.m4
-  m4/socklen.m4
-  m4/sockpfaf.m4
   m4/ssize_t.m4
   m4/stat-time.m4
   m4/stat.m4
   m4/std-gnu11.m4
-  m4/stdalign.m4
   m4/stdarg.m4
   m4/stddef_h.m4
   m4/stdint.m4
@@ -1257,20 +807,11 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/stdio_h.m4
   m4/stdlib_h.m4
   m4/strerror.m4
-  m4/strerror_r.m4
   m4/string_h.m4
-  m4/strtoll.m4
-  m4/symlink.m4
-  m4/sys_ioctl_h.m4
-  m4/sys_select_h.m4
   m4/sys_socket_h.m4
   m4/sys_stat_h.m4
   m4/sys_time_h.m4
   m4/sys_types_h.m4
-  m4/sys_uio_h.m4
-  m4/thread.m4
-  m4/threadlib.m4
-  m4/time.m4
   m4/time_h.m4
   m4/time_r.m4
   m4/time_rz.m4
@@ -1279,7 +820,6 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/tm_gmtoff.m4
   m4/tzset.m4
   m4/unistd_h.m4
-  m4/usleep.m4
   m4/vararrays.m4
   m4/vasnprintf.m4
   m4/vasprintf.m4
@@ -1289,217 +829,5 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/wchar_t.m4
   m4/wint_t.m4
   m4/xsize.m4
-  m4/yield.m4
   m4/zzgnulib.m4
-  tests/atomic-int-gnulib.h
-  tests/init.sh
-  tests/macros.h
-  tests/nan.h
-  tests/nap.h
-  tests/signature.h
-  tests/test-accept.c
-  tests/test-alignasof.c
-  tests/test-alloca-opt.c
-  tests/test-arpa_inet.c
-  tests/test-assert.c
-  tests/test-binary-io.c
-  tests/test-binary-io.sh
-  tests/test-bind.c
-  tests/test-c-ctype.c
-  tests/test-cloexec.c
-  tests/test-close.c
-  tests/test-connect.c
-  tests/test-ctype.c
-  tests/test-dup2.c
-  tests/test-environ.c
-  tests/test-errno.c
-  tests/test-error.c
-  tests/test-error.sh
-  tests/test-fcntl-h.c
-  tests/test-fcntl.c
-  tests/test-fdopen.c
-  tests/test-fgetc.c
-  tests/test-float.c
-  tests/test-fputc.c
-  tests/test-fread.c
-  tests/test-free.c
-  tests/test-fstat.c
-  tests/test-ftruncate.c
-  tests/test-ftruncate.sh
-  tests/test-fwrite.c
-  tests/test-getcwd-lgpl.c
-  tests/test-getdelim.c
-  tests/test-getdtablesize.c
-  tests/test-getline.c
-  tests/test-getprogname.c
-  tests/test-gettimeofday.c
-  tests/test-ignore-value.c
-  tests/test-inet_pton.c
-  tests/test-init.sh
-  tests/test-intprops.c
-  tests/test-inttypes.c
-  tests/test-ioctl.c
-  tests/test-isblank.c
-  tests/test-largefile.c
-  tests/test-limits-h.c
-  tests/test-listen.c
-  tests/test-lock.c
-  tests/test-lstat.c
-  tests/test-lstat.h
-  tests/test-malloca.c
-  tests/test-memchr.c
-  tests/test-nanosleep.c
-  tests/test-netinet_in.c
-  tests/test-nstrftime.c
-  tests/test-once.c
-  tests/test-open.c
-  tests/test-open.h
-  tests/test-parse-datetime.c
-  tests/test-parse-duration.c
-  tests/test-parse-duration.sh
-  tests/test-pathmax.c
-  tests/test-perror.c
-  tests/test-perror.sh
-  tests/test-perror2.c
-  tests/test-pipe.c
-  tests/test-pselect.c
-  tests/test-pthread-thread.c
-  tests/test-pthread.c
-  tests/test-pthread_sigmask1.c
-  tests/test-pthread_sigmask2.c
-  tests/test-raise.c
-  tests/test-rwlock1.c
-  tests/test-sched.c
-  tests/test-select-fd.c
-  tests/test-select-in.sh
-  tests/test-select-out.sh
-  tests/test-select-stdin.c
-  tests/test-select.c
-  tests/test-select.h
-  tests/test-setenv.c
-  tests/test-setsockopt.c
-  tests/test-signal-h.c
-  tests/test-sigprocmask.c
-  tests/test-sleep.c
-  tests/test-sockets.c
-  tests/test-stat-time.c
-  tests/test-stat.c
-  tests/test-stat.h
-  tests/test-stdbool.c
-  tests/test-stdckdint.c
-  tests/test-stddef.c
-  tests/test-stdint.c
-  tests/test-stdio.c
-  tests/test-stdlib.c
-  tests/test-strerror.c
-  tests/test-strerror_r.c
-  tests/test-string.c
-  tests/test-symlink.c
-  tests/test-symlink.h
-  tests/test-sys_ioctl.c
-  tests/test-sys_select.c
-  tests/test-sys_socket.c
-  tests/test-sys_stat.c
-  tests/test-sys_time.c
-  tests/test-sys_types.c
-  tests/test-sys_uio.c
-  tests/test-sys_wait.h
-  tests/test-thread_create.c
-  tests/test-thread_self.c
-  tests/test-time-h.c
-  tests/test-time.c
-  tests/test-timespec.c
-  tests/test-unistd.c
-  tests/test-unsetenv.c
-  tests/test-usleep.c
-  tests/test-vasnprintf.c
-  tests/test-vasprintf.c
-  tests/test-verify-try.c
-  tests/test-verify.c
-  tests/test-verify.sh
-  tests/test-version-etc.c
-  tests/test-version-etc.sh
-  tests/test-wchar.c
-  tests/zerosize-ptr.h
-  tests=lib/_Noreturn.h
-  tests=lib/accept.c
-  tests=lib/alloca.c
-  tests=lib/arg-nonnull.h
-  tests=lib/arpa_inet.in.h
-  tests=lib/atoll.c
-  tests=lib/binary-io.c
-  tests=lib/binary-io.h
-  tests=lib/bind.c
-  tests=lib/c++defs.h
-  tests=lib/connect.c
-  tests=lib/ctype.in.h
-  tests=lib/dtotimespec.c
-  tests=lib/fdopen.c
-  tests=lib/fpucw.h
-  tests=lib/ftruncate.c
-  tests=lib/getcwd-lgpl.c
-  tests=lib/getpagesize.c
-  tests=lib/glthread/lock.c
-  tests=lib/glthread/lock.h
-  tests=lib/glthread/thread.c
-  tests=lib/glthread/thread.h
-  tests=lib/glthread/threadlib.c
-  tests=lib/glthread/yield.h
-  tests=lib/ignore-value.h
-  tests=lib/inet_pton.c
-  tests=lib/ioctl.c
-  tests=lib/isblank.c
-  tests=lib/listen.c
-  tests=lib/lstat.c
-  tests=lib/malloc.c
-  tests=lib/nanosleep.c
-  tests=lib/netinet_in.in.h
-  tests=lib/perror.c
-  tests=lib/pipe.c
-  tests=lib/pselect.c
-  tests=lib/pthread-thread.c
-  tests=lib/pthread.in.h
-  tests=lib/pthread_sigmask.c
-  tests=lib/putenv.c
-  tests=lib/raise.c
-  tests=lib/same-inode.h
-  tests=lib/sched.in.h
-  tests=lib/sched_yield.c
-  tests=lib/select.c
-  tests=lib/setsockopt.c
-  tests=lib/signal.in.h
-  tests=lib/sigprocmask.c
-  tests=lib/sleep.c
-  tests=lib/socket.c
-  tests=lib/sockets.c
-  tests=lib/sockets.h
-  tests=lib/strerror_r.c
-  tests=lib/strtol.c
-  tests=lib/strtoll.c
-  tests=lib/symlink.c
-  tests=lib/sys_ioctl.in.h
-  tests=lib/sys_select.in.h
-  tests=lib/sys_socket.c
-  tests=lib/sys_socket.in.h
-  tests=lib/sys_uio.in.h
-  tests=lib/time.c
-  tests=lib/timespec-add.c
-  tests=lib/timespec-sub.c
-  tests=lib/usleep.c
-  tests=lib/version-etc-fsf.c
-  tests=lib/w32sock.h
-  tests=lib/warn-on-use.h
-  tests=lib/windows-initguard.h
-  tests=lib/windows-mutex.c
-  tests=lib/windows-mutex.h
-  tests=lib/windows-once.c
-  tests=lib/windows-once.h
-  tests=lib/windows-recmutex.c
-  tests=lib/windows-recmutex.h
-  tests=lib/windows-rwlock.c
-  tests=lib/windows-rwlock.h
-  tests=lib/windows-thread.c
-  tests=lib/windows-thread.h
-  tests=lib/windows-tls.c
-  tests=lib/windows-tls.h
 ])

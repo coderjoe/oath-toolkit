@@ -43,118 +43,58 @@ AC_DEFUN([gl_EARLY],
   AC_REQUIRE([gl_PROG_AR_RANLIB])
 
   # Code from module absolute-header:
-  # Code from module alignasof:
-  # Code from module alignasof-tests:
-  # Code from module alloca-opt:
-  # Code from module alloca-opt-tests:
-  # Code from module assert-h:
-  # Code from module assert-h-tests:
-  # Code from module attribute:
   # Code from module base64:
-  # Code from module base64-tests:
   # Code from module c99:
   # Code from module calloc-gnu:
-  # Code from module calloc-gnu-tests:
   # Code from module calloc-posix:
-  # Code from module errno:
-  # Code from module errno-tests:
   # Code from module extensions:
   # Code from module extern-inline:
-  # Code from module fdopen:
-  # Code from module fdopen-tests:
-  # Code from module fgetc-tests:
-  # Code from module float:
-  # Code from module float-tests:
-  # Code from module fpieee:
-  AC_REQUIRE([gl_FP_IEEE])
-  # Code from module fpucw:
-  # Code from module fputc-tests:
-  # Code from module fread-tests:
   # Code from module free-posix:
-  # Code from module free-posix-tests:
-  # Code from module fwrite-tests:
   # Code from module gen-header:
-  # Code from module getpagesize:
   # Code from module ialloc:
   # Code from module idx:
   # Code from module include_next:
   # Code from module intprops:
-  # Code from module intprops-tests:
   # Code from module inttostr:
-  # Code from module inttostr-tests:
-  # Code from module inttypes:
   # Code from module inttypes-incomplete:
-  # Code from module inttypes-tests:
   # Code from module lib-symbol-versions:
   # Code from module lib-symbol-visibility:
   # Code from module libc-config:
   # Code from module limits-h:
-  # Code from module limits-h-tests:
   # Code from module malloc-gnu:
-  # Code from module malloc-gnu-tests:
   # Code from module malloc-posix:
   # Code from module manywarnings:
   # Code from module memchr:
-  # Code from module memchr-tests:
   # Code from module minmax:
-  # Code from module msvc-inval:
   # Code from module multiarch:
   # Code from module realloc-gnu:
-  # Code from module realloc-gnu-tests:
   # Code from module realloc-posix:
   # Code from module reallocarray:
-  # Code from module reallocarray-tests:
-  # Code from module size_max:
   # Code from module snippet/_Noreturn:
   # Code from module snippet/arg-nonnull:
   # Code from module snippet/c++defs:
   # Code from module snippet/warn-on-use:
-  # Code from module snprintf:
-  # Code from module snprintf-tests:
   # Code from module ssize_t:
   # Code from module std-gnu11:
   # Code from module stdbool:
-  # Code from module stdbool-tests:
   # Code from module stdckdint:
-  # Code from module stdckdint-tests:
   # Code from module stddef:
-  # Code from module stddef-tests:
   # Code from module stdint:
-  # Code from module stdint-tests:
-  # Code from module stdio:
-  gl_STDIO_H_EARLY
-  # Code from module stdio-tests:
   # Code from module stdlib:
-  # Code from module stdlib-tests:
   # Code from module strcase:
   # Code from module string:
-  # Code from module string-tests:
   # Code from module strings:
-  # Code from module strings-tests:
   # Code from module strptime:
   # Code from module strverscmp:
-  # Code from module strverscmp-tests:
   # Code from module sys_time:
-  # Code from module sys_time-tests:
   # Code from module sys_types:
-  # Code from module sys_types-tests:
-  # Code from module test-framework-sh:
-  # Code from module test-framework-sh-tests:
   # Code from module time-h:
-  # Code from module time-h-tests:
   # Code from module time_r:
   # Code from module unistd:
-  # Code from module unistd-tests:
   # Code from module valgrind-tests:
-  # Code from module vasnprintf:
-  # Code from module vasnprintf-tests:
-  # Code from module verify:
-  # Code from module verify-tests:
   # Code from module warnings:
   # Code from module wchar:
-  # Code from module wchar-tests:
   # Code from module xalloc-oversized:
-  # Code from module xsize:
 ])
 
 # This macro should be invoked from ./configure.ac, in the section
@@ -375,77 +315,7 @@ changequote([, ])dnl
   AC_SUBST([gltests_WITNESS])
   gl_module_indicator_condition=$gltests_WITNESS
   m4_pushdef([gl_MODULE_INDICATOR_CONDITION], [$gl_module_indicator_condition])
-  gl_ALIGNASOF
-  gl_FUNC_ALLOCA
-  gl_CONDITIONAL_HEADER([alloca.h])
-  AC_PROG_MKDIR_P
-  gl_ASSERT_H
-  gl_CONDITIONAL_HEADER([assert.h])
-  AC_PROG_MKDIR_P
-  gl_HEADER_ERRNO_H
-  gl_CONDITIONAL_HEADER([errno.h])
-  AC_PROG_MKDIR_P
-  gl_FUNC_FDOPEN
-  gl_CONDITIONAL([GL_COND_OBJ_FDOPEN], [test $REPLACE_FDOPEN = 1])
-  AM_COND_IF([GL_COND_OBJ_FDOPEN], [
-    gl_PREREQ_FDOPEN
-  ])
-  gl_STDIO_MODULE_INDICATOR([fdopen])
-  gl_FLOAT_H
-  gl_CONDITIONAL_HEADER([float.h])
-  AC_PROG_MKDIR_P
-  gl_CONDITIONAL([GL_COND_OBJ_FLOAT], [test $REPLACE_FLOAT_LDBL = 1])
-  gl_CONDITIONAL([GL_COND_OBJ_ITOLD], [test $REPLACE_ITOLD = 1])
-  gl_FUNC_GETPAGESIZE
-  gl_CONDITIONAL([GL_COND_OBJ_GETPAGESIZE], [test $REPLACE_GETPAGESIZE = 1])
-  gl_UNISTD_MODULE_INDICATOR([getpagesize])
-  gl_INTTYPES_H
-  dnl Check for prerequisites for memory fence checks.
-  gl_FUNC_MMAP_ANON
-  AC_CHECK_HEADERS_ONCE([sys/mman.h])
-  AC_CHECK_FUNCS_ONCE([mprotect])
-  AC_REQUIRE([gl_MSVC_INVAL])
-  gl_CONDITIONAL([GL_COND_OBJ_MSVC_INVAL],
-                 [test $HAVE_MSVC_INVALID_PARAMETER_HANDLER = 1])
-  gl_SIZE_MAX
-  gl_FUNC_SNPRINTF
-  gl_STDIO_MODULE_INDICATOR([snprintf])
-  gl_MODULE_INDICATOR([snprintf])
-  AC_REQUIRE([gt_TYPE_WCHAR_T])
-  AC_REQUIRE([gt_TYPE_WINT_T])
-  gl_STDIO_H
-  gl_STDIO_H_REQUIRE_DEFAULTS
-  AC_PROG_MKDIR_P
-  gl_CONDITIONAL([GL_COND_OBJ_STDIO_READ], [test $REPLACE_STDIO_READ_FUNCS = 1])
-  gl_CONDITIONAL([GL_COND_OBJ_STDIO_WRITE], [test $REPLACE_STDIO_WRITE_FUNCS = 1])
-  dnl No need to create extra modules for these functions. Everyone who uses
-  dnl <stdio.h> likely needs them.
-  gl_STDIO_MODULE_INDICATOR([fscanf])
-  gl_MODULE_INDICATOR([fscanf])
-  gl_STDIO_MODULE_INDICATOR([scanf])
-  gl_MODULE_INDICATOR([scanf])
-  gl_STDIO_MODULE_INDICATOR([fgetc])
-  gl_STDIO_MODULE_INDICATOR([getc])
-  gl_STDIO_MODULE_INDICATOR([getchar])
-  gl_STDIO_MODULE_INDICATOR([fgets])
-  gl_STDIO_MODULE_INDICATOR([fread])
-  dnl No need to create extra modules for these functions. Everyone who uses
-  dnl <stdio.h> likely needs them.
-  gl_STDIO_MODULE_INDICATOR([fprintf])
-  gl_STDIO_MODULE_INDICATOR([printf])
-  gl_STDIO_MODULE_INDICATOR([vfprintf])
-  gl_STDIO_MODULE_INDICATOR([vprintf])
-  gl_STDIO_MODULE_INDICATOR([fputc])
-  gl_STDIO_MODULE_INDICATOR([putc])
-  gl_STDIO_MODULE_INDICATOR([putchar])
-  gl_STDIO_MODULE_INDICATOR([fputs])
-  gl_STDIO_MODULE_INDICATOR([puts])
-  gl_STDIO_MODULE_INDICATOR([fwrite])
-  gl_DOUBLE_EXPONENT_LOCATION
   gl_VALGRIND_TESTS
-  AC_REQUIRE([AC_C_RESTRICT])
-  gl_FUNC_VASNPRINTF
-  gl_XSIZE
   m4_popdef([gl_MODULE_INDICATOR_CONDITION])
   m4_ifval(gltests_LIBSOURCES_LIST, [
     m4_syscmd([test ! -d ]m4_defn([gltests_LIBSOURCES_DIR])[ ||
@@ -604,54 +474,35 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/00gnulib.m4
   m4/__inline.m4
   m4/absolute-header.m4
-  m4/alloca.m4
-  m4/assert_h.m4
   m4/base64.m4
   m4/c-bool.m4
   m4/calloc.m4
   m4/codeset.m4
-  m4/errno_h.m4
-  m4/exponentd.m4
   m4/extensions.m4
   m4/extern-inline.m4
-  m4/fdopen.m4
-  m4/float_h.m4
-  m4/fpieee.m4
   m4/free.m4
-  m4/getpagesize.m4
   m4/gnulib-common.m4
   m4/include_next.m4
-  m4/intmax_t.m4
   m4/inttostr.m4
   m4/inttypes.m4
-  m4/inttypes_h.m4
   m4/ld-version-script.m4
   m4/limits-h.m4
   m4/locale-fr.m4
   m4/malloc.m4
   m4/manywarnings-c++.m4
   m4/manywarnings.m4
-  m4/math_h.m4
   m4/memchr.m4
   m4/minmax.m4
   m4/mmap-anon.m4
-  m4/msvc-inval.m4
   m4/multiarch.m4
-  m4/musl.m4
   m4/off_t.m4
   m4/pid_t.m4
-  m4/printf.m4
   m4/realloc.m4
   m4/reallocarray.m4
-  m4/size_max.m4
-  m4/snprintf.m4
   m4/ssize_t.m4
   m4/std-gnu11.m4
-  m4/stdalign.m4
   m4/stddef_h.m4
   m4/stdint.m4
-  m4/stdint_h.m4
-  m4/stdio_h.m4
   m4/stdlib_h.m4
   m4/strcase.m4
   m4/string_h.m4
@@ -666,92 +517,16 @@ AC_DEFUN([gl_FILE_LIST], [
   m4/tm_gmtoff.m4
   m4/unistd_h.m4
   m4/valgrind-tests.m4
-  m4/vasnprintf.m4
   m4/visibility.m4
   m4/warn-on-use.m4
   m4/warnings.m4
   m4/wchar_h.m4
   m4/wchar_t.m4
   m4/wint_t.m4
-  m4/xsize.m4
   m4/zzgnulib.m4
-  tests/init.sh
-  tests/macros.h
-  tests/nan.h
-  tests/signature.h
-  tests/test-alignasof.c
-  tests/test-alloca-opt.c
-  tests/test-assert.c
-  tests/test-base64.c
-  tests/test-calloc-gnu.c
-  tests/test-errno.c
-  tests/test-fdopen.c
-  tests/test-fgetc.c
-  tests/test-float.c
-  tests/test-fputc.c
-  tests/test-fread.c
-  tests/test-free.c
-  tests/test-fwrite.c
-  tests/test-init.sh
-  tests/test-intprops.c
-  tests/test-inttostr.c
-  tests/test-inttypes.c
-  tests/test-limits-h.c
-  tests/test-malloc-gnu.c
-  tests/test-memchr.c
-  tests/test-realloc-gnu.c
-  tests/test-reallocarray.c
-  tests/test-snprintf.c
-  tests/test-stdbool.c
-  tests/test-stdckdint.c
-  tests/test-stddef.c
-  tests/test-stdint.c
-  tests/test-stdio.c
-  tests/test-stdlib.c
-  tests/test-string.c
-  tests/test-strings.c
-  tests/test-strverscmp.c
-  tests/test-sys_time.c
-  tests/test-sys_types.c
-  tests/test-sys_wait.h
-  tests/test-time-h.c
-  tests/test-unistd.c
-  tests/test-vasnprintf.c
-  tests/test-verify-try.c
-  tests/test-verify.c
-  tests/test-verify.sh
-  tests/test-wchar.c
-  tests/zerosize-ptr.h
   tests=lib/_Noreturn.h
-  tests=lib/alloca.in.h
   tests=lib/arg-nonnull.h
-  tests=lib/asnprintf.c
-  tests=lib/assert.in.h
-  tests=lib/attribute.h
   tests=lib/c++defs.h
-  tests=lib/errno.in.h
-  tests=lib/fdopen.c
-  tests=lib/float+.h
-  tests=lib/float.c
-  tests=lib/float.in.h
-  tests=lib/fpucw.h
-  tests=lib/getpagesize.c
-  tests=lib/itold.c
-  tests=lib/msvc-inval.c
-  tests=lib/msvc-inval.h
-  tests=lib/printf-args.c
-  tests=lib/printf-args.h
-  tests=lib/printf-parse.c
-  tests=lib/printf-parse.h
-  tests=lib/size_max.h
-  tests=lib/snprintf.c
-  tests=lib/stdio-read.c
-  tests=lib/stdio-write.c
-  tests=lib/stdio.in.h
-  tests=lib/vasnprintf.c
-  tests=lib/vasnprintf.h
-  tests=lib/verify.h
+  tests=lib/dummy.c
   tests=lib/warn-on-use.h
-  tests=lib/xsize.c
-  tests=lib/xsize.h
 ])

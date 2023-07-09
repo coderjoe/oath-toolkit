@@ -29,7 +29,6 @@
 #  --doc-base=doc \
 #  --tests-base=gl/tests \
 #  --aux-dir=build-aux \
-#  --with-tests \
 #  --no-conditional-dependencies \
 #  --libtool \
 #  --macro-prefix=gl \
@@ -58,7 +57,6 @@ CLEANFILES =
 DISTCLEANFILES =
 MAINTAINERCLEANFILES =
 # No GNU Make output.
-SUBDIRS += . tests
 EXTRA_DIST += m4/gnulib-cache.m4
 
 AM_CPPFLAGS =
