@@ -85,13 +85,16 @@
 /liboath/gl/tests/signal.h
 /liboath/gl/tests/sys/
 /liboath/gl/tests/test-accept
+/liboath/gl/tests/test-alignasof
 /liboath/gl/tests/test-alloca-opt
 /liboath/gl/tests/test-arpa_inet
+/liboath/gl/tests/test-assert
 /liboath/gl/tests/test-base32
 /liboath/gl/tests/test-binary-io
 /liboath/gl/tests/test-bind
 /liboath/gl/tests/test-byteswap
 /liboath/gl/tests/test-c-ctype
+/liboath/gl/tests/test-calloc-gnu
 /liboath/gl/tests/test-canonicalize-lgpl
 /liboath/gl/tests/test-chdir
 /liboath/gl/tests/test-cloexec
@@ -99,6 +102,7 @@
 /liboath/gl/tests/test-connect
 /liboath/gl/tests/test-ctype
 /liboath/gl/tests/test-dirent
+/liboath/gl/tests/test-dirfd
 /liboath/gl/tests/test-dup2
 /liboath/gl/tests/test-environ
 /liboath/gl/tests/test-errno
@@ -148,12 +152,14 @@
 /liboath/gl/tests/test-inttypes
 /liboath/gl/tests/test-ioctl
 /liboath/gl/tests/test-isblank
+/liboath/gl/tests/test-largefile
 /liboath/gl/tests/test-limits-h
 /liboath/gl/tests/test-link
 /liboath/gl/tests/test-listen
 /liboath/gl/tests/test-lock
 /liboath/gl/tests/test-lseek
 /liboath/gl/tests/test-lstat
+/liboath/gl/tests/test-malloc-gnu
 /liboath/gl/tests/test-malloca
 /liboath/gl/tests/test-memchr
 /liboath/gl/tests/test-nanosleep
@@ -166,6 +172,7 @@
 /liboath/gl/tests/test-perror2
 /liboath/gl/tests/test-pipe
 /liboath/gl/tests/test-priv-set
+/liboath/gl/tests/test-pselect
 /liboath/gl/tests/test-pthread
 /liboath/gl/tests/test-pthread-thread
 /liboath/gl/tests/test-pthread_sigmask1
@@ -173,6 +180,8 @@
 /liboath/gl/tests/test-raise
 /liboath/gl/tests/test-rawmemchr
 /liboath/gl/tests/test-readlink
+/liboath/gl/tests/test-realloc-gnu
+/liboath/gl/tests/test-reallocarray
 /liboath/gl/tests/test-rename
 /liboath/gl/tests/test-rmdir
 /liboath/gl/tests/test-rwlock1
@@ -183,8 +192,12 @@
 /liboath/gl/tests/test-select-stdin
 /liboath/gl/tests/test-setsockopt
 /liboath/gl/tests/test-sha1
+/liboath/gl/tests/test-sha1-buffer
+/liboath/gl/tests/test-sha1-stream
 /liboath/gl/tests/test-sha256
+/liboath/gl/tests/test-sha256-stream
 /liboath/gl/tests/test-sha512
+/liboath/gl/tests/test-sha512-stream
 /liboath/gl/tests/test-sigaction
 /liboath/gl/tests/test-signal-h
 /liboath/gl/tests/test-sigprocmask
@@ -195,6 +208,7 @@
 /liboath/gl/tests/test-stat-time
 /liboath/gl/tests/test-stdalign
 /liboath/gl/tests/test-stdbool
+/liboath/gl/tests/test-stdckdint
 /liboath/gl/tests/test-stddef
 /liboath/gl/tests/test-stdint
 /liboath/gl/tests/test-stdio
@@ -216,6 +230,7 @@
 /liboath/gl/tests/test-thread_create
 /liboath/gl/tests/test-thread_self
 /liboath/gl/tests/test-time
+/liboath/gl/tests/test-time-h
 /liboath/gl/tests/test-u64
 /liboath/gl/tests/test-unistd
 /liboath/gl/tests/test-unlink
@@ -654,8 +669,10 @@
 /oathtool/gl/tests/signal.h
 /oathtool/gl/tests/sys/
 /oathtool/gl/tests/test-accept
+/oathtool/gl/tests/test-alignasof
 /oathtool/gl/tests/test-alloca-opt
 /oathtool/gl/tests/test-arpa_inet
+/oathtool/gl/tests/test-assert
 /oathtool/gl/tests/test-binary-io
 /oathtool/gl/tests/test-bind
 /oathtool/gl/tests/test-c-ctype
@@ -666,6 +683,7 @@
 /oathtool/gl/tests/test-dup2
 /oathtool/gl/tests/test-environ
 /oathtool/gl/tests/test-errno
+/oathtool/gl/tests/test-error
 /oathtool/gl/tests/test-fcntl
 /oathtool/gl/tests/test-fcntl-h
 /oathtool/gl/tests/test-fdopen
@@ -689,6 +707,7 @@
 /oathtool/gl/tests/test-inttypes
 /oathtool/gl/tests/test-ioctl
 /oathtool/gl/tests/test-isblank
+/oathtool/gl/tests/test-largefile
 /oathtool/gl/tests/test-limits-h
 /oathtool/gl/tests/test-listen
 /oathtool/gl/tests/test-lock
@@ -707,6 +726,7 @@
 /oathtool/gl/tests/test-perror
 /oathtool/gl/tests/test-perror2
 /oathtool/gl/tests/test-pipe
+/oathtool/gl/tests/test-pselect
 /oathtool/gl/tests/test-pthread
 /oathtool/gl/tests/test-pthread-thread
 /oathtool/gl/tests/test-pthread_sigmask1
@@ -728,6 +748,7 @@
 /oathtool/gl/tests/test-stat-time
 /oathtool/gl/tests/test-stdalign
 /oathtool/gl/tests/test-stdbool
+/oathtool/gl/tests/test-stdckdint
 /oathtool/gl/tests/test-stddef
 /oathtool/gl/tests/test-stdint
 /oathtool/gl/tests/test-stdio
@@ -748,6 +769,7 @@
 /oathtool/gl/tests/test-thread_create
 /oathtool/gl/tests/test-thread_self
 /oathtool/gl/tests/test-time
+/oathtool/gl/tests/test-time-h
 /oathtool/gl/tests/test-timespec
 /oathtool/gl/tests/test-unistd
 /oathtool/gl/tests/test-unsetenv
