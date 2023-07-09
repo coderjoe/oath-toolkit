@@ -138,7 +138,6 @@ AC_CONFIG_FILES([
   Makefile
   examples/Makefile
   gl/Makefile
-  gl/tests/Makefile
   gtk-doc/Makefile
   gtk-doc/version.xml
   include/Makefile
