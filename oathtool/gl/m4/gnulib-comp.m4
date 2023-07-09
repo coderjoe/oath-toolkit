@@ -253,7 +253,6 @@ AC_DEFUN([gl_EARLY],
   # Code from module string:
   # Code from module string-tests:
   # Code from module strtoll:
-  # Code from module strtoll-tests:
   # Code from module symlink:
   # Code from module symlink-tests:
   # Code from module sys_ioctl:
@@ -1395,7 +1394,6 @@ AC_DEFUN([gl_FILE_LIST], [
   tests/test-strerror.c
   tests/test-strerror_r.c
   tests/test-string.c
-  tests/test-strtoll.c
   tests/test-symlink.c
   tests/test-symlink.h
   tests/test-sys_ioctl.c

@@ -1419,14 +1419,6 @@ EXTRA_libtests_a_SOURCES += strtol.c
 
 ## end   gnulib module strtoll
 
-## begin gnulib module strtoll-tests
-
-TESTS += test-strtoll
-check_PROGRAMS += test-strtoll
-EXTRA_DIST += test-strtoll.c signature.h macros.h
-
-## end   gnulib module strtoll-tests
-
 ## begin gnulib module symlink
 
 if GL_COND_OBJ_SYMLINK

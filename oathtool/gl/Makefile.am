@@ -33,6 +33,7 @@
 #  --no-conditional-dependencies \
 #  --libtool \
 #  --macro-prefix=gl \
+#  --avoid=strtoll-tests \
 #  error \
 #  getline \
 #  inttypes \
